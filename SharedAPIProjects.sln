@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaServerAPI", "AviaServerAPI\AviaServerAPI.csproj", "{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaEntities", "AviaEntitites\AviaEntities.csproj", "{6D668428-1E33-48E0-806C-FB142FA740EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneralEntities", "GeneralEntities\GeneralEntities.csproj", "{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

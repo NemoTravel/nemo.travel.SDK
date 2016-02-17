@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="AviaServerAPI.Avia" CodeBehind="Avia.svc.cs" %>
