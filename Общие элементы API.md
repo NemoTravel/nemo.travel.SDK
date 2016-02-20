@@ -1,0 +1,1422 @@
+Данная статья содержит описание структуры различных общих элементов API .NET серверов Nemo Platform.
+
+Бронь, Заказ
+============
+
+Данный раздел включает в себя описание элементов, которые используются при формировании структуры брони и заказа в .нет серверах. Бронь и заказ состоят как из общих элементов, к примеру Traveller, Service, DataItem, так и специфичных для данного типа объекта данных.
+
+Traveller
+---------
+
+Содержит описание персональную информацию о путешественнике. Состоит из следующих элементов:
+
+-   **ID** - ИД данного путешественника в рамках данного объекта (брони/заказа). Тип данных - Int32.
+-   **Type** - Тип пассажира. Тип данных - перечисление, возможные значения:
+    -   ADT - взрослый - пассажир старше 12 лет
+    -   UNN - ребёнок - пассажир старше 2 и младше 12 лет - без сопровождения взрослых
+    -   CNN - ребёнок - пассажир старше 2 и младше 12 лет
+    -   INF - младенец - пассажир младше 2 лет - не занимающий места в самолёте
+    -   INS - младенец - пассажир младше 2 лет - занимающий места в самолёте
+    -   MIL - военнослужащий
+    -   SEA - моряк
+    -   SRC - пожилой пассажир
+    -   STU - студент
+-   **NamePrefix** - Префикс/титул данного пассажира. Тип данных - строка.
+-   **Name** - Имя пассажира. Тип данных - строка.
+-   **LastName** - Фамилия пассажира. Тип данных - строка.
+-   **MiddleName** - Отчество пассажира. Тип данных - строка.
+-   **DateOfBirth** -
+-   **Nationality** - Гражданство пассажира. Тип данных - строка, ISO Alpha2 или ISO Alpha3 код страны
+-   **Gender** - Пол пассажира. Тип данных - перечисление, возможные значения:
+    -   M - мужской
+    -   F - женский
+-   **LinkedTo** - Привязка пассажира к другому пассажиру, имеет смысл и обязателен только для младенцев без места. Тип данных - Int32.
+
+### Пример
+
+    <Traveller>
+       <ID>1</ID>
+       <Type>ADT</Type>
+       <Name>KIRILL</Name>
+       <LastName>FIMCHENKO</LastName>
+       <MiddleName>OLEGOVICH</MiddleName>
+       <DateOfBirth>13.04.1994</DateOfBirth>
+       <Nationality>RU</Nationality>
+       <Gender>M</Gender>
+    </Traveller>
+
+Service
+-------
+
+На данный момент есть разделение на базовые услуги, дополнительные и услуги по обработки заказа. Каждый из этих типов услуг отображаются массивом в отдельных полях брони/заказа. К числу базовых услуг относятся перелёт, ж/д, отель. К допуслугам - авиа допуслуги, страховки, аэроэкспресс и прочее. Услуга по обработке заказа по сути представлена в единственной сущности с указанием типа услуги.
+
+### BaseService
+
+Каждая из базовых и допуслуг наследуется от класса BaseService и содержит следующие поля:
+
+-   **ID** - ИД данной услуги в рамках данного объекта (брони/заказа). Тип данных - Int32.
+-   **SupplierID** - ИД данной услуги в системе поставщика услуг. Тип данных - строка.
+-   **IsOffline** - Признак оффлайн услуги. Тип данных - bool.
+-   **Status** - статус услуги в системе поставщика. Тип данных - перечисление *PNRStatus*, возможные значения:
+    -   Booked
+    -   Canceled
+    -   Ticketed
+    -   AwaitingTicketing - в основном для случая с чартерами, когда бронь отправили в очередь на выписку билетов а/к
+    -   Partial - части брони/заказа находится в одном состоянии, остальная в другом (к примеру частично выписанная бронь, или у разных услуг разные статусы)
+    -   Problematic - проблемная бронь/заказ/услуга, при наличии данного статуса в подстатусах указывается что именно не так с бронью
+-   **SubStatus** - Список подстатусов уточняющих текущее состояние услуги. Тип данных - перечисление, возможные значения:
+    -   InvalidSegmentStatus
+    -   SegmentStatusForManualConfirmation - если в силу каких-то причин не удалось автоматически их подтверждить (имеются ввиду TK/KK статусы)
+    -   HaveNotStoredTickets - выписанный активный билет почему-то не в ПНРе
+    -   NotActualTicketStatus - один из билетов в ПНРе имеет не актуальный статус - в основном специфично для глюков тестовой среды разлиных ГДС и Галилео после войдирования
+    -   NoValidFare - у ПНРа в ГДС нет активной и валидной цены, специфика Галилео в общем-то
+    -   UnremovedVoidedTicketElements - специфиная фигня в Амадеусе
+    -   PaidBook - Сирена, когда ПНР оплачивали через их ПШ, но он почему-то ещё не выписался.
+    -   FaildToActualizePrice - не удалось получить актуальную цены для брони
+    -   UnconfirmedInfant - неподтвержденный младенец, требуется ручная обработка.
+-   **TravellerRef** - Ссылка на путешественников, к которым относится данная услуга. Если услуга применятеся для всех путешественников, то элемент не указывается. Тип данных - массив RefList.
+-   **TravellerRef.Ref** - ссылка на конкретного путешественника в рамках брони/заказа. Тип данных - Int32.
+
+### FlightService
+
+Авиа услуга, по сути описание данных перелёта, состоит из следующих элементов:
+
+-   **Type** - Тип перелёта. Тип данных - перечисление, возможные значения:
+    -   Regular
+    -   Charter
+    -   LowCost
+-   **DirectionType** - Тип направления перелёта. Тип данных - перечисление, возможные значения:
+    -   OW
+    -   RT
+    -   CT
+    -   SingleOJ
+    -   DoubleOJ
+    -   hRT
+    -   mOW - перелёт является возможным плечом мультиOW перелёта
+-   **Segments** - Сегменты перелёта. Тип данных - массив элементов FlightSegment.
+-   **FlightSegment** - Сегмент перелёт. Тип данных - сложный.
+-   **FlightSegment.ID** - ИД сегмента в рамках данного перелёта. Тип данных - Int32.
+-   **FlightSegment.DepatureAirport** - Информация об аэропорте отправления. Тип данных - TripPointInformation.
+-   **FlightSegment.DepatureAirport.Code** - Код аэропорта. Тип данных - строка.
+-   **FlightSegment.DepatureAirport.SubPointCode** - Код терминала. Тип данных - строка.
+-   **FlightSegment.DepatureAirport.CityCode** - Код города, при наличии агреации аэропортов. Тип данных - строка.
+-   **FlightSegment.DepatureAirport.UTC** - Часовой пояс. Тип данных - float.
+-   **FlightSegment.ArrivalAirport** - Информация об аэропорте прибытия. Тип данных - TripPointInformation.
+-   **FlightSegment.StopPoints** - Точки остановки на данном сегменте. Тип данных - массив элементов StopPoint.
+-   **FlightSegment.StopPoints.StopPoint** - Точка остановки на данном сегменте. Тип данных - сложный, наследник TripPointInformation.
+-   **FlightSegment.StopPoints.StopPoint.ArrDateTime** - Дата и время прилёта в точку остановки. Тип данных - дата и время.
+-   **FlightSegment.StopPoints.StopPoint.DepDateTime** - Дата и время вылета из точки остановки. Тип данных - дата и время.
+-   **FlightSegment.StopPoints.StopPoint.PassengerLanding** - Признак высадки пассажиров из самолёта. Тип данных - bool.
+-   **FlightSegment.DepatureDateTime** - Дата и время вылета сегмента, местное для аэропорта вылета. Тип данных - дата и время.
+-   **FlightSegment.ArrivalDateTime** - Дата и время прилёта сегмента, местное для аэропорта прибытия. Тип данных - дата и время.
+-   **FlightSegment.FlightTime** - Суммарное время в пути на данном сегменте. Тип данных - Int32.
+-   **FlightSegment.FlightNumber** - Номер рейса. Тип данных - строка.
+-   **FlightSegment.AircraftType** - Код типа воздушного судна. Тип данных - строка.
+-   **FlightSegment.OperatingAirline** - Кода а/к, чей самолёт выполняет перевозку пассажиров. Тип данных - строка.
+-   **FlightSegment.MarketingAirline** - Кода а/к, которая выполняет продажу мест на данный рейс. Тип данных - строка.
+-   **FlightSegment.Charterer** - Фрахтователь продаваемых мест. Тип данных - строка.
+-   **FlightSegment.ETicket** - Сегменты перелёта. Тип данных - bool.
+-   **FlightSegment.BookingClassCode** - Литера класса бронирования да данном сегменте. Тип данных - строка.
+-   **FlightSegment.Status** - Статус сегмента. Тип данных - перечисление, возможные значения:
+    -   Confirmed
+    -   NeedConfirmation
+    -   NotConfirmed
+    -   Canceled
+    -   Flew
+    -   OnRequest
+    -   Rejected
+-   **FlightSegment.StatusCode** - Индустриальный код статуса сегмента. Тип данных - строка.
+-   **FlightSegment.SupplierRef** - ИД брони сегмента в инвенторной системе а/к. Тип данных - строка.
+-   **FlightSegment.RequestedSegment** - Ссылка на сегмента из запроса пользователя. Тип данных - Int32.
+
+#### Пример
+
+    <Service type="FlightService">
+        <ID>0</ID>
+        <SupplierID>C6FWDO</SupplierID>
+        <Status>Booked</Status>
+        <SubStatus>
+            <Status>NoValidFare</Status>
+        </SubStatus>
+        <Type>Regular</Type>
+        <DirectionType>OW</DirectionType>
+        <Segments>
+            <FlightSegment>
+                <ID>0</ID>
+                <DepatureAirport>
+                    <Code>VKO</Code>
+                    <SubPointCode>A</SubPointCode>
+                    <CityCode>MOW</CityCode>
+                    <UTC>4</UTC>
+                </DepatureAirport>
+                <ArrivalAirport>
+                    <Code>LED</Code>
+                    <SubPointCode>1</SubPointCode>
+                    <UTC>4</UTC>
+                </ArrivalAirport>
+                <DepatureDateTime>2015-09-22T09:15:00</DepatureDateTime>
+                <ArrivalDateTime>2015-09-22T10:40:00</ArrivalDateTime>
+                <FlightNumber>30</FlightNumber>
+                <AircraftType>73G</AircraftType>
+                <OperatingAirline>UN</OperatingAirline>
+                <MarketingAirline>UN</MarketingAirline>
+                <ETicket>false</ETicket>
+                <BookingClassCode>W</BookingClassCode>
+                <Status>Confirmed</Status>
+                <StatusCode>HK</StatusCode>
+                <SupplierRef>PLMN3</SupplierRef>
+            </FlightSegment>
+        </Segments>
+    </Service>
+
+### ArbitraryService
+
+Произвольная дополнительная услуга. Просто текстовое описание некой услуги, которую агент предоставляет путешественнику.
+
+-   **PreDefinedServiceID** - ИД предопределённой произвольной услуги. Тип данных - Int32.
+-   **Name** - Название услуги. Тип данных - строка.
+-   **ShortDescription** - Краткое описание. Тип данных - строка.
+-   **Description** - Полное описание услуги. Тип данных - строка.
+
+### InsuranceService
+
+Страховки.
+
+-   **Vendor** - Поставщик услуги страхования. Тип данных - перечисление, возможные значения:
+    -   AlphaInsurance
+-   **InsuranceLevel** - Уровень/программа страхования. Тип данных - строка.
+-   **DocumentURL** - Ссылка на документа с страховкой. Тип данных - строка.
+
+### AeroexpressService
+
+Аэроэкспресс.
+
+-   **SegmentRef** - Привязка к сегмента перелёта. Тип данных - массив RefList.
+-   **StationName** - Название воказала отправления/прибытия аэроэкспресса. Тип данных - строка.
+-   **ToAirport** - Призак в/из аэропорта. Тип данных - bool.
+-   **DocumentURL** - Ссылка на документа с документом на проезд. Тип данных - строка.
+
+### ServicePackageService
+
+Описание сервисного пакета. По согласованию с AE тут просто строка с какими-то данными, которые будут. Хз как это будет юзаться в статистике
+
+-   **RawData** - Данные сервисного пакета. Тип данных - строка.
+
+### FlightAncillaryService
+
+Авиа допуслуга, версия предварительная, возможно изменится.
+
+-   **SegmentRef** - Привязка к сегмента перелёта. Тип данных - массив RefList.
+-   **Number** - Номер допуслуги, по которому её можно купить. Тип данных - Int32.
+-   **TypeCode** - Код типа допуслуги. Тип данных - строка.
+-   **Name** - Описание допуслуги. Тип данных - строка.
+-   **CompanyCode** - Код а/к, предоставляющей данную допуслугу. Тип данных - строка.
+-   **CCFOPRequired** - Признак необходимости оплаты ГДС процессингом данной услуги. Тип данных - bool.
+-   **RequieredSSR** - Код SSRки, которую необходимо добавить в ПНР в случае покупки данной допуслуги. Тип данных - строка.
+-   **RequierDescriptionForSSR** - Код SSRки, для которое требуется описание от юзера. Тип данных - строка.
+
+### OrderProcessingService
+
+Не наследуется от BaseService. Содержит описание некой услуги по обработке заказа, идеологически представляет собой различные сборы.
+
+-   **ID** - ИД данной услуги в рамках данного объекта (заказа). Тип данных - Int32.
+-   **Type** - Тип действия по обработке заказа. Тип данных - перечисление, возможные значения:
+    -   Creation
+    -   Ticketing
+    -   Payment - сбор ПШ типо
+    -   Exchange
+    -   Refund
+    -   Modification
+    -   Cancellation
+-   **Status** - Статус выполнения услуги. Тип данных - перечисление, возможные значения:
+    -   Requested
+    -   Executed
+    -   Rejected
+-   **RuleID** - ИД правила в Немо, по которому сформирована данная услуга. Тип данных - строка.
+
+Price
+-----
+
+Содержи полную информацию о цене и её формировании для брони или заказа.
+
+-   **TotalPrice** - Полная стоимости данной брони или заказа в валюте продажи агента. Тип данных - Money.
+-   **PriceBreakdown** - Брэкдаун с формирование цены объекта. Тип данных - массив PricePart.
+-   **PricePart** - Часть цены объекта, как правило для одной из услуг в данном заказе. Тип данных - сложный.
+-   **PricePart.ServiceRef** - Ссылка на услуги в брони/заказе, для которых применяется данная цена. Не указывается если данная цена применяется к всем услугам в брони/заказе. Тип данных - RefList.
+-   **PricePart.SegmentRef** - Ссылка на сегменты перелёта, к которым применяется данная цена. Специфика выписки нескольких билетов на один перелёт. Тип данных - RefList.
+-   **PricePart.TotalPrice** - Полная стоимости данной части цены. Тип данных - Money.
+-   **PricePart.ValidatingCompany** - ВП. Тип данных - строка.
+-   **PricePart.Refundable** - Тип возвратности денег по данной цене услуги. Тип данных - перечисление, возможные значения:
+    -   Unknown
+    -   Refundable
+    -   NonRefundable
+    -   PenaltiesApplies
+-   **PricePart.PrivateFareInd** - Признак наличия приватных тарифов при формировании цены. Тип данных - bool.
+-   **PricePart.PassengerTypePriceBreakdown** - ВП. Тип данных - массив PassengerTypePrice.
+-   **PassengerTypePrice** - Формирование цены на определённый тип путешественника. Тип данных - сложный.
+-   **PassengerTypePrice.TravellerRef** - Ссылка на путешественников. Тип данных - RefList.
+-   **PassengerTypePrice.PricingType** - Тип пассажира, по которому сформирована данная цена, может не совпадать с типом путешественника в соответствующем разделе. Тип данных - строка.
+-   **PassengerTypePrice.BaseFare** - Цена по тарифам в валюте их заведения. Тип данных - Money.
+-   **PassengerTypePrice.EquiveFare** - Цена по тарифам в валюте продаже из ГДС. Тип данных - Money.
+-   **PassengerTypePrice.TotalFare** - Полная цена в валюте продаже из ГДС. Тип данных - Money.
+-   **PassengerTypePrice.Taxes** - Таксы. Тип данных - массив Tax.
+-   **Tax** - Информация об определённой таксе (сборе). Тип данных - сложный, наследник Money.
+-   **Tax.TaxCode** - Код таксы. Тип данных - строка.
+-   **PassengerTypePrice.Tariffs** - Тарифы. Тип данных - массив Tariff.
+-   **Tariff** - Описание тарифа, который принимает участие в формировании данной цены. Тип данных - сложный, описание приведено для AirTariff.
+-   **Tariff.Code** - Код тарифа. Тип данных - строка.
+-   **Tariff.Type** - Тип тарифа. Тип данных - перечисление, возможные значения:
+    -   Public
+    -   Cat35
+    -   Cat25
+    -   InclusiveTour
+    -   PersonalCompanySite
+    -   Private
+-   **Tariff.ClassOfService** - Класс обслуживания по данномут тарифу. Тип данных - перечисление, возможные значения:
+    -   Economy
+    -   Business
+    -   First
+    -   PremiumEconomy
+    -   Other
+-   **Tariff.BookingClassCode** - Литера класса бронирования. Тип данных - строка.
+-   **Tariff.SegmentID** - ИД сегмента перелёта, к которому применяется данный тариф. Тип данных - Int32.
+-   **Tariff.FreeBaggage** - Информация о бесплатном багаже по данному тарифу. Тип данных - Baggage.
+-   **Tariff.FreeBaggage.Value** - Значение меры бесплатного багажа. Тип данных - строка.
+-   **Tariff.FreeBaggage.Measure** - Единица меры бесплатного багажа. Тип данных - перечисление, возможные значения:
+    -   Kilograms
+    -   Pounds
+    -   Pieces
+    -   SpecialCharge
+    -   Size
+    -   ValueOfMeasure
+    -   Weight
+-   **Tariff.FreeBaggage.Size** - Информация об ограничениях по размеру, накладываемых на багаж. Тип данных - строка.
+-   **Tariff.FreeMeal** - Бесплатное питание по данному тарифу. Тип данных - массив MealType.
+-   **MealType** - тип бесплатного питания по тарифу. Тип данных - перечисление, возможные значения:
+    -   AlcoholBeverages
+    -   Beverages
+    -   Breakfast
+    -   ColdMeal
+    -   ContinentalBreakfast
+    -   Dinner
+    -   HotMeal
+    -   Lunch
+    -   Meal
+    -   Refreshment
+    -   Snack
+-   **Tariff.IsSystemTransfer** - Признак системного трансфера. Тип данных - bool.
+-   **PassengerTypePrice.FareCalc** - Строка рассчёта цены. Тип данных - строка.
+
+DataItem
+--------
+
+Уницифированные блок данных для хранения различного контента брони.
+
+-   **ID** - ИД данного данного блока данных. Тип данных - Int32.
+-   **TravellerRef** - Ссылка на путешественников. Тип данных - RefList.
+-   **ServiceRef** - Ссылка на услуги в брони/заказе. Тип данных - RefList.
+-   **SegmentRef** - Ссылка на сегменты. Тип данных - RefList.
+-   **Type** - Тип контента в данном блоке данных. Тип данных - перечисление, возможные значения:
+    -   SSR
+    -   ContactInfo
+    -   FOP - Form Of Payment, кредитка - один из вариантов
+    -   LoyaltyCard
+    -   TL - тайм-лимиты, выглядит так:
+    -   ED - электронные документы - билеты, EMD
+    -   PD - бумажные документы - МК и прочее
+    -   FE - эндорсменты
+    -   Remark
+    -   CashValueForMultiFOPProxing - используется в паре с TicketingProxy при мультиФОП ГДС процессинге через ПШ
+    -   Commission
+    -   SourceInfo - информация о пакете реквизитов, в котором создана бронь
+    -   IDDocument - документ, удостоверяющий личность пассажира (паспорт и прочее)
+    -   Meal
+    -   Visa
+    -   ArrivalAddress
+    -   BookedSeat
+    -   ValidatingCompany - обязателен при бронировании перелётов, кроме собственно кода ВП можно указывать признак переопределённого ВП
+    -   SubagentCommission
+    -   TicketDesignator
+    -   TourCode
+    -   Markup
+    -   TicketingProxy
+    -   CRMIntegration
+    -   Discount
+    -   EndUserData
+-   **Remark** - Текстовая ремарка. Тип данных - сложный.
+-   **Remark.Type** - Тип ремарка. Тип данных - перечисление, возможные значения:
+    -   General
+    -   Itinerary
+    -   Invoice
+    -   Historical
+    -   QueueControl
+    -   Vendor
+    -   NemoInternal
+    -   Confidential
+    -   MiniItinerary
+-   **Remark.Text** - Текст ремарки. Тип данных - строка.
+-   **TimeLimits** - Тайм-лимиты. Тип данных - сложный.
+-   **TimeLimits.EffectiveTimeLimit** - Эффективный ТЛ, определяется как минимальный из всех ТЛ на войдирования. Тип данных - дата и время с указанием часового пояса.
+-   **TimeLimits.PriceTimeLimit** - ТЛ из цены ГДС. Тип данных - дата и время с указанием часового пояса.
+-   **TimeLimits.SegmentsTimeLimit** - ТЛ сегментов, на данный момент не используется. Тип данных - дата и время с указанием часового пояса.
+-   **TimeLimits.TicketingTimeLimit** - ТЛ выписки. Тип данных - дата и время с указанием часового пояса.
+-   **TimeLimits.AgencyTimeLimit** - Агентский ТЛ. Тип данных - дата и время с указанием часового пояса.
+-   **TimeLimits.VoidTimeLimit** - ТЛ на войдирование от ГДС. Тип данных - дата и время с указанием часового пояса.
+-   **SSR** - SSRка. Тип данных - SSRDataItem.
+-   **SSR.Code** - Код SSRки. Тип данных - строка.
+-   **SSR.Text** - Текст. Тип данных - строка.
+-   **SSR.Status** - Статус. Тип данных - перечисление, возможные значения:
+    -   Confirmed
+    -   NeedConfirmation
+    -   NotConfirmed
+    -   Canceled
+    -   Flew
+    -   OnRequest
+    -   Rejected
+-   **SSR.StatusCode** - Индустриальный код статуса. Тип данных - строка.
+-   **Commission** - Комиссия а/к. Тип данных - CommissionDataItem.
+-   **Commission.Percent** - Комиссия в %. Тип данных - float.
+-   **Commission.Amount** - Сумма комиссии. Тип данных - float.
+-   **Commission.Currency** - Код валюты для суммы. Тип данных - строка.
+-   **FOPInfo** - Форма оплаты для передачи в систему поставщика услуги. Тип данных - сложный.
+-   **FOPInfo.FOPs** - Содержит список форм оплаты для прописывания в бронь. Тип данных - сложный.
+-   **FOPInfo.FOPs.FOP** - Информация об одной из форм оплаты в брони. Тип данных - сложный.
+-   **FOPInfo.FOPs.FOP.type** - ХМЛ аттрибут, сожержит указание типа класса формы оплаты, необходимо для корректной передачи данных кредитной карты через ХМЛ. Тип данных - строка. Для данных кредитной карты должен содержать значение CreditCardFOP с указанием xmlns данного типа.
+-   **FOPInfo.FOPs.FOP.Amount** - Сумма оплаты в рамках данного ФОПа. Тип данных - *Money*. Обязателен при использовании мультиФОПа.
+-   **FOPInfo.FOPs.FOP.Type** - Тип данного ФОПа. Тип данных - перечисление, возможные значения:
+    -   CA - cash, наличные
+    -   CC - credit card
+    -   CK - check, банковский чек
+    -   IN - invoice
+-   **FOPInfo.FOPs.FOP.VendorCode** - Двухбуквенный код поставщика кредитки. Тип данных - строка.
+-   **FOPInfo.FOPs.FOP.Number** - Номер кредитки. Тип данных - строка.
+-   **FOPInfo.FOPs.FOP.ExpireDate** - Дата окончания срока действия карты. Тип данных - дата в формате MM.yyyy
+-   **FOPInfo.FOPs.FOP.ManualApprovalCode** - Код платёжной транзакции, по которой должно будет проводится списание средств. Тип данных - строка.
+-   **SourceInfo** - Информация об источнике где была создана бронь услуги. Тип данных - сложный.
+-   **SourceInfo.ID** - ИД пакета реквизитов. Тип данных - Int32.
+-   **SourceInfo.BookingSupplierAgencyID** - ИД реквизитов в системе поставщика, в которых создана бронь услуги. Тип данных - строка.
+-   **SourceInfo.TicketingSupplierAgencyID** - ИД реквизитов в системе поставщика, в которых бронь услуги выписана. Тип данных - строка.
+-   **SourceInfo.Supplier** - Поставщик услуги. Тип данных - перечисление, возможные значения:
+    -   Sabre
+    -   Sirena
+    -   Galileo
+    -   Amadeus
+    -   SITAGabriel
+    -   SpecialFares
+    -   SIG
+    -   NemoInventory
+    -   Pegasys
+-   **SourceInfo.Environment** - Тип среды в системе поставщика. Тип данных - перечисление, возможные значения:
+    -   TEST
+    -   CERT
+    -   PROD
+-   **SourceInfo.TicketingIATAValidator** - Информация об источнике где была создана бронь услуги. Тип данных - строка.
+-   **Document** - Документ, удостоверяющий личность путешественника. Тип данных - сложный.
+-   **Document.Type** - Тип документа. Тип данных - перечисление, возможные значения описаны в [Типы документов](Типы_документов "wikilink").
+-   **Document.Number** - Номер документа, удостоверяющий личность путешественника. Тип данных - строка.
+-   **Document.IssueCountryCode** - ISO Alpha2 или ISO Alpha3 код страны выдачи документа. Тип данных - строка.
+-   **Document.ElapsedTime** - Дата окончания срока действия документа. Тип данных - дата в формате dd.mm.yyyy.
+-   **Document.AddedAsDOCS** - Признак внесения документа как SSR DOCS в ПНР. Тип данных - bool.
+-   **Document.AddedAsFOID** - Признак внесения документа как SSR FOID в ПНР. Тип данных - bool.
+-   **ContactInfo** - Контактные данные. Тип данных - сложный.
+-   **ContactInfo.EmailID** - Имэйл. Тип данных - строка.
+-   **ContactInfo.Telephone** - Контактный телефон. Тип данных - сложный.
+-   **ContactInfo.Telephone.Type** - Тип телефона. Тип данных - перечисление, возможные значения:
+    -   A - Агентство
+    -   B - Рабочий
+    -   M - Мобильный
+    -   H - Домашний
+-   **ContactInfo.Telephone.PhoneNumber** - Номер телефона. Тип данных - строка.
+-   **LoyaltyCard** - Карточка лояльности. Тип данных - сложный.
+-   **LoyaltyCard.OwnerType** - Тип эмитента карточки лояльности. Тип данных - перечисление, возможные значения:
+    -   Airline
+    -   Agent
+-   **LoyaltyCard.Owner** - Код эмитента карточки лояльности. Тип данных - строка.
+-   **LoyaltyCard.Number** - Номер карточки лояльности. Тип данных - строка.
+-   **LoyaltyCard.Status** - Статус. Тип данных - перечисление, возможные значения:
+    -   Confirmed
+    -   NeedConfirmation
+    -   NotConfirmed
+    -   Canceled
+    -   Flew
+    -   OnRequest
+    -   Rejected
+-   **LoyaltyCard.StatusCode** - Индустриальный код статуса. Тип данных - строка.
+-   **Meal** - Спецпитание. Тип данных - SSRDataItem.
+-   **ElectronicDocument** - Некий электронный документ (ЭД) (билет/EMD). Тип данных - сложный.
+-   **ElectronicDocument.Number** - Номер ЭД. Тип данных - строка.
+-   **ElectronicDocument.ConjunctionNumbers** - "Присоединённые" номера. Тип данных - массив.
+-   **ElectronicDocument.ConjunctionNumbers.Number** - Номер "присоединённого" билета. Тип данных - строка.
+-   **ElectronicDocument.Status** - Статус документа. Тип данных - перечисление, возможные значения:
+    -   Active
+    -   Used
+    -   Voided
+    -   Refuned
+    -   Exchanged
+-   **ElectronicDocument.ServiceType** - Тип услуги, предоставляемой по данному ЭД. Тип данных - перечисление, возможные значения:
+    -   Flight
+    -   Ancillary
+    -   TicketIssuance
+    -   TicketExchange
+    -   TicketRefund
+-   **ElectronicDocument.IssueDateTime** - Время генерации ЭД. Тип данных - дата и время с указанием часового пояса.
+-   **ElectronicDocument.ExecutionTimeLimit** - ТЛ на предоставление услуги по данному ЭД. Тип данных - дата и время с указанием часового пояса.
+-   **ElectronicDocument.VAT** - Некий электронный документ (билет/EMD). Тип данных - Money.
+-   **PaperDocument** - Бумажный документ. Тип данных - сложный.
+-   **PaperDocument.Type** - Тип документ. Тип данных - перечисление, возможные значения:
+    -   ItinReceipt
+    -   Other
+-   **PaperDocument.Format** - Формат документа. Тип данных - строка.
+-   **PaperDocument.Encoding** - Кодировка документа. Тип данных - строка.
+-   **PaperDocument.DocumentData** - Данные документа. Тип данных - строка.
+-   **PaperDocument.IsBase64Wrapped** - Призак обёртки данных документа в Base64. Тип данных - bool.
+-   **Endorsements** - Эндорсменты. Тип данных - сложный.
+-   **Endorsements.EndorsementText** - Текст эндорсментов. Тип данных - массив.
+-   **Endorsements.EndorsementText.Text** - Одна строка из эндорсментов. Тип данных - строка.
+-   **Visa** - Данные визы. Тип данных - сложный.
+-   **Visa.Number** - Номер визы. Тип данных - строка.
+-   **Visa.BirthPlace** - Место рождения путешественника, которому выдали визу. Тип данных - строка.
+-   **Visa.IssuePlace** - Место выдачи визы. Тип данных - строка.
+-   **Visa.IssueDate** - Дата выдачи визы. Тип данных - дата в формате dd.mm.yyyy.
+-   **Visa.ApplicableCountry** - ISO Alpha2 или ISO Alpha3 код страны на которую действует виза. Тип данных - строка.
+-   **ArrivalAddress** - Адрес пребывания. Тип данных - сложный.
+-   **ArrivalAddress.CountryCode** - ISO Alpha2 или ISO Alpha3 код страны пребывания. Тип данных - строка.
+-   **ArrivalAddress.City** - Город пребывания. Тип данных - строка.
+-   **ArrivalAddress.State** - Штат/область пребывания. Тип данных - строка.
+-   **ArrivalAddress.StreetAddress** - Адрес пребывания. Тип данных - строка.
+-   **ArrivalAddress.PostalCode** - почтовый индекс пребывания. Тип данных - строка.
+-   **BookedSeat** - Данный бронируемого/забронированного места из карты мест. Тип данных - сложный.
+-   **BookedSeat.Number** - Номер места. Тип данных - строка.
+-   **BookedSeat.Characteristic** - Характеристика места. Тип данных - строка.
+-   **BookedSeat.SmokingPreference** - Признак места для курящих. Тип данных - bool.
+-   **BookedSeat.Status** - Статус места. Тип данных - перечисление, возможные значения:
+    -   Confirmed
+    -   NeedConfirmation
+    -   NotConfirmed
+    -   Canceled
+    -   Flew
+    -   OnRequest
+    -   Rejected
+-   **BookedSeat.StatusCode** - Индустриальный код статуса. Тип данных - строка.
+-   **ValidatingCompany** - Информация о валидирующий перевозчик. Тип данных - сложный.
+-   **ValidatingCompany.Code** - Код компании. Тип данных - строка.
+-   **ValidatingCompany.IsForced** - Признак переопределённого ВП. Тип данных - bool.
+-   **CashValueForMultiFOPProxing** - Содержит значение суммы для cash части при мультиФОП ГДС процессинге через сторонние ПШ. Тип данных - сложный.
+-   **CashValueForMultiFOPProxing.CashValue** - значение суммы для cash части при мультиФОП ГДС процессинге через сторонние ПШ. Тип данных - Money.
+-   **PNRFOP** - Содержит формы оплаты в брони. Тип данных - сложный.
+-   **PNRFOP.FOPs** - Содержит список форм оплаты для прописывания в бронь. Тип данных - массив.
+-   **PNRFOP.FOPs.FOP** - Одна из форма оплаты в брони. Тип данных - сложный.
+-   **PNRFOP.FOPs.FOP.Type** - Тип данного ФОПа. Тип данных - перечисление, возможные значения:
+    -   CA - cash, наличные
+    -   CC - credit card
+    -   CK - check, банковский чек
+    -   IN - invoice
+-   **PNRFOP.FOPs.FOP.CreditCardNumber** - Маскированный номер кредитной карты, в случае если форматы оплаты - кредитка. Тип данных - строка.
+-   **SubagentCommission** - Субагентская комиссия. Тип данных - CommissionDataItem.
+-   **TicketDesignator** - Информация о тикет десигнаторе для прописывания в бронь. Тип данных - сложный.
+-   **TicketDesignator.Value** - Значение тикет десигнатора для прописывания в бронь. Тип данных - строка.
+-   **TourCode** - Туркод. Тип данных - сложный.
+-   **TourCode.Type** - Тип туркод. Тип данных - перечисление, возможные значения:
+    -   Default
+    -   Unprintable
+    -   InclusiveTour
+    -   BulkTour
+    -   BSPInclusiveTour
+-   **TourCode.Value** - Значение туркода. Тип данных - строка.
+-   **Markup** - Информация о сборе агента. Тип данных - сложный.
+-   **Markup.MarkupValue** - Значение сбора агента. Тип данных - *Money*.
+-   **Markup.VAT** - Данные об НДС. Тип данных - сложный.
+-   **Markup.VAT.VATValue** - Сумма НДС. Тип данных - *Money*.
+-   **Markup.VAT.VATRate** - Ставка НДС в %. Тип данных - double.
+-   **TicketingProxy** - Данный для проксирования выписки через ПШ. Тип данных - сложный.
+-   **TicketingProxy.Gateway** - ПШ, которым была произведена оплата. Тип данных - перечисление, допустимые значение:
+    -   platron
+    -   uniteller
+-   **TicketingProxy.ProxingParams** - Гет параметры, необходимые для корректного проксирования выписки. Тип данных - строка.
+-   **CRMIntegration** - Данный для прописывания в ПНРа для интеграции с CRM/BO системами работающимим с системами поставщиков. Тип данных - сложный.
+-   **CRMIntegration.ClientID** - ИД агента/субагента в CRM/BO системе. Тип данных - строка.
+-   **CRMIntegration.NemoClientID** - ИД агента/субагента в Немо. Тип данных - int.
+-   **CRMIntegration.OrderID** - ИД заказа в Немо. Тип данных - строка.
+-   **CRMIntegration.PricingRuleID** - ИД сработавшего ценового правила в Немо. Тип данных - int.
+-   **CRMIntegration.PaymentGateway** - способ оплаты/ПШ. Тип данных - строка.
+-   **CRMIntegration.PaymentGatewayMarkup** - сбор ПШ. Тип данных - сложный.
+-   **CRMIntegration.SalesChannel** - Канал продажи. Тип данных - перечисление, допустимые значение:
+    -   Meta
+    -   API
+    -   AgentSite
+-   **Discount** - Скидка от тарифа. Тип данных - сложный.
+-   **Discount.Percent** - Значение скидки в %. Тип данных - float.
+-   **Discount.Amount** - Сумма скидки. Тип данных - float.
+-   **Discount.Currency** - Код валюты скидки. Тип данных - строка.
+-   **Discount.AuthCode** - Код авторизации скидки, как правило отображается в качестве тикет десигнатора в тарифе. Тип данных - строка.
+-   **EndUserData** - Данные конечного пользователя системы. Тип данных - сложный.
+-   **EndUserData.EndUserIP** - IP адрес конечного пользователя. Тип данных - строка.
+-   **EndUserData.EndUserBrowserAgent** - идентификация ПО-клиента конечного юзера. Тип данных - строка.
+-   **EndUserData.RequestOrigin** - исходный источник перехода. Тип данных - строка.
+
+DateInfo
+--------
+
+Содержи информацию о дате и времени выполнения различных событий с объектом. Все элементы данного блока имеют тип дата-время с указанием часового пояса.
+
+-   **Created** - Дата и время создания объекта. Для брони при наличии возможности подтягивается из ГДС.
+-   **Start** - Дата и время начала выполнения услуг в объекте.
+-   **LastUpdate** - Дата и время последнего обновления.
+-   **LastAccess** - Дата и время последнего доступа к объекту.
+-   **Canceled** - Дата и время отмены брони услуг.
+-   **Ticketed** - Дата и время выписки.
+-   **Voided** - Дата и время войдирования.
+-   **Refunded** - Дата и время возврата билетов.
+-   **Exchanged** - Дата и время обмена билетов.
+-   **Paid** - Дата и время оплаты заказа.
+
+PossibleActions
+---------------
+
+Содержит список допустимых действий с бронью или заказом, который централизованно определяется для каждого объекта. Именно по нему определяется возможности выполнить ту или иную операцию в .нет сервере. Является массивом элементов Action.
+
+-   **Action** - Допустимое действие с объектом. Тип данных - перечисление, возможные значения:
+    -   Get
+    -   Update
+    -   PayFor
+    -   Cancel
+    -   Ticket
+    -   Void
+    -   Refund
+    -   Split - тут имеется ввиду аналог ГДС сплита, при котором одна бронь разбирается на 2 с разными пассажирами
+    -   Modify
+    -   ProcessPayment
+    -   GetHistory
+
+Book
+----
+
+Бронь некой базовой услуги с набором связанных допуслуга от поставщика.
+
+-   **ID** - уникальный идентификатор данной брони. Тип данных - long.
+-   **OwnerID** - ИД владельца брони в системе. Тип данных - int32.
+-   **DateInfo** - информация о времени различных событий с данной бронь. Тип данных - [DateInfo](#dateinfo "wikilink").
+-   **PossibleActions** - список допустимых действий с данной бронью. Тип данных - [PossibleActions](#possibleactions "wikilink").
+-   **Travellers** - список путешественников, для которых создана данная бронь. Тип данных - массив [Traveller](#traveller "wikilink").
+-   **Services** - список базовых услуг, забронированных в рамках данной брони. Тип данных - массив [Service](#service "wikilink").
+-   **AncillaryServices** - список допуслуг от поставщика, забронированных в рамках данной брони. Тип данных - массив [Service](#service "wikilink").
+-   **Price** - цена брони. Тип данных - [Price](#price "wikilink").
+-   **DataItems** - контент брони. Тип данных - [DataItem](#dataitem "wikilink").
+
+### Пример
+
+    <ResponseBody>
+        <ID>140819</ID>
+        <OwnerID>4</OwnerID>
+        <DateInfo>
+            <Created>2015-07-29 19:18:59 +03:00</Created>
+        </DateInfo>
+        <PossibleActions>
+            <Action>Get</Action>
+            <Action>Update</Action>
+            <Action>GetHistory</Action>
+            <Action>Modify</Action>
+            <Action>Ticket</Action>
+            <Action>Cancel</Action>
+        </PossibleActions>
+        <Travellers>
+            <Traveller>
+                <ID>1</ID>
+                <Type>ADT</Type>
+                <Name>KONSTANTIN</Name>
+                <LastName>VASYUK</LastName>
+                <DateOfBirth>15.08.1989</DateOfBirth>
+                <Nationality>RU</Nationality>
+                <Gender>M</Gender>
+            </Traveller>
+            <Traveller>
+                <ID>2</ID>
+                <Type>INF</Type>
+                <Name>ZHENYA</Name>
+                <LastName>VASYUK</LastName>
+                <DateOfBirth>15.08.2014</DateOfBirth>
+                <Nationality>RU</Nationality>
+                <Gender>F</Gender>
+                <LinkedTo>1</LinkedTo>
+            </Traveller>
+            <Traveller>
+                <ID>3</ID>
+                <Type>ADT</Type>
+                <Name>IVAN</Name>
+                <LastName>VASYUK</LastName>
+                <DateOfBirth>15.08.1992</DateOfBirth>
+                <Nationality>RU</Nationality>
+                <Gender>M</Gender>
+            </Traveller>
+            <Traveller>
+                <ID>4</ID>
+                <Type>CNN</Type>
+                <Name>SERGEY</Name>
+                <LastName>VASYUK</LastName>
+                <DateOfBirth>15.08.2010</DateOfBirth>
+                <Nationality>RU</Nationality>
+                <Gender>M</Gender>
+            </Traveller>
+        </Travellers>
+        <Services>
+            <Service i:type="FlightService">
+                <ID>0</ID>
+                <SupplierID>5RKGGY</SupplierID>
+                <Status>Booked</Status>
+                <SubStatus/>
+                <Type>Regular</Type>
+                <DirectionType>OW</DirectionType>
+                <Segments>
+                    <FlightSegment>
+                        <ID>0</ID>
+                        <DepatureAirport>
+                            <Code>DME</Code>
+                            <CityCode>MOW</CityCode>
+                            <UTC>4</UTC>
+                        </DepatureAirport>
+                        <ArrivalAirport>
+                            <Code>LED</Code>
+                            <SubPointCode>1</SubPointCode>
+                            <UTC>4</UTC>
+                        </ArrivalAirport>
+                        <DepatureDateTime>2015-09-10T23:20:00</DepatureDateTime>
+                        <ArrivalDateTime>2015-09-11T00:50:00</ArrivalDateTime>
+                        <FlightNumber>6172</FlightNumber>
+                        <AircraftType>319</AircraftType>
+                        <OperatingAirline>SU</OperatingAirline>
+                        <MarketingAirline>SU</MarketingAirline>
+                        <ETicket>true</ETicket>
+                        <BookingClassCode>R</BookingClassCode>
+                        <Status>Confirmed</Status>
+                        <StatusCode>HK</StatusCode>
+                    </FlightSegment>
+                </Segments>
+            </Service>
+        </Services>
+        <Price>
+            <TotalPrice>
+                <Amount>7590</Amount>
+                <Currency>RUB</Currency>
+            </TotalPrice>
+            <PriceBreakdown>
+                <PricePart>
+                    <TotalPrice>
+                        <Amount>7590</Amount>
+                        <Currency>RUB</Currency>
+                    </TotalPrice>
+                    <ValidatingCompany>SU</ValidatingCompany>
+                    <Refundable>NonRefundable</Refundable>
+                    <PassengerTypePriceBreakdown>
+                        <PassengerTypePrice>
+                            <TravellerRef>
+                                <Ref>1</Ref>
+                                <Ref>3</Ref>
+                            </TravellerRef>
+                            <PricingType>ADT</PricingType>
+                            <BaseFare>
+                                <Amount>800</Amount>
+                                <Currency>RUB</Currency>
+                            </BaseFare>
+                            <EquiveFare>
+                                <Amount>800</Amount>
+                                <Currency>RUB</Currency>
+                            </EquiveFare>
+                            <TotalFare>
+                                <Amount>2530</Amount>
+                                <Currency>RUB</Currency>
+                            </TotalFare>
+                            <Taxes>
+                                <Tax>
+                                    <Amount>1500</Amount>
+                                    <Currency>RUB</Currency>
+                                    <TaxCode>YQ</TaxCode>
+                                </Tax>
+                                <Tax>
+                                    <Amount>230</Amount>
+                                    <Currency>RUB</Currency>
+                                    <TaxCode>YR</TaxCode>
+                                </Tax>
+                            </Taxes>
+                            <Tariffs>
+                                <Tariff i:type="AirTariff">
+                                    <Code>RPROWRF</Code>
+                                    <Type>Public</Type>
+                                    <ClassOfService>Economy</ClassOfService>
+                                    <BookingClassCode>R</BookingClassCode>
+                                    <SegmentID>0</SegmentID>
+                                    <FreeBaggage>
+                                        <Value>1</Value>
+                                        <Measure>Pieces</Measure>
+                                    </FreeBaggage>
+                                </Tariff>
+                            </Tariffs>
+                            <FareCalc>MOW SU LED800.00RUB800.00END</FareCalc>
+                        </PassengerTypePrice>
+                        <PassengerTypePrice>
+                            <TravellerRef>
+                                <Ref>4</Ref>
+                            </TravellerRef>
+                            <PricingType>CH</PricingType>
+                            <BaseFare>
+                                <Amount>800</Amount>
+                                <Currency>RUB</Currency>
+                            </BaseFare>
+                            <EquiveFare>
+                                <Amount>800</Amount>
+                                <Currency>RUB</Currency>
+                            </EquiveFare>
+                            <TotalFare>
+                                <Amount>2530</Amount>
+                                <Currency>RUB</Currency>
+                            </TotalFare>
+                            <Taxes>
+                                <Tax>
+                                    <Amount>1500</Amount>
+                                    <Currency>RUB</Currency>
+                                    <TaxCode>YQ</TaxCode>
+                                </Tax>
+                                <Tax>
+                                    <Amount>230</Amount>
+                                    <Currency>RUB</Currency>
+                                    <TaxCode>YR</TaxCode>
+                                </Tax>
+                            </Taxes>
+                            <Tariffs>
+                                <Tariff i:type="AirTariff">
+                                    <Code>RPROWRF/CH00</Code>
+                                    <Type>Public</Type>
+                                    <ClassOfService>Economy</ClassOfService>
+                                    <BookingClassCode>R</BookingClassCode>
+                                    <SegmentID>0</SegmentID>
+                                    <FreeBaggage>
+                                        <Value>1</Value>
+                                        <Measure>Pieces</Measure>
+                                    </FreeBaggage>
+                                </Tariff>
+                            </Tariffs>
+                            <FareCalc>MOW SU LED800.00RUB800.00END</FareCalc>
+                        </PassengerTypePrice>
+                        <PassengerTypePrice>
+                            <TravellerRef>
+                                <Ref>2</Ref>
+                            </TravellerRef>
+                            <PricingType>IN</PricingType>
+                            <BaseFare>
+                                <Amount>0</Amount>
+                                <Currency>RUB</Currency>
+                            </BaseFare>
+                            <EquiveFare>
+                                <Amount>0</Amount>
+                                <Currency>RUB</Currency>
+                            </EquiveFare>
+                            <TotalFare>
+                                <Amount>0</Amount>
+                                <Currency>RUB</Currency>
+                            </TotalFare>
+                            <Tariffs>
+                                <Tariff i:type="AirTariff">
+                                    <Code>RPROWRF/IN</Code>
+                                    <Type>Public</Type>
+                                    <ClassOfService>Economy</ClassOfService>
+                                    <BookingClassCode>R</BookingClassCode>
+                                    <SegmentID>0</SegmentID>
+                                    <FreeBaggage>
+                                        <Value>1</Value>
+                                        <Measure>Pieces</Measure>
+                                    </FreeBaggage>
+                                </Tariff>
+                            </Tariffs>
+                            <FareCalc>MOW SU LED0.00RUB0.00END</FareCalc>
+                        </PassengerTypePrice>
+                    </PassengerTypePriceBreakdown>
+                </PricePart>
+            </PriceBreakdown>
+        </Price>
+        <DataItems>
+            <DataItem>
+                <ID>0</ID>
+                <Type>SourceInfo</Type>
+                <SourceInfo>
+                    <ID>1</ID>
+                    <BookingSupplierAgencyID>MOWR223J7</BookingSupplierAgencyID>
+                    <TicketingSupplierAgencyID>MOWR221TU</TicketingSupplierAgencyID>
+                    <Supplier>Amadeus</Supplier>
+                    <Environment>TEST</Environment>
+                </SourceInfo>
+            </DataItem>
+            <DataItem>
+                <ID>1</ID>
+                <Type>TL</Type>
+                <TimeLimits>
+                    <EffectiveTimeLimit>2015-07-30 19:18:59 +03:00</EffectiveTimeLimit>
+                    <PriceTimeLimit>2015-07-30 19:18:59 +03:00</PriceTimeLimit>
+                </TimeLimits>
+            </DataItem>
+            <DataItem>
+                <ID>2</ID>
+                <Type>ValidatingCompany</Type>
+                <ValidatingCompany>
+                    <Code>SU</Code>
+                </ValidatingCompany>
+            </DataItem>
+            <DataItem>
+                <ID>3</ID>
+                <Type>FOP</Type>
+                <PNRFOP>
+                    <FOPs>
+                        <FOP>
+                            <Type>CA</Type>
+                        </FOP>
+                    </FOPs>
+                </PNRFOP>
+            </DataItem>
+            <DataItem>
+                <ID>4</ID>
+                <TravellerRef>
+                    <Ref>1</Ref>
+                </TravellerRef>
+                <Type>IDDocument</Type>
+                <Document>
+                    <Type>P</Type>
+                    <Number>4108190448</Number>
+                    <IssueCountryCode>RU</IssueCountryCode>
+                    <ElapsedTime>15.08.2039</ElapsedTime>
+                    <AddedAsDOCS>true</AddedAsDOCS>
+                </Document>
+            </DataItem>
+            <DataItem>
+                <ID>5</ID>
+                <TravellerRef>
+                    <Ref>3</Ref>
+                </TravellerRef>
+                <Type>IDDocument</Type>
+                <Document>
+                    <Type>P</Type>
+                    <Number>4111111415</Number>
+                    <IssueCountryCode>RU</IssueCountryCode>
+                    <ElapsedTime>15.08.2039</ElapsedTime>
+                    <AddedAsDOCS>true</AddedAsDOCS>
+                </Document>
+            </DataItem>
+            <DataItem>
+                <ID>6</ID>
+                <TravellerRef>
+                    <Ref>4</Ref>
+                </TravellerRef>
+                <Type>IDDocument</Type>
+                <Document>
+                    <Type>P</Type>
+                    <Number>4111111448</Number>
+                    <IssueCountryCode>RU</IssueCountryCode>
+                    <ElapsedTime>15.08.2039</ElapsedTime>
+                    <AddedAsDOCS>true</AddedAsDOCS>
+                </Document>
+            </DataItem>
+            <DataItem>
+                <ID>7</ID>
+                <TravellerRef>
+                    <Ref>2</Ref>
+                </TravellerRef>
+                <Type>IDDocument</Type>
+                <Document>
+                    <Type>P</Type>
+                    <Number>4111111048</Number>
+                    <IssueCountryCode>RU</IssueCountryCode>
+                    <ElapsedTime>15.08.2039</ElapsedTime>
+                    <AddedAsDOCS>true</AddedAsDOCS>
+                </Document>
+            </DataItem>
+            <DataItem>
+                <ID>8</ID>
+                <Type>ContactInfo</Type>
+                <ContactInfo>
+                    <Telephone>
+                        <Type>A</Type>
+                        <PhoneNumber>74996382735- AGCY</PhoneNumber>
+                    </Telephone>
+                </ContactInfo>
+            </DataItem>
+            <DataItem>
+                <ID>9</ID>
+                <TravellerRef>
+                    <Ref>1</Ref>
+                </TravellerRef>
+                <Type>ContactInfo</Type>
+                <ContactInfo>
+                    <EmailID>K.VASYUK@MUTE-LAB.COM</EmailID>
+                    <Telephone>
+                        <Type>M</Type>
+                        <PhoneNumber>89276223156</PhoneNumber>
+                    </Telephone>
+                </ContactInfo>
+            </DataItem>
+            <DataItem>
+                <ID>10</ID>
+                <TravellerRef>
+                    <Ref>1</Ref>
+                    <Ref>3</Ref>
+                    <Ref>4</Ref>
+                </TravellerRef>
+                <Type>FE</Type>
+                <Endorsements>
+                    <EndorsementText>
+                        <Text>PAX NONREF/HEBO3BPATEH</Text>
+                    </EndorsementText>
+                </Endorsements>
+            </DataItem>
+            <DataItem>
+                <ID>11</ID>
+                <TravellerRef>
+                    <Ref>2</Ref>
+                </TravellerRef>
+                <Type>FE</Type>
+                <Endorsements>
+                    <EndorsementText>
+                        <Text>INF NONREF/HEBO3BPATEH</Text>
+                    </EndorsementText>
+                </Endorsements>
+            </DataItem>
+        </DataItems>
+    </ResponseBody>
+
+Order
+-----
+
+Заказа с набором забронированных услуг, которым может соответствовать несколько броней в системах поставщиков услуг.
+
+-   **ID** - уникальный идентификатор данного заказа. Тип данных - строка.
+-   **OwnerInfo** - информация об источнике создания заказа. Тип данных - сложный.
+-   **OwnerInfo.EngineVersion** - тип движка заказов, в котором он создан. Тип данных - перечисление, возможные значения:
+    -   NEMO\_NET
+    -   NEMO\_PHP
+-   **OwnerInfo.OwnerID** - ИД владельца заказа в системе. Тип данных - int32.
+-   **OwnerInfo.UserHierarchy** - иерархия владельца заказа. Тип данных - массив.
+-   **OwnerInfo.UserHierarchy.ID** - ИД некой группы в иерархии владельца заказа. Тип данных - int32.
+-   **OwnerInfo.UTMSource** - источник переход на создание заказа в системе. Тип данных - сложный.
+-   **Type** - тип заказа. Тип данных - перечисление, возможные значения:
+    -   Online - содержит только онлайн услуги - живут в условиях взаимодейтсвия с системами поставщиков
+    -   Offline - содержит только оффлайн услуги - живут без взаимодействия с системами поставщиком, структурированные или нет - значения не имеет
+    -   Mixed - содержит как онлайн, так и оффлайн услуги
+-   **Status** - статус заказа. Тип данных - перечисление *PNRStatus*, возможные значения:
+    -   Booked
+    -   Canceled
+    -   Ticketed
+    -   AwaitingTicketing - в основном для случая с чартерами, когда бронь отправили в очередь на выписку билетов а/к
+    -   Partial - части брони/заказа находится в одном состоянии, остальная в другом (к примеру частично выписанная бронь, или у разных услуг разные статусы)
+    -   Problematic - проблемная бронь/заказ/услуга, при наличии данного статуса в подстатусах указывается что именно не так с бронью
+-   **SubStatus** - под статус заказа, уточняющий его состояние. Тип данных - перечисление, возможные значения:
+    -   ProblematicService
+    -   ContainsCanceledService
+    -   PartialTicketing
+    -   HasUnfinishedPaymentTransaction
+    -   PaymentConfirmationFailed
+    -   TicketingFailed
+-   **PaymentStatus** - статус оплаты заказа. Тип данных - перечисление, возможные значения:
+    -   NotPaid
+    -   Paid
+    -   PartPaid
+-   **DateInfo** - информация о времени различных событий с данным заказом. Тип данных - [DateInfo](#dateinfo "wikilink").
+-   **PossibleActions** - список допустимых действий с данным заказом. Тип данных - [PossibleActions](#possibleactions "wikilink").
+-   **Travellers** - список путешественников, для которых создана данный заказ. Тип данных - массив [Traveller](#traveller "wikilink").
+-   **Services** - список базовых услуг, забронированных в рамках данного заказа. Тип данных - массив [Service](#service "wikilink").
+-   **AncillaryServices** - список допуслуг от поставщика, забронированных в рамках данного заказа. Тип данных - массив [Service](#service "wikilink").
+-   **ProcessingServices** - список услуг по обработке заказа, предоставленных в рамках данного заказа. Тип данных - массив [OrderProcessingService](#orderprocessingservice "wikilink").
+-   **ServiceGroups** - группы услуг в заказе. Тип данных - массив *ServiceGroup*.
+-   **ServiceGroup** - группа услуг. Тип данных - сложный.
+-   **ServiceGroup.ServiceRef** - список услуг, объединённых в данную услугу. Тип данных - массив RefList.
+-   **ServiceGroup.GroupType** - тип/основание группировки. Тип данных - перечисление, возможные значения:
+    -   SingleBook - одна бронь в системе поставищка, как правило используется группировки базовых и допуслуг, которые представлены в виде единой брони.
+    -   MultiOW
+-   **ServiceGroup.BookID** - ИД брони. Тип данных - long.
+-   **Price** - цена заказа. Тип данных - [Price](#price "wikilink").
+-   **PaymentTransactions** - список транзакций оплаты заказа. Тип данных - массив *Transaction*.
+-   **Transaction** - транзакция оплаты заказа. Тип данных - сложный.
+-   **Transaction.ID** ''' - идентификатор транзакции в платёжной компоненте системы. Тип данных - long.
+-   **Transaction.Status** - статус транзакции. Тип данных - перечисление, возможные значения:
+    -   Initialized
+    -   Authorized
+    -   Confirmed
+    -   Canceled
+    -   Rejected
+-   **Transaction.Amount** - сумма транзакции. Тип данных - [Money](Money "wikilink").
+-   **Transaction.PossibleActions** - список доступных действий с транзакцией. Тип данных - массив.
+-   **DataItems** - контент заказа. Тип данных - [DataItem](#dataitem "wikilink").
+
+### Пример
+
+    <ResponseBody>
+        <ID>uYcCzA4dR9Ff+PQ+WcTS7Q6s3wA=</ID>
+        <OwnerInfo>
+            <EngineVersion>NEMO_NET</EngineVersion>
+            <OwnerID>4</OwnerID>
+        </OwnerInfo>
+        <Type>Online</Type>
+        <Status>Booked</Status>
+        <PaymentStatus>NotPaid</PaymentStatus>
+        <DateInfo>
+            <Created>2015-07-30 13:09:45 +03:00</Created>
+        </DateInfo>
+        <PossibleActions>
+            <Action>Update</Action>
+            <Action>Get</Action>
+            <Action>Modify</Action>
+            <Action>Ticket</Action>
+            <Action>Cancel</Action>
+        </PossibleActions>
+        <Travellers>
+            <Traveller>
+                <ID>1</ID>
+                <Type>ADT</Type>
+                <Name>Константин</Name>
+                <LastName>Васюк</LastName>
+                <DateOfBirth>15.08.1989</DateOfBirth>
+                <Nationality>RU</Nationality>
+                <Gender>M</Gender>
+            </Traveller>
+        </Travellers>
+        <Services>
+            <Service i:type="FlightService">
+                <ID>0</ID>
+                <SupplierID>5RLY5V</SupplierID>
+                <Status>Booked</Status>
+                <SubStatus/>
+                <Type>Regular</Type>
+                <DirectionType>OW</DirectionType>
+                <Segments>
+                    <FlightSegment>
+                        <ID>0</ID>
+                        <DepatureAirport>
+                            <Code>DME</Code>
+                            <CityCode>MOW</CityCode>
+                            <UTC>4</UTC>
+                        </DepatureAirport>
+                        <ArrivalAirport>
+                            <Code>LED</Code>
+                            <SubPointCode>1</SubPointCode>
+                            <UTC>4</UTC>
+                        </ArrivalAirport>
+                        <DepatureDateTime>2015-09-11T09:20:00</DepatureDateTime>
+                        <ArrivalDateTime>2015-09-11T10:50:00</ArrivalDateTime>
+                        <FlightNumber>6122</FlightNumber>
+                        <AircraftType>319</AircraftType>
+                        <OperatingAirline>SU</OperatingAirline>
+                        <MarketingAirline>SU</MarketingAirline>
+                        <ETicket>true</ETicket>
+                        <BookingClassCode>R</BookingClassCode>
+                        <Status>Confirmed</Status>
+                        <StatusCode>HK</StatusCode>
+                    </FlightSegment>
+                </Segments>
+            </Service>
+            <Service i:type="FlightService">
+                <ID>1</ID>
+                <SupplierID>5RLY56</SupplierID>
+                <Status>Booked</Status>
+                <SubStatus/>
+                <Type>Regular</Type>
+                <DirectionType>OW</DirectionType>
+                <Segments>
+                    <FlightSegment>
+                        <ID>0</ID>
+                        <DepatureAirport>
+                            <Code>DME</Code>
+                            <CityCode>MOW</CityCode>
+                            <UTC>4</UTC>
+                        </DepatureAirport>
+                        <ArrivalAirport>
+                            <Code>LED</Code>
+                            <UTC>4</UTC>
+                        </ArrivalAirport>
+                        <DepatureDateTime>2015-09-11T21:45:00</DepatureDateTime>
+                        <ArrivalDateTime>2015-09-11T23:20:00</ArrivalDateTime>
+                        <FlightNumber>139</FlightNumber>
+                        <AircraftType>735</AircraftType>
+                        <OperatingAirline>UN</OperatingAirline>
+                        <MarketingAirline>UN</MarketingAirline>
+                        <ETicket>true</ETicket>
+                        <BookingClassCode>W</BookingClassCode>
+                        <Status>Confirmed</Status>
+                        <StatusCode>HK</StatusCode>
+                    </FlightSegment>
+                </Segments>
+            </Service>
+        </Services>
+        <ServiceGroups>
+            <ServiceGroup>
+                <ServiceRef>
+                    <Ref>0</Ref>
+                </ServiceRef>
+                <GroupType>SingleBook</GroupType>
+                <BookID>140823</BookID>
+            </ServiceGroup>
+            <ServiceGroup>
+                <ServiceRef>
+                    <Ref>1</Ref>
+                </ServiceRef>
+                <GroupType>SingleBook</GroupType>
+                <BookID>140824</BookID>
+            </ServiceGroup>
+            <ServiceGroup>
+                <ServiceRef>
+                    <Ref>0</Ref>
+                    <Ref>1</Ref>
+                </ServiceRef>
+                <GroupType>MultiOW</GroupType>
+            </ServiceGroup>
+        </ServiceGroups>
+        <Price>
+            <TotalPrice>
+                <Amount>4982</Amount>
+                <Currency>RUB</Currency>
+            </TotalPrice>
+            <PriceBreakdown>
+                <PricePart>
+                    <ServiceRef>
+                        <Ref>0</Ref>
+                    </ServiceRef>
+                    <TotalPrice>
+                        <Amount>2530</Amount>
+                        <Currency>RUB</Currency>
+                    </TotalPrice>
+                    <ValidatingCompany>SU</ValidatingCompany>
+                    <Refundable>NonRefundable</Refundable>
+                    <PassengerTypePriceBreakdown>
+                        <PassengerTypePrice>
+                            <TravellerRef>
+                                <Ref>1</Ref>
+                            </TravellerRef>
+                            <PricingType>ADT</PricingType>
+                            <BaseFare>
+                                <Amount>800</Amount>
+                                <Currency>RUB</Currency>
+                            </BaseFare>
+                            <EquiveFare>
+                                <Amount>800</Amount>
+                                <Currency>RUB</Currency>
+                            </EquiveFare>
+                            <TotalFare>
+                                <Amount>2530</Amount>
+                                <Currency>RUB</Currency>
+                            </TotalFare>
+                            <Taxes>
+                                <Tax>
+                                    <Amount>1500</Amount>
+                                    <Currency>RUB</Currency>
+                                    <TaxCode>YQ</TaxCode>
+                                </Tax>
+                                <Tax>
+                                    <Amount>230</Amount>
+                                    <Currency>RUB</Currency>
+                                    <TaxCode>YR</TaxCode>
+                                </Tax>
+                            </Taxes>
+                            <Tariffs>
+                                <Tariff i:type="AirTariff">
+                                    <Code>RPROWRF</Code>
+                                    <Type>Public</Type>
+                                    <ClassOfService>Economy</ClassOfService>
+                                    <BookingClassCode>R</BookingClassCode>
+                                    <SegmentID>0</SegmentID>
+                                    <FreeBaggage>
+                                        <Value>1</Value>
+                                        <Measure>Pieces</Measure>
+                                    </FreeBaggage>
+                                </Tariff>
+                            </Tariffs>
+                            <FareCalc>MOW SU LED800.00RUB800.00END</FareCalc>
+                        </PassengerTypePrice>
+                    </PassengerTypePriceBreakdown>
+                </PricePart>
+                <PricePart>
+                    <ServiceRef>
+                        <Ref>1</Ref>
+                    </ServiceRef>
+                    <TotalPrice>
+                        <Amount>2452</Amount>
+                        <Currency>RUB</Currency>
+                    </TotalPrice>
+                    <ValidatingCompany>UN</ValidatingCompany>
+                    <Refundable>NonRefundable</Refundable>
+                    <PassengerTypePriceBreakdown>
+                        <PassengerTypePrice>
+                            <TravellerRef>
+                                <Ref>1</Ref>
+                            </TravellerRef>
+                            <PricingType>ADT</PricingType>
+                            <BaseFare>
+                                <Amount>400</Amount>
+                                <Currency>RUB</Currency>
+                            </BaseFare>
+                            <EquiveFare>
+                                <Amount>400</Amount>
+                                <Currency>RUB</Currency>
+                            </EquiveFare>
+                            <TotalFare>
+                                <Amount>2452</Amount>
+                                <Currency>RUB</Currency>
+                            </TotalFare>
+                            <Taxes>
+                                <Tax>
+                                    <Amount>750</Amount>
+                                    <Currency>RUB</Currency>
+                                    <TaxCode>YQ</TaxCode>
+                                </Tax>
+                                <Tax>
+                                    <Amount>1240</Amount>
+                                    <Currency>RUB</Currency>
+                                    <TaxCode>YR</TaxCode>
+                                </Tax>
+                                <Tax>
+                                    <Amount>62</Amount>
+                                    <Currency>RUB</Currency>
+                                    <TaxCode>RU</TaxCode>
+                                </Tax>
+                            </Taxes>
+                            <Tariffs>
+                                <Tariff i:type="AirTariff">
+                                    <Code>WDOW</Code>
+                                    <Type>Public</Type>
+                                    <ClassOfService>Economy</ClassOfService>
+                                    <BookingClassCode>W</BookingClassCode>
+                                    <SegmentID>0</SegmentID>
+                                    <FreeBaggage>
+                                        <Value>1</Value>
+                                        <Measure>Pieces</Measure>
+                                    </FreeBaggage>
+                                </Tariff>
+                            </Tariffs>
+                            <FareCalc>MOW UN LED400.00RUB400.00END</FareCalc>
+                        </PassengerTypePrice>
+                    </PassengerTypePriceBreakdown>
+                </PricePart>
+            </PriceBreakdown>
+        </Price>
+        <DataItems>
+            <DataItem>
+                <ID>0</ID>
+                <ServiceRef>
+                    <Ref>0</Ref>
+                    <Ref>1</Ref>
+                </ServiceRef>
+                <Type>SourceInfo</Type>
+                <SourceInfo>
+                    <ID>78</ID>
+                    <BookingSupplierAgencyID>MOWR2235G</BookingSupplierAgencyID>
+                    <TicketingSupplierAgencyID>MOWR2235G</TicketingSupplierAgencyID>
+                    <Supplier>Amadeus</Supplier>
+                    <Environment>TEST</Environment>
+                </SourceInfo>
+            </DataItem>
+            <DataItem>
+                <ID>1</ID>
+                <ServiceRef>
+                    <Ref>0</Ref>
+                </ServiceRef>
+                <Type>ValidatingCompany</Type>
+                <ValidatingCompany>
+                    <Code>SU</Code>
+                </ValidatingCompany>
+            </DataItem>
+            <DataItem>
+                <ID>2</ID>
+                <ServiceRef>
+                    <Ref>0</Ref>
+                    <Ref>1</Ref>
+                </ServiceRef>
+                <Type>FOP</Type>
+                <PNRFOP>
+                    <FOPs>
+                        <FOP>
+                            <Type>CA</Type>
+                        </FOP>
+                    </FOPs>
+                </PNRFOP>
+            </DataItem>
+            <DataItem>
+                <ID>3</ID>
+                <TravellerRef>
+                    <Ref>1</Ref>
+                </TravellerRef>
+                <Type>IDDocument</Type>
+                <Document>
+                    <Type>P</Type>
+                    <Number>4111111448</Number>
+                    <IssueCountryCode>RU</IssueCountryCode>
+                    <ElapsedTime>15.08.2039</ElapsedTime>
+                    <AddedAsDOCS>true</AddedAsDOCS>
+                </Document>
+            </DataItem>
+            <DataItem>
+                <ID>4</ID>
+                <Type>ContactInfo</Type>
+                <ContactInfo>
+                    <Telephone>
+                        <Type>A</Type>
+                        <PhoneNumber>74996382735- AGCY</PhoneNumber>
+                    </Telephone>
+                </ContactInfo>
+            </DataItem>
+            <DataItem>
+                <ID>5</ID>
+                <TravellerRef>
+                    <Ref>1</Ref>
+                </TravellerRef>
+                <Type>ContactInfo</Type>
+                <ContactInfo>
+                    <EmailID>K.VASYUK@MUTE-LAB.COM</EmailID>
+                    <Telephone>
+                        <Type>M</Type>
+                        <PhoneNumber>811111111116</PhoneNumber>
+                    </Telephone>
+                </ContactInfo>
+            </DataItem>
+            <DataItem>
+                <ID>6</ID>
+                <TravellerRef>
+                    <Ref>1</Ref>
+                </TravellerRef>
+                <ServiceRef>
+                    <Ref>0</Ref>
+                </ServiceRef>
+                <Type>FE</Type>
+                <Endorsements>
+                    <EndorsementText>
+                        <Text>PAX NONREF/HEBO3BPATEH</Text>
+                    </EndorsementText>
+                </Endorsements>
+            </DataItem>
+            <DataItem>
+                <ID>7</ID>
+                <ServiceRef>
+                    <Ref>1</Ref>
+                </ServiceRef>
+                <Type>ValidatingCompany</Type>
+                <ValidatingCompany>
+                    <Code>UN</Code>
+                </ValidatingCompany>
+            </DataItem>
+            <DataItem>
+                <ID>8</ID>
+                <TravellerRef>
+                    <Ref>1</Ref>
+                </TravellerRef>
+                <ServiceRef>
+                    <Ref>1</Ref>
+                </ServiceRef>
+                <Type>FE</Type>
+                <Endorsements>
+                    <EndorsementText>
+                        <Text>PAX PLS CHECK BAGGAGE INFO WWW.TRANSAERO.RU NONREF/HEBO3BPATEH</Text>
+                    </EndorsementText>
+                </Endorsements>
+            </DataItem>
+            <DataItem>
+                <ID>9</ID>
+                <Type>TL</Type>
+                <TimeLimits>
+                    <EffectiveTimeLimit>2015-07-31 13:09:39 +03:00</EffectiveTimeLimit>
+                    <PriceTimeLimit>2015-07-31 13:09:39 +03:00</PriceTimeLimit>
+                </TimeLimits>
+            </DataItem>
+        </DataItems>
+    </ResponseBody>
