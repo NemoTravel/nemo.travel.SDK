@@ -1,9 +1,8 @@
 ﻿using AviaEntities.FlightSearch.RequestElements;
+using AviaEntities.ScheduleSearch.RequestElements;
 using GeneralEntities.PNRDataContent;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
 
 namespace AviaEntities.ScheduleSearch
 {
@@ -18,7 +17,7 @@ namespace AviaEntities.ScheduleSearch
 		/// (время вылета, прямой или с пересадками и т.д.)
 		/// </summary>
 		[DataMember(Order = 0, IsRequired = true)]
-		public AviaEntities.ScheduleSearch.RequestElements.ScheduleFlightDirection RequestedFlightInfo { get; set; }
+		public ScheduleFlightDirection RequestedFlightInfo { get; set; }
 
 		/// <summary>
 		/// Допольнительный условия/ограничея, накладываемые на поиск перелётов
@@ -32,6 +31,7 @@ namespace AviaEntities.ScheduleSearch
 		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public EndUserDataDataItem EndUserData { get; set; }
 
+
 		/// <summary>
 		/// Выполняет полное копирование объекта, реализация интерфейса ICloneable
 		/// </summary>
@@ -40,7 +40,7 @@ namespace AviaEntities.ScheduleSearch
 		{
 			var result = new ScheduleSearchRQBody();
 
-			result.RequestedFlightInfo = new RequestElements.ScheduleFlightDirection();
+			result.RequestedFlightInfo = new ScheduleFlightDirection();
 			result.RequestedFlightInfo.ODPair = RequestedFlightInfo.ODPair.FullCopy();
 
 			result.RequestedFlightInfo.Direct = RequestedFlightInfo.Direct;
@@ -57,6 +57,7 @@ namespace AviaEntities.ScheduleSearch
 				result.Restrictions.MaxConnectionTime = Restrictions.MaxConnectionTime;
 				result.Restrictions.ResultsGrouping = Restrictions.ResultsGrouping;
 				result.Restrictions.MaxResultCount = Restrictions.MaxResultCount;
+				result.Restrictions.MaxConnections = Restrictions.MaxConnections;
 
 				if (Restrictions.CompanyFilter != null)
 				{

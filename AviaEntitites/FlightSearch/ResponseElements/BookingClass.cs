@@ -1,7 +1,6 @@
 ﻿using GeneralEntities;
 using GeneralEntities.Shared;
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.FlightSearch.ResponseElements
@@ -17,7 +16,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		/// Базовый класс перелёта
 		/// </summary>
 		[DataMember(Order = 0, EmitDefaultValue = false)]
-        public BaseClass? BaseClass { get; set; }
+		public BaseClass? BaseClass { get; set; }
 
 		/// <summary>
 		/// Класс перелёта
@@ -43,11 +42,6 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		[DataMember(Order = 4, EmitDefaultValue = false)]
 		public Baggage Baggage { get; set; }
 
-		/// <summary>
-		/// Допуслуги, доступные на данном сегменте перелёта
-		/// </summary>
-		[DataMember(Order = 5, EmitDefaultValue = false)]
-		public List<AdditionalService> AdditionalServices { get; set; }
 
 		/// <summary>
 		/// Конструктор без параметров необходим сериализатору
@@ -60,10 +54,10 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		/// <param name="bookingClassCode">Класс перелёта</param>
 		/// <param name="baseClass">Базовый класс перелёта</param>
 		/// <param name="baggage">Допустимая мера багажа для данного класса перелёта</param>
-        public BookingClass(string bookingClassCode, BaseClass? baseClass = null, int freeSeatCount = -1, string mealType = null, Baggage baggage = null)
+		public BookingClass(string bookingClassCode, BaseClass? baseClass = null, int freeSeatCount = -1, string mealType = null, Baggage baggage = null)
 		{
 			BookingClassCode = bookingClassCode;
-            BaseClass = baseClass;
+			BaseClass = baseClass;
 			Baggage = baggage;
 			MealType = mealType;
 

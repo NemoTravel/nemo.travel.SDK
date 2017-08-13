@@ -85,7 +85,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		/// Создаёт экземпляр класса с инициализацией полей
 		/// </summary>
 		public PassengerFare()
-		{}
+		{ }
 
 		/// <summary>
 		/// Полное копирование объекта

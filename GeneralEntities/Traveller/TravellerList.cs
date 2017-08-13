@@ -9,7 +9,8 @@ namespace GeneralEntities.Traveller
 		public TravellerList()
 		{ }
 
-		public TravellerList(List<TravellerInformation> list) : base(list)
+		public TravellerList(List<TravellerInformation> list)
+			: base(list)
 		{ }
 	}
 }

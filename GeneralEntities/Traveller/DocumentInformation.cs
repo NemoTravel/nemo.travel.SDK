@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using SharedAssembly;
 using System;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;

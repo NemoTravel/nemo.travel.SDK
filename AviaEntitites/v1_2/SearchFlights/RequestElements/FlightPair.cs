@@ -51,6 +51,12 @@ namespace AviaEntities.v1_2.SearchFlights.RequestElements
 		public RequestedTripPoint ArrivalPoint { get; set; }
 
 		/// <summary>
+		/// Идентификатор элемента.
+		/// </summary>
+		[DataMember(Order = 4, IsRequired = false)]
+		public int? ID { get; set; }
+
+		/// <summary>
 		/// Выполняет полное копирование текущего объекта
 		/// </summary>
 		/// <returns>Результат копирования, приведённый к типу данного класса</returns>
@@ -68,7 +74,7 @@ namespace AviaEntities.v1_2.SearchFlights.RequestElements
 
 			result.DepaturePoint.Code = DepaturePoint.Code;
 			result.DepaturePoint.IsCity = DepaturePoint.IsCity;
-			
+
 
 			return result;
 		}

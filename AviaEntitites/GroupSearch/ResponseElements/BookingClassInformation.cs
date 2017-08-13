@@ -8,7 +8,7 @@ namespace AviaEntities.GroupSearch.ResponseElements
 	/// Информация о классе перелёта для определённого сегмента перелёта
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
-	public class BookingClassInformation : BookingClass 
+	public class BookingClassInformation : BookingClass
 	{
 		/// <summary>
 		/// Номер сегмента в перелёте
@@ -40,8 +40,6 @@ namespace AviaEntities.GroupSearch.ResponseElements
 			BookingClassCode = segment.BookingClassInfo.BookingClassCode;
 			FreeSeatCount = segment.BookingClassInfo.FreeSeatCount;
 			MealType = segment.BookingClassInfo.MealType;
-			AdditionalServices = segment.BookingClassInfo.AdditionalServices;
-
 
 			SegmentNumber = segment.ID;
 			Connection = segment.Connection;

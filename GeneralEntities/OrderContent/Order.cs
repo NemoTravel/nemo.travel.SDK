@@ -75,7 +75,7 @@ namespace GeneralEntities.OrderContent
 		/// Услуги обработки заказа
 		/// </summary>
 		[DataMember(Order = 10, EmitDefaultValue = false)]
-		public OrderProcessingServiceList ProcessingServices { get; set; }
+		public ProcessingServiceList ProcessingServices { get; set; }
 
 		/// <summary>
 		/// Группы услуг

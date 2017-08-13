@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Diagnostics;
+using System.Runtime.Serialization;
 
 namespace GeneralEntities.Services
 {
@@ -6,6 +7,7 @@ namespace GeneralEntities.Services
 	/// Содержит описание информации о точке путешествия
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	[DebuggerDisplay("[{Code}:{CityCode}]")]
 	public class TripPointInformation
 	{
 		/// <summary>
@@ -32,9 +34,55 @@ namespace GeneralEntities.Services
 		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public float? UTC { get; set; }
 
+
+		/// <summary>
+		/// Получает код города, если код не указан - возвращает код аэропорта
+		/// </summary>
+		/// <returns></returns>
 		public string GetCityCode()
 		{
-			return !string.IsNullOrWhiteSpace(CityCode) ? CityCode : Code;
+			return string.IsNullOrEmpty(CityCode) ? Code : CityCode;
+		}
+
+		/// <summary>
+		/// Получает код аэропорта, если код не указан - возвращает код города
+		/// </summary>
+		/// <returns></returns>
+		public string GetAirportCode()
+		{
+			return string.IsNullOrEmpty(Code) ? CityCode : Code;
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj == null)
+			{
+				return false;
+			}
+
+			if (obj == this)
+			{
+				return true;
+			}
+
+			var tripPointInformation = obj as TripPointInformation;
+
+			if (tripPointInformation != null)
+			{
+				if (tripPointInformation.Code == this.Code &&
+					tripPointInformation.CityCode == this.CityCode &&
+					tripPointInformation.SubPointCode == this.SubPointCode)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return (Code + CityCode).GetHashCode();
 		}
 	}
 }

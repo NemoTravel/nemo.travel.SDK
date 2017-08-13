@@ -38,5 +38,20 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 		/// </summary>
 		[DataMember(Order = 4, EmitDefaultValue = false)]
 		public Baggage FreeBaggage { get; set; }
+
+		/// <summary>
+		/// Бренд(Имя семейства цены)
+		/// </summary>
+		[DataMember(Order = 5, EmitDefaultValue = false)]
+		public int? FareFamilyDescID { get; set; }
+
+		[DataMember(Order = 6, EmitDefaultValue = false)]
+		public string FareFamilyCode { get; set; }
+
+		/// <summary>
+		/// Идентификатор информации о субсидии
+		/// </summary>
+		[DataMember(Order = 7, EmitDefaultValue = false)]
+		public int? SubsidyInfoID { get; set; }
 	}
 }

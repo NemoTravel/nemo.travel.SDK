@@ -1,8 +1,10 @@
 ﻿using GeneralEntities;
 using GeneralEntities.ExtendedDateTime;
+using GeneralEntities.Market;
 using GeneralEntities.PriceContent;
+using GeneralEntities.PriceContent.PricingDebug;
 using GeneralEntities.Shared;
-using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.v1_1.FlightSearch.ResponseElements
@@ -55,15 +57,55 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 		}
 
 		/// <summary>
-		/// Массив цен по типам пассажиров
+		/// Бренд(Имя семейства цены)
 		/// </summary>
 		[DataMember(Order = 5, EmitDefaultValue = false)]
+		public string FareFamilyName;
+
+		/// <summary>
+		/// Массив цен по типам пассажиров
+		/// </summary>
+		[DataMember(Order = 6, EmitDefaultValue = false)]
 		public PassengerFareList PassengerFares { get; set; }
 
 		/// <summary>
 		/// Опциональные сборы при оплате определёнными типами карт
 		/// </summary>
-		[DataMember(Order = 6, EmitDefaultValue = false)]
+		[DataMember(Order = 7, EmitDefaultValue = false)]
 		public CCTypeFeeList CCTypeFees { get; set; }
+
+		[DataMember(Order = 7, EmitDefaultValue = false)]
+		public Money AgencyMarkup { get; set; }
+
+		[DataMember(Order = 8, EmitDefaultValue = false)]
+		public Money DicountByPromoAction { get; set; }
+
+		[DataMember(Order = 9, EmitDefaultValue = false)]
+		public PricingData PricingData { get; set; }
+
+		[DataMember(Order = 10, EmitDefaultValue = false)]
+		public Money RoundingChargePart { get; set; }
+
+		[DataMember(Order = 11, EmitDefaultValue = false)]
+		public bool IsFixed { get; set; }
+
+		[DataMember(Order = 12, EmitDefaultValue = false)]
+		public ChargePartList ChargeBreakdown { get; set; }
+
+		[IgnoreDataMember]
+		public Money TotalPrice
+		{
+			get
+			{
+				if (PassengerFares != null)
+				{
+					return new Money(PassengerFares.Sum(pricePart => pricePart.TotalFare.Value * pricePart.Quantity), PassengerFares[0].TotalFare.Currency);
+				}
+				else
+				{
+					return null;
+				}
+			}
+		}
 	}
 }

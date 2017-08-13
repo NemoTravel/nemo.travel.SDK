@@ -1,5 +1,7 @@
 ﻿using GeneralEntities.Market;
 using GeneralEntities.Shared;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace GeneralEntities.PriceContent
@@ -19,7 +21,7 @@ namespace GeneralEntities.PriceContent
 		/// <summary>
 		/// Тип пассажира прайсинга
 		/// </summary>
-		[DataMember(Order = 1, IsRequired = true)]
+		[DataMember(Order = 1, EmitDefaultValue = false)]
 		public string PricingType { get; set; }
 
 		/// <summary>
@@ -32,7 +34,31 @@ namespace GeneralEntities.PriceContent
 		/// Цена в эквивалентной валюте
 		/// </summary>
 		[DataMember(Order = 3, EmitDefaultValue = false)]
-		public Money EquiveFare { get; set; }
+		public Money EquiveFare
+		{
+			get
+			{
+				if (equiveFare == null)
+				{
+					if (TotalFare != null && BaseFare != null && TotalFare.Currency == BaseFare.Currency)
+					{
+						return BaseFare;
+					}
+					else
+					{
+						return null;
+					}
+				}
+				else
+				{
+					return equiveFare;
+				}
+			}
+			set
+			{
+				equiveFare = value;
+			}
+		}
 
 		/// <summary>
 		/// Суммарная цена для 1 пассажира данного типа
@@ -49,7 +75,7 @@ namespace GeneralEntities.PriceContent
 		/// <summary>
 		/// Тарифы
 		/// </summary>
-		[DataMember(Order = 6, IsRequired = true)]
+		[DataMember(Order = 6, EmitDefaultValue = false)]
 		public TariffList Tariffs { get; set; }
 
 		/// <summary>
@@ -58,8 +84,6 @@ namespace GeneralEntities.PriceContent
 		[DataMember(Order = 7, EmitDefaultValue = false)]
 		public string FareCalc { get; set; }
 
-		
-		
 		/// <summary>
 		/// Получение тарифа для определённого сегмента услуги, в случае если подобная привязка допустима
 		/// </summary>
@@ -79,5 +103,17 @@ namespace GeneralEntities.PriceContent
 		{
 			return TravellerRef != null && TravellerRef.Contains(travellerID);
 		}
+
+		public IEnumerable<AirTariff> GetAirTariffs()
+		{
+			if (Tariffs == null)
+			{
+				return Enumerable.Empty<AirTariff>();
+			}
+
+			return Tariffs.OfType<AirTariff>();
+		}
+
+		private Money equiveFare;
 	}
 }

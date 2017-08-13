@@ -1,5 +1,6 @@
 ﻿using GeneralEntities.ExtendedDateTime;
 using GeneralEntities.Market;
+using GeneralEntities.PNRDataContent.Ancillary;
 using System.Runtime.Serialization;
 
 namespace GeneralEntities.PNRDataContent
@@ -42,15 +43,33 @@ namespace GeneralEntities.PNRDataContent
 		public DateTimeEx IssueDateTime { get; set; }
 
 		/// <summary>
-		/// ТЛ на выполнение услуги
+		/// Признак что данный билет не сохранён в ПНРе
 		/// </summary>
 		[DataMember(Order = 5, EmitDefaultValue = false)]
+		public bool NotStoredInPNR { get; set; }
+
+		/// <summary>
+		/// ТЛ на выполнение услуги
+		/// </summary>
+		[DataMember(Order = 6, EmitDefaultValue = false)]
 		public DateTimeEx ExecutionTimeLimit { get; set; }
+
+		/// <summary>
+		/// Специфичные для ЕМД данные
+		/// </summary>
+		[DataMember(Order = 7, EmitDefaultValue = false)]
+		public EMDSpecificData EMDSpecificData { get; set; }
 
 		/// <summary>
 		/// НДС на услугу, предоставляемую по данному ЭД
 		/// </summary>
-		[DataMember(Order = 6, EmitDefaultValue = false)]
+		[DataMember(Order = 8, EmitDefaultValue = false)]
 		public Money VAT { get; set; }
+
+		/// <summary>
+		/// Информация о НДС
+		/// </summary>
+		[DataMember(Order = 9, EmitDefaultValue = false)]
+		public VATBreakdown VATBreakdown { get; set; }
 	}
 }

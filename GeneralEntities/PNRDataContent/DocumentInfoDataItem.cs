@@ -1,5 +1,4 @@
 ﻿using GeneralEntities.ExtendedDateTime;
-using SharedAssembly;
 using System;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;
@@ -7,11 +6,16 @@ using System.Text.RegularExpressions;
 namespace GeneralEntities.PNRDataContent
 {
 	/// <summary>
-	/// Содержит описание
+	/// Содержит описание документа, удостоверяющего личность путешественника
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public class DocumentInfoDataItem
 	{
+		/// <summary>
+		/// Шаблон для SSR DOCS
+		/// </summary>
+		public const string DOCSPattern = @"[A-Z]{1}/[A-Z]{2,3}/[A-Z0-9]*/[A-Z]{2,3}/[0-9]{2}[A-Z]{3}[0-9]{2,4}/[A-Z]{1,2}/[0-9]{2}[A-Z]{3}[0-9]{2,4}/([A-Z]*/{0,1}){2}[A-Z]{1}";
+
 		protected DateTimeEx elapsedTime;
 
 		/// <summary>
@@ -69,8 +73,14 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		/// <param name="docsString">SSR DOCS строка</param>
 		/// <param name="supplier">Поставщик, из которого была получена SSR DOCS строка</param>
+		/// <exception cref="ArgumentException">В случае неверного формата входной строки</exception>
 		public DocumentInfoDataItem(string docsString, AviaSuppliers? supplier = null)
 		{
+			if (!Regex.IsMatch(docsString, DOCSPattern))
+			{
+				throw new ArgumentException("Неверный формат SSR DOCS");
+			}
+
 			int index = 0;
 			//ибо только Сэйбр на данный момент добавляет в SSR строку статус SSRки
 			if (supplier.HasValue && supplier.Value == AviaSuppliers.Sabre)

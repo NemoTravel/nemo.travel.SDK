@@ -14,7 +14,7 @@ namespace AviaEntities.v1_1.GroupSearch.ResponseElements
 		/// </summary>
 		[DataMember(IsRequired = true, Order = 0)]
 		public string FlightID { get; set; }
-		
+
 		/// <summary>
 		/// ИД цены, которая определяет данный перелёт
 		/// </summary>
@@ -38,5 +38,8 @@ namespace AviaEntities.v1_1.GroupSearch.ResponseElements
 		/// </summary>
 		[DataMember(Order = 6, EmitDefaultValue = false)]
 		public bool AdditionalServicePossiblyExist { get; set; }
+
+		[DataMember(Order = 7, EmitDefaultValue = false)]
+		public int? ExpectedTicketCount { get; set; }
 	}
 }

@@ -1,6 +1,10 @@
 ﻿using AviaEntities.AdditionalOperations.RequestElements;
 using AviaEntities.AdditionalOperations.ResponseElements;
+using AviaEntities.FlightRepricing;
+using AviaEntities.SeatMap;
+using AviaEntities.v1_1.AdditionalOperations.ResponseElements;
 using AviaEntities.v1_1.FlightSearch.ResponseElements;
+using GeneralEntities.PriceContent.PricingDebug;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.v1_1.AdditionalOperations
@@ -33,7 +37,7 @@ namespace AviaEntities.v1_1.AdditionalOperations
 		/// Результат получения карты мест
 		/// </summary>
 		[DataMember(Order = 3, EmitDefaultValue = false)]
-		public GetSeatMapResult GetSeatMapResult { get; set; }
+		public SeatMapRSBody GetSeatMapResult { get; set; }
 
 		/// <summary>
 		/// Результат получения актуальной цены
@@ -45,7 +49,7 @@ namespace AviaEntities.v1_1.AdditionalOperations
 		/// Результат поиска допуслуг
 		/// </summary>
 		[DataMember(Order = 5, EmitDefaultValue = false)]
-		public FindAdditionalServicesResult FindAdditionalServicesResult { get; set; }
+		public AncillaryServicesSearchResult FindAdditionalServicesResult { get; set; }
 
 		/// <summary>
 		/// Результат получения допустимых кредитных карт
@@ -58,5 +62,29 @@ namespace AviaEntities.v1_1.AdditionalOperations
 		/// </summary>
 		[DataMember(Order = 7, EmitDefaultValue = false)]
 		public GetAllowedLoyaltyCardsResult GetAllowedLoyaltyCardsResult { get; set; }
+
+		/// <summary>
+		/// Актуализированный перелёт
+		/// </summary>
+		[DataMember(Order = 8, EmitDefaultValue = false)]
+		public Flight ActualizedFlight { get; set; }
+
+		[DataMember(Order = 9, EmitDefaultValue = false)]
+		public FlightList FlightsByFareFamily { get; set; }
+
+		/// <summary>
+		/// Результат репрайсинга перелёта
+		/// </summary>
+		[DataMember(Order = 10, EmitDefaultValue = false)]
+		public FlightRepricingRSBody FlightRepricingResult { get; set; }
+
+		[DataMember(Order = 11, EmitDefaultValue = false)]
+		public FlightList SubsidizedTariffs { get; set; }
+
+		/// <summary>
+		/// Отладка ценообразования
+		/// </summary>
+		[DataMember(Order = 12, EmitDefaultValue = false)]
+		public PricingDebugDataCollection PricingDebugLogs { get; set; }
 	}
 }

@@ -32,6 +32,7 @@ namespace AviaEntities.v1_2.SearchFlights.RequestElements
 
 		/// <summary>
 		/// Предпочитаемый класс перелёта
+		/// <para>NeverNullAfterNormalization</para>
 		/// </summary>
 		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public ClassPrefList ClassPreference { get; set; }
@@ -65,5 +66,26 @@ namespace AviaEntities.v1_2.SearchFlights.RequestElements
 		/// </summary>
 		[DataMember(Order = 12, EmitDefaultValue = false)]
 		public int? MaxResultCount { get; set; }
+
+		/// <summary>
+		/// Указание искомой цены min/refund/minrefund
+		/// </summary>
+		[DataMember(Order = 13, EmitDefaultValue = false)]
+		public PriceRefundType PriceRefundType { get; set; }
+
+		/// <summary>
+		/// Признак запуска асинхронного поиска
+		/// </summary>
+		[DataMember(Order = 14, EmitDefaultValue = false)]
+		public bool AsyncSearch { get; set; }
+
+		/// <summary>
+		/// Количество остановок
+		/// </summary>
+		[DataMember(Order = 16, EmitDefaultValue = false)]
+		public int? MaxConnections { get; set; }
+
+		[IgnoreDataMember]
+		public bool AdditionalPublicFaresOnly { get; set; }
 	}
 }

@@ -14,7 +14,6 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -87,10 +86,41 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'trunk2|AnyCPU'">
     <OutputPath>bin\trunk2\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'agent.prod2.backend.nemo.travel|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\agent.prod2.backend.nemo.travel\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'airlines.pro.backend2.nemo.travel|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\airlines.pro.backend2.nemo.travel\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'loadtest.backend2.nemo.travel|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\loadtest.backend2.nemo.travel\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'preprod.mlsd.ru|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\preprod.mlsd.ru\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Lib\JsonSerializer\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -104,6 +134,39 @@
   <ItemGroup>
     <Compile Include="BookContent\Book.cs" />
     <Compile Include="BookContent\BookDateInfo.cs" />
+    <Compile Include="Constatnts\FlightPricingCheckName.cs" />
+    <Compile Include="Pay\CardData.cs" />
+    <Compile Include="Pay\RequestsParams.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FOP\NumberedFOP.cs" />
+    <Compile Include="PNRDataContent\DiscountDocumentDataItem.cs" />
+    <Compile Include="PriceContent\PricingDebug\PricingDebugDataCollection.cs" />
+    <Compile Include="Services\Hotels\Entities\Booking\CardInfo.cs" />
+    <Compile Include="PNRDataContent\AdditionalLocatorsDataItem.cs" />
+    <Compile Include="PNRDataContent\Ancillary\BookIDs.cs" />
+    <Compile Include="PNRDataContent\Ancillary\LocatorList.cs" />
+    <Compile Include="PNRDataContent\ReferencedBooksDataItem.cs" />
+    <Compile Include="PriceContent\ChargePartList.cs" />
+    <Compile Include="PriceContent\LangItem.cs" />
+    <Compile Include="PriceContent\PricingDebug\CheckInfo.cs" />
+    <Compile Include="PriceContent\PricingDebug\CheckResultsCollection.cs" />
+    <Compile Include="PriceContent\PricingDebug\DebugData.cs" />
+    <Compile Include="PriceContent\PricingDebug\RulesDebugInfoCollection.cs" />
+    <Compile Include="PriceContent\PricingDebug\ObjectData.cs" />
+    <Compile Include="PriceContent\PricingDebug\RuleData.cs" />
+    <Compile Include="PriceContent\PricingDebug\VendorsCollection.cs" />
+    <Compile Include="Refund\EDRefundData.cs" />
+    <Compile Include="Refund\EDRefundDataList.cs" />
+    <Compile Include="Services\Hotels\Entities\Booking\Guest.cs" />
+    <Compile Include="Services\Hotels\Entities\Booking\Person.cs" />
+    <Compile Include="Services\Hotels\Entities\Booking\Room.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\CancellationRule.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\CancellationRuleGroupElement.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\GroupOfGroups.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\PriceBreakdown.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\RoomGroupElement.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\RoomMealGroupElement.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\RoomRateGroupElement.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\RoomTypeGroupElement.cs" />
     <Compile Include="BookContent\PNRPossibleActionList.cs" />
     <Compile Include="Client\ClientInfo.cs" />
     <Compile Include="Constatnts\Formats.cs" />
@@ -118,7 +181,12 @@
     <Compile Include="Locale.cs" />
     <Compile Include="Market\CurrencyRateInfo.cs" />
     <Compile Include="Market\CurrencyRateList.cs" />
+    <Compile Include="Market\MoneyExtensions.cs" />
+    <Compile Include="PNRDataContent\Ancillary\EMDSpecificData.cs" />
+    <Compile Include="PNRDataContent\Ancillary\VATBreakdown.cs" />
     <Compile Include="PNRDataContent\EndUserDataDataItem.cs" />
+    <Compile Include="PNRDataContent\OSIDataItem.cs" />
+    <Compile Include="PNRDataContent\SellingPointDescriptionDataItem.cs" />
     <Compile Include="PriceContent\CCTypeFee.cs" />
     <Compile Include="Market\ICurrencyConverter.cs" />
     <Compile Include="Market\ICurrencyDepended.cs" />
@@ -187,12 +255,18 @@
     <Compile Include="PriceContent\BaseTariff.cs" />
     <Compile Include="PriceContent\CCTypeFeeList.cs" />
     <Compile Include="Market\CurrencyRate.cs" />
+    <Compile Include="PriceContent\ChargePart.cs" />
+    <Compile Include="PriceContent\FareFamilyDescription.cs" />
+    <Compile Include="PriceContent\FareFamilyDescriptionList.cs" />
+    <Compile Include="PriceContent\FareFamilyParameter.cs" />
+    <Compile Include="PriceContent\FOPPriceList.cs" />
     <Compile Include="PriceContent\MealTypeList.cs" />
     <Compile Include="PriceContent\PassengerTypePriceBreakdown.cs" />
     <Compile Include="PriceContent\PassengerTypePriceBreakdownList.cs" />
     <Compile Include="PriceContent\Price.cs" />
     <Compile Include="PriceContent\PriceBreakdown.cs" />
     <Compile Include="PriceContent\PriceBreakdownList.cs" />
+    <Compile Include="PriceContent\PricingData.cs" />
     <Compile Include="PriceContent\TariffList.cs" />
     <Compile Include="PriceContent\Tax.cs" />
     <Compile Include="PriceContent\TaxList.cs" />
@@ -204,6 +278,7 @@
     <Compile Include="Services\Ancillary\AeroexpressService.cs" />
     <Compile Include="Services\Ancillary\ArbitraryService.cs" />
     <Compile Include="Services\Ancillary\FlightAncillaryService.cs" />
+    <Compile Include="Services\Ancillary\HotelsService.cs" />
     <Compile Include="Services\Ancillary\InsuranceService.cs" />
     <Compile Include="Services\Ancillary\ServicePackageService.cs" />
     <Compile Include="Services\Avia\FlightSegment.cs" />
@@ -212,14 +287,28 @@
     <Compile Include="Services\Avia\StopPoint.cs" />
     <Compile Include="Services\Avia\StopPointList.cs" />
     <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Services\OrderProcessingService.cs" />
-    <Compile Include="Services\OrderProcessingServiceList.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\City.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\Country.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\CustomerRating.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\Distance.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\Feature.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\Hotel.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\HotelsFeatures.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\Region.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\Resort.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\StaticDataContainer.cs" />
+    <Compile Include="Services\Hotels\PaymentInfo.cs" />
+    <Compile Include="Services\Hotels\ServiceParams.cs" />
+    <Compile Include="Services\ProcessingService.cs" />
+    <Compile Include="Services\ProcessingServiceList.cs" />
     <Compile Include="Services\PNRAdditionalStatusList.cs" />
     <Compile Include="Services\ServiceList.cs" />
     <Compile Include="Services\TripPointInformation.cs" />
     <Compile Include="Shared\Baggage.cs" />
     <Compile Include="Shared\BaseBaggage.cs" />
+    <Compile Include="Shared\IDList.cs" />
     <Compile Include="Shared\ItemIdentification.cs" />
+    <Compile Include="Shared\MRefList.cs" />
     <Compile Include="Shared\RefList.cs" />
     <Compile Include="Shared\TagList.cs" />
     <Compile Include="Shared\TextList.cs" />
@@ -242,9 +331,7 @@
     <Compile Include="Warning\Codes\CommonWarningCodes.cs" />
     <Compile Include="Warning\Warning.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

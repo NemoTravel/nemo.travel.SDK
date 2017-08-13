@@ -4,7 +4,6 @@ using AviaEntities.FlightSearch.ResponseElements;
 using GeneralEntities;
 using GeneralEntities.Shared;
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.BookFlight
@@ -71,16 +70,11 @@ namespace AviaEntities.BookFlight
 		public bool FareStored { get; set; }
 
 		/// <summary>
-		/// Допслуги, купленные в рамках данной брони
-		/// </summary>
-		[DataMember(Order = 10, EmitDefaultValue = false)]
-		public List<BookedAdditionalService> BookedAdditionalServices { get; set; }
-
-		/// <summary>
 		/// реквизиты только в латинице
 		/// </summary>
 		[IgnoreDataMember]
 		public bool LatinRegistration { get; set; }
+
 
 		/// <summary>
 		/// Создаёт экземпляр класса с инициализацией полей

@@ -59,11 +59,11 @@ namespace AviaEntities.GroupSearch.ResponseElements
 		[DataMember(Order = 8, EmitDefaultValue = false)]
 		public int? FlightTime { get; set; }
 
+
 		/// <summary>
 		/// Пустой конструктор, нужен в том числе для сериализации объекта
 		/// </summary>
-		public FlightSegment()
-		{ }
+		public FlightSegment() { }
 
 		/// <summary>
 		/// Создание объекта сегмента сгруппированного перелёта на основании полного сегмента перелёта

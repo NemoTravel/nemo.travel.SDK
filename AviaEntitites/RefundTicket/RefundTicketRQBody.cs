@@ -1,4 +1,5 @@
 ﻿using AviaEntities.SharedElements;
+using GeneralEntities.Shared;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.RefundTicket
@@ -10,9 +11,15 @@ namespace AviaEntities.RefundTicket
 	public class RefundTicketRQBody : OnlyBookIDElement
 	{
 		/// <summary>
-		/// Список пассажиров, билеты которых требуется сдать
+		/// Список пассажиров, билеты которых требуется сдать билеты
 		/// </summary>
-		[DataMember(IsRequired = false, Order = 1)]
-		public PassengerList Passengers { get; set; }
+		[DataMember(Order = 0, IsRequired = true, Name = "Passengers")]
+		public RefList<int> Travellers { get; set; }
+
+		/// <summary>
+		/// Признак вынужденного возврата
+		/// </summary>
+		[DataMember(Order = 1, IsRequired = false)]
+		public bool Involuntary { get; set; }
 	}
 }

@@ -28,6 +28,7 @@ namespace AviaEntities.v1_2.SearchFlights
 
 		/// <summary>
 		/// Допольнительный условия/ограничея, накладываемые на поиск перелётов
+		/// <para>NeverNullAfterNormalization</para>
 		/// </summary>
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public RequestElements.AdditionalSearchInfo Restrictions { get; set; }
@@ -38,6 +39,12 @@ namespace AviaEntities.v1_2.SearchFlights
 		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public EndUserDataDataItem EndUserData { get; set; }
 
+		/// <summary>
+		/// Описание точки продажи
+		/// </summary>
+		[DataMember(Order = 4, EmitDefaultValue = false)]
+		public SellingPointDescriptionDataItem SellingPointDescription { get; set; }
+
 
 		/// <summary>
 		/// Привязка к сегменту из запроса
@@ -46,6 +53,29 @@ namespace AviaEntities.v1_2.SearchFlights
 		[JsonIgnore]
 		[IgnoreDataMember]
 		public int? MultiOWRequestedSegmentNumber { get; set; }
+
+		[XmlIgnore]
+		[JsonIgnore]
+		[IgnoreDataMember]
+		public bool AsyncSearch
+		{
+			get
+			{
+				return Restrictions != null && Restrictions.AsyncSearch;
+			}
+		}
+
+		[XmlIgnore]
+		[JsonIgnore]
+		[IgnoreDataMember]
+		public bool IsCurrencySet
+		{
+			get
+			{
+				return Restrictions != null && Restrictions.CurrencyCode != null;
+			}
+		}
+
 
 		/// <summary>
 		/// Выполняет полное копирование объекта, реализация интерфейса ICloneable
@@ -83,13 +113,18 @@ namespace AviaEntities.v1_2.SearchFlights
 			if (Restrictions != null)
 			{
 				result.Restrictions = new RequestElements.AdditionalSearchInfo();
-				result.Restrictions.ClassPreference = Restrictions.ClassPreference;
+				result.Restrictions.ClassPreference = new RequestElements.ClassPrefList();
+				result.Restrictions.ClassPreference.AddRange(Restrictions.ClassPreference);
 				result.Restrictions.CurrencyCode = Restrictions.CurrencyCode;
 				result.Restrictions.PrivateFaresOnly = Restrictions.PrivateFaresOnly;
 				result.Restrictions.SourcePreference = Restrictions.SourcePreference;
 				result.Restrictions.MaxConnectionTime = Restrictions.MaxConnectionTime;
 				result.Restrictions.ResultsGrouping = Restrictions.ResultsGrouping;
 				result.Restrictions.MaxResultCount = Restrictions.MaxResultCount;
+				result.Restrictions.PriceRefundType = Restrictions.PriceRefundType;
+				result.Restrictions.AsyncSearch = Restrictions.AsyncSearch;
+				result.Restrictions.AdditionalPublicFaresOnly = Restrictions.AdditionalPublicFaresOnly;
+				result.Restrictions.MaxConnections = Restrictions.MaxConnections;
 
 				if (Restrictions.CompanyFilter != null)
 				{

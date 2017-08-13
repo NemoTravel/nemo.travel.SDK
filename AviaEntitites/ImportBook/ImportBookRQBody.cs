@@ -37,5 +37,11 @@ namespace AviaEntities.ImportBook
 		/// </summary>
 		[DataMember(Order = 4, EmitDefaultValue = false)]
 		public string ValidatingCompany { get; set; }
+
+		/// <summary>
+		/// Признак использования флекс семейств (специфика Габрика)
+		/// </summary>
+		[DataMember(Order = 5, EmitDefaultValue = false)]
+		public bool UseFlexFares { get; set; }
 	}
 }

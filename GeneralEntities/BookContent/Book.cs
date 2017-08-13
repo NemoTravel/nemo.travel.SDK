@@ -50,15 +50,21 @@ namespace GeneralEntities.BookContent
 		public ServiceList AncillaryServices { get; set; }
 
 		/// <summary>
-		/// Цена брони
+		/// Услуги обработки брони
 		/// </summary>
 		[DataMember(Order = 6, EmitDefaultValue = false)]
+		public ProcessingServiceList ProcessingServices { get; set; }
+
+		/// <summary>
+		/// Цена брони
+		/// </summary>
+		[DataMember(Order = 7, EmitDefaultValue = false)]
 		public Price Price { get; set; }
 
 		/// <summary>
 		/// Унифицированные данные брони
 		/// </summary>
-		[DataMember(Order = 7, EmitDefaultValue = false)]
+		[DataMember(Order = 8, EmitDefaultValue = false)]
 		public PNRDataItemList DataItems { get; set; }
 	}
 }

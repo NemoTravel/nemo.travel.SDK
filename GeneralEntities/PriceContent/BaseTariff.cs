@@ -7,7 +7,7 @@ namespace GeneralEntities.PriceContent
 	/// </summary>
 	[KnownType(typeof(AirTariff))]
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
-	public class BaseTariff
+	public abstract class BaseTariff
 	{
 		/// <summary>
 		/// Код тарифа
@@ -16,12 +16,14 @@ namespace GeneralEntities.PriceContent
 		public string Code { get; set; }
 
 		[IgnoreDataMember]
-		public string FareBasisCode
+		public virtual string FareBasisCode
 		{
 			get
 			{
 				return Code.Split('/')[0];
 			}
 		}
+
+		public abstract string GetFareBasisCode(bool forceSplit = false);
 	}
 }

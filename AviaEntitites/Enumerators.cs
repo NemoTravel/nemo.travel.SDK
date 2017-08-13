@@ -90,7 +90,7 @@ namespace AviaEntities
 		[EnumMember]
 		VIPService = 7
 	}
-	
+
 	/// <summary>
 	/// Список возможных положений места в самолетё в ряду
 	/// </summary>
@@ -402,7 +402,7 @@ namespace AviaEntities
 		/// Получение списка доступных допуслуг
 		/// </summary>
 		[EnumMember]
-		FindAdditionalServices = 4,
+		SearchAncillaryServices = 4,
 		/// <summary>
 		/// Получение списка кредитных карт, которыми можно оплатить бронь перелёта
 		/// </summary>
@@ -417,6 +417,40 @@ namespace AviaEntities
 		/// Актуализация перелёта
 		/// </summary>
 		[EnumMember]
-		ActualizeFlight = 7
+		ActualizeFlight = 7,
+		/// <summary>
+		/// Получение списка тарифов по семействам
+		/// </summary>
+		[EnumMember]
+		GetFareFamilies = 8,
+		/// <summary>
+		/// Репрайсинг перелёта
+		/// </summary>
+		[EnumMember]
+		FlightRepricing = 9,
+		/// <summary>
+		/// Получение субсидированных тарифов
+		/// </summary>
+		[EnumMember]
+		GetSubsidizedTariffs = 10
+	}
+
+	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
+	public enum AviaMixerPriceCondition
+	{
+		[EnumMember]
+		MinimalNet,
+		[EnumMember]
+		MinimalPrice,
+		[EnumMember]
+		MaximalPrice,
+		[EnumMember]
+		MaximalAgencyMarkup,
+		[EnumMember]
+		MaximalAirlineCommission,
+		[EnumMember]
+		MaximalProfit,
+		[EnumMember]
+		Ignore
 	}
 }

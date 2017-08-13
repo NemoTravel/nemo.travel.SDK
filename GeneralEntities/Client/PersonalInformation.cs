@@ -13,11 +13,6 @@ namespace GeneralEntities.Client
 	public class PersonalInformation
 	{
 		/// <summary>
-		/// ФИО пассажира
-		/// </summary>
-		protected string lastName, firstName, middleName;
-
-		/// <summary>
 		/// Дата рождения пассажира в формате дд.ММ.гггг
 		/// </summary>
 		[DataMember(Order = 0, EmitDefaultValue = false)]
@@ -45,31 +40,31 @@ namespace GeneralEntities.Client
 		/// Имя пассажира
 		/// </summary>
 		[DataMember(IsRequired = true, Order = 4, EmitDefaultValue = false)]
-		public string FirstName
-		{
-			get { return firstName; }
-			set { firstName = value; }
-		}
+		public string FirstName { get; set; }
 
 		/// <summary>
 		/// Отчество пассажира
 		/// </summary>
 		[DataMember(Order = 5, EmitDefaultValue = false)]
-		public string MiddleName
-		{
-			get { return middleName; }
-			set { middleName = value; }
-		}
+		public string MiddleName { get; set; }
 
 		/// <summary>
 		/// Фамилия пассажира
 		/// </summary>
 		[DataMember(IsRequired = true, Order = 6, EmitDefaultValue = false)]
-		public string LastName
-		{
-			get { return lastName; }
-			set { lastName = value; }
-		}
+		public string LastName { get; set; }
+
+		/// <summary>
+		/// адрес пассажира
+		/// </summary>
+		[DataMember(IsRequired = false, Order = 7, EmitDefaultValue = false)]
+		public string Address { get; set; }
+
+		/// <summary>
+		/// телефон пассажира
+		/// </summary>
+		[DataMember(IsRequired = false, Order = 8, EmitDefaultValue = false)]
+		public string Phone { get; set; }
 
 		/// <summary>
 		/// Имя пассажира с транслитерацией
@@ -80,7 +75,7 @@ namespace GeneralEntities.Client
 		{
 			get
 			{
-				return Transliteration.UARUStoENG(firstName).ToUpper().Trim();
+				return Transliteration.UARUStoENG(FirstName).ToUpper().Trim();
 			}
 		}
 
@@ -91,7 +86,7 @@ namespace GeneralEntities.Client
 		[IgnoreDataMember]
 		public string LastNameTL
 		{
-			get { return Transliteration.UARUStoENG(lastName).ToUpper().Trim(); }
+			get { return Transliteration.UARUStoENG(LastName).ToUpper().Trim(); }
 		}
 
 		/// <summary>
@@ -103,13 +98,13 @@ namespace GeneralEntities.Client
 		{
 			get
 			{
-				if (middleName != null)
+				if (MiddleName != null)
 				{
-					return Transliteration.UARUStoENG(middleName).ToUpper().Trim();
+					return Transliteration.UARUStoENG(MiddleName).ToUpper().Trim();
 				}
 				else
 				{
-					return middleName;
+					return MiddleName;
 				}
 			}
 		}

@@ -21,5 +21,14 @@ namespace GeneralEntities.Client
 		/// </summary>
 		[DataMember(IsRequired = true, Order = 1)]
 		public string PhoneNumber { get; set; }
+
+
+		public Telephone() { }
+
+		public Telephone(string number, TelephoneTypes type)
+		{
+			Type = type;
+			PhoneNumber = number;
+		}
 	}
 }

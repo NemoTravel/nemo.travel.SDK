@@ -1,5 +1,6 @@
 ﻿using AviaEntities.SharedElements;
 using GeneralEntities.PNRDataContent;
+using GeneralEntities.Shared;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.v2.Ticketing
@@ -15,5 +16,11 @@ namespace AviaEntities.v2.Ticketing
 		/// </summary>
 		[DataMember(Order = 1, EmitDefaultValue = false)]
 		public PNRDataItemList DataItems { get; set; }
+
+		/// <summary>
+		/// Теги для ЦО
+		/// </summary>
+		[DataMember(Order = 2, EmitDefaultValue = false)]
+		public TagList RequestorTags { get; set; }
 	}
 }

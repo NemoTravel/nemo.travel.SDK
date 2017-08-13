@@ -8,6 +8,7 @@ namespace GeneralEntities.PNRDataContent.FOP
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	[KnownType(typeof(CreditCardFOP))]
+	[KnownType(typeof(NumberedFOP))]
 	public class BaseFOP
 	{
 		/// <summary>

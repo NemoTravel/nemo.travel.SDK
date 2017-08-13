@@ -21,11 +21,16 @@ namespace AviaEntities.GetSupplierStatic
 		[DataMember(Order = 1, IsRequired = true)]
 		public SupplierStaticType StaticType { get; set; }
 
-
 		/// <summary>
 		/// Данные для получения информации о поддержке кредитных карт
 		/// </summary>
-		[DataMember(Order = 5, EmitDefaultValue = false)]
+		[DataMember(Order = 2)]
 		public CreditCardSupport CreditCardSupport { get; set; }
+
+		/// <summary>
+		/// Данные для получения справочника допуслуг
+		/// </summary>
+		[DataMember(Order = 3)]
+		public AncillaryServiceCatalogue AncillaryServiceCatalogue { get; set; }
 	}
 }

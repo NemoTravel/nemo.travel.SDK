@@ -37,5 +37,11 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 4, EmitDefaultValue = false)]
 		public string StatusCode { get; set; }
+
+		/// <summary>
+		/// RFISC допулсгуи ассоциированной с местом
+		/// </summary>
+		[DataMember(Order = 5, EmitDefaultValue = false)]
+		public string RFISC { get; set; }
 	}
 }

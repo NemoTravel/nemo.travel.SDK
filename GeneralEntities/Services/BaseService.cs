@@ -15,6 +15,7 @@ namespace GeneralEntities.Services
 	[KnownType(typeof(AeroexpressService))]
 	[KnownType(typeof(ServicePackageService))]
 	[KnownType(typeof(FlightAncillaryService))]
+	[KnownType(typeof(HotelsService))]
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public abstract class BaseService : ItemIdentification<int>
 	{
@@ -49,7 +50,6 @@ namespace GeneralEntities.Services
 		public RefList<int> TravellerRef { get; set; }
 
 
-
 		/// <summary>
 		/// Определение типа услуги
 		/// </summary>
@@ -62,6 +62,16 @@ namespace GeneralEntities.Services
 			}
 
 			throw new Exception("Невозможно определить тип услуги");
+		}
+
+		/// <summary>
+		/// Выполняет проверку привязки данной услуги к определённому пассажиру
+		/// </summary>
+		/// <param name="travellerID">ИД пассажира</param>
+		/// <returns>Признак привязки указанного пассажира к данной услуге</returns>
+		public bool IsLinkedToTraveller(int travellerID)
+		{
+			return TravellerRef != null && TravellerRef.Contains(travellerID);
 		}
 	}
 }

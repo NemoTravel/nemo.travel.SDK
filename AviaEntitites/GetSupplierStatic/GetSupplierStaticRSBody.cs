@@ -1,6 +1,7 @@
 ﻿using AviaEntities.GetAllowedCC;
 using AviaEntities.GetSupplierStatic.FFPPartnership;
 using System.Runtime.Serialization;
+using AviaEntities.GetSupplierStatic.ClassesOfService;
 
 namespace AviaEntities.GetSupplierStatic
 {
@@ -21,5 +22,11 @@ namespace AviaEntities.GetSupplierStatic
 		/// </summary>
 		[DataMember(Order = 1, EmitDefaultValue = false)]
 		public AirlinePartnersList FFPPartnership { get; set; }
+
+		/// <summary>
+		/// Отношение [код а/к : [литера класса : базовый класс]]
+		/// </summary>
+		[DataMember(Order = 2, EmitDefaultValue = false)]
+		public AirlneClassCodes AirlneClassCodes { get; set; }
 	}
 }

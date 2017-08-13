@@ -1,5 +1,4 @@
 ﻿using AviaEntities.SeatMap.Elements;
-using AviaEntities.SharedElements;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.SeatMap
@@ -8,12 +7,12 @@ namespace AviaEntities.SeatMap
 	/// Тело ответа поиска карты мест
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
-	public class SeatMapRSBody : OnlyFlightIDElement
+	public class SeatMapRSBody
 	{
 		/// <summary>
 		/// Карта мест для каждого из сегментов перелёта
 		/// </summary>
-		[DataMember(IsRequired = true, Order = 1, EmitDefaultValue = false)]
+		[DataMember(Order = 0, EmitDefaultValue = false)]
 		public FlightSeatMap SeatMapSegments { get; set; }
 	}
 }

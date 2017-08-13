@@ -20,5 +20,8 @@ namespace AviaEntities.v1_1.BookFlight.ResponseElements
 		/// </summary>
 		[DataMember(Order = 14, EmitDefaultValue = false)]
 		public AcquiredDocuments AcquiredDocuments { get; set; }
+
+		[DataMember(Order = 15, EmitDefaultValue = false)]
+		public int IDInPNR { get; set; }
 	}
 }

@@ -26,33 +26,21 @@ namespace AviaEntities.AdditionalOperations
 		public GetFareRulesResult GetFareRulesResult { get; set; }
 
 		/// <summary>
-		/// Результат получения карты мест
-		/// </summary>
-		[DataMember(Order = 3, EmitDefaultValue = false)]
-		public GetSeatMapResult GetSeatMapResult { get; set; }
-
-		/// <summary>
 		/// Результат получения актуальной цены
 		/// </summary>
-		[DataMember(Order = 4, EmitDefaultValue = false)]
+		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public GetPriceResult GetPriceResult { get; set; }
-
-		/// <summary>
-		/// Результат поиска допуслуг
-		/// </summary>
-		[DataMember(Order = 5, EmitDefaultValue = false)]
-		public FindAdditionalServicesResult FindAdditionalServicesResult { get; set; }
 
 		/// <summary>
 		/// Результат получения допустимых кредитных карт
 		/// </summary>
-		[DataMember(Order = 6, EmitDefaultValue = false)]
+		[DataMember(Order = 4, EmitDefaultValue = false)]
 		public GetAllowedCCsResult GetAllowedCCsResult { get; set; }
 
 		/// <summary>
 		/// Результат получения а/к, чьи карточки лояльности принимаются на перелёте
 		/// </summary>
-		[DataMember(Order = 7, EmitDefaultValue = false)]
+		[DataMember(Order = 5, EmitDefaultValue = false)]
 		public GetAllowedLoyaltyCardsResult GetAllowedLoyaltyCardsResult { get; set; }
 	}
 }

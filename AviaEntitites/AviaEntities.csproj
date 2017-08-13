@@ -12,7 +12,6 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -82,12 +81,44 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'trunk2|AnyCPU'">
     <OutputPath>bin\trunk2\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'agent.prod2.backend.nemo.travel|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\agent.prod2.backend.nemo.travel\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'airlines.pro.backend2.nemo.travel|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\airlines.pro.backend2.nemo.travel\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'loadtest.backend2.nemo.travel|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\loadtest.backend2.nemo.travel\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'preprod.mlsd.ru|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\preprod.mlsd.ru\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Lib\JsonSerializer\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -109,15 +140,75 @@
     <Compile Include="AdditionalOperations\RequestElements\PricingInfo.cs" />
     <Compile Include="AdditionalOperations\ResponseElements\AirlinesForSegments.cs" />
     <Compile Include="AdditionalOperations\ResponseElements\CheckAvailabilityResult.cs" />
-    <Compile Include="AdditionalOperations\ResponseElements\FindAdditionalServicesResult.cs" />
+    <Compile Include="GetSupplierStatic\AncillaryServiceCatalogue.cs" />
+    <Compile Include="IssueEMD\IssueEMDRQBody.cs" />
+    <Compile Include="ModifyContent\ModifyAncillaryService.cs" />
+    <Compile Include="ModifyContent\ModifyAncillaryServicesList.cs" />
+    <Compile Include="SharedElements\Ancillaries\RequestElements\CommonAncillaryServiceRQ.cs" />
+    <Compile Include="SharedElements\Ancillaries\RequestElements\AncillaryService.cs" />
+    <Compile Include="SharedElements\Ancillaries\RequestElements\AncillaryServiceRQ.cs" />
+    <Compile Include="SharedElements\Ancillaries\ResponseElements\AncillaryServiceRS.cs" />
+    <Compile Include="SharedElements\Ancillaries\ResponseElements\AncillaryServicePrice.cs" />
+    <Compile Include="SharedElements\Ancillaries\AncillaryServices.cs" />
+    <Compile Include="SharedElements\Ancillaries\ResponseElements\AncillaryServicesPrices.cs" />
+    <Compile Include="v1_1\AdditionalOperations\ResponseElements\AncillaryServicesSearchResult.cs" />
     <Compile Include="AdditionalOperations\ResponseElements\GetAllowedCCsResult.cs" />
     <Compile Include="AdditionalOperations\ResponseElements\GetAllowedLoyaltyCardsResult.cs" />
     <Compile Include="AdditionalOperations\ResponseElements\GetFareRulesResult.cs" />
     <Compile Include="AdditionalOperations\ResponseElements\GetPriceResult.cs" />
-    <Compile Include="AdditionalOperations\ResponseElements\GetSeatMapResult.cs" />
     <Compile Include="AdditionalOperations\ResponseElements\AirlineList.cs" />
-    <Compile Include="AdditionalServicesSearch\AdditionalServiceSegmentList.cs" />
-    <Compile Include="AdditionalServicesSearch\AdditionalServicesSearchRSBody.cs" />
+    <Compile Include="AgencyAPISearch\AgencyAPISearchRQBody.cs" />
+    <Compile Include="AgencyAPISearch\AgencyAPISearchRSBody.cs" />
+    <Compile Include="AgencyAPISearch\RequestBin.cs" />
+    <Compile Include="AgencyAPISearch\RequestElements\AirVPref.cs" />
+    <Compile Include="AgencyAPISearch\RequestElements\EndUserData.cs" />
+    <Compile Include="AgencyAPISearch\RequestElements\ODPair.cs" />
+    <Compile Include="AgencyAPISearch\RequestElements\ODPairsContainer.cs" />
+    <Compile Include="AgencyAPISearch\RequestElements\Restrictions.cs" />
+    <Compile Include="AgencyAPISearch\RequestElements\SearchFlights.cs" />
+    <Compile Include="AgencyAPISearch\RequestElements\Source.cs" />
+    <Compile Include="AgencyAPISearch\RequestElements\Traveller.cs" />
+    <Compile Include="AgencyAPISearch\Response.cs" />
+    <Compile Include="AgencyAPISearch\ResponseBin.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\BaggageAllowance.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\BookingCode.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\Error.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\Flight.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\FlightsContainer.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\Money.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\PassengerFare.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\Price.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\PricingInfo.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\Segment.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\Tariff.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\Tax.cs" />
+    <Compile Include="AgencyAPISearch\ResponseElements\TimeZone.cs" />
+    <Compile Include="AgencyAPISearch\Shared\Enumeration.cs" />
+    <Compile Include="AgencyAPISearch\Shared\TripPoint.cs" />
+    <Compile Include="Agent_ru\Enumerators.cs" />
+    <Compile Include="Agent_ru\VariantSearch\RequestElements\FlightPreferences.cs" />
+    <Compile Include="Agent_ru\VariantSearch\RequestElements\PassengersInformation.cs" />
+    <Compile Include="Agent_ru\VariantSearch\RequestElements\SearchPreferences.cs" />
+    <Compile Include="Agent_ru\VariantSearch\RequestElements\Segment.cs" />
+    <Compile Include="Agent_ru\VariantSearch\RequestElements\FlightPoint.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\Classifiers\AbstractClassifier.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\CategoryPriceBreakdown.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\Classifiers\AircompanyClassifier.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\Classifiers\AircraftClassifier.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\Classifiers\AirportClassifier.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\Classifiers\CityClassifier.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\Classifiers\CountryClassifier.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\DiscountedPrice.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\Fare.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\Flight.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\ItinerarySegment.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\Price.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\PricedVariant.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\ResponseClassifiers.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\Classifiers\LocalizedName.cs" />
+    <Compile Include="Agent_ru\VariantSearch\ResponseElements\TaxBreakdown.cs" />
+    <Compile Include="Agent_ru\VariantSearch\VariantSearchRQ.cs" />
+    <Compile Include="Agent_ru\VariantSearch\VariantSearchRS.cs" />
     <Compile Include="AirAvail\AirAvailRQBody.cs" />
     <Compile Include="AirAvail\AirAvailRSBody.cs" />
     <Compile Include="BookFlight\AviaBook.cs" />
@@ -132,15 +223,82 @@
     <Compile Include="BookFlight\ResponseElements\BookedTraveller.cs" />
     <Compile Include="BookFlight\ResponseElements\BookedTravellerList.cs" />
     <Compile Include="BookFlight\ResponseElements\ItinReceipts.cs" />
-    <Compile Include="BookFlight\ResponseElements\BookedAdditionalService.cs" />
     <Compile Include="BookFlight\ResponseElements\ItinReceiptsList.cs" />
     <Compile Include="BookFlight\ResponseElements\SegmentNumberList.cs" />
     <Compile Include="BookFlight\ResponseElements\TicketInfo.cs" />
     <Compile Include="BookFlight\ResponseElements\TicketList.cs" />
+    <Compile Include="FlightRepricing\AvailabilityCheckInfo.cs" />
+    <Compile Include="FlightRepricing\MixerLog\AviaMixerLog.cs" />
+    <Compile Include="FlightRepricing\MixerLog\CurrencyRates.cs" />
+    <Compile Include="FlightRepricing\MixerLog\FlightMixData.cs" />
+    <Compile Include="FlightRepricing\MixerLog\FlightsMixResults.cs" />
+    <Compile Include="FlightRepricing\MixerLog\GroupMixResult.cs" />
+    <Compile Include="FlightRepricing\MixerLog\MixResults.cs" />
+    <Compile Include="FlightRepricing\MixerLog\PassedLevelsList.cs" />
+    <Compile Include="FlightRepricing\MixerLog\RatesInfo.cs" />
+    <Compile Include="FlightRepricing\MixerLog\RuleData.cs" />
+    <Compile Include="FlightRepricing\MixerLog\RulesCollection.cs" />
+    <Compile Include="FlightRepricing\MixerLog\SourceList.cs" />
+    <Compile Include="FlightRepricing\RepricingLog.cs" />
+    <Compile Include="FlightRepricing\SourceResultInfo.cs" />
+    <Compile Include="GetAirlineSchedule\GetAirlineScheduleRQBody.cs" />
+    <Compile Include="GetAirlineSchedule\GetAirlineScheduleRSBody.cs" />
+    <Compile Include="GetAirlineSchedule\ResponseElements\AirlineSchedule.cs" />
+    <Compile Include="GetAirlineSchedule\ResponseElements\ClassesCollection.cs" />
+    <Compile Include="GetAirlineSchedule\ResponseElements\DayOfWeekCollection.cs" />
+    <Compile Include="GetAirlineSchedule\ResponseElements\ScheduleFlight.cs" />
+    <Compile Include="GetAirlineSchedule\ResponseElements\ScheduleFlightsCollection.cs" />
+    <Compile Include="GetAirlineSchedule\ResponseElements\Period.cs" />
+    <Compile Include="GetAirlineSchedule\ResponseElements\PeriodsCollection.cs" />
+    <Compile Include="GetAirlineSchedule\ResponseElements\Segment.cs" />
+    <Compile Include="GetAirlineSchedule\ResponseElements\SegmentsCollection.cs" />
+    <Compile Include="GetFareFamilies\GetFareFamiliesRQBody.cs" />
+    <Compile Include="FlightRepricing\FlightRepricingRQBody.cs" />
+    <Compile Include="GetPNRTerminalView\GetPNRTerminalViewRSBody.cs" />
+    <Compile Include="GetSearchResults\GetSearchResultsRSBody.cs" />
+    <Compile Include="GetSearchResults\RAWSearchResultData.cs" />
+    <Compile Include="GetSearchResults\RAWSearchResultDataList.cs" />
+    <Compile Include="DeleteFromQueue\DeleteFromQueueRQBody.cs" />
+    <Compile Include="DeleteFromQueue\RequestElements\BookQueueInfo.cs" />
+    <Compile Include="DeleteFromQueue\RequestElements\BookQueueList.cs" />
+    <Compile Include="DeleteFromQueue\RequestElements\UnnamedQueueList.cs" />
+    <Compile Include="GetFareFamilies\GetFareFamiliesRSBody.cs" />
+    <Compile Include="GetSearchResults\SearchContext.cs" />
+    <Compile Include="GetRoutingGrid\GetRoutingGridRQBody.cs" />
+    <Compile Include="GetRoutingGrid\ResponseElements\GetRoutingGridRSBody.cs" />
+    <Compile Include="GetRoutingGrid\ResponseElements\RoutingGrid.cs" />
+    <Compile Include="GetRoutingGrid\ResponseElements\Route.cs" />
+    <Compile Include="GetBansInfo\AdditionalBanInfo.cs" />
+    <Compile Include="GetBansInfo\BanInfo.cs" />
+    <Compile Include="GetBansInfo\BanList.cs" />
+    <Compile Include="GetRequestCountInfo\DatedRequestCountInfo.cs" />
+    <Compile Include="GetBansInfo\GetBansInfoRQBody.cs" />
+    <Compile Include="GetBansInfo\GetBansInfoRSBody.cs" />
+    <Compile Include="GetRequestCountInfo\RequestCountBySubAgencyDictionary.cs" />
+    <Compile Include="SharedElements\SubAgencyIDHashSet.cs" />
+    <Compile Include="GetRequestCountInfo\GetRequestCountInfoRQBody.cs" />
+    <Compile Include="GetRequestCountInfo\GetRequestCountInfoRSBody.cs" />
+    <Compile Include="GetRequestCountInfo\RequestCountInfo.cs" />
+    <Compile Include="ExchangeTicket\ExchangeTicketRQBody.cs" />
+    <Compile Include="ExchangeTicket\ExchangeTicketRSBody.cs" />
+    <Compile Include="GetExchangeVariants\GetExchangeVariantsRQBody.cs" />
+    <Compile Include="GetExchangeVariants\GetExchangeVariantsRSBody.cs" />
+    <Compile Include="GetSupplierStatic\ClassesOfService\AirlneClassCodes.cs" />
+    <Compile Include="GetSupplierStatic\ClassesOfService\ClassesByCodes.cs" />
     <Compile Include="GetSupplierStatic\FFPPartnership\AirlinePartnerBlock.cs" />
     <Compile Include="GetSupplierStatic\FFPPartnership\AirlinePartnersList.cs" />
     <Compile Include="GetSupplierStatic\FFPPartnership\AirlinePartners.cs" />
     <Compile Include="GetSearchResults\GetSearchResultsRQBody.cs" />
+    <Compile Include="RefundTicket\RefundedTicket.cs" />
+    <Compile Include="RefundTicket\RefundTicketRSBody.cs" />
+    <Compile Include="ListQueue\ListQueueRQBody.cs" />
+    <Compile Include="ListQueue\ListQueueRSBody.cs" />
+    <Compile Include="ListQueue\RequestElements\PackagesList.cs" />
+    <Compile Include="ListQueue\RequestElements\QueueList.cs" />
+    <Compile Include="ListQueue\ResponseElements\BookInfo.cs" />
+    <Compile Include="ListQueue\ResponseElements\BookInfoList.cs" />
+    <Compile Include="ListQueue\ResponseElements\QueueInfo.cs" />
+    <Compile Include="ListQueue\ResponseElements\UnnamedQueueInfo.cs" />
     <Compile Include="ScheduleSearch\RequestElements\ScheduleFlightDirection.cs" />
     <Compile Include="ScheduleSearch\RequestElements\ScheduleFlightPair.cs" />
     <Compile Include="ScheduleSearch\ResponseElements\DaysOfWeekList.cs" />
@@ -150,9 +308,10 @@
     <Compile Include="ScheduleSearch\ResponseElements\ScheduleFlightList.cs" />
     <Compile Include="ScheduleSearch\ScheduleSearchRQBody.cs" />
     <Compile Include="ScheduleSearch\ScheduleSearchRSBody.cs" />
+    <Compile Include="FlightRepricing\FlightRepricingRSBody.cs" />
+    <Compile Include="SplitBook\SplitBookRQBody.cs" />
     <Compile Include="v1_1\BookFlight\AviaBook.cs" />
     <Compile Include="v1_1\BookFlight\ResponseElements\AcquiredDocuments.cs" />
-    <Compile Include="v1_1\BookFlight\ResponseElements\BookedAdditionalService.cs" />
     <Compile Include="v1_1\BookFlight\ResponseElements\BookedSeat.cs" />
     <Compile Include="v1_1\BookFlight\ResponseElements\BookedSeatList.cs" />
     <Compile Include="v1_1\BookFlight\ResponseElements\BookedTraveller.cs" />
@@ -180,25 +339,38 @@
     <Compile Include="v1_1\FlightSearch\ResponseElements\AirItinerary.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\AirportInformation.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\BookingClass.cs" />
+    <Compile Include="v1_1\FlightSearch\ResponseElements\Commission.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\CompleteSegment.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\CompleteSegmentList.cs" />
+    <Compile Include="v1_1\FlightSearch\ResponseElements\DocumentList.cs" />
+    <Compile Include="v1_1\FlightSearch\ResponseElements\ExchangePriceInfo.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\Flight.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\FlightList.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\FlightTypeInfo.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\PassengerFare.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\PassengerFareList.cs" />
+    <Compile Include="v1_1\FlightSearch\ResponseElements\PassengerTypeDescription.cs" />
+    <Compile Include="v1_1\FlightSearch\ResponseElements\MultiLanguageDictionary.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\Price.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\PriceList.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\StopPoint.cs" />
+    <Compile Include="v1_1\FlightSearch\ResponseElements\SubsidyInformationList.cs" />
+    <Compile Include="v1_1\FlightSearch\ResponseElements\SubsidyInformation.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\SupplierSegmentInfo.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\Tariff.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\TariffList.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\Tax.cs" />
+    <Compile Include="v1_1\FlightSearch\ResponseElements\PricingData.cs" />
+    <Compile Include="v1_1\FlightSearch\ResponseElements\TaxList.cs" />
+    <Compile Include="v1_1\RefundTicket\RefundEDRSBody.cs" />
     <Compile Include="v1_2\SearchFlights\RequestElements\AdditionalSearchInfo.cs" />
     <Compile Include="v1_2\SearchFlights\RequestElements\ClassPrefList.cs" />
     <Compile Include="v1_2\SearchFlights\RequestElements\FlightDirection.cs" />
     <Compile Include="v1_2\SearchFlights\RequestElements\FlightPair.cs" />
     <Compile Include="v1_2\SearchFlights\RequestElements\FlightPairList.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\SearchDebugData.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\SearchThreadInfo.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\SourceInfo.cs" />
     <Compile Include="v1_2\SearchFlights\SearchFlightsRQBody.cs" />
     <Compile Include="v1_2\SearchFlights\RequestElements\RequestedTripPoint.cs" />
     <Compile Include="GetAllowedCC\CCCodeList.cs" />
@@ -258,7 +430,7 @@
     <Compile Include="FlightSearch\ResponseElements\CompleteSegment.cs" />
     <Compile Include="FlightSearch\ResponseElements\CompleteSegmentList.cs" />
     <Compile Include="FlightSearch\ResponseElements\Flight.cs" />
-    <Compile Include="FlightSearch\ResponseElements\AdditionalService.cs" />
+    <Compile Include="SharedElements\Ancillaries\BaseAncillaryService.cs" />
     <Compile Include="FlightSearch\ResponseElements\PassengerFare.cs" />
     <Compile Include="FlightSearch\ResponseElements\Price.cs" />
     <Compile Include="FlightSearch\ResponseElements\SupplierSegmentInfo.cs" />
@@ -272,9 +444,7 @@
     <Compile Include="OpenSession\OpenSessionRQBody.cs" />
     <Compile Include="OpenSession\OpenSessionRSBody.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RefundTicket\PassengerList.cs" />
     <Compile Include="RefundTicket\RefundTicketRQBody.cs" />
-    <Compile Include="RefundTicket\RefundTicketRSBody.cs" />
     <Compile Include="RulesSearch\FareRule.cs" />
     <Compile Include="RulesSearch\FareRuleList.cs" />
     <Compile Include="RulesSearch\RulesSearchRSBody.cs" />
@@ -310,6 +480,7 @@
     <Compile Include="v1_2\SearchFlights\SearchFlightsRSBody.cs" />
     <Compile Include="v2\BookFlight\AdditionalBookingActions.cs" />
     <Compile Include="v2\BookFlight\BookFlightRQBody.cs" />
+    <Compile Include="v2\BookFlight\PricingOptions.cs" />
     <Compile Include="v2\BookModify\BookModifyRQBody.cs" />
     <Compile Include="v2\Ticketing\TicketingRQBody.cs" />
     <Compile Include="v2\UpdateBook\UpdateBookRQBody.cs" />
@@ -320,11 +491,7 @@
       <Name>GeneralEntities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

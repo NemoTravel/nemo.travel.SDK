@@ -1,4 +1,5 @@
 ﻿using GeneralEntities.Market;
+using GeneralEntities.PNRDataContent.Ancillary;
 using System;
 using System.Runtime.Serialization;
 
@@ -29,6 +30,12 @@ namespace AviaEntities.BookFlight.ResponseElements
 		/// </summary>
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public Money VAT { get; set; }
+
+		/// <summary>
+		/// Информация о НДС для данного билета
+		/// </summary>
+		[DataMember(Order = 3, EmitDefaultValue = false)]
+		public VATBreakdown VATBreakdown { get; set; }
 
 		/// <summary>
 		/// Пустой конструктор, необходим для сериализатора

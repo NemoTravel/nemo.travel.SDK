@@ -14,5 +14,16 @@ namespace GeneralEntities.PriceContent
 		/// </summary>
 		[DataMember(Order = 0, IsRequired = true)]
 		public string TaxCode { get; set; }
+
+		/// <summary>
+		/// Тип таксы, специфика Амадеуса
+		/// </summary>
+		[DataMember(Order = 1, EmitDefaultValue = false)]
+		public string Type { get; set; }
+
+		/// <summary>
+		/// Природа таксы, специфика Амадеуса
+		/// </summary>
+		public string Nature { get; set; }
 	}
 }

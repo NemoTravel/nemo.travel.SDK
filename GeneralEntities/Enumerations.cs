@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+using System;
+using System.Runtime.Serialization;
 
 namespace GeneralEntities
 {
@@ -17,7 +18,21 @@ namespace GeneralEntities
 		/// Партнерские группы ак по приему карт лояльности
 		/// </summary>
 		[EnumMember]
-		FFPPartnership = 1
+		FFPPartnership = 1,
+		[EnumMember]
+		SSRCodes = 2,
+		[EnumMember]
+		TravellerDocumentTypes = 3,
+		/// <summary>
+		/// Отношение литер и классов обслуживания
+		/// </summary>
+		[EnumMember]
+		ClassOfService = 4,
+		[EnumMember]
+		/// <summary>
+		/// Справочник допуслуг
+		/// </summary>
+		AncillaryServiceCatalogue = 5
 	}
 
 	/// <summary>
@@ -323,7 +338,17 @@ namespace GeneralEntities
 		/// Оптово-массовый тип младенца без места
 		/// </summary>
 		[EnumMember]
-		JNF = 12
+		JNF = 12,
+		/// <summary>
+		/// Пассажир сопровождающий инвалида
+		/// </summary>
+		[EnumMember]
+		DAT = 13,
+		/// <summary>
+		/// Инвалид
+		/// </summary>
+		[EnumMember]
+		DIS = 14
 	}
 
 	/// <summary>
@@ -386,10 +411,20 @@ namespace GeneralEntities
 		[EnumMember]
 		Partial = 4,
 		/// <summary>
+		/// Услуга запрошена
+		/// </summary>
+		[EnumMember]
+		Requested = 5,
+		/// <summary>
+		/// Отклонено
+		/// </summary>
+		[EnumMember]
+		Rejected = 6,
+		/// <summary>
 		/// Проблемный заказ
 		/// </summary>
 		[EnumMember]
-		Problematic = 10
+		Problematic = 10,
 	}
 
 	/// <summary>
@@ -429,7 +464,7 @@ namespace GeneralEntities
 		[EnumMember]
 		UnremovedVoidedTicketElements = 5,
 		/// <summary>
-		/// Специфичная ситуация в Сирене при оплате через их ПШ, может быть ситуация что бронь уже оплатилась, но ещё билеты не выписались, в этом случае ничего с бронь делать нельзя
+		/// Специфичная ситуация в Сирене при оплате через их ПШ, может быть ситуация что бронь уже оплатилась, но ещё билеты не выписались, в этом случае ничего с бронью делать нельзя
 		/// </summary>
 		[EnumMember]
 		PaidBook = 6,
@@ -437,12 +472,12 @@ namespace GeneralEntities
 		/// Ошибка при актуализации цены
 		/// </summary>
 		[EnumMember]
-		FaildToActualizePrice = 7,
+		FailedToActualizePrice = 7,
 		/// <summary>
 		/// Ошибка "выписки" в ТФ
 		/// </summary>
 		[EnumMember]
-		TicketingFaild = 8,
+		TicketingFailed = 8,
 		/// <summary>
 		/// Специфичная ситуация с младенцами без места, требуется ручная обработка
 		/// </summary>
@@ -457,7 +492,27 @@ namespace GeneralEntities
 		/// Статус брони не подтверждён (специфика ТФ)
 		/// </summary>
 		[EnumMember]
-		UnconfirmedBooking = 11
+		UnconfirmedBooking = 11,
+		/// <summary>
+		/// Бронь содержит непотвержденную карточку лояльности
+		/// </summary>
+		[EnumMember]
+		UnconfirmedLoyaltyCard = 12,
+		/// <summary>
+		/// Необходимо вернуть RSVR EMD
+		/// </summary>
+		[EnumMember]
+		NeedRefundRSVR = 13,
+		/// <summary>
+		/// Ошибка при возврате RSVR EMD
+		/// </summary>
+		[EnumMember]
+		FailedRefundRSVR = 14,
+		/// <summary>
+		/// Ошибка при обмене
+		/// </summary>
+		[EnumMember]
+		FailedExchange = 15
 	}
 
 	/// <summary>
@@ -670,6 +725,142 @@ namespace GeneralEntities
 	}
 
 	/// <summary>
+	/// Статус брони отеля
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum HotelsBookStatus
+	{
+		/// <summary>
+		/// Новый
+		/// </summary>
+		[EnumMember]
+		New = 1,
+		/// <summary>
+		/// Забронирован
+		/// </summary>
+		[EnumMember]
+		Booked = 2,
+		/// <summary>
+		/// Подтвержден, оплачен
+		/// </summary>
+		[EnumMember]
+		Confirmed = 3,
+		/// <summary>
+		/// Отменен
+		/// </summary>
+		[EnumMember]
+		Cancelled = 4,
+		/// <summary>
+		/// Ожидает подтверждения
+		/// </summary>
+		[EnumMember]
+		PendingConfirmation = 5,
+		/// <summary>
+		/// Ожидание
+		/// </summary>
+		[EnumMember]
+		Waiting = 6,
+	}
+
+	/// <summary>
+	/// Поставщики отелей
+	/// </summary>
+	[Flags]
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum HotelsSuppliers
+	{
+		/// <summary>
+		/// BookedNet
+		/// </summary>
+		[EnumMember]
+		BookedNet = 1,
+		/// <summary>
+		/// Hotelston
+		/// </summary>
+		[EnumMember]
+		Hotelston = 2,
+		/// <summary>
+		/// Natecnia
+		/// </summary>
+		[EnumMember]
+		Natecnia = 4,
+		/// <summary>
+		/// Oktogo
+		/// </summary>
+		[EnumMember]
+		Oktogo = 8,
+		/// <summary>
+		/// Travelport
+		/// </summary>
+		[EnumMember]
+		Travelport = 16,
+		/// <summary>
+		/// Academ
+		/// </summary>
+		[EnumMember]
+		Academ = 32,
+	}
+
+	/// <summary>
+	/// тип питания
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	[Flags]
+	public enum HotelsMealTypes
+	{
+		Unknown = 0,
+		/// <summary>
+		/// Room only
+		/// </summary>
+		[EnumMember]
+		RO = 1,
+		/// <summary>
+		/// Breakfast
+		/// </summary>
+		[EnumMember]
+		BB = 2,
+		/// <summary>
+		/// Half board
+		/// </summary>
+		[EnumMember]
+		HB = 4,
+		/// <summary>
+		/// Full board
+		/// </summary>
+		[EnumMember]
+		FB = 8,
+		/// <summary>
+		/// All inclusive
+		/// </summary>
+		[EnumMember]
+		AI = 16,
+		/// <summary>
+		/// Dinner
+		/// </summary>
+		[EnumMember]
+		DN = 32
+
+	}
+
+	/// <summary>
+	/// Тип постояльца
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum HotelsGuestTypes
+	{
+		/// <summary>
+		/// Взрослый
+		/// </summary>
+		[EnumMember]
+		ADT = 1,
+		/// <summary>
+		/// Ребенок
+		/// </summary>
+		[EnumMember]
+		CLD = 2,
+
+	}
+	/// <summary>
 	/// Поставщики авиа услуг
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
@@ -726,7 +917,16 @@ namespace GeneralEntities
 		/// Mystifly
 		/// </summary>
 		[EnumMember]
-		Mystifly = 10
+		Mystifly = 10,
+		/// <summary>
+		/// GalileoUAPI
+		/// </summary>
+		[EnumMember]
+		GalileoUAPI = 11,
+		[EnumMember]
+		NemoAviaServer = 12,
+		[EnumMember]
+		AmadeusS7SearchAPI = 13
 	}
 
 	/// <summary>
@@ -767,9 +967,22 @@ namespace GeneralEntities
 		/// Информация о статус сегментов, когда не удалось забронирования один из сегментов
 		/// </summary>
 		[EnumMember]
-		SegmentsStatus = 0,
+		SegmentsStatus,
+		/// <summary>
+		/// Штаит?
+		/// </summary>
 		[EnumMember]
-		InvalidParam = 1
+		InvalidParam,
+		/// <summary>
+		/// Хост команда, сгенерированная запросом
+		/// </summary>
+		[EnumMember]
+		HostCommand,
+		/// <summary>
+		/// Стадия в рамках которой возникла ошибка
+		/// </summary>
+		[EnumMember]
+		Stage
 	}
 
 	/// <summary>
@@ -869,6 +1082,12 @@ namespace GeneralEntities
 		StatisticsServer = 14,
 
 		/// <summary>
+		/// Сервер отелей
+		/// </summary>
+		[EnumMember]
+		HotelsServer = 15,
+
+		/// <summary>
 		/// Сервер авиабронирования #2
 		/// </summary>
 		[EnumMember]
@@ -885,6 +1104,12 @@ namespace GeneralEntities
 		/// </summary>
 		[EnumMember]
 		Supplier = 33,
+
+		/// <summary>
+		///  Сервер Немо1 (php)
+		/// </summary>
+		[EnumMember]
+		NemoOne = 34
 	}
 
 	/// <summary>
@@ -1104,7 +1329,33 @@ namespace GeneralEntities
 		/// Получение истории брони
 		/// </summary>
 		[EnumMember]
-		GetHistory = 10
+		GetHistory = 10,
+		/// <summary>
+		/// Обмен билетов
+		/// </summary>
+		[EnumMember]
+		Exchange = 11,
+		/// <summary>
+		/// Завершение обменов
+		/// </summary>
+		[EnumMember]
+		CompleteExchange = 12,
+		/// <summary>
+		/// Снятие мест
+		/// </summary>
+		[EnumMember]
+		ReleaseSeat = 13,
+		[EnumMember]
+		IssueEMD = 14,
+		[EnumMember]
+		VoidEMD = 15,
+		[EnumMember]
+		RefundEMD = 16,
+		/// <summary>
+		/// Получение терминального вида ПНРа для брони
+		/// </summary>
+		[EnumMember]
+		GetPNRTerminalView = 17,
 	}
 
 	/// <summary>
@@ -1266,7 +1517,26 @@ namespace GeneralEntities
 		[EnumMember]
 		EndUserData = 27,
 		[EnumMember]
-		TFBookData = 28
+		TFBookData = 28,
+		[EnumMember]
+		SellingPointDescription = 29,
+		[EnumMember]
+		AdditionalLocators = 30,
+		/// <summary>
+		/// OSI - Other service information (Прочая служебная информация)
+		/// </summary>
+		[EnumMember]
+		OSI = 31,
+		/// <summary>
+		/// Данные о связных бронях (родительской и дочерней)
+		/// </summary>
+		[EnumMember]
+		ReferencedBooks = 32,
+		/// <summary>
+		/// Документ-основание для скидки
+		/// </summary>
+		[EnumMember]
+		DiscountDocument = 34
 	}
 
 	/// <summary>
@@ -1320,7 +1590,12 @@ namespace GeneralEntities
 		/// Инвойс
 		/// </summary>
 		[EnumMember]
-		IN = 3
+		IN = 3,
+		/// <summary>
+		/// Платёжное Поручение
+		/// </summary>
+		[EnumMember]
+		PP = 4
 	}
 
 	/// <summary>
@@ -1379,6 +1654,18 @@ namespace GeneralEntities
 	}
 
 	/// <summary>
+	/// Тип электронного документа
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum EDType
+	{
+		[EnumMember]
+		Ticket = 0,
+		[EnumMember]
+		EMD = 1
+	}
+
+	/// <summary>
 	/// Возможные статусы электронных документов
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
@@ -1391,7 +1678,7 @@ namespace GeneralEntities
 		[EnumMember]
 		Voided = 2,
 		[EnumMember]
-		Refuned = 3,
+		Refunded = 3,
 		[EnumMember]
 		Exchanged = 4
 	}
@@ -1418,15 +1705,20 @@ namespace GeneralEntities
 		[EnumMember]
 		TicketIssuance = 2,
 		/// <summary>
-		/// Обмен билета
+		/// PENF EMD
 		/// </summary>
 		[EnumMember]
-		TicketExchange = 3,
+		Penalty = 3,
 		/// <summary>
-		/// Возврат билета
+		/// RSVR EMD
 		/// </summary>
 		[EnumMember]
-		TicketRefund = 4
+		ResidualValue = 4,
+		/// <summary>
+		/// Сборы
+		/// </summary>
+		[EnumMember]
+		FinancialImpact = 5
 	}
 
 	/// <summary>
@@ -1440,6 +1732,16 @@ namespace GeneralEntities
 		/// </summary>
 		[EnumMember]
 		ItinReceipt = 0,
+		/// <summary>
+		/// Текстовое представление ЕМД
+		/// </summary>
+		[EnumMember]
+		EMD = 1,
+		/// <summary>
+		/// Сертификат на выписку билета для чартеров
+		/// </summary>
+		[EnumMember]
+		TicketIssueCertificate = 2,
 		/// <summary>
 		/// Что-то другое
 		/// </summary>
@@ -1537,7 +1839,7 @@ namespace GeneralEntities
 	/// Типы возможных услуг обработки заказа
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
-	public enum OrderProcessingType
+	public enum ProcessingServiceType
 	{
 		/// <summary>
 		/// Создание
@@ -1573,14 +1875,19 @@ namespace GeneralEntities
 		/// Ануляция заказа
 		/// </summary>
 		[EnumMember]
-		Cancellation = 6
+		Cancellation = 6,
+		/// <summary>
+		/// Прочее
+		/// </summary>
+		[EnumMember]
+		Other = 30
 	}
 
 	/// <summary>
 	/// Статус услуг по обработке заказа
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
-	public enum OrderProcessingStatus
+	public enum ProcessingServiceStatus
 	{
 		/// <summary>
 		/// Запрошено
@@ -1731,12 +2038,12 @@ namespace GeneralEntities
 		[EnumMember]
 		HasUnfinishedPaymentTransaction = 3,
 		/// <summary>
-		/// Неудалось подтверждение одной из транзакций
+		/// Не удалось подтверждение одной из транзакций
 		/// </summary>
 		[EnumMember]
 		PaymentConfirmationFailed = 4,
 		/// <summary>
-		/// Неудалось выписать одну из услуг
+		/// Не удалось выписать одну из услуг
 		/// </summary>
 		[EnumMember]
 		TicketingFailed = 5
@@ -1808,5 +2115,474 @@ namespace GeneralEntities
 		BulkTour = 3,
 		[EnumMember]
 		BSPInclusiveTour = 4
+	}
+
+	/// <summary>
+	/// <summary>
+	/// Тип искомой цены
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum PriceRefundType
+	{
+		[EnumMember]
+		AnyLowest = 0,
+		[EnumMember]
+		Refundable = 1,
+		[EnumMember]
+		Both = 2
+	}
+
+	[Flags]
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum Language
+	{
+		[EnumMember]
+		en = 0,
+		[EnumMember]
+		ru = 1,
+	}
+
+	/// <summary>
+	/// Название очереди
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum QueueName
+	{
+		/// <summary>
+		/// Общая очередь
+		/// </summary>
+		[EnumMember]
+		GeneralQueue = 0,
+		/// <summary>
+		/// Очередь с изменениями в расписании
+		/// </summary>
+		[EnumMember]
+		ScheduleChanged = 1,
+		/// <summary>
+		/// Очередь с добавленными билетами
+		/// </summary>
+		[EnumMember]
+		TicketsAdded = 2,
+		/// <summary>
+		/// Очередь с отменённыи сегментами
+		/// </summary>
+		[EnumMember]
+		SegmentsCancelled = 3,
+		/// <summary>
+		/// Очередь с неподтверждёнными сегментами
+		/// </summary>
+		[EnumMember]
+		UnconfirmedSegments = 4,
+		/// <summary>
+		/// Очередь ожидания подтверждения
+		/// </summary>
+		[EnumMember]
+		WaitingConfirmation = 5,
+		/// <summary>
+		/// Очередь с изменениями в SSR
+		/// </summary>
+		[EnumMember]
+		ServiceInfoChanged = 6,
+		/// <summary>
+		/// Очередь с истекающими ТЛ
+		/// </summary>
+		[EnumMember]
+		TimeLimit = 7,
+
+
+		//Далее имена внутренних очередей (аналогичны подстатусам брони, когда основной статус проблематичный)
+		/// <summary>
+		/// Невалидный статус сегмента
+		/// </summary>
+		[EnumMember]
+		InvalidSegmentStatus = 30,
+		/// <summary>
+		/// Один из сегментов имеет валидный статус, который требуется сменить на HK (к примеру ТК статус)
+		/// </summary>
+		[EnumMember]
+		SegmentStatusForManualConfirmation = 31,
+		/// <summary>
+		/// Есть выписанные билеты, однако в ПНРе их нет
+		/// </summary>
+		[EnumMember]
+		HaveNotStoredTickets = 32,
+		/// <summary>
+		/// Статус билет в ПНРе и аудит репорте не совпадают
+		/// </summary>
+		[EnumMember]
+		NotActualTicketStatus = 33,
+		/// <summary>
+		/// Слетел тариф, специфика Галилео
+		/// </summary>
+		[EnumMember]
+		NoValidFare = 34,
+		/// <summary>
+		/// Данные о провойдированных билетах не были удалены из ПНРа. Специфика Амадеуса
+		/// </summary>
+		[EnumMember]
+		UnremovedVoidedTicketElements = 35,
+		/// <summary>
+		/// Специфичная ситуация в Сирене при оплате через их ПШ, может быть ситуация что бронь уже оплатилась, но ещё билеты не выписались, в этом случае ничего с бронь делать нельзя
+		/// </summary>
+		[EnumMember]
+		PaidBook = 36,
+		/// <summary>
+		/// Ошибка при актуализации цены
+		/// </summary>
+		[EnumMember]
+		FailedToActualizePrice = 37,
+		/// <summary>
+		/// Ошибка "выписки" в ТФ
+		/// </summary>
+		[EnumMember]
+		TicketingFailed = 38,
+		/// <summary>
+		/// Специфичная ситуация с младенцами без места, требуется ручная обработка
+		/// </summary>
+		[EnumMember]
+		UnconfirmedInfant = 39,
+		/// <summary>
+		/// Данная бронь дублирует другую (специфика ТФ)
+		/// </summary>
+		[EnumMember]
+		DuplicateBooking = 40,
+		/// <summary>
+		/// Статус брони не подтверждён (специфика ТФ)
+		/// </summary>
+		[EnumMember]
+		UnconfirmedBooking = 41,
+		/// <summary>
+		/// Необходимо вернуть RSVR EMD
+		/// </summary>
+		[EnumMember]
+		NeedRefundRSVR = 42,
+		/// <summary>
+		/// Ошибка при возврате RSVR EMD
+		/// </summary>
+		[EnumMember]
+		FailedRefundRSVR = 43,
+		/// <summary>
+		/// Ошибка при обмене
+		/// </summary>
+		[EnumMember]
+		FailedExchange = 44
+	}
+
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum BanType
+	{
+		/// <summary>
+		/// Превышено ограничение на количество поисков
+		/// </summary>
+		[EnumMember]
+		SearchesLimit,
+		/// <summary>
+		/// Превышено ограничение на количества поисков к одной выписке
+		/// </summary>
+		[EnumMember]
+		SearchesPerTicketLimit
+	}
+
+	///
+	/// Тип коммиссии для ценовых правил Nemo
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum CommissionType
+	{
+		/// <summary>
+		/// Деньги
+		/// </summary>
+		[EnumMember]
+		Money,
+		/// <summary>
+		/// Процент от тарифа
+		/// </summary>
+		[EnumMember]
+		Percent
+	}
+
+	/// <summary>
+	/// платежные системы
+	/// </summary>
+	[Flags]
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum PaymentSystem
+	{
+		[EnumMember]
+		JapanCreditBureau,
+		[EnumMember]
+		MasterCardDebit,
+		[EnumMember]
+		VisaDelta,
+		[EnumMember]
+		Visa,
+		[EnumMember]
+		UniversalAirTravelPlan,
+		[EnumMember]
+		DiscoverCard,
+		[EnumMember]
+		DinersClub,
+		[EnumMember]
+		AmericanExpress,
+		[EnumMember]
+		MasterCard,
+		[EnumMember]
+		VisaElectron,
+		[EnumMember]
+		Maestro,
+		[EnumMember]
+		EasyJetElectron,
+		[EnumMember]
+		CarteBlanche,
+	}
+
+	[Flags]
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum GuaranteeType
+	{
+		[EnumMember]
+		Deposit,
+		[EnumMember]
+		Credit,
+		[EnumMember]
+		Prepayment,
+		[EnumMember]
+		Cash,
+		[EnumMember]
+		Guarantee,
+		[EnumMember]
+		Other,
+	}
+
+	/// Тип кэша для перезагрузки
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum CacheType
+	{
+		/// <summary>
+		/// Авиакомпании (iata/tf)
+		/// </summary>
+		[EnumMember]
+		Airlines,
+		/// <summary>
+		/// Аэропорты/города
+		/// </summary>
+		[EnumMember]
+		Airports,
+		/// <summary>
+		/// Страны
+		/// </summary>
+		[EnumMember]
+		Countries,
+		/// <summary>
+		/// Семейства тарифов
+		/// </summary>
+		[EnumMember]
+		FFamilies,
+		/// <summary>
+		/// Партнерство а/к по карточкам лояльности
+		/// </summary>
+		[EnumMember]
+		FFPPartnership,
+		/// <summary>
+		/// Переводы
+		/// </summary>
+		[EnumMember]
+		Translations,
+		/// <summary>
+		/// Города
+		/// </summary>
+		[EnumMember]
+		Cities,
+		/// <summary>
+		/// Классы бронирования
+		/// </summary>
+		[EnumMember]
+		Classes,
+		/// <summary>
+		/// Временные зоны
+		/// </summary>
+		[EnumMember]
+		Timezones,
+		[EnumMember]
+		SubsidizedTariffs
+	}
+
+	/// <summary>
+	/// Действие с перелетом
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum FlightOperation
+	{
+		/// <summary>
+		/// Проверка доступности перелёта
+		/// </summary>
+		[EnumMember]
+		CheckFlightAvailability = 0,
+		/// <summary>
+		/// Получение актуальной цены перелета
+		/// </summary>
+		[EnumMember]
+		GetFlightPrice = 1,
+		/// <summary>
+		/// Актуализация перелёта
+		/// </summary>
+		[EnumMember]
+		ActualizeFlight = 2,
+		/// <summary>
+		/// Бронирование перелета
+		/// </summary>
+		[EnumMember]
+		BookFlight = 3
+	}
+
+	/// <summary>
+	/// Информация о наличии мест
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum HotelProductAvailability
+	{
+		[EnumMember]
+		FreeSale,
+		[EnumMember]
+		OnRequest
+	}
+
+	/// <summary>
+	/// Коды типов документов, которые могут быть основанием для скидки. Взято из справочника Сирены
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum DiscountDocumentType
+	{
+		/// <summary>
+		/// СПРАВКА ИЗ РОДДОМА
+		/// </summary>
+		[EnumMember]
+		SPR = 0,
+		/// <summary>
+		/// УДОСТ ДЕПУТАТА ГОС ДУМЫ ФЕДЕРАЛЬНОГО СОБРАНИЯ РФ
+		/// </summary>
+		[EnumMember]
+		GD = 1,
+		/// <summary>
+		/// КОМАНДИРОВОЧНОЕ УДОСТОВЕРЕНИЕ
+		/// </summary>
+		[EnumMember]
+		KU = 2,
+		/// <summary>
+		/// СЛ ТРЕБ ДЛЯ РАБОТН ГА А ТАКЖЕ ДРУГОГО ПРЕДПРИЯТ
+		/// </summary>
+		[EnumMember]
+		ST = 3,
+		/// <summary>
+		/// ГОДОВОЙ СЛУЖ БИЛЕТ ДЛЯ РАБОТН ГА И ДР ПРЕДПРИЯТ
+		/// </summary>
+		[EnumMember]
+		GB = 4,
+		/// <summary>
+		/// СВИДЕТЕЛЬСТВО О СМЕРТИ
+		/// </summary>
+		[EnumMember]
+		SS = 5,
+		/// <summary>
+		/// НАПРАВЛЕНИЕ НА ЛЕЧЕНИЕ
+		/// </summary>
+		[EnumMember]
+		NL = 6,
+		/// <summary>
+		/// СПРАВКА МЕДИКО СОЦИАЛЬНОЙ ЭКСПЕРТИЗЫ
+		/// </summary>
+		[EnumMember]
+		MV = 7,
+		/// <summary>
+		/// МЕДИЦИНСКАЯ СПРАВКА
+		/// </summary>
+		[EnumMember]
+		MD = 8,
+		/// <summary>
+		/// УДОСТОВЕРЕНИЕ ИНВАЛИДА
+		/// </summary>
+		[EnumMember]
+		UI = 9,
+		/// <summary>
+		/// СПР О ПРАВЕ РЕБ ИНВ НА ЛГ ВЫДАН ОРГАНОМ СОЦ ЗАЩИТЫ
+		/// </summary>
+		[EnumMember]
+		SI = 10,
+		/// <summary>
+		/// СЛУЖЕБНОЕ УДОСТ ИЛИ ДР ДОКУМ УДОСТ ПРОФ ПРИНАДЛЕЖН
+		/// </summary>
+		[EnumMember]
+		SU = 11,
+		/// <summary>
+		/// РАЗРЕШ РУКОВОД АП НА ПЕРЕВОЗ БЕСПЛАТ ИЛИ СО СКИДК
+		/// </summary>
+		[EnumMember]
+		RZ = 12,
+		/// <summary>
+		/// ДОК ПОДТВЕРЖД ЧЛЕНСТВО В КЛУБЕ АССОЦИАЦ ОРГАНИЗАЦ
+		/// </summary>
+		[EnumMember]
+		CL = 13,
+		/// <summary>
+		/// ДОК ПОДТВЕРЖДАЮЩИЙ ЗВАНИЕ И НАГРАДЫ ПАССАЖИРА
+		/// </summary>
+		[EnumMember]
+		PZ = 14,
+		/// <summary>
+		/// СВИДЕТЕЛЬСТВО О БРАКЕ
+		/// </summary>
+		[EnumMember]
+		BR = 15,
+		/// <summary>
+		/// СПРАВКА ИЗ ШКОЛЫ
+		/// </summary>
+		[EnumMember]
+		SK = 16,
+		/// <summary>
+		/// УЧЕНИЧЕСКИЙ БИЛЕТ
+		/// </summary>
+		[EnumMember]
+		UB = 17,
+		/// <summary>
+		/// СТУДЕНЧЕСКИЙ БИЛЕТ
+		/// </summary>
+		[EnumMember]
+		SB = 17,
+		/// <summary>
+		/// ПЕНСИОННОЕ УДОСТОВЕРЕНИЕ
+		/// </summary>
+		[EnumMember]
+		PU = 17,
+		/// <summary>
+		/// УДОСТ ЛИЧНОСТИ ДЛЯ ВОЕННОСЛ ОФИЦЕР ПРАПОРЩ МИЧМААН
+		/// </summary>
+		[EnumMember]
+		UL = 18,
+		/// <summary>
+		/// УДОСТ СУДЬИ КОНСТИТУЦИОННОГО СУДА
+		/// </summary>
+		[EnumMember]
+		KS = 19,
+		/// <summary>
+		/// УДОСТ ДЕПУТАТА МЕСТНЫХ ЗАКОНОДАТЕЛЬНЫХ ОРГАНОВ
+		/// </summary>
+		[EnumMember]
+		DM = 20,
+		/// <summary>
+		/// УДОСТ ЧЛЕНА СОВЕТА ФЕДЕРАЦИИ ФЕДЕРАЛЬН СОБРАН РФ
+		/// </summary>
+		[EnumMember]
+		SF = 21,
+		/// <summary>
+		/// СВОБОДНЫЙ ТЕКСТ
+		/// </summary>
+		[EnumMember]
+		NS = 22,
+		/// <summary>
+		/// КОД НАГРАДЫ
+		/// </summary>
+		[EnumMember]
+		CN = 23
 	}
 }

@@ -12,7 +12,7 @@ namespace AviaEntities.ScheduleSearch
 		/// <summary>
 		/// Перелёты
 		/// </summary>
-		[DataMember(IsRequired = true, Order = 0, EmitDefaultValue = false)]
+		[DataMember(Order = 0, EmitDefaultValue = false)]
 		public ScheduleFlightList Flights { get; set; }
 	}
 }

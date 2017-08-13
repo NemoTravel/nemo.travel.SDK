@@ -1,8 +1,4 @@
-﻿using GeneralEntities.Market;
-using GeneralEntities.Shared;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace AviaEntities.ScheduleSearch.ResponseElements
 {

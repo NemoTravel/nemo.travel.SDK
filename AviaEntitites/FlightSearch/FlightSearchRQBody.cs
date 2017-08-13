@@ -58,7 +58,7 @@ namespace AviaEntities.FlightSearch
 			result.RequestedFlightInfo.Direct = RequestedFlightInfo.Direct;
 			result.RequestedFlightInfo.Type = RequestedFlightInfo.Type;
 			result.RequestedFlightInfo.SubType = RequestedFlightInfo.SubType;
-			
+
 			foreach (var seg in RequestedFlightInfo.ODPairs)
 			{
 				result.RequestedFlightInfo.ODPairs.Add(seg.FullCopy());

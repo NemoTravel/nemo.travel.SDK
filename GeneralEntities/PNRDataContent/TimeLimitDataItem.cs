@@ -1,5 +1,4 @@
 ﻿using GeneralEntities.ExtendedDateTime;
-using SharedAssembly;
 using System.Runtime.Serialization;
 
 namespace GeneralEntities.PNRDataContent
@@ -11,10 +10,11 @@ namespace GeneralEntities.PNRDataContent
 	public class TimeLimitDataItem
 	{
 		protected DateTimeEx priceTimeLimit;
-		protected DateTimeEx segmentsTimeLimit;
 		protected DateTimeEx ticketingTimeLimit;
 		protected DateTimeEx agencyTimeLimit;
 		protected DateTimeEx voidTimeLimit;
+		protected DateTimeEx advancedPurchaseTimeLimit;
+		protected DateTimeEx effectiveTimeLimit;
 
 		/// <summary>
 		/// Эффективный ТЛ брони
@@ -22,34 +22,9 @@ namespace GeneralEntities.PNRDataContent
 		[DataMember(Order = 0, EmitDefaultValue = false)]
 		public DateTimeEx EffectiveTimeLimit
 		{
-			get
-			{
-				DateTimeEx tl = null;
+			get { return effectiveTimeLimit; }
 
-				if (PriceTimeLimit != null && (tl == null || PriceTimeLimit.DateTime < tl))
-				{
-					tl = PriceTimeLimit;
-				}
-
-				if (SegmentsTimeLimit != null && (tl == null || SegmentsTimeLimit.DateTime < tl))
-				{
-					tl = SegmentsTimeLimit;
-				}
-
-				if (TicketingTimeLimit != null && (tl == null || TicketingTimeLimit.DateTime < tl))
-				{
-					tl = TicketingTimeLimit;
-				}
-
-				if (AgencyTimeLimit != null && (tl == null || AgencyTimeLimit.DateTime < tl))
-				{
-					tl = AgencyTimeLimit;
-				}
-
-				return tl;
-			}
-
-			set { }
+			set { effectiveTimeLimit = SetOutFormat(value); }
 		}
 
 		/// <summary>
@@ -59,31 +34,7 @@ namespace GeneralEntities.PNRDataContent
 		public DateTimeEx PriceTimeLimit
 		{
 			get { return priceTimeLimit; }
-			set
-			{
-				if (value != null)
-				{
-					value.OutFormat = Formats.FULL_DATE_TIME_FORMAT;
-				}
-				priceTimeLimit = value;
-			}
-		}
-
-		/// <summary>
-		/// ТЛ на сегменты
-		/// </summary>
-		[DataMember(Order = 2, EmitDefaultValue = false)]
-		public DateTimeEx SegmentsTimeLimit
-		{
-			get { return segmentsTimeLimit; }
-			set
-			{
-				if (value != null)
-				{
-					value.OutFormat = Formats.FULL_DATE_TIME_FORMAT;
-				}
-				segmentsTimeLimit = value;
-			}
+			set { priceTimeLimit = SetOutFormat(value); }
 		}
 
 		/// <summary>
@@ -93,14 +44,7 @@ namespace GeneralEntities.PNRDataContent
 		public DateTimeEx TicketingTimeLimit
 		{
 			get { return ticketingTimeLimit; }
-			set
-			{
-				if (value != null)
-				{
-					value.OutFormat = Formats.FULL_DATE_TIME_FORMAT;
-				}
-				ticketingTimeLimit = value;
-			}
+			set { ticketingTimeLimit = SetOutFormat(value); }
 		}
 
 		/// <summary>
@@ -110,14 +54,7 @@ namespace GeneralEntities.PNRDataContent
 		public DateTimeEx AgencyTimeLimit
 		{
 			get { return agencyTimeLimit; }
-			set
-			{
-				if (value != null)
-				{
-					value.OutFormat = Formats.FULL_DATE_TIME_FORMAT;
-				}
-				agencyTimeLimit = value;
-			}
+			set { agencyTimeLimit = SetOutFormat(value); }
 		}
 
 		/// <summary>
@@ -127,14 +64,28 @@ namespace GeneralEntities.PNRDataContent
 		public DateTimeEx VoidTimeLimit
 		{
 			get { return voidTimeLimit; }
-			set
+			set { voidTimeLimit = SetOutFormat(value); }
+		}
+
+		/// <summary>
+		/// ТЛ из секции Advanced Purchase УПТ
+		/// </summary>
+		[DataMember(Order = 7, EmitDefaultValue = false)]
+		public DateTimeEx AdvancedPurchaseTimeLimit
+		{
+			get { return advancedPurchaseTimeLimit; }
+			set { advancedPurchaseTimeLimit = SetOutFormat(value); }
+		}
+
+
+		private DateTimeEx SetOutFormat(DateTimeEx value)
+		{
+			if (value != null)
 			{
-				if (value != null)
-				{
-					value.OutFormat = Formats.FULL_DATE_TIME_FORMAT;
-				}
-				voidTimeLimit = value;
+				value.OutFormat = Formats.FULL_DATE_TIME_FORMAT;
 			}
+
+			return value;
 		}
 	}
 }

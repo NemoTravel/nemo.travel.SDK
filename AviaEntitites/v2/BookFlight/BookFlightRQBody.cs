@@ -1,5 +1,8 @@
 ﻿using AviaEntities.SharedElements;
+using AviaEntities.SharedElements.Ancillaries;
+using AviaEntities.SharedElements.Ancillaries.RequestElements;
 using GeneralEntities.PNRDataContent;
+using GeneralEntities.Shared;
 using GeneralEntities.Traveller;
 using System.Runtime.Serialization;
 
@@ -28,5 +31,23 @@ namespace AviaEntities.v2.BookFlight
 		/// </summary>
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public AdditionalBookingActions AdditionalActions { get; set; }
+
+		/// <summary>
+		/// Опции тарификации брони
+		/// </summary>
+		[DataMember(Order = 3, EmitDefaultValue = false)]
+		public PricingOptions PricingOptions { get; set; }
+
+		/// <summary>
+		/// Список допуслуг для бронирования
+		/// </summary>
+		[DataMember(Order = 4, EmitDefaultValue = false)]
+		public AncillaryServices<AncillaryServiceRQ> AncillaryServices { get; set; }
+
+		/// <summary>
+		/// Теги для ЦО
+		/// </summary>
+		[DataMember(Order = 5, EmitDefaultValue = false)]
+		public TagList RequestorTags { get; set; }
 	}
 }

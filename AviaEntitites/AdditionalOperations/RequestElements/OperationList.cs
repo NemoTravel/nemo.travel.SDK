@@ -9,5 +9,11 @@ namespace AviaEntities.AdditionalOperations.RequestElements
 	[CollectionDataContract(Namespace = "http://nemo-ibe.com/Avia", ItemName = "Operation")]
 	public class OperationList : List<AdditionalOperation>
 	{
+		public OperationList()
+		{ }
+
+		public OperationList(IEnumerable<AdditionalOperation> operationList)
+			: base(operationList)
+		{ }
 	}
 }

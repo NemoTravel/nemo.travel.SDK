@@ -13,7 +13,7 @@ namespace GeneralEntities.PNRDataContent
 		/// Сумма кэша для проксируемой выписки с мультиФОПом
 		/// </summary>
 		[DataMember(Order = 0, EmitDefaultValue = false)]
-		public CashValueForMultiFOPProxingDataItem CashValueForMultiFOPProxing{ get; set; }
+		public CashValueForMultiFOPProxingDataItem CashValueForMultiFOPProxing { get; set; }
 
 		/// <summary>
 		/// ФОП из ПНРа
@@ -56,6 +56,12 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 8, EmitDefaultValue = false)]
 		public EndUserDataDataItem EndUserData { get; set; }
+
+		/// <summary>
+		/// Описание точки продажи
+		/// </summary>
+		[DataMember(Order = 9, EmitDefaultValue = false)]
+		public SellingPointDescriptionDataItem SellingPointDescription { get; set; }
 
 		/// <summary>
 		/// Получение хэша данного элемента, формируемого на основании типа и контента
@@ -129,6 +135,25 @@ namespace GeneralEntities.PNRDataContent
 					if (ElectronicDocument.VAT != null)
 					{
 						result.Append(ElectronicDocument.VAT.ToString());
+						result.Append(";");
+					}
+					if (ElectronicDocument.VATBreakdown != null)
+					{
+						if (ElectronicDocument.VATBreakdown.Tariff != null)
+						{
+							result.Append(ElectronicDocument.VATBreakdown.Tariff.ToString());
+							result.Append(";");
+						}
+						if (ElectronicDocument.VATBreakdown.Taxes != null)
+						{
+							result.Append(ElectronicDocument.VATBreakdown.Taxes.ToString());
+							result.Append(";");
+						}
+						if (ElectronicDocument.VATBreakdown.Total != null)
+						{
+							result.Append(ElectronicDocument.VATBreakdown.Total.ToString());
+							result.Append(";");
+						}
 					}
 					break;
 				case PNRDataItemType.FE:
@@ -144,6 +169,8 @@ namespace GeneralEntities.PNRDataContent
 						result.Append(fop.Type.ToString());
 						result.Append(";");
 						result.Append(fop.CreditCardNumber);
+						result.Append(";");
+						result.Append(fop.Number);
 						result.Append(";");
 					}
 					break;
@@ -217,9 +244,9 @@ namespace GeneralEntities.PNRDataContent
 					result.Append(";");
 					result.Append(TimeLimits.PriceTimeLimit);
 					result.Append(";");
-					result.Append(TimeLimits.SegmentsTimeLimit);
-					result.Append(";");
 					result.Append(TimeLimits.TicketingTimeLimit);
+					result.Append(";");
+					result.Append(TimeLimits.AdvancedPurchaseTimeLimit);
 					result.Append(";");
 					result.Append(TimeLimits.VoidTimeLimit);
 					break;
@@ -265,7 +292,7 @@ namespace GeneralEntities.PNRDataContent
 				//	break;
 				//case PNRDataItemType.TicketingProxy:
 				//	break;
-				
+
 
 				//внутреннии данные брони, в АПИ не отображаются
 				//case PNRDataItemType.FareRules:

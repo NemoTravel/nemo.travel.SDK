@@ -32,7 +32,7 @@ namespace GeneralEntities.ExtendedDateTime
 		[XmlIgnore]
 		[JsonIgnore]
 		[IgnoreDataMember]
-		public double TimeZone
+		public double UTCOffset
 		{
 			get
 			{
@@ -113,8 +113,9 @@ namespace GeneralEntities.ExtendedDateTime
 		/// <param name="inFormat">Формат входной строки с датой и временем</param>
 		/// <param name="offset">Смещение часового пояса для дато-времени</param>
 		/// <param name="timeZoneID">ИД временной зоны, в которой находится данное дата-время</param>
+		/// <param name="inLocale">Локаль входной строки с датой временем</param>
 		/// <param name="outLocale">Локаль выходной строки с датой временем</param>
-		public DateTimeEx(string dateTime, string outFormat = Formats.DATE_TIME_FORMAT, string inFormat = null, TimeSpan? offset = null, string timeZoneID = null, CultureInfo outLocale = null)
+		public DateTimeEx(string dateTime, string outFormat = Formats.DATE_TIME_FORMAT, string inFormat = null, TimeSpan? offset = null, string timeZoneID = null, CultureInfo inLocale = null, CultureInfo outLocale = null)
 		{
 			if (string.IsNullOrEmpty(dateTime))
 			{
@@ -130,7 +131,7 @@ namespace GeneralEntities.ExtendedDateTime
 				}
 				else
 				{
-					parsedDT = DateTimeOffset.ParseExact(dateTime, inFormat, Locale.UsCulture);
+					parsedDT = DateTimeOffset.ParseExact(dateTime, inFormat, inLocale ?? Locale.UsCulture);
 				}
 
 				if (offset.HasValue)
@@ -246,6 +247,16 @@ namespace GeneralEntities.ExtendedDateTime
 			return new DateTimeEx(DateTime.AddMinutes(minutesCount), OutFormat, OutLocale, TimeZoneID);
 		}
 
+		public DateTimeEx AddSeconds(double secondsCount)
+		{
+			return new DateTimeEx(DateTime.AddSeconds(secondsCount), OutFormat, OutLocale, TimeZoneID);
+		}
+
+		public DateTimeEx AddTicks(long ticksCount)
+		{
+			return new DateTimeEx(DateTime.AddTicks(ticksCount), OutFormat, OutLocale, TimeZoneID);
+		}
+
 		public DateTimeEx AddMonths(int monthCount)
 		{
 			return new DateTimeEx(DateTime.AddMonths(monthCount), OutFormat, OutLocale, TimeZoneID);
@@ -256,11 +267,29 @@ namespace GeneralEntities.ExtendedDateTime
 			return new DateTimeEx(DateTime.AddYears(yearCount), OutFormat, OutLocale, TimeZoneID);
 		}
 
+		public DateTimeEx ConvertToLocalTimeZone()
+		{
+			if (TimeZoneID == TimeZoneInfo.Local.Id)
+			{
+				return this;
+			}
+
+			var targetTimeZoneID = TimeZoneInfo.Local.Id;
+
+			var tzDiff = TimeZoneCache.GetTimeZoneByID(targetTimeZoneID).GetUtcOffset(DateTime) - TimeZoneCache.GetTimeZoneByID(TimeZoneID).GetUtcOffset(DateTime);
+			var result = new DateTimeEx((DateTime + tzDiff), timeZoneID: targetTimeZoneID);
+
+			result.OutFormat = OutFormat;
+			result.OutLocale = OutLocale;
+
+			return result;
+		}
+
 		public DateTimeEx ConvertToTimeZone(string targetTimeZoneID)
 		{
 			DateTimeEx result = null;
 
-			if (targetTimeZoneID != null)
+			if (!string.IsNullOrEmpty(targetTimeZoneID))
 			{
 				var tzDiff = TimeZoneCache.GetTimeZoneByID(targetTimeZoneID).GetUtcOffset(DateTime) - TimeZoneCache.GetTimeZoneByID(TimeZoneID).GetUtcOffset(DateTime);
 				result = new DateTimeEx((DateTime + tzDiff), timeZoneID: targetTimeZoneID);
@@ -361,7 +390,7 @@ namespace GeneralEntities.ExtendedDateTime
 		/// <returns>Итоговое дата-время</returns>
 		public static DateTimeEx operator -(DateTimeEx dateTime, TimeSpan timeSpan)
 		{
-			return dateTime.DateTime - timeSpan;
+			return new DateTimeEx(dateTime.DateTime - timeSpan, dateTime.OutFormat, dateTime.OutLocale, dateTime.TimeZoneID);
 		}
 
 		/// <summary>
@@ -372,7 +401,7 @@ namespace GeneralEntities.ExtendedDateTime
 		/// <returns>Итоговое дата-время</returns>
 		public static DateTimeEx operator +(DateTimeEx dateTime, TimeSpan timeSpan)
 		{
-			return dateTime.DateTime + timeSpan;
+			return new DateTimeEx(dateTime.DateTime + timeSpan, dateTime.OutFormat, dateTime.OutLocale, dateTime.TimeZoneID);
 		}
 
 		#endregion
@@ -472,7 +501,7 @@ namespace GeneralEntities.ExtendedDateTime
 
 			if (strContent == null)
 			{
-				throw new Exception("Неудалось прочитать контент");
+				throw new Exception("Не удалось прочитать контент");
 			}
 
 			if (string.IsNullOrWhiteSpace(strContent))

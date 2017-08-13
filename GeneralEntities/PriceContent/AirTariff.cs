@@ -51,20 +51,36 @@ namespace GeneralEntities.PriceContent
 		[DataMember(Order = 6, EmitDefaultValue = false)]
 		public bool? IsSystemTransfer { get; set; }
 
+		/// <summary>
+		/// ID описания семейства тарифов
+		/// </summary>
+		[DataMember(Order = 7, EmitDefaultValue = false)]
+		public int? FareFamilyDescID { get; set; }
 
-		[IgnoreDataMember]
-		public string FareBasisCode
+		/// <summary>
+		/// Код а/к семейства цены
+		/// </summary>
+		[DataMember(Order = 8, EmitDefaultValue = false)]
+		public string FareFamilyCode { get; set; }
+
+		/// <summary>
+		/// Обратная совместимость для S7
+		/// </summary>
+		[DataMember(Order = 9, EmitDefaultValue = false)]
+		public string FareFamilyName { get; set; }
+
+		/// <summary>
+		/// Код тарифа без кода скидки
+		/// </summary>
+		public override string GetFareBasisCode(bool forceSplit = false)
 		{
-			get
+			if (Type == TariffType.Public || forceSplit)
 			{
-				if (Type == TariffType.Public)
-				{
-					return Code.Split('/')[0];
-				}
-				else
-				{
-					return Code;
-				}
+				return FareBasisCode;
+			}
+			else
+			{
+				return Code;
 			}
 		}
 	}

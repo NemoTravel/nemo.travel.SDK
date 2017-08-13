@@ -17,7 +17,7 @@ namespace AviaEntities.SeatMap.Elements
 		/// <summary>
 		/// Схема ряда с параметрами по умолчанию
 		/// </summary>
-		[DataMember(IsRequired = true, Order = 1, EmitDefaultValue = false)]
+		[DataMember(Order = 1, EmitDefaultValue = false)]
 		public SeatRow DefaultRow { get; set; }
 
 		/// <summary>
@@ -25,6 +25,7 @@ namespace AviaEntities.SeatMap.Elements
 		/// </summary>
 		[DataMember(IsRequired = true, Order = 2, EmitDefaultValue = false)]
 		public SeatRowList SeatRows { get; set; }
+
 
 		public SeatMapFloor()
 		{

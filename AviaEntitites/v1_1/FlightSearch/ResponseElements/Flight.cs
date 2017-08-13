@@ -1,6 +1,6 @@
 ﻿using GeneralEntities.Market;
+using GeneralEntities.PriceContent;
 using GeneralEntities.Shared;
-using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
@@ -30,20 +30,38 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 		[DataMember(Order = 5, EmitDefaultValue = false)]
 		public bool AdditionalServicePossiblyExist { get; set; }
 
+		[DataMember(Order = 6, EmitDefaultValue = false)]
+		public bool MandatoryLatinNames { get; set; }
+
+		/// <summary>
+		/// Количество билетов, которые будут выписаны на 1 пассажира при оформлении данного перелёта
+		/// </summary>
+		[DataMember(Order = 7, EmitDefaultValue = false)]
+		public int? ExpectedTicketCount { get; set; }
+
 		/// <summary>
 		/// Сегменты перелёта
 		/// </summary>
-		[DataMember(Order = 6, EmitDefaultValue = false)]
+		[DataMember(Order = 8, EmitDefaultValue = false)]
 		public CompleteSegmentList Segments { get; set; }
 
 		/// <summary>
 		/// Цены перелёта
 		/// </summary>
-		[DataMember(Order = 7, EmitDefaultValue = false)]
+		[DataMember(Order = 9, EmitDefaultValue = false)]
 		public PriceList PriceInfo { get; set; }
 
-		[DataMember(Order = 8, EmitDefaultValue = false)]
+		[DataMember(Order = 10, EmitDefaultValue = false)]
 		public CurrencyRateList UsedRates { get; set; }
+
+		[DataMember(Order = 11, EmitDefaultValue = false)]
+		public FareFamilyDescriptionList FareFamiliesDescription { get; set; }
+
+		[DataMember(Order = 12, EmitDefaultValue = false)]
+		public SubsidyInformationList SubsidiesInformation { get; set; }
+
+		[DataMember(Order = 13, EmitDefaultValue = false)]
+		public bool CanHaveSubsidizedTariffs { get; set; }
 
 		/// <summary>
 		/// Вычисление полной цены перелёта по всем пассажирам
@@ -60,13 +78,18 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 					{
 						if (price.PassengerFares != null && price.PassengerFares.Count > 0)
 						{
-							result = price.PassengerFares[0].TotalFare * price.PassengerFares[0].Quantity;
-							for (int i = 1; i < price.PassengerFares.Count; i++)
+							foreach (var passFare in price.PassengerFares)
 							{
-								result += (price.PassengerFares[i].TotalFare * price.PassengerFares[i].Quantity);
+								var farePrice = passFare.TotalFare * passFare.Quantity;
+								if (result == null)
+								{
+									result = farePrice;
+								}
+								else
+								{
+									result += farePrice;
+								}
 							}
-
-							
 						}
 					}
 					return result;

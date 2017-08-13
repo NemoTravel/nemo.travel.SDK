@@ -25,5 +25,8 @@ namespace AviaEntities.v1_1.AdditionalOperations.RequestElements
 		/// </summary>
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public bool UpdateCachedFareRules { get; set; }
+
+		[DataMember(Order = 3, EmitDefaultValue = false)]
+		public bool ListFaresIfNoFamiliesDifined { get; set; }
 	}
 }

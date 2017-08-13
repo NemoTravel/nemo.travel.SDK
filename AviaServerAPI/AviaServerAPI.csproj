@@ -75,14 +75,10 @@
   <ItemGroup>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
-      <SubType>Designer</SubType>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AviaEntitites\AviaEntities.csproj">
@@ -93,6 +89,9 @@
       <Project>{dc94fcab-3f2d-48ef-9562-8434cdee1c21}</Project>
       <Name>GeneralEntities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,7 +1,6 @@
 ﻿using AviaEntities.v1_1.FlightSearch.ResponseElements;
 using GeneralEntities;
 using GeneralEntities.ExtendedDateTime;
-using SharedAssembly;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -96,11 +95,11 @@ namespace AviaEntities.ScheduleSearch.ResponseElements
 		[DataMember(Order = 15, EmitDefaultValue = false)]
 		public DateTimeEx StartDate
 		{
-			get { return startDate; } 
+			get { return startDate; }
 			set
-			{ 
-				startDate = value; 
-				if (startDate != null) 
+			{
+				startDate = value;
+				if (startDate != null)
 					startDate.OutFormat = Formats.DATE_WITH_DASHES_FORMAT;
 			}
 		}
@@ -155,6 +154,83 @@ namespace AviaEntities.ScheduleSearch.ResponseElements
 		{
 			DepAirp = new AirportInformation();
 			ArrAirp = new AirportInformation();
+		}
+
+		/// <summary>
+		/// Полное копирование текущего объекта
+		/// </summary>
+		/// <returns>Полная копия объекта</returns>
+		public ScheduleCompleteSegment FullCopy()
+		{
+			var result = new ScheduleCompleteSegment();
+
+			result.AircraftType = AircraftType;
+			result.ArrivalDaysChange = ArrivalDaysChange;
+			result.ArrivalTime = ArrivalTime;
+			result.ArrivalTimeString = ArrivalTimeString;
+			result.Charterer = Charterer;
+			result.DepartureDaysChange = DepartureDaysChange;
+			result.DepartureTime = DepartureTime;
+			result.DepartureTimeString = DepartureTimeString;
+			result.EndDate = EndDate;
+			result.ETicket = ETicket;
+			result.FlightNumber = FlightNumber;
+			result.FlightTime = FlightTime;
+			result.ID = ID;
+			result.MarkAirline = MarkAirline;
+			result.OpAirline = OpAirline;
+			result.StartDate = StartDate;
+
+			if (ArrAirp != null)
+			{
+				result.ArrAirp = new AirportInformation();
+				result.ArrAirp.AirportCode = ArrAirp.AirportCode;
+				result.ArrAirp.CityCode = ArrAirp.CityCode;
+				result.ArrAirp.Terminal = ArrAirp.Terminal;
+				result.ArrAirp.UTC = ArrAirp.UTC;
+			}
+
+			if (DepAirp != null)
+			{
+				result.DepAirp = new AirportInformation();
+				result.DepAirp.AirportCode = DepAirp.AirportCode;
+				result.DepAirp.CityCode = DepAirp.CityCode;
+				result.DepAirp.Terminal = DepAirp.Terminal;
+				result.DepAirp.UTC = DepAirp.UTC;
+			}
+
+			if (BaseClasses != null && BaseClasses.Count > 0)
+			{
+				result.BaseClasses = new List<BaseClass>();
+				BaseClasses.ForEach(bc => { result.BaseClasses.Add(bc); });
+			}
+
+			if (OperatedDaysOfWeek != null && OperatedDaysOfWeek.Count > 0)
+			{
+				result.OperatedDaysOfWeek = new DaysOfWeekList();
+				OperatedDaysOfWeek.ForEach(dow => { result.OperatedDaysOfWeek.Add(dow); });
+			}
+
+			if (StopPoints != null && StopPoints.Count > 0)
+			{
+				result.StopPoints = new List<StopPoint>();
+
+				foreach (var stopPoint in StopPoints)
+				{
+					var point = new StopPoint();
+
+					point.AirportCode = stopPoint.AirportCode;
+					point.ArrDateTime = stopPoint.ArrDateTime;
+					point.CityCode = stopPoint.CityCode;
+					point.DepDateTime = stopPoint.DepDateTime;
+					point.Terminal = stopPoint.Terminal;
+					point.UTC = stopPoint.UTC;
+
+					result.StopPoints.Add(point);
+				}
+			}
+
+			return result;
 		}
 	}
 }

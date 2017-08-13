@@ -26,11 +26,14 @@ namespace GeneralEntities.PNRDataContent
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public string Currency { get; set; }
 
+		[DataMember(Order = 3, EmitDefaultValue = false)]
+		public bool IsFareCommission { get; set; }
+
 		/// <summary>
 		/// Генерирует строковое представление данного объекта
 		/// </summary>
 		/// <returns>Строкое представление объекта</returns>
-		public override string ToString()
+		public string ToString(bool currencyFirst = false)
 		{
 			if (Percent.HasValue)
 			{
@@ -38,12 +41,31 @@ namespace GeneralEntities.PNRDataContent
 			}
 			else if (Amount.HasValue)
 			{
-				return Amount.ToString() + Currency;
+				if (currencyFirst)
+				{
+					return Currency + " " + Amount.Value.ToString(Locale.UsCulture);
+				}
+				else
+				{
+					return Amount.ToString() + Currency;
+				}
 			}
-			else
-			{
-				return null;
-			}
+
+			return null;
+		}
+
+		public override bool Equals(object obj)
+		{
+			var anotherCommission = obj as CommissionDataItem;
+			return anotherCommission != null &&
+				Amount == anotherCommission.Amount &&
+				Currency == anotherCommission.Currency &&
+				Percent == anotherCommission.Percent;
+		}
+
+		public bool Equals(CommissionDataItem comm, bool checkFareCommProperty = true)
+		{
+			return Equals((object)comm) && (!checkFareCommProperty || IsFareCommission == comm.IsFareCommission);
 		}
 	}
 }

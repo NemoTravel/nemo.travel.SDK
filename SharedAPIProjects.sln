@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Express 14 for Web
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaServerAPI", "AviaServerAPI\AviaServerAPI.csproj", "{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AviaEntities", "AviaEntitites\AviaEntities.csproj", "{6D668428-1E33-48E0-806C-FB142FA740EA}"
@@ -10,21 +12,63 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		ghoust_IIS|Any CPU = ghoust_IIS|Any CPU
+		mlsd.ru|Any CPU = mlsd.ru|Any CPU
+		prod.backend.nemo.travel|Any CPU = prod.backend.nemo.travel|Any CPU
+		prod2.backend.nemo.travel|Any CPU = prod2.backend.nemo.travel|Any CPU
 		Release|Any CPU = Release|Any CPU
+		test.backend.nemo.travel|Any CPU = test.backend.nemo.travel|Any CPU
+		trunk|Any CPU = trunk|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.ghoust_IIS|Any CPU.ActiveCfg = Release|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.ghoust_IIS|Any CPU.Build.0 = Release|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.mlsd.ru|Any CPU.ActiveCfg = Release|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.mlsd.ru|Any CPU.Build.0 = Release|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.prod.backend.nemo.travel|Any CPU.ActiveCfg = Release|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.prod.backend.nemo.travel|Any CPU.Build.0 = Release|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.prod2.backend.nemo.travel|Any CPU.ActiveCfg = Release|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.prod2.backend.nemo.travel|Any CPU.Build.0 = Release|Any CPU
 		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D668428-1E33-48E0-806C-FB142FA740EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D668428-1E33-48E0-806C-FB142FA740EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D668428-1E33-48E0-806C-FB142FA740EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D668428-1E33-48E0-806C-FB142FA740EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.test.backend.nemo.travel|Any CPU.ActiveCfg = Release|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.test.backend.nemo.travel|Any CPU.Build.0 = Release|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.trunk|Any CPU.ActiveCfg = Release|Any CPU
+		{77E60C24-9DCF-4B73-ABFE-D32C3194D8BB}.trunk|Any CPU.Build.0 = Release|Any CPU
 		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.ghoust_IIS|Any CPU.ActiveCfg = ghoust_IIS|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.ghoust_IIS|Any CPU.Build.0 = ghoust_IIS|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.mlsd.ru|Any CPU.ActiveCfg = mlsd.ru|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.mlsd.ru|Any CPU.Build.0 = mlsd.ru|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.prod.backend.nemo.travel|Any CPU.ActiveCfg = prod.backend.nemo.travel|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.prod.backend.nemo.travel|Any CPU.Build.0 = prod.backend.nemo.travel|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.prod2.backend.nemo.travel|Any CPU.ActiveCfg = prod2.backend.nemo.travel|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.prod2.backend.nemo.travel|Any CPU.Build.0 = prod2.backend.nemo.travel|Any CPU
 		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.test.backend.nemo.travel|Any CPU.ActiveCfg = test.backend.nemo.travel|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.test.backend.nemo.travel|Any CPU.Build.0 = test.backend.nemo.travel|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.trunk|Any CPU.ActiveCfg = trunk|Any CPU
+		{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}.trunk|Any CPU.Build.0 = trunk|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.ghoust_IIS|Any CPU.ActiveCfg = ghoust_IIS|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.ghoust_IIS|Any CPU.Build.0 = ghoust_IIS|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.mlsd.ru|Any CPU.ActiveCfg = mlsd.ru|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.mlsd.ru|Any CPU.Build.0 = mlsd.ru|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.prod.backend.nemo.travel|Any CPU.ActiveCfg = prod.backend.nemo.travel|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.prod.backend.nemo.travel|Any CPU.Build.0 = prod.backend.nemo.travel|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.prod2.backend.nemo.travel|Any CPU.ActiveCfg = prod2.backend.nemo.travel|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.prod2.backend.nemo.travel|Any CPU.Build.0 = prod2.backend.nemo.travel|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.test.backend.nemo.travel|Any CPU.ActiveCfg = test.backend.nemo.travel|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.test.backend.nemo.travel|Any CPU.Build.0 = test.backend.nemo.travel|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.trunk|Any CPU.ActiveCfg = trunk|Any CPU
+		{6D668428-1E33-48E0-806C-FB142FA740EA}.trunk|Any CPU.Build.0 = trunk|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

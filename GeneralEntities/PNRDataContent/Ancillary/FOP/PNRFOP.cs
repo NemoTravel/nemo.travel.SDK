@@ -19,5 +19,11 @@ namespace GeneralEntities.PNRDataContent.FOP
 		/// </summary>
 		[DataMember(Order = 1, EmitDefaultValue = false)]
 		public string CreditCardNumber { get; set; }
+
+		/// <summary>
+		/// Номер ФОПа в ПНРе
+		/// </summary>
+		[DataMember(Order = 2, EmitDefaultValue = false)]
+		public string Number { get; set; }
 	}
 }

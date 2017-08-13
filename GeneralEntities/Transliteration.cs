@@ -122,7 +122,7 @@ namespace GeneralEntities
 		/// </summary>
 		/// <param name="orginal">Строка подлежащая транслитерации</param>
 		/// <returns>Строка являющаяся результатом транслитерации</returns>
-        public static string UARUStoENG(string orginal)
+		public static string UARUStoENG(string orginal)
 		{
 			//пробегаемся по словарю
 			foreach (var kvp in UARUStoENGDictionary)

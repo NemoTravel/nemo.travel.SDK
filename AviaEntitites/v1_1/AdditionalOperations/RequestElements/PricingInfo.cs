@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using GeneralEntities.Shared;
+using System.Runtime.Serialization;
 
 namespace AviaEntities.v1_1.AdditionalOperations.RequestElements
 {
@@ -13,5 +14,17 @@ namespace AviaEntities.v1_1.AdditionalOperations.RequestElements
 		/// </summary>
 		[DataMember(Order = 5, EmitDefaultValue = false)]
 		public bool IgnoreRepricingSettings { get; set; }
+
+		/// <summary>
+		/// Информация об ициниализаторе поиска в системе, приславшей запрос
+		/// </summary>
+		[DataMember(Order = 7, EmitDefaultValue = false)]
+		public TagList RequestorTags { get; set; }
+
+		/// <summary>
+		/// При репрайсинге использовать только конкретные коды типов пассажиров, по возможности
+		/// </summary>
+		[DataMember(Order = 7, EmitDefaultValue = false)]
+		public bool PriceSpecifiedPassTypesOnly { get; set; }
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using GeneralEntities.ExtendedDateTime;
 using GeneralEntities.Shared;
-using SharedAssembly;
 using System;
 using System.Runtime.Serialization;
 using System.Text;
@@ -19,6 +18,7 @@ namespace GeneralEntities.Traveller
 		/// <summary>
 		/// ИД пассажира в ПНРе поставщика
 		/// </summary>
+		[DataMember(Order = 0, EmitDefaultValue = false)]
 		public int IDInPNR { get; set; }
 
 		/// <summary>
@@ -86,6 +86,12 @@ namespace GeneralEntities.Traveller
 		[DataMember(Order = 9, EmitDefaultValue = false)]
 		public int? LinkedTo { get; set; }
 
+		/// <summary>
+		/// Признак инвалида
+		/// </summary>
+		[DataMember(Order = 10, EmitDefaultValue = false)]
+		public bool IsDisabled { get; set; }
+
 
 		#region ФИО с транслитерацией
 
@@ -136,55 +142,109 @@ namespace GeneralEntities.Traveller
 		/// </summary>
 		/// <param name="separator">Разделитель в ФИО</param>
 		/// <param name="transliterated">Включение транслитерации ФИО</param>
+		/// <param name="namePartsToMiddleName"></param>
 		/// <returns>ФИО данного пассажира</returns>
-		public string GetFullName(string separator = " ", bool transliterated = true)
+		public string GetFullName(string separator = " ", bool transliterated = true, bool namePartsToMiddleName = false)
 		{
-			var result = new StringBuilder();
+			var name = transliterated ? NameTL : Name;
+			var lastName = transliterated ? LastNameTL : LastName;
+			var middleName = transliterated ? MiddleNameTL : MiddleName;
 
-			if (transliterated)
+			if (namePartsToMiddleName && name.Split(' ').Length > 1)
 			{
-				result.Append(LastNameTL);
+				var nameParts = name.Split(' ');
+				name = nameParts[0];
 
-				result.Append(separator);
-				result.Append(NameTL);
-
-				if (!string.IsNullOrWhiteSpace(MiddleName))
+				var newMiddleName = new StringBuilder();
+				for (int i = 1; i < nameParts.Length; i++)
 				{
-					result.Append(separator);
-					result.Append(MiddleNameTL);
+					newMiddleName.Append(nameParts[i]);
+					newMiddleName.Append(' ');
 				}
-			}
-			else
-			{
-				result.Append(LastName.Trim());
-
-				result.Append(separator);
-				result.Append(Name.Trim());
-
-				if (!string.IsNullOrWhiteSpace(MiddleName))
-				{
-					result.Append(separator);
-					result.Append(MiddleName.Trim());
-				}
+				newMiddleName.Append(middleName);
+				middleName = newMiddleName.ToString().Trim();
 			}
 
+			return GetFullName(name, lastName, middleName, separator);
+		}
 
-			return result.ToString();
+		/// <summary>
+		/// Получение полного имени без фамилии для данной сущности
+		/// </summary>
+		/// <param name="separator">Разделитель в ИО</param>
+		/// <returns>ИО данного пассажира</returns>
+		public string GetFullFirstName(string separator = " ")
+		{
+			return GetFullName(NameTL, null, MiddleNameTL, separator);
+		}
+
+		/// <summary>
+		/// Получение отформатированной строки имени пассажира
+		/// <para>Опиcание формата:</para>
+		/// <para>%FN% Имя</para>
+		/// <para>%LN% Фамилия</para>
+		/// <para>%MN% Отчество</para>
+		/// <para>%PF% Префикс(титул)</para>
+		/// </summary>
+		/// <param name="format">Формат</param>
+		/// <param name="transliterated">Включение транслитерации ФИО</param>
+		/// <returns>Отформатированная строка имени пассжаира</returns>
+		public string GetFormattedName(string format, bool transliterated = true)
+		{
+			return format
+				.Replace("%FN%", transliterated ? NameTL : Name)
+				.Replace("%LN%", transliterated ? LastNameTL : LastName)
+				.Replace("%MN%", transliterated ? MiddleNameTL : MiddleName)
+				.Replace("%PF%", NamePrefix);
 		}
 
 		/// <summary>
 		/// Получение возраста пассажира на указанную дату
+		/// <para>null если не удалось определить</para>
 		/// </summary>
 		/// <param name="date">Дата, на момент которой требуется получить возраст пассажира</param>
-		/// <returns>Возраст пассажира. 0 если дата рождения не указана</returns>
-		public int GetAge(DateTime date)
+		/// <returns>Возвраст пассажира, null если не удалось определить</returns>
+		public int? GetAge(DateTime date)
 		{
 			if (DateOfBirth == null)
 			{
-				return 0;
+				return null;
 			}
 
 			return date.Year - DateOfBirth.Date.Year - (date.DayOfYear < DateOfBirth.Date.DayOfYear ? 1 : 0);
+		}
+
+		public string GetFullNameForDOCS()
+		{
+			return "/" + LastName + "/" + Name + (MiddleName != null ? "/" + MiddleName[0] : "");
+		}
+
+
+		private string GetFullName(string name, string lastName, string middleName, string separator)
+		{
+			var result = new StringBuilder();
+
+			if (!string.IsNullOrWhiteSpace(lastName))
+			{
+				result.Append(lastName.Trim());
+				result.Append(separator);
+			}
+
+			result.Append(name.Trim());
+
+			if (!string.IsNullOrWhiteSpace(middleName))
+			{
+				result.Append(separator);
+				result.Append(middleName.Trim());
+			}
+
+			if (!string.IsNullOrWhiteSpace(NamePrefix))
+			{
+				result.Append(separator);
+				result.Append(NamePrefix.Trim());
+			}
+
+			return result.ToString();
 		}
 	}
 }

@@ -1,5 +1,7 @@
-﻿using AviaEntities.SharedElements;
+﻿using AviaEntities.ModifyContent;
+using AviaEntities.SharedElements;
 using GeneralEntities.ModifyContent;
+using GeneralEntities.Shared;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.v2.BookModify
@@ -27,5 +29,17 @@ namespace AviaEntities.v2.BookModify
 		/// </summary>
 		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public ModifyPNRDataItemList DataItems { get; set; }
+
+		/// <summary>
+		/// Допуслуги
+		/// </summary>
+		[DataMember(Order = 4, EmitDefaultValue = false)]
+		public ModifyAncillaryServicesList AncillaryServices { get; set; }
+
+		/// <summary>
+		/// Теги для ЦО
+		/// </summary>
+		[DataMember(Order = 5, EmitDefaultValue = false)]
+		public TagList RequestorTags { get; set; }
 	}
 }

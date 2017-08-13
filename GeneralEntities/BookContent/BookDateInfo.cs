@@ -1,5 +1,4 @@
 ﻿using GeneralEntities.ExtendedDateTime;
-using SharedAssembly;
 using System.Runtime.Serialization;
 
 namespace GeneralEntities.BookContent
@@ -69,5 +68,17 @@ namespace GeneralEntities.BookContent
 		/// </summary>
 		[DataMember(Order = 9, EmitDefaultValue = false)]
 		public DateTimeEx Paid { get; set; }
+
+		/// <summary>
+		/// Дата и время разбиения брони
+		/// </summary>
+		[DataMember(Order = 10, EmitDefaultValue = false)]
+		public DateTimeEx Splited { get; set; }
+
+		/// <summary>
+		/// Дата и время снятия мест у выписанной брони
+		/// </summary>
+		[DataMember(Order = 11, EmitDefaultValue = false)]
+		public DateTimeEx SeatsReleased { get; set; }
 	}
 }

@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AviaEntities.SharedElements
 {
 	/// <summary>
-	/// Тело запроса получения карты мест
+	/// Тело для различных запросов, в которых передаётся только ИД перелета, над которым требуется выполнить операции
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
 	[Serializable]

@@ -21,5 +21,10 @@
 		/// Использование устаревшей версии АПИ, что приводит к неполноценной работе с системой
 		/// </summary>
 		public const ushort OLD_API_VERSION = 4;
+
+		/// <summary>
+		/// Некорректный конфиг в системе поставщика
+		/// </summary>
+		public const ushort SUPPLIER_CONFIG = 5;
 	}
 }

@@ -11,8 +11,8 @@ namespace AviaEntities.SeatMap.Elements
 		/// <summary>
 		/// Номер ряда
 		/// </summary>
-		[DataMember(IsRequired = false, Order = 0)]
-		public int Num { get; set; }
+		[DataMember(Name = "Num", IsRequired = false, Order = 0)]
+		public int Number { get; set; }
 
 		/// <summary>
 		/// Места в ряду
@@ -26,23 +26,12 @@ namespace AviaEntities.SeatMap.Elements
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public string Characteristics { get; set; }
 
-		/// <summary>
-		/// Полное копирование ряда
-		/// </summary>
-		/// <returns>Копия ряда</returns>
-		public SeatRow Clone()
+
+		public SeatRow()
 		{
-			SeatRow result = new SeatRow();
-			result.Num = Num;
-			result.Seats = new SeatList();
-
-			foreach (Seat seat in Seats)
-			{
-				result.Seats.Add(seat.Clone());
-			}
-
-			return result;
+			Seats = new SeatList();
 		}
+
 
 		/// <summary>
 		/// Получение места по его номеру
@@ -55,15 +44,10 @@ namespace AviaEntities.SeatMap.Elements
 
 			if (Seats != null)
 			{
-				result =  Seats.Find(seat => seat.Number == seatNum);
+				result = Seats.Find(seat => seat.Number == seatNum);
 			}
 
 			return result;
-		}
-
-		public SeatRow()
-		{
-			Seats = new SeatList();
 		}
 	}
 }

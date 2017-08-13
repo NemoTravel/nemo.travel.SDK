@@ -19,5 +19,17 @@ namespace AviaEntities.GetSearchResults
 		/// </summary>
 		[DataMember(Order = 0, EmitDefaultValue = false)]
 		public string FlightID { get; set; }
+
+		/// <summary>
+		/// Вернуть контент общения с поставщиком
+		/// </summary>
+		[DataMember(Order = 1, EmitDefaultValue = false)]
+		public bool RawData { get; set; }
+
+		/// <summary>
+		/// Содержит параметры, необходимые для корректной обработки запрошенных результатов
+		/// </summary>
+		[DataMember(Order = 2, EmitDefaultValue = false)]
+		public SearchContext SearchContext { get; set; }
 	}
 }

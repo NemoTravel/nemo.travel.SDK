@@ -1,9 +1,7 @@
 ﻿using GeneralEntities.ExtendedDateTime;
-using GeneralEntities.Market;
 using GeneralEntities.Shared;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.FlightSearch.ResponseElements
@@ -133,22 +131,6 @@ namespace AviaEntities.FlightSearch.ResponseElements
 					result.BookingClassInfo.Baggage = new Baggage();
 					result.BookingClassInfo.Baggage.Measure = BookingClassInfo.Baggage.Measure;
 					result.BookingClassInfo.Baggage.Value = BookingClassInfo.Baggage.Value;
-				}
-
-				if (BookingClassInfo.AdditionalServices != null)
-				{
-					result.BookingClassInfo.AdditionalServices = new List<AdditionalService>();
-					foreach (var addService in BookingClassInfo.AdditionalServices)
-					{
-						var tmp = new AdditionalService();
-
-						tmp.AircompanyCode = addService.AircompanyCode;
-						tmp.Price = new Money(addService.Price);
-						tmp.Code = addService.Code;
-						tmp.Name = addService.Name;
-
-						result.BookingClassInfo.AdditionalServices.Add(tmp);
-					}
 				}
 			}
 

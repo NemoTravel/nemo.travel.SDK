@@ -1,5 +1,21 @@
-﻿using AviaEntities.ImportBook;
+﻿using AviaEntities.DeleteFromQueue;
+using AviaEntities.Exchange;
+using AviaEntities.FlightRepricing;
+using AviaEntities.GetAirlineSchedule;
+using AviaEntities.GetBookHistory;
+using AviaEntities.GetCurrencyConversion;
+using AviaEntities.GetExchangeVariants;
+using AviaEntities.GetRoutingGrid;
+using AviaEntities.GetSupplierStatic;
+using AviaEntities.ImportBook;
+using AviaEntities.IssueEMD;
+using AviaEntities.ListQueue;
+using AviaEntities.RefundTicket;
 using AviaEntities.ScheduleSearch;
+using AviaEntities.SharedElements;
+using AviaEntities.SharedElements.Ancillaries.RequestElements;
+using AviaEntities.SplitBook;
+using AviaEntities.v1_1.RefundTicket;
 using GeneralEntities;
 using GeneralEntities.BookContent;
 using System;
@@ -10,103 +26,139 @@ namespace AviaServerAPI
 	{
 		#region АПИ версии 1.0
 
-		public Response<AviaEntities.RulesSearch.RulesSearchRSBody> GetFareRules(Request<AviaEntities.SharedElements.OnlyFlightIDElement> Request)
+		public Response<AviaEntities.RulesSearch.RulesSearchRSBody> GetFareRules(Request<OnlyFlightIDElement> Request)
 		{
 			//Place your code here
 			throw new NotImplementedException();
 		}
 
-		public Response<AviaEntities.AirAvail.AirAvailRSBody> CheckFlightAvailability(Request<AviaEntities.AirAvail.AirAvailRQBody> Request)
+		public Response<AviaEntities.SeatMap.SeatMapRSBody> GetSeatMap(Request<OnlyFlightIDElement> Request)
 		{
 			//Place your code here
 			throw new NotImplementedException();
 		}
 
-		public Response<AviaEntities.SeatMap.SeatMapRSBody> GetSeatMap(Request<AviaEntities.SharedElements.OnlyFlightIDElement> Request)
+		public Response<BookOperationResult> CancelBook(Request<OnlyBookIDElement> Request)
 		{
 			//Place your code here
 			throw new NotImplementedException();
 		}
 
-		public Response<AviaEntities.AdditionalServicesSearch.AdditionalServicesSearchRSBody> GetAdditionalServices(Request<AviaEntities.SharedElements.OnlyFlightIDElement> Request)
+		public Response<GetBookHistoryRSBody> GetBookHistory(Request<OnlyBookIDElement> Request)
 		{
 			//Place your code here
 			throw new NotImplementedException();
 		}
 
-		public Response<AviaEntities.SharedElements.BookOperationResult> CancelBook(Request<AviaEntities.SharedElements.OnlyBookIDElement> Request)
+		public Response<BookOperationResult> VoidTicket(Request<OnlyBookIDElement> Request)
 		{
 			//Place your code here
 			throw new NotImplementedException();
 		}
 
-		public Response<AviaEntities.GetBookHistory.GetBookHistoryRSBody> GetBookHistory(Request<AviaEntities.SharedElements.OnlyBookIDElement> Request)
+		public Response<GetCurrencyConversionRSBody> GetCurrencyConversion(Request<GetCurrencyConversionRQBody> Request)
 		{
 			//Place your code here
 			throw new NotImplementedException();
 		}
 
-		public Response<AviaEntities.SharedElements.BookOperationResult> VoidTicket(Request<AviaEntities.SharedElements.OnlyBookIDElement> Request)
+		public Response<Book> GetBook(Request<OnlyBookIDElement> Request)
 		{
 			//Place your code here
 			throw new NotImplementedException();
 		}
 
-		public Response<AviaEntities.RefundTicket.RefundTicketRSBody> RefundTicket(Request<AviaEntities.RefundTicket.RefundTicketRQBody> Request)
-		{
-			//Place your code here
-			throw new NotImplementedException();
-		}
-
-		public Response<AviaEntities.ServerCommand.ServerCommandRSBody> HostCommand(Request<AviaEntities.ServerCommand.ServerCommandRQBody> Request)
-		{
-			//Place your code here
-			throw new NotImplementedException();
-		}
-
-		public Response<AviaEntities.OpenSession.OpenSessionRSBody> OpenSession(Request<AviaEntities.OpenSession.OpenSessionRQBody> Request)
-		{
-			//Place your code here
-			throw new NotImplementedException();
-		}
-
-		public Response<AviaEntities.CloseSession.CloseSessionRSBody> CloseSession(Request<AviaEntities.CloseSession.CloseSessionRQBody> Request)
-		{
-			//Place your code here
-			throw new NotImplementedException();
-		}
-
-		public Response<AviaEntities.GetAllowedCC.GetAllowedCCRSBody> GetAllowedCC(Request<AviaEntities.SharedElements.OnlyBookIDElement> Request)
-		{
-			//Place your code here
-			throw new NotImplementedException();
-		}
-
-		public Response<AviaEntities.GetCurrencyConversion.GetCurrencyConversionRSBody> GetCurrencyConversion(Request<AviaEntities.GetCurrencyConversion.GetCurrencyConversionRQBody> Request)
-		{
-			//Place your code here
-			throw new NotImplementedException();
-		}
-
-		public Response<Book> GetBook(Request<AviaEntities.SharedElements.OnlyBookIDElement> Request)
-		{
-			//Place your code here
-			throw new NotImplementedException();
-		}
-
-		public Response<AviaEntities.v1_2.SearchFlights.SearchFlightsRSBody> GetSearchResults(Request<AviaEntities.GetSearchResults.GetSearchResultsRQBody> Request)
-		{
-			//Place your code here
-			throw new NotImplementedException();
-		}
-
-		public Response<AviaEntities.GetSupplierStatic.GetSupplierStaticRSBody> GetSupplierStatic(Request<AviaEntities.GetSupplierStatic.GetSupplierStaticRQBody> Request)
+		public Response<GetSupplierStaticRSBody> GetSupplierStatic(Request<AviaEntities.GetSupplierStatic.GetSupplierStaticRQBody> Request)
 		{
 			//Place your code here
 			throw new NotImplementedException();
 		}
 
 		public Response<ScheduleSearchRSBody> ScheduleSearch(Request<ScheduleSearchRQBody> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<ListQueueRSBody> ListQueue(Request<ListQueueRQBody> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<object> DeleteFromQueue(Request<DeleteFromQueueRQBody> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<GetRoutingGridRSBody> GetRoutingGrid(Request<GetRoutingGridRQBody> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<FlightRepricingRSBody> FlightRepricing(Request<FlightRepricingRQBody> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<Book> ReleaseSeat(Request<OnlyBookIDElement> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<Book> SplitBook(Request<SplitBookRQBody> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<GetExchangeVariantsRSBody> GetExchangeVariants(Request<GetExchangeVariantsRQBody> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<ExchangeTicketRSBody> ExchangeTicket(Request<ExchangeTicketRQBody> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<Book> CompleteEMDProcessing(Request<OnlyBookIDElement> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<Book> IssueEMD(Request<IssueEMDRQBody> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<Book> VoidEMD(Request<CommonAncillaryServiceRQ> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<RefundEDRSBody> GetEMDRefundData(Request<CommonAncillaryServiceRQ> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<RefundEDRSBody> RefundEMD(Request<CommonAncillaryServiceRQ> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<GetAirlineScheduleRSBody> GetAirlineSchedule(Request<GetAirlineScheduleRQBody> Request)
 		{
 			//Place your code here
 			throw new NotImplementedException();
@@ -123,6 +175,18 @@ namespace AviaServerAPI
 		}
 
 		public Response<AviaEntities.v1_1.AdditionalOperations.AdditionalOperationsRSBody> AdditionalOperations_1_1(Request<AviaEntities.v1_1.AdditionalOperations.AdditionalOperationsRQBody> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<RefundEDRSBody> GetRefundData_1_1(Request<RefundTicketRQBody> Request)
+		{
+			//Place your code here
+			throw new NotImplementedException();
+		}
+
+		public Response<RefundEDRSBody> RefundTicket_1_1(Request<RefundTicketRQBody> Request)
 		{
 			//Place your code here
 			throw new NotImplementedException();
