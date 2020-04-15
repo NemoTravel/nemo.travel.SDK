@@ -1,6 +1,6 @@
 ﻿using GeneralEntities.Market;
 using System.Collections.Generic;
-using GeneralEntities.Services.Hotels.Entities;
+using System.Linq;
 
 namespace GeneralEntities.BookContent.Entities.GroupElements
 {
@@ -10,10 +10,17 @@ namespace GeneralEntities.BookContent.Entities.GroupElements
 
 		public string SupplierId;
 
+		/// <summary>
+		/// Нужно в случае, если для проверки доступности и бронирования поставщик отдает разные Id.
+		/// Сейчас используется у островка
+		/// </summary>
+		public string AvailabilityCheckId;
+
 		public Money Price;
 
 		/// <summary>
-		/// Нужен для Трэвелпорта при получении доп.информации о тарифах
+		/// Нужен для некоторых поставщиков при получении доп.информации о тарифах и подтверждении заказа.
+		/// Сейчас используется у тревелпорта, натекнии.
 		/// </summary>
 		public Money BasePrice;
 
@@ -57,5 +64,45 @@ namespace GeneralEntities.BookContent.Entities.GroupElements
 		public bool GuestCitizenshipRequired = false;
 
 		public HotelProductAvailability Availability;
+
+		public VATInfo VATInfo;
+
+		public System.DateTime? AgencyTimeLimit;
+
+		public int? FreeCount;
+
+		public RoomRateGroupElement Copy()
+		{
+			return new RoomRateGroupElement()
+			{
+				Id = Id,
+				SupplierId = SupplierId,
+				AvailabilityCheckId = AvailabilityCheckId,
+				Price = Price?.Copy(),
+				BasePrice = BasePrice?.Copy(),
+				IsSpecialOffer = IsSpecialOffer,
+				VisaSupportProvided = VisaSupportProvided,
+				BookingRemarks = BookingRemarks,
+				IsMinPrice = IsMinPrice,
+				IsNonRefundable = IsNonRefundable,
+				CancellationRuleIds = CancellationRuleIds?.ToList(),
+				Provider = Provider,
+				PaymentType = PaymentType,
+				HoldTimeLimit = HoldTimeLimit,
+				IsApproximatePrice = IsApproximatePrice,
+				DiscountID = DiscountID,
+				PriceAtDay = PriceAtDay,
+				NeedAdditionalRequest = NeedAdditionalRequest,
+				AdditionalInformation = AdditionalInformation?.ToDictionary(info => info.Key, info => info.Value.ToList()),
+				Allotment = Allotment,
+				CheckInTime = CheckInTime,
+				CheckOutTime = CheckOutTime,
+				GuestCitizenshipRequired = GuestCitizenshipRequired,
+				Availability = Availability,
+				VATInfo = VATInfo?.Copy(),
+				AgencyTimeLimit = AgencyTimeLimit,
+				FreeCount = FreeCount
+			};
+		}
 	}
 }

@@ -435,22 +435,34 @@ namespace AviaEntities
 		GetSubsidizedTariffs = 10
 	}
 
+	/// <summary>
+	/// Тип ЭМД
+	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
-	public enum AviaMixerPriceCondition
+	public enum EMDType
+	{
+		/// <summary>
+		/// A - associated
+		/// </summary>
+		[EnumMember]
+		A = 0,
+		/// <summary>
+		/// S - standalone
+		/// </summary>
+		[EnumMember]
+		S = 1
+	}
+
+	[DataContract(Namespace = "http://nemo.travel/Avia")]
+	public enum AvailabilityType
 	{
 		[EnumMember]
-		MinimalNet,
+		Included,
 		[EnumMember]
-		MinimalPrice,
+		AtCharge,
 		[EnumMember]
-		MaximalPrice,
+		NotOffered,
 		[EnumMember]
-		MaximalAgencyMarkup,
-		[EnumMember]
-		MaximalAirlineCommission,
-		[EnumMember]
-		MaximalProfit,
-		[EnumMember]
-		Ignore
+		DisplayedNotOffered
 	}
 }

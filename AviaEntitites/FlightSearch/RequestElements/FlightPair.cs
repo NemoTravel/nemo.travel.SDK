@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace AviaEntities.FlightSearch.RequestElements
 {
@@ -7,7 +6,7 @@ namespace AviaEntities.FlightSearch.RequestElements
 	/// Содержит информацию о запрашиваемом сегменте перелёта
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
-	public class FlightPair : ICloneable
+	public class FlightPair
 	{
 		/// <summary>
 		/// Дата и время отправления в формате yyyy-MM-ddTHH:mm:ss
@@ -34,10 +33,10 @@ namespace AviaEntities.FlightSearch.RequestElements
 		public string ArrAirp { get; set; }
 
 		/// <summary>
-		/// Выполняет полное копирование объекта, реализация интерфейса ICloneable
+		/// Выполняет полное копирование объекта
 		/// </summary>
 		/// <returns>Результат копирования</returns>
-		public object Clone()
+		public FlightPair Copy()
 		{
 			var newFlp = new FlightPair();
 
@@ -47,15 +46,6 @@ namespace AviaEntities.FlightSearch.RequestElements
 			newFlp.MaxDepatureTime = MaxDepatureTime;
 
 			return newFlp;
-		}
-
-		/// <summary>
-		/// Обёртка над интерфейсным Clone() с приведением результата к нужному типу
-		/// </summary>
-		/// <returns>Результат копирования, приведённый к типу данного класса</returns>
-		public FlightPair FullCopy()
-		{
-			return (FlightPair)Clone();
 		}
 	}
 }

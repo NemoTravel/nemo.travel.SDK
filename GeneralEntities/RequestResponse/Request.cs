@@ -12,21 +12,21 @@ namespace GeneralEntities
 		/// <summary>
 		/// Реквизиты доступа
 		/// </summary>
-		[DataMember(IsRequired = true, Order = 0)]
+		[DataMember(Order = 0, IsRequired = true)]
 		public RequestRequisites Requisites { get; set; }
 
 		/// <summary>
 		/// ИД юзера, выполняющего запрос
 		/// </summary>
-		[DataMember(IsRequired = true, Order = 1)]
+		[DataMember(Order = 1, IsRequired = true)]
 		public int UserID { get; set; }
 
 		/// <summary>
 		/// Тип инициализации запроса
 		/// </summary>
-		[DataMember(IsRequired = false, Order = 2)]
+		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public RequestTypes RequestType { get; set; }
-	}
+ 	}
 
 	/// <summary>
 	/// Базовый класс для запросов к серверам (кроме роутинг-сервера) с универсальным типом тела

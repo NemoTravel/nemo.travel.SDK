@@ -56,9 +56,23 @@ namespace AviaEntities.SharedElements.Ancillaries
 		public string SSRDescription { get; set; }
 
 		/// <summary>
-		/// Некий тип допуслуги (специфика Сирены)
+		/// Некий тип допуслуги
 		/// </summary>
 		[DataMember(Order = 8)]
 		public string Type { get; set; }
+
+
+		protected void CopyTo(BaseAncillaryService target)
+		{
+			target.ID = ID;
+			target.Name = Name;
+			target.Group = Group;
+			target.SubGroup = SubGroup;
+			target.RFIC = RFIC;
+			target.RFISC = RFISC;
+			target.SSRCode = SSRCode;
+			target.SSRDescription = SSRDescription;
+			target.Type = Type;
+		}
 	}
 }

@@ -84,5 +84,29 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 		/// </summary>
 		[DataMember(Order = 17, EmitDefaultValue = false)]
 		public int? RequestedSegment { get; set; }
+
+		/// <summary>
+		/// Номер рейса а/к выполняющей рейс
+		/// </summary>
+		[DataMember(Order = 18, EmitDefaultValue = false)]
+		public string OpFlightNumber { get; set; }
+
+		/// <summary>
+		/// Выброс CO2 в кг/км
+		/// </summary>
+		[DataMember(Order = 19, EmitDefaultValue = false)]
+		public double CO2Emission { get; set; }
+
+		/// <summary>
+		/// Длина пути в милях
+		/// </summary>
+		[DataMember(Order = 20, EmitDefaultValue = false)]
+		public double FlightDistance { get; set; }
+
+		/// <summary>
+		/// Индикатор наземного сегмента
+		/// </summary>
+		[DataMember(Order = 22, EmitDefaultValue = false)]
+		public bool NotAirplaneSegmentInd { get; set; }
 	}
 }

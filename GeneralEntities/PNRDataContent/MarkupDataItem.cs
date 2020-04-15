@@ -20,5 +20,15 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 1, EmitDefaultValue = false)]
 		public VATData VAT { get; set; }
+
+		public MarkupDataItem Copy()
+		{
+			var result = new MarkupDataItem();
+
+			result.MarkupValue = MarkupValue?.Copy();
+			result.VAT = VAT?.Copy();
+
+			return result;
+		}
 	}
 }

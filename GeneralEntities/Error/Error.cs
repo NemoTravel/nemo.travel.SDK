@@ -42,6 +42,12 @@ namespace GeneralEntities.Error
 		[DataMember(Order = 4, EmitDefaultValue = false)]
 		public AdditionalErrorInfo AdditionalInfo { get; set; }
 
+		/// <summary>
+		/// Стэктрейс из исключения, на основе которого была сгенерированна данная ошибка. Используется для статистики
+		/// </summary>
+		[IgnoreDataMember]
+		public string StackTrace { get; set; }
+
 		public Error()
 		{
 		}

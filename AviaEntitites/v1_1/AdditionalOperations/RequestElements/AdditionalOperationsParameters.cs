@@ -1,4 +1,8 @@
-﻿using System.Runtime.Serialization;
+﻿using AviaEntities.v1_2.AdditionalOperations.RequestElements;
+using AviaEntities.v1_2.SharedElements.Ancillaries.RequestElements;
+using GeneralEntities;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace AviaEntities.v1_1.AdditionalOperations.RequestElements
 {
@@ -28,5 +32,41 @@ namespace AviaEntities.v1_1.AdditionalOperations.RequestElements
 
 		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public bool ListFaresIfNoFamiliesDifined { get; set; }
+
+		/// <summary>
+		/// Язык, на котором требуется получить УПТ
+		/// </summary>
+		[DataMember(Order = 4, EmitDefaultValue = false)]
+		public Language? Language { get; set; }
+
+		/// <summary>
+		/// Уже выбранные доп. услуги. (Необходимо при поиске доп. услуг в сирене для определения стоимости 2ой и следующих сумок багажа)
+		/// </summary>
+		[DataMember(Order = 5, EmitDefaultValue = false)]
+		public SelectedAncillaryServicesList SelectedAncillaryServices { get; set; }
+
+
+		public AdditionalOperationsParameters DeepCopy()
+		{
+			var result = new AdditionalOperationsParameters();
+
+			result.CheckAvailabilityWithBookingRequest = CheckAvailabilityWithBookingRequest;
+			result.UpdateCachedFareRules = UpdateCachedFareRules;
+			result.ListFaresIfNoFamiliesDifined = ListFaresIfNoFamiliesDifined;
+			result.Language = Language;
+
+			if (PricingInfo != null)
+			{
+				result.PricingInfo = new PricingInfo();
+				PricingInfo.CopyTo(result.PricingInfo);
+			}
+
+			if (SelectedAncillaryServices != null)
+			{
+				result.SelectedAncillaryServices = new SelectedAncillaryServicesList(SelectedAncillaryServices.Select(svc => svc.DeepCopy()));
+			}
+
+			return result;
+		}
 	}
 }

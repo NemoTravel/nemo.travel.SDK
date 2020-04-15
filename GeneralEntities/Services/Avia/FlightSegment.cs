@@ -13,8 +13,8 @@ namespace GeneralEntities.Services.Avia
 		/// <summary>
 		/// ИД сегмента в ПНРе поставщика
 		/// </summary>
-		[IgnoreDataMember]
-		public int IDInPNR { get; set; }
+		[DataMember(Order = 0, EmitDefaultValue = false)]
+		public string IDInPNR { get; set; }
 
 		/// <summary>
 		/// Аэропорт отправления
@@ -117,5 +117,39 @@ namespace GeneralEntities.Services.Avia
 		/// </summary>
 		[DataMember(Order = 17, EmitDefaultValue = false)]
 		public int? RequestedSegment { get; set; }
+
+		/// <summary>
+		/// Номер рейса а/к выполняющей рейс
+		/// </summary>
+		[DataMember(Order = 18, EmitDefaultValue = false)]
+		public string OperatingFlightNumber { get; set; }
+
+		/// Выброс CO2 в кг/км
+		/// </summary>
+		[DataMember(Order = 19, EmitDefaultValue = false)]
+		public double CO2Emission { get; set; }
+
+		/// <summary>
+		/// Длина пути в милях
+		/// </summary>
+		[DataMember(Order = 20, EmitDefaultValue = false)]
+		public double FlightDistance { get; set; }
+
+		/// Имя типа самолета. Специфика Фейрлоджикса
+		/// </summary>
+		[DataMember(Order = 21, EmitDefaultValue = false)]
+		public string AircraftName { get; set; }
+
+		/// <summary>
+		/// Статус купона
+		/// </summary>
+		[DataMember(Order = 22, EmitDefaultValue = false)]
+		public CouponStatus? CouponStatus { get; set; }
+
+		/// <summary>
+		/// Индикатор наземного сегмента
+		/// </summary>
+		[DataMember(Order = 23, EmitDefaultValue = false)]
+		public bool NotAirplaneSegmentInd { get; set; }
 	}
 }

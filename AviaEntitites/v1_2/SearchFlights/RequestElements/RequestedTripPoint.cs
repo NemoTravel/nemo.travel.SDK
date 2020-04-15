@@ -19,5 +19,13 @@ namespace AviaEntities.v1_2.SearchFlights.RequestElements
 		/// </summary>
 		[DataMember(Order = 1, EmitDefaultValue = false)]
 		public bool IsCity { get; set; }
+
+		public RequestedTripPoint FullCopy()
+		{
+			var result = new RequestedTripPoint();
+			result.Code = Code;
+			result.IsCity = IsCity;
+			return result;
+		}
 	}
 }

@@ -59,6 +59,11 @@ namespace AviaEntities.GroupSearch.ResponseElements
 		[DataMember(Order = 8, EmitDefaultValue = false)]
 		public int? FlightTime { get; set; }
 
+		/// <summary>
+		/// Номер рейса а/к выполняющей рейс
+		/// </summary>
+		[DataMember(Order = 9, EmitDefaultValue = false)]
+		public string OperatingFlightNumber { get; set; }
 
 		/// <summary>
 		/// Пустой конструктор, нужен в том числе для сериализации объекта
@@ -75,6 +80,7 @@ namespace AviaEntities.GroupSearch.ResponseElements
 			ItineraryID = itineraryID;
 			OperatingCompany = segment.OpAirline;
 			MarketingCompany = segment.MarkAirline;
+			OperatingFlightNumber = segment.OpFlightNumber;
 			FlightNumber = segment.FlightNumber;
 			AircraftType = segment.AircraftType;
 			DepatureDateTime = segment.DepDateTime;

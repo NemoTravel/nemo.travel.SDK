@@ -23,5 +23,8 @@ namespace AviaEntities.GetSearchResults
 
 		[DataMember(Order = 5)]
 		public string Response { get; set; }
+
+		[DataMember(Order = 6, EmitDefaultValue = false)]
+		public string InternalRequestData { get; set; }
 	}
 }

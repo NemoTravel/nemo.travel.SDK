@@ -26,10 +26,13 @@ namespace AviaEntities.GetSearchResults
 		[DataMember(Order = 1, EmitDefaultValue = false)]
 		public bool RawData { get; set; }
 
+		[DataMember(Order = 2, EmitDefaultValue = false)]
+		public bool ReturnPropagationLog { get; set; }
+
 		/// <summary>
 		/// Содержит параметры, необходимые для корректной обработки запрошенных результатов
 		/// </summary>
-		[DataMember(Order = 2, EmitDefaultValue = false)]
+		[DataMember(Order = 4, EmitDefaultValue = false)]
 		public SearchContext SearchContext { get; set; }
 	}
 }

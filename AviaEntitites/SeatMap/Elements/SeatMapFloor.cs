@@ -15,21 +15,29 @@ namespace AviaEntities.SeatMap.Elements
 		public bool IsUpper { get; set; }
 
 		/// <summary>
-		/// Схема ряда с параметрами по умолчанию
-		/// </summary>
-		[DataMember(Order = 1, EmitDefaultValue = false)]
-		public SeatRow DefaultRow { get; set; }
-
-		/// <summary>
 		/// Ряды мест
 		/// </summary>
-		[DataMember(IsRequired = true, Order = 2, EmitDefaultValue = false)]
+		[DataMember(IsRequired = true, Order = 1, EmitDefaultValue = false)]
 		public SeatRowList SeatRows { get; set; }
 
 
 		public SeatMapFloor()
 		{
 			SeatRows = new SeatRowList();
+		}
+
+		public SeatMapFloor DeepCopy()
+		{
+			var result = new SeatMapFloor();
+
+			result.IsUpper = IsUpper;
+
+			foreach (var seatRow in SeatRows)
+			{
+				result.SeatRows.Add(seatRow.DeepCopy());
+			}
+
+			return result;
 		}
 	}
 }

@@ -39,5 +39,27 @@ namespace GeneralEntities.PNRDataContent
 				}
 			}
 		}
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as DiscountDocumentDataItem;
+			if (other == null)
+			{
+				return false;
+			}
+
+			return Type == other.Type && Number == other.Number && Equals(ElapsedTime, other.ElapsedTime);
+		}
+
+		public DiscountDocumentDataItem Copy()
+		{
+			var result = new DiscountDocumentDataItem();
+
+			result.Type = Type;
+			result.Number = Number;
+			result.ElapsedTime = ElapsedTime?.Copy();
+
+			return result;
+		}
 	}
 }

@@ -15,7 +15,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
 	[Serializable]
-	public class Price : ItemIdentification<long>, ICloneable
+	public class Price : ItemIdentification<long>
 	{
 		protected DateTimeEx ticketTimeLimit;
 
@@ -79,7 +79,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 				if (PassengerFares != null && PassengerFares.Count > 0)
 				{
 					var result = PassengerFares[0].TotalFare * PassengerFares[0].Quantity;
-					for (int i = 1; i < PassengerFares.Count;i++ )
+					for (int i = 1; i < PassengerFares.Count; i++)
 					{
 						result += (PassengerFares[i].TotalFare * PassengerFares[i].Quantity);
 					}
@@ -125,7 +125,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		/// Выполняет полное копирование объекта, реализация интерфейса ICloneable
 		/// </summary>
 		/// <returns>Результат копирования</returns>
-		public object Clone()
+		public Price Copy()
 		{
 			Price result = new Price();
 
@@ -146,7 +146,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 
 			foreach (var pass in PassengerFares)
 			{
-				result.PassengerFares.Add((PassengerFare)pass.Clone());
+				result.PassengerFares.Add(pass.Copy());
 			}
 
 			return result;

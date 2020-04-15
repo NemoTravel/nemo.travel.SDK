@@ -8,5 +8,14 @@ namespace GeneralEntities.PNRDataContent
 	{
 		[DataMember(Order = 0, IsRequired = true)]
 		public Money CashValue { get; set; }
+
+		public CashValueForMultiFOPProxingDataItem Copy()
+		{
+			var result = new CashValueForMultiFOPProxingDataItem();
+
+			result.CashValue = CashValue?.Copy();
+
+			return result;
+		}
 	}
 }

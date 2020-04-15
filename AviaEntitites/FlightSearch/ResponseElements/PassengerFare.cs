@@ -14,7 +14,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
 	[Serializable]
-	public class PassengerFare : ICloneable
+	public class PassengerFare
 	{
 		/// <summary>
 		/// Сиреновская специфическая информация, необходимая для поиска тарифных правил
@@ -91,7 +91,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		/// Полное копирование объекта
 		/// </summary>
 		/// <returns>Копия объекта</returns>
-		public object Clone()
+		public PassengerFare Copy()
 		{
 			var result = new PassengerFare();
 
@@ -125,7 +125,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 				result.Tariffs = new List<Tariff>();
 				foreach (var oldTarif in Tariffs)
 				{
-					result.Tariffs.Add(oldTarif.FullCopy());
+					result.Tariffs.Add(oldTarif.Copy());
 				}
 			}
 

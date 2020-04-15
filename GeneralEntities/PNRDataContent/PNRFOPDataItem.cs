@@ -14,5 +14,18 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 0, IsRequired = true)]
 		public PNRFOPList FOPs { get; set; }
+
+		public PNRFOPDataItem Copy()
+		{
+			var result = new PNRFOPDataItem();
+
+			if (FOPs != null)
+			{
+				result.FOPs = new PNRFOPList();
+				FOPs.ForEach(fop => result.FOPs.Add(fop.Copy()));
+			}
+
+			return result;
+		}
 	}
 }

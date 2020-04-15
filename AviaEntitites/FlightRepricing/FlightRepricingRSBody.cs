@@ -1,4 +1,5 @@
 ﻿using AviaEntities.v1_1.FlightSearch.ResponseElements;
+using GeneralEntities.PriceContent;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.FlightRepricing
@@ -13,6 +14,12 @@ namespace AviaEntities.FlightRepricing
 		public FlightList BaggageDowngrade { get; set; }
 
 		[DataMember(Order = 2, EmitDefaultValue = false)]
+		public SubsidyInformationList SubsidiesInformation { get; set; }
+
+		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public RepricingLog Log { get; set; }
+
+		[DataMember(Order = 4)]
+		public bool ResultsFiltersApplied { get; set; }
 	}
 }

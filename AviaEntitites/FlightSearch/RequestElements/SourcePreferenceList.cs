@@ -9,5 +9,11 @@ namespace AviaEntities.FlightSearch.RequestElements
 	[CollectionDataContract(Namespace = "http://nemo-ibe.com/Avia", Name = "SourcePreference", ItemName = "Source")]
 	public class SourcePreferenceList : List<int>
 	{
+		public SourcePreferenceList()
+		{ }
+
+		public SourcePreferenceList(IEnumerable<int> arg)
+			: base(arg)
+		{ }
 	}
 }

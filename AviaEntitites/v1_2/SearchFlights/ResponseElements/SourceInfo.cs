@@ -1,16 +1,21 @@
 ﻿using GeneralEntities;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.v1_2.SearchFlights.ResponseElements
 {
-	[CollectionDataContract(Namespace = "http://nemo-ibe.com/Avia", ItemName = "SourceInfo", KeyName = "ID", ValueName = "Supplier")]
-	public class SourceInfo : Dictionary<int, AviaSuppliers>
+	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
+	public class SourceInfo
 	{
-		public SourceInfo()
-		{ }
+		[DataMember(Order = 0, IsRequired = true)]
+		public int ID { get; set; }
 
-		public SourceInfo(Dictionary<int, AviaSuppliers> arg) : base(arg)
-		{ }
+		[DataMember(Order = 1, IsRequired = true)]
+		public AviaSuppliers Supplier { get; set; }
+
+		[DataMember(Order = 2, EmitDefaultValue = false)]
+		public string DefaultTicketingRequisiteID { get; set; }
+
+		[DataMember(Order = 3, EmitDefaultValue = false)]
+		public RequisiteConfigList CustomTicketingRequisites { get; set; }
 	}
 }

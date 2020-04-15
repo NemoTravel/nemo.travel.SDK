@@ -27,5 +27,29 @@ namespace AviaEntities.v1_1.AdditionalOperations
 		/// </summary>
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public AdditionalOperationsParameters OperationsRestrictions { get; set; }
+
+		public AdditionalOperationsRQBody Clone()
+		{
+			var result = new AdditionalOperationsRQBody();
+
+			if (ObjectForOperations != null)
+			{
+				result.ObjectForOperations = new ObjectForOperations();
+				result.ObjectForOperations.BookID = ObjectForOperations.BookID;
+				result.ObjectForOperations.FlightID = ObjectForOperations.FlightID;
+			}
+
+			if (Operations != null)
+			{
+				result.Operations = new OperationList(Operations);
+			}
+
+			if (OperationsRestrictions != null)
+			{
+				result.OperationsRestrictions = OperationsRestrictions.DeepCopy();
+			}
+
+			return result;
+		}
 	}
 }

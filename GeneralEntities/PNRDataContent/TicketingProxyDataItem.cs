@@ -19,5 +19,15 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 1, IsRequired = true)]
 		public string ProxingParams { get; set; }
+
+		public TicketingProxyDataItem Copy()
+		{
+			var result = new TicketingProxyDataItem();
+
+			result.Gateway = Gateway;
+			result.ProxingParams = ProxingParams;
+
+			return result;
+		}
 	}
 }

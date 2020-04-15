@@ -44,14 +44,12 @@ namespace AviaEntities.ScheduleSearch
 			result.RequestedFlightInfo.ODPair = RequestedFlightInfo.ODPair.FullCopy();
 
 			result.RequestedFlightInfo.Direct = RequestedFlightInfo.Direct;
-			result.RequestedFlightInfo.Type = RequestedFlightInfo.Type;
 			result.RequestedFlightInfo.SubType = RequestedFlightInfo.SubType;
 
 			if (Restrictions != null)
 			{
 				result.Restrictions = new v1_2.SearchFlights.RequestElements.AdditionalSearchInfo();
 				result.Restrictions.ClassPreference = Restrictions.ClassPreference;
-				result.Restrictions.CurrencyCode = Restrictions.CurrencyCode;
 				result.Restrictions.PrivateFaresOnly = Restrictions.PrivateFaresOnly;
 				result.Restrictions.SourcePreference = Restrictions.SourcePreference;
 				result.Restrictions.MaxConnectionTime = Restrictions.MaxConnectionTime;

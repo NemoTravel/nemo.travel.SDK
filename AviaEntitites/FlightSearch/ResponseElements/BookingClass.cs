@@ -15,8 +15,8 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		/// <summary>
 		/// Базовый класс перелёта
 		/// </summary>
-		[DataMember(Order = 0, EmitDefaultValue = false)]
-		public BaseClass? BaseClass { get; set; }
+		[DataMember(Order = 0)]
+		public BaseClass BaseClass { get; set; }
 
 		/// <summary>
 		/// Класс перелёта
@@ -54,7 +54,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		/// <param name="bookingClassCode">Класс перелёта</param>
 		/// <param name="baseClass">Базовый класс перелёта</param>
 		/// <param name="baggage">Допустимая мера багажа для данного класса перелёта</param>
-		public BookingClass(string bookingClassCode, BaseClass? baseClass = null, int freeSeatCount = -1, string mealType = null, Baggage baggage = null)
+		public BookingClass(string bookingClassCode, BaseClass baseClass = BaseClass.Other, int freeSeatCount = -1, string mealType = null, Baggage baggage = null)
 		{
 			BookingClassCode = bookingClassCode;
 			BaseClass = baseClass;

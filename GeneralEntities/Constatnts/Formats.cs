@@ -35,6 +35,13 @@
 		/// </summary>
 		public const string RAIL_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
+		public const string DATE_TIME_ANOTHER_FORMAT = "dd.MM.yyyy HH:mm:ss";
+
+		/// <summary>
+		/// Формат времени - "HH:mm"
+		/// </summary>
+		public const string TIME_HOURS_MINS = "HH:mm";
+
 		/// <summary>
 		/// Формат даты для паспортных строк EDIFACT - "ddMMMyyyy"
 		/// </summary>
@@ -49,5 +56,10 @@
 		/// Формат цены - "F"
 		/// </summary>
 		public const string PRICE_FORMAT = "F";
+
+		/// <summary>
+		/// Формат даты истечение ФОПа кредитной карты
+		/// </summary>
+		public const string CC_FOP_EXPIRE_DATE_FORMAT = "MM.yyyy";
 	}
 }

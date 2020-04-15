@@ -8,7 +8,7 @@ namespace AviaEntities.GetAirlineSchedule.ResponseElements
 	{
 		public ScheduleFlightsCollection() : base() { }
 
-		public ScheduleFlightsCollection(int capasity) : base(capasity) { }
+		public ScheduleFlightsCollection(int capacity) : base(capacity) { }
 
 		public ScheduleFlightsCollection(IEnumerable<ScheduleFlight> collection) : base(collection) { }
 	}

@@ -43,5 +43,35 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 5, EmitDefaultValue = false)]
 		public string TicketingIATAValidator { get; set; }
+
+		[DataMember(Order = 9, EmitDefaultValue = false)]
+		public bool IsSirenaAviaPlus { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as SourceInfoDataItem;
+			if (other == null)
+			{
+				return false;
+			}
+
+			return ID == other.ID && BookingSupplierAgencyID == other.BookingSupplierAgencyID && TicketingSupplierAgencyID == other.TicketingSupplierAgencyID &&
+				Supplier == other.Supplier && Environment == other.Environment && TicketingIATAValidator == other.TicketingIATAValidator && IsSirenaAviaPlus == other.IsSirenaAviaPlus;
+		}
+
+		public SourceInfoDataItem Copy()
+		{
+			var result = new SourceInfoDataItem();
+
+			result.ID = ID;
+			result.BookingSupplierAgencyID = BookingSupplierAgencyID;
+			result.TicketingSupplierAgencyID = TicketingSupplierAgencyID;
+			result.Supplier = Supplier;
+			result.Environment = Environment;
+			result.TicketingIATAValidator = TicketingIATAValidator;
+			result.IsSirenaAviaPlus = IsSirenaAviaPlus;
+
+			return result;
+		}
 	}
 }

@@ -25,5 +25,22 @@ namespace GeneralEntities.PNRDataContent.Ancillary
 		/// </summary>
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public string Description { get; set; }
+
+		public bool Equals(EMDSpecificData item1, EMDSpecificData item2)
+		{
+			return item1 == null && item2 == null ||
+				item1 != null && item2 != null && item1.EMDType == item2.EMDType && item1.ParentTicket == item2.ParentTicket && item1.Description == item2.Description;
+		}
+
+		public EMDSpecificData Copy()
+		{
+			var result = new EMDSpecificData();
+
+			result.EMDType = EMDType;
+			result.ParentTicket = ParentTicket;
+			result.Description = Description;
+
+			return result;
+		}
 	}
 }

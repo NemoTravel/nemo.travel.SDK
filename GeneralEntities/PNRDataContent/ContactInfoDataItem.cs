@@ -1,5 +1,4 @@
 ﻿using GeneralEntities.Client;
-using System;
 using System.Runtime.Serialization;
 
 namespace GeneralEntities.PNRDataContent
@@ -21,5 +20,26 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 1, EmitDefaultValue = false)]
 		public Telephone Telephone { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as ContactInfoDataItem;
+			if (other == null)
+			{
+				return false;
+			}
+
+			return EmailID == other.EmailID && Equals(Telephone, other.Telephone);
+		}
+
+		public ContactInfoDataItem Copy()
+		{
+			var result = new ContactInfoDataItem();
+
+			result.EmailID = EmailID;
+			result.Telephone = Telephone?.Copy();
+
+			return result;
+		}
 	}
 }

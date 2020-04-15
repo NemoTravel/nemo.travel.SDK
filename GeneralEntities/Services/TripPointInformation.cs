@@ -35,6 +35,15 @@ namespace GeneralEntities.Services
 		public float? UTC { get; set; }
 
 
+		public TripPointInformation()
+		{ }
+
+		public TripPointInformation(string code, string cityCode)
+		{
+			Code = code;
+			CityCode = cityCode;
+		}
+
 		/// <summary>
 		/// Получает код города, если код не указан - возвращает код аэропорта
 		/// </summary>
@@ -51,6 +60,11 @@ namespace GeneralEntities.Services
 		public string GetAirportCode()
 		{
 			return string.IsNullOrEmpty(Code) ? CityCode : Code;
+		}
+
+		public bool Equals(string pointCode)
+		{
+			return Code == pointCode || CityCode == pointCode;
 		}
 
 		public override bool Equals(object obj)
@@ -82,7 +96,7 @@ namespace GeneralEntities.Services
 
 		public override int GetHashCode()
 		{
-			return (Code + CityCode).GetHashCode();
+			return (Code + SubPointCode + CityCode).GetHashCode();
 		}
 	}
 }

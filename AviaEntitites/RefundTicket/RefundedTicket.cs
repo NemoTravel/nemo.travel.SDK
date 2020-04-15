@@ -1,4 +1,5 @@
 ﻿using GeneralEntities.Market;
+using GeneralEntities.PriceContent;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.RefundTicket
@@ -29,5 +30,11 @@ namespace AviaEntities.RefundTicket
 		/// </summary>
 		[DataMember(Order = 2, IsRequired = false, EmitDefaultValue = false)]
 		public Money RefundMoney { get; set; }
+
+		/// <summary>
+		/// Сумма к возврату для тарифов и такс
+		/// </summary>
+		[DataMember(Order = 3, EmitDefaultValue = false)]
+		public RefundBreakdown RefundBreakdown { get; set; }
 	}
 }

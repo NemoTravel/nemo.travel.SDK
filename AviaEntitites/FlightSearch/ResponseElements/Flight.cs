@@ -12,7 +12,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
 	[Serializable]
-	public class Flight : ItemIdentification<string>, ICloneable
+	public class Flight : ItemIdentification<string>
 	{
 		/// <summary>
 		/// ИД пакета реквизитов, из которого был получен данный перелёт
@@ -31,12 +31,6 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		/// </summary>
 		[DataMember(Order = 4, EmitDefaultValue = false)]
 		public string ValCompany { get; set; }
-
-		/// <summary>
-		/// Признак, что на перелёте возможно есть допуслуги
-		/// </summary>
-		[DataMember(Order = 5, EmitDefaultValue = false)]
-		public bool AdditionalServicePossiblyExist { get; set; }
 
 		/// <summary>
 		/// Сегменты перелёта
@@ -68,10 +62,10 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		}
 
 		/// <summary>
-		/// Выполняет полное копирование объекта, реализация интерфейса ICloneable
+		/// Выполняет полное копирование объекта
 		/// </summary>
 		/// <returns>Результат копирования</returns>
-		public object Clone()
+		public Flight Copy()
 		{
 			var result = new Flight();
 
@@ -101,18 +95,13 @@ namespace AviaEntities.FlightSearch.ResponseElements
 				result.TypeInfo.MultyOWLeg = TypeInfo.MultyOWLeg;
 			}
 
-			result.Price = (Price)Price.Clone();
+			result.Price = Price.Copy();
 			foreach (var seg in Segments)
 			{
 				result.Segments.Add(seg.FullCopy());
 			}
 
 			return result;
-		}
-
-		public Flight FullCopy()
-		{
-			return (Flight)Clone();
 		}
 
 		/// <summary>

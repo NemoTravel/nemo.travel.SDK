@@ -9,7 +9,7 @@ namespace GeneralEntities.Warning
 	/// </summary>
 	[Serializable]
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
-	public class Warning
+	public class Warning : IEquatable<Warning>
 	{
 		/// <summary>
 		/// Код типа сообщения
@@ -52,6 +52,14 @@ namespace GeneralEntities.Warning
 		public override bool Equals(object obj)
 		{
 			var other = obj as Warning;
+			return other != null
+				&& Code == other.Code
+				&& Message == other.Message
+				&& ServiceMessage == other.ServiceMessage;
+		}
+
+		public bool Equals(Warning other)
+		{
 			return other != null
 				&& Code == other.Code
 				&& Message == other.Message

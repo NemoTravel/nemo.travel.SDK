@@ -13,8 +13,8 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 		/// <summary>
 		/// Базовый класс перелёта
 		/// </summary>
-		[DataMember(Order = 0, EmitDefaultValue = false)]
-        public BaseClass? BaseClass { get; set; }
+		[DataMember(Order = 0)]
+		public BaseClass BaseClass { get; set; }
 
 		/// <summary>
 		/// Класс перелёта

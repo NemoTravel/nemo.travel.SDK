@@ -30,8 +30,8 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 		/// <summary>
 		/// Номер сегмента
 		/// </summary>
-		[DataMember(Order = 3, EmitDefaultValue = false)]
-		public int? SegNum { get; set; }
+		[DataMember(Order = 3)]
+		public int SegNum { get; set; }
 
 		/// <summary>
 		/// Допустимая мера багажа для данного класса перелёта
@@ -53,5 +53,11 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 		/// </summary>
 		[DataMember(Order = 7, EmitDefaultValue = false)]
 		public int? SubsidyInfoID { get; set; }
+
+		/// <summary>
+		/// Допустимая мера ручной клади для данного класса перелёта
+		/// </summary>
+		[DataMember(Order = 8, EmitDefaultValue = false)]
+		public Baggage CarryOn { get; set; }
 	}
 }

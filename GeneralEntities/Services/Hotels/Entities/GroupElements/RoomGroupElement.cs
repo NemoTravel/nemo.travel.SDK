@@ -11,5 +11,7 @@ namespace GeneralEntities.BookContent.Entities.GroupElements
 		public int RateId;
 		public int? MealId;
 		public List<Money> MarkUps = new List<Money>();
+		public List<Money> AgencyCharges = new List<Money>();
+		public List<Money> ServiceCharges = new List<Money>();
 	}
 }

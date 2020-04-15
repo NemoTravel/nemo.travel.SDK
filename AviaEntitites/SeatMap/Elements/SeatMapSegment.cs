@@ -25,5 +25,19 @@ namespace AviaEntities.SeatMap.Elements
 		{
 			Floors = new SeatMapFloorList();
 		}
+
+		public FlightSegmentSeatMap DeepCopy()
+		{
+			var result = new FlightSegmentSeatMap();
+
+			result.Number = Number;
+
+			foreach (var floor in Floors)
+			{
+				result.Floors.Add(floor.DeepCopy());
+			}
+
+			return result;
+		}
 	}
 }

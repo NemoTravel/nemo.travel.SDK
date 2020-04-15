@@ -63,7 +63,69 @@ namespace AviaEntities.AgencyAPISearch.Shared
 		/// </summary>
 		[XmlEnum("MYSTIFLY")]
 		Mystifly = 9,
+		/// <summary>
+		/// Galileo uAPI
+		/// </summary>
 		[XmlEnum("GALILEOUAPI")]
-		GalileoUAPI = 10
+		GalileoUAPI = 10,
+		/// <summary>
+		/// PEGAS Touristik
+		/// </summary>
+		[XmlEnum("PEGASYS")]
+		Pegasys = 11,
+		/// <summary>
+		/// Немо-немо
+		/// </summary>
+		[XmlEnum("NEMO")]
+		Nemo = 12,
+		/// <summary>
+		/// Farelogix
+		/// </summary>
+		[XmlEnum("FARELOGIX")]
+		Farelogix = 14,
+		/// <summary>
+		/// S7 NDC API
+		/// </summary>
+		[XmlEnum("S7NDC")]
+		S7NDC = 15,
+
+		// [XmlEnum("ATLASGLOBAL")]
+		// Atlasglobal = 16 - (Удален)
+
+		/// <summary>
+		/// Навитэир
+		/// </summary>
+		[XmlEnum("NAVITAIRE")]
+		Navitaire = 17,
+		/// <summary>
+		/// Radixx
+		/// </summary>
+		[XmlEnum("RADIXX")]
+		Radixx = 18,
+		/// <summary>
+		/// AccelAero
+		/// </summary>
+		[XmlEnum("ACCELAERO")]
+		AccelAero = 19,
+		/// <summary>
+		/// Kiwi.com
+		/// </summary>
+		[XmlEnum("KIWI")]
+		Kiwi = 22,
+		/// <summary>
+		/// Aeroflot
+		/// </summary>
+		[XmlEnum("AEROFLOTNDC")]
+		AeroflotNDC = 24,
+		/// <summary>
+		/// Hitit
+		/// </summary>
+		[XmlEnum("HITIT")]
+		Hitit = 25,
+		/// <summary>
+		/// SolringNDC
+		/// </summary>
+		[XmlEnum("SOLRINGNDC")]
+		SolringNDC = 26
 	}
 }

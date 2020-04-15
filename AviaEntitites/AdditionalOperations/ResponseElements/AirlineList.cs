@@ -9,5 +9,8 @@ namespace AviaEntities.AdditionalOperations.ResponseElements
 	[CollectionDataContract(Namespace = "http://nemo-ibe.com/Avia", ItemName = "AirlineCode")]
 	public class AirlineList : List<string>
 	{
+		public AirlineList() : base() { }
+
+		public AirlineList(IEnumerable<string> collection) : base(collection) { }
 	}
 }

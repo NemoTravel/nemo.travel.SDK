@@ -18,14 +18,6 @@ namespace AviaEntities.ModifyContent
 		}
 
 		/// <summary>
-		/// Допуслуги которые необходимо модифицировать
-		/// </summary>
-		public IEnumerable<AncillaryServiceRQ> ToModify
-		{
-			get { return Select(PNRContentModifyAction.Modify); }
-		}
-
-		/// <summary>
 		/// Допуслуги которые необходимо удалить
 		/// </summary>
 		public IEnumerable<AncillaryServiceRQ> ToRemove

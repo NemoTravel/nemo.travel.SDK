@@ -19,5 +19,26 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 1, EmitDefaultValue = false)]
 		public bool IsForced { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as ValidatingCompanyDataItem;
+			if (other == null)
+			{
+				return false;
+			}
+
+			return Code == other.Code && IsForced == other.IsForced;
+		}
+
+		public ValidatingCompanyDataItem Copy()
+		{
+			var result = new ValidatingCompanyDataItem();
+
+			result.Code = Code;
+			result.IsForced = IsForced;
+
+			return result;
+		}
 	}
 }

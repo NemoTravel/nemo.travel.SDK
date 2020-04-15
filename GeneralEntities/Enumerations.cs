@@ -36,7 +36,7 @@ namespace GeneralEntities
 	}
 
 	/// <summary>
-	/// Типы сред выполнения запросов в GDS'ах
+	/// Типы сред выполнения запросов у поставщиков
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public enum EnvironmentType
@@ -215,6 +215,46 @@ namespace GeneralEntities
 		/// </summary>
 		[EnumMember]
 		MilitaryOfficerDocument = 30,
+		/// <summary>
+		/// Автоматический тип документа
+		/// </summary>
+		[EnumMember]
+		AutosetByNumber = 31,
+		/// <summary>
+		/// Справка об утере паспорта
+		/// </summary>
+		[EnumMember]
+		CertificateOfLossPassport = 32,
+		/// <summary>
+		/// Паспорт СССР
+		/// </summary>
+		[EnumMember]
+		PassportUSSR = 33,
+		/// <summary>
+		/// Удостоверение личности лица без гражданства
+		/// </summary>
+		[EnumMember]
+		IdentityWithoutCitizenship = 34,
+		/// <summary>
+		/// Паспорт Узбекистана
+		/// </summary>
+		[EnumMember]
+		PassportUZ = 35,
+		/// <summary>
+		/// Паспорт Казахстана
+		/// </summary>
+		[EnumMember]
+		PassportKZ = 36,
+		/// <summary>
+		/// Удостоверение личности
+		/// </summary>
+		[EnumMember]
+		IdentityCard = 37,
+		/// <summary>
+		/// Медицинское свидетельство о рождении
+		/// </summary>
+		[EnumMember]
+		MedicalBirthCertificate = 38
 	}
 
 	/// <summary>
@@ -512,7 +552,39 @@ namespace GeneralEntities
 		/// Ошибка при обмене
 		/// </summary>
 		[EnumMember]
-		FailedExchange = 15
+		FailedExchange = 15,
+		/// <summary>
+		/// Бронь содержит допуслуги для которых не существует цен
+		/// </summary>
+		[EnumMember]
+		AncillariesWithoutPrice = 16,
+		/// <summary>
+		/// У сегментов отсутствует локатор от поставщика
+		/// </summary>
+		[EnumMember]
+		NoAirlineLocator = 17,
+		/// <summary>
+		/// Расхождение между данными из ПНР и масок билетов
+		/// </summary>
+		[EnumMember]
+		TicketMaskDataMismatch = 18,
+		/// <summary>
+		/// Есть обменянный билет, но нового взамен него нету.
+		/// Тут либо обмен не завершён, либо обмены был на стороне а/к и в ГДС просто нет данных по новому билету.
+		/// В любом случае это проблема и делать что-то с такой бронью крайне опасно.
+		/// </summary>
+		[EnumMember]
+		ExchangedTicketWithoutNew = 19,
+		/// <summary>
+		/// На такущий момент специфика Галилео и uAPI в частности, когда от них приходит Z статус
+		/// </summary>
+		[EnumMember]
+		SupplierDoNotKnowEdState = 20,
+		/// <summary>
+		/// SubStatus на случай, если от поставщика пришло "Order not found"
+		/// </summary>
+		[EnumMember]
+		SupplierDidNotFoundOrder = 21,
 	}
 
 	/// <summary>
@@ -710,7 +782,7 @@ namespace GeneralEntities
 	/// Базовый классы перелёта
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
-	public enum BaseClass
+	public enum BaseClass : byte
 	{
 		[EnumMember]
 		Economy = 0,
@@ -756,16 +828,20 @@ namespace GeneralEntities
 		[EnumMember]
 		PendingConfirmation = 5,
 		/// <summary>
-		/// Ожидание
+		/// Проблемная бронь
 		/// </summary>
 		[EnumMember]
-		Waiting = 6,
+		Problematic = 6,
+		/// <summary>
+		/// Ожидает отмены
+		/// </summary>
+		[EnumMember]
+		PendingCancellation = 7,
 	}
 
 	/// <summary>
 	/// Поставщики отелей
 	/// </summary>
-	[Flags]
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public enum HotelsSuppliers
 	{
@@ -799,15 +875,40 @@ namespace GeneralEntities
 		/// </summary>
 		[EnumMember]
 		Academ = 32,
+		/// <summary>
+		/// Content Inn
+		/// </summary>
+		[EnumMember]
+		ContentInn = 64,
+		/// <summary>
+		/// Ostrovok
+		/// </summary>
+		[EnumMember]
+		Ostrovok = 128,
+		/// <summary>
+		/// Bronevik
+		/// </summary>
+		[EnumMember]
+		Bronevik = 129,
+		/// <summary>
+		/// Amadeus
+		/// </summary>
+		[EnumMember]
+		AmadeusHotels = 130,
+		/// <summary>
+		/// BookingCom
+		/// </summary>
+		[EnumMember]
+		BookingCom = 131,
 	}
 
 	/// <summary>
 	/// тип питания
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
-	[Flags]
 	public enum HotelsMealTypes
 	{
+		[EnumMember]
 		Unknown = 0,
 		/// <summary>
 		/// Room only
@@ -838,10 +939,33 @@ namespace GeneralEntities
 		/// Dinner
 		/// </summary>
 		[EnumMember]
-		DN = 32
-
+		DN = 32,
+		/// <summary>
+		/// Lunch
+		/// </summary>
+		[EnumMember]
+		LU = 33,
 	}
 
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum PriceRule
+	{
+		/// <summary>
+		/// Неизвестно
+		/// </summary>
+		[EnumMember]
+		Unknown = 0,
+		/// <summary>
+		/// Бесплатно
+		/// </summary>
+		[EnumMember]
+		Free = 1,
+		/// <summary>
+		/// Доплата
+		/// </summary>
+		[EnumMember]
+		AdditionalPrice = 2,
+	}
 	/// <summary>
 	/// Тип постояльца
 	/// </summary>
@@ -858,10 +982,10 @@ namespace GeneralEntities
 		/// </summary>
 		[EnumMember]
 		CLD = 2,
-
 	}
+
 	/// <summary>
-	/// Поставщики авиа услуг
+	/// Поставщики авиа услуг.
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public enum AviaSuppliers
@@ -923,10 +1047,67 @@ namespace GeneralEntities
 		/// </summary>
 		[EnumMember]
 		GalileoUAPI = 11,
+		/// <summary>
+		/// Немо-немо
+		/// </summary>
 		[EnumMember]
-		NemoAviaServer = 12,
+		Nemo = 12,
+
+		// AmadeusS7SearchAPI = 13, Данный поставщик удален
+
+		/// <summary>
+		/// Farelogix
+		/// </summary>
 		[EnumMember]
-		AmadeusS7SearchAPI = 13
+		Farelogix = 14,
+
+		// Atlasglobal = 16 - Удален
+
+		/// <summary>
+		/// S7 NDC API
+		/// </summary>
+		[EnumMember]
+		S7NDC = 15,
+		/// <summary>
+		/// Навитэир
+		/// </summary>
+		[EnumMember]
+		Navitaire = 17,
+		/// <summary>
+		/// Radixx
+		/// </summary>
+		[EnumMember]
+		Radixx = 18,
+		/// <summary>
+		/// AirArabia
+		/// </summary>
+		[EnumMember]
+		AccelAero = 19,
+		/// <summary>
+		/// Kiwi.com
+		/// </summary>
+		[EnumMember]
+		Kiwi = 22,
+		/// <summary>
+		/// Aeroflot
+		/// </summary>
+		[EnumMember]
+		AeroflotNDC = 24,
+		/// <summary>
+		/// FlyArystan
+		/// </summary>
+		[EnumMember]
+		Hitit = 25,
+		/// <summary>
+		/// Solring NDC API
+		/// </summary>
+		[EnumMember]
+		SolringNDC = 26
+
+		// При добавлении нового поставщика необходимо также добавлять его в AviaEntities.AgencyAPISearch.Shared.Supplier
+		//
+		// А так же в файл `AviaServer/NDC/Constants/Supplier.cs`, если известен двух-символьный IATA код поставщика
+		// или задаем значение `Suppliers.UNKNOWN_CODE`, если код неизвестен
 	}
 
 	/// <summary>
@@ -1100,6 +1281,12 @@ namespace GeneralEntities
 		FrontendServer = 30,
 
 		/// <summary>
+		/// Сервер авиабронирования #3
+		/// </summary>
+		[EnumMember]
+		AviaServer3 = 31,
+
+		/// <summary>
 		/// Поставщик услуги (ГДС)
 		/// </summary>
 		[EnumMember]
@@ -1109,7 +1296,19 @@ namespace GeneralEntities
 		///  Сервер Немо1 (php)
 		/// </summary>
 		[EnumMember]
-		NemoOne = 34
+		NemoOne = 34,
+
+		/// <summary>
+		/// Сервер авиабронирования #4
+		/// </summary>
+		[EnumMember]
+		AviaServer4 = 41,
+
+		/// <summary>
+		/// Сервер онлайн регистрации
+		/// </summary>
+		[EnumMember]
+		CheckInServer = 42,
 	}
 
 	/// <summary>
@@ -1132,7 +1331,22 @@ namespace GeneralEntities
 		/// Запрос по расписанию
 		/// </summary>
 		[EnumMember]
-		S = 2
+		S = 2,
+		/// <summary>
+		/// Немо-немо запрос, используется для защиты от рекурсивных вызовов
+		/// </summary>
+		[EnumMember]
+		N = 3,
+		/// <summary>
+		/// PHP
+		/// </summary>
+		[EnumMember]
+		P = 4,
+		/// <summary>
+		/// Callback
+		/// </summary>
+		[EnumMember]
+		C = 5
 	}
 
 	/// <summary>
@@ -1356,6 +1570,16 @@ namespace GeneralEntities
 		/// </summary>
 		[EnumMember]
 		GetPNRTerminalView = 17,
+		/// <summary>
+		/// Получение маски электронного билета
+		/// </summary>
+		[EnumMember]
+		GetEDData = 18,
+		/// <summary>
+		/// Доп операции с бронью
+		/// </summary>
+		[EnumMember]
+		AdditionalOperations = 19,
 	}
 
 	/// <summary>
@@ -1533,10 +1757,34 @@ namespace GeneralEntities
 		[EnumMember]
 		ReferencedBooks = 32,
 		/// <summary>
+		/// Доп. инофрмация, распасенная из тарифных правил
+		/// </summary>
+		[EnumMember]
+		FareInfo = 33,
+		/// <summary>
 		/// Документ-основание для скидки
 		/// </summary>
 		[EnumMember]
-		DiscountDocument = 34
+		DiscountDocument = 34,
+		/// <summary>
+		/// Voucher
+		/// </summary>
+		[EnumMember]
+		VoucherFile = 35,
+		/// <summary>
+		/// Информация о связанных заказах
+		/// </summary>
+		[EnumMember]
+		LinkedBooks = 36,
+		/// <summary>
+		/// Информация от поставщика
+		/// </summary>
+		[EnumMember]
+		CustomSupplierData = 37,
+		/// <summary>
+		/// Содержит некие идентификаторы данного перелёта в системах поставщиков, необходимые для дальнейших операций с ним (бронирование или ещё что-то)
+		/// </summary>
+		SupplierLinkageInfo = 38
 	}
 
 	/// <summary>
@@ -1562,7 +1810,9 @@ namespace GeneralEntities
 		[EnumMember]
 		Confidential = 7,
 		[EnumMember]
-		MiniItinerary = 8
+		MiniItinerary = 8,
+		[EnumMember]
+		YCategory = 9
 	}
 
 	/// <summary>
@@ -1592,10 +1842,20 @@ namespace GeneralEntities
 		[EnumMember]
 		IN = 3,
 		/// <summary>
-		/// Платёжное Поручение
+		/// Взаимозачёт, добавлено по тикету #43253
 		/// </summary>
 		[EnumMember]
-		PP = 4
+		VZ = 4,
+		/// <summary>
+		/// Токен
+		/// </summary>
+		[EnumMember]
+		TC = 5,
+		/// <summary>
+		/// Аванс
+		/// </summary>
+		[EnumMember]
+		AV = 6
 	}
 
 	/// <summary>
@@ -1680,7 +1940,9 @@ namespace GeneralEntities
 		[EnumMember]
 		Refunded = 3,
 		[EnumMember]
-		Exchanged = 4
+		Exchanged = 4,
+		[EnumMember]
+		SupplierDoNotKnowEdState = 5
 	}
 
 	/// <summary>
@@ -1718,7 +1980,53 @@ namespace GeneralEntities
 		/// Сборы
 		/// </summary>
 		[EnumMember]
-		FinancialImpact = 5
+		FinancialImpact = 5,
+		/// <summary>
+		/// Справка о возврате
+		/// </summary>
+		[EnumMember]
+		RefundDocument = 6,
+		/// <summary>
+		/// Страховка/страховой полис
+		/// </summary>
+		[EnumMember]
+		Insurance = 7,
+
+	}
+
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum CouponStatus
+	{
+		[EnumMember]
+		Open,
+		[EnumMember]
+		Used,
+		[EnumMember]
+		Void,
+		[EnumMember]
+		CheckIn,
+		[EnumMember]
+		Printed,
+		[EnumMember]
+		Refunded,
+		[EnumMember]
+		Exchanged,
+		[EnumMember]
+		Registered,
+		[EnumMember]
+		Landed,
+		[EnumMember]
+		Stoped,
+		[EnumMember]
+		PaperDocument,
+		[EnumMember]
+		Unavailable,
+		[EnumMember]
+		ExchangedToPaper,
+		[EnumMember]
+		Closed,
+		[EnumMember]
+		AirportControl
 	}
 
 	/// <summary>
@@ -2132,7 +2440,6 @@ namespace GeneralEntities
 		Both = 2
 	}
 
-	[Flags]
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public enum Language
 	{
@@ -2188,6 +2495,11 @@ namespace GeneralEntities
 		/// </summary>
 		[EnumMember]
 		TimeLimit = 7,
+		/// <summary>
+		/// Бронирования с ремарками от авиакомпаний
+		/// </summary>
+		[EnumMember]
+		VendorRemarks = 8,
 
 
 		//Далее имена внутренних очередей (аналогичны подстатусам брони, когда основной статус проблематичный)
@@ -2265,7 +2577,7 @@ namespace GeneralEntities
 		/// Ошибка при обмене
 		/// </summary>
 		[EnumMember]
-		FailedExchange = 44
+		FailedExchange = 44,
 	}
 
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
@@ -2304,12 +2616,13 @@ namespace GeneralEntities
 	/// <summary>
 	/// платежные системы
 	/// </summary>
-	[Flags]
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public enum PaymentSystem
 	{
 		[EnumMember]
 		JapanCreditBureau,
+		[EnumMember]
+		ElectronicCash,
 		[EnumMember]
 		MasterCardDebit,
 		[EnumMember]
@@ -2336,20 +2649,21 @@ namespace GeneralEntities
 		CarteBlanche,
 	}
 
-	[Flags]
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public enum GuaranteeType
 	{
+		[EnumMember]
+		Prepayment,
 		[EnumMember]
 		Deposit,
 		[EnumMember]
 		Credit,
 		[EnumMember]
-		Prepayment,
-		[EnumMember]
 		Cash,
 		[EnumMember]
 		Guarantee,
+		[EnumMember]
+		IataGuarantee,
 		[EnumMember]
 		Other,
 	}
@@ -2385,11 +2699,6 @@ namespace GeneralEntities
 		[EnumMember]
 		FFPPartnership,
 		/// <summary>
-		/// Переводы
-		/// </summary>
-		[EnumMember]
-		Translations,
-		/// <summary>
 		/// Города
 		/// </summary>
 		[EnumMember]
@@ -2405,7 +2714,12 @@ namespace GeneralEntities
 		[EnumMember]
 		Timezones,
 		[EnumMember]
-		SubsidizedTariffs
+		SubsidizedTariffs,
+		/// <summary>
+		/// Дополнительные услуги
+		/// </summary>
+		[EnumMember]
+		AncillaryServices
 	}
 
 	/// <summary>
@@ -2433,7 +2747,12 @@ namespace GeneralEntities
 		/// Бронирование перелета
 		/// </summary>
 		[EnumMember]
-		BookFlight = 3
+		BookFlight = 3,
+		/// <summary>
+		/// Репрайсинг перелета
+		/// </summary>
+		[EnumMember]
+		FlightRepricing = 4,
 	}
 
 	/// <summary>
@@ -2584,5 +2903,293 @@ namespace GeneralEntities
 		/// </summary>
 		[EnumMember]
 		CN = 23
+	}
+
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum PaymentProxySystem
+	{
+		[EnumMember]
+		FCm
+	}
+
+	/// <summary>
+	/// Условия применения какого-либо правила из тарифных правил
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum FareRuleApplicationCondition
+	{
+		/// <summary>
+		/// Разрешено всегда
+		/// </summary>
+		[EnumMember]
+		Ever = 0,
+		/// <summary>
+		/// Запрещено всегда
+		/// </summary>
+		[EnumMember]
+		Never = 1,
+		/// <summary>
+		/// Разрешено, кроме некоторых случаев
+		/// </summary>
+		[EnumMember]
+		EverWithRestrictions = 2
+	}
+
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum ChargeType
+	{
+		/// <summary>
+		/// Сбор по правилу
+		/// </summary>
+		[EnumMember]
+		PriceRule,
+		/// <summary>
+		/// Округление цены в валюте агентсва
+		/// </summary>
+		[EnumMember]
+		FareRound,
+		/// <summary>
+		/// Округление такс в валюте агентства
+		/// </summary>
+		[EnumMember]
+		TaxRound,
+		/// <summary>
+		/// Округление итогового сбора
+		/// </summary>
+		[EnumMember]
+		MarkupRound
+	}
+
+	[DataContract]
+	public enum SupplierData
+	{
+		/// <summary>
+		/// Id транзакции
+		/// </summary>
+		[EnumMember]
+		KiwiTransactionId = 0,
+	}
+
+	/// <summary>
+	/// Поддерживаемые сервером Ж/Д поставщики
+	/// </summary>
+	[DataContract(Namespace = "http://nemo-ibe.com/Rail", Name = "Service")]
+	public enum RailSuppliers
+	{
+		/// <summary>
+		/// УФС
+		/// </summary>
+		[EnumMember]
+		UFS = 0,
+		/// <summary>
+		/// ж/д Украины (Универсальные Информационные Технологии)
+		/// </summary>
+		[EnumMember]
+		UIT = 1,
+		/// <summary>
+		/// Сирена
+		/// </summary>
+		[EnumMember]
+		Sirena = 2,
+		/// <summary>
+		/// КТЖ
+		/// </summary>
+		[EnumMember]
+		KTZ = 3,
+		/// <summary>
+		/// УЖД
+		/// </summary>
+		[EnumMember]
+		UZHD = 4,
+	}
+
+	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
+	public enum AviaMixerPriceCondition
+	{
+		[EnumMember]
+		MinimalNet,
+		[EnumMember]
+		MinimalPrice,
+		[EnumMember]
+		MaximalPrice,
+		[EnumMember]
+		MaximalAgencyMarkup,
+		[EnumMember]
+		MaximalAirlineCommission,
+		[EnumMember]
+		MaximalProfit,
+		[EnumMember]
+		Ignore
+	}
+
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum SsrStatus
+	{
+		Confirmed = 0,
+
+		NeedConfirmation = 1,
+
+		NotConfirmed = 2,
+
+		Canceled = 3,
+
+		Flew = 4,
+
+		OnRequest = 5,
+
+		Rejected = 6
+	}
+
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum CheckInStatus
+	{
+		/// <summary>
+		/// Неопределенный
+		/// </summary>
+		[EnumMember]
+		Undefined = 0,
+
+		/// <summary>
+		/// Зарегестрирован
+		/// </summary>
+		[EnumMember]
+		CheckedIn = 1,
+
+		/// <summary>
+		/// Не зарегестрирован
+		/// </summary>
+		[EnumMember]
+		NotCheckedIn = 2,
+
+		/// <summary>
+		/// Ожидает посадки на рейс
+		/// </summary>
+		[EnumMember]
+		StandBy = 3,
+
+		/// <summary>
+		/// Посадка на рейс
+		/// </summary>
+		[EnumMember]
+		Boarded = 4
+	}
+
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum GlobalSuppliers
+	{
+		[EnumMember]
+		DcsAstra = 1,
+
+		[EnumMember]
+		DcsSita = 2,
+
+		[EnumMember]
+		NemoConnectAvia = 3,
+
+		[EnumMember]
+		Sirena = 4,
+
+		[EnumMember]
+		SITAGabriel = 5,
+	}
+
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
+	public enum BoardingPassFormatType
+	{
+		/// <summary>
+		/// поток байт в формате base64 с указанием типа документа, например pdf
+		/// </summary>
+		[EnumMember]
+		Base64 = 0,
+
+		/// <summary>
+		/// структурированный набор данных-параметров
+		/// </summary>
+		[EnumMember]
+		Params = 1,
+
+	}
+	
+	/// <summary>
+	/// Типы допустимых багажей
+	/// </summary>
+	public enum BaggageTypes
+	{
+		FreeBaggage, // бесплатный багаж
+		CarryOnBaggage, // ручная кладь
+	}
+
+	/// <summary>
+	/// Типы допустимых категорий багажей
+	/// </summary>
+	public enum BaggageCategories
+	{
+		CheckedBaggage,
+		CarryOnBaggage,
+	}
+
+	[DataContract(Namespace = "http://nemo.travel/STL")]
+	public enum BackgroundBookOperationSearchType
+	{
+		[EnumMember]
+		AfterTicketingRebookAndPriceChange
+	}
+
+	[DataContract(Namespace = "http://nemo.travel/STL")]
+	public enum BackgroundBookOperationSearchStatus
+	{
+		[EnumMember]
+		InProcess,
+		[EnumMember]
+		Finished,
+	}
+
+
+	public class EnumUtils
+	{
+		public static T ParseEnumFromString<T>(string value) where T : struct
+		{
+			T result;
+			if (!Enum.TryParse<T>(value, out result))
+			{
+				throw new ArgumentException("Unknown enum value");
+			}
+			return result;
+		}
+	}
+
+
+	[DataContract(Namespace = "http://nemo.travel/STL")]
+	public enum CheckInSubStatus : byte
+	{
+		/// <summary>
+		/// Неопределенный
+		/// </summary>
+		[EnumMember]
+		Undefined = 0,
+
+		/// <summary>
+		/// Регистрация на рейс доступна только в аэропорту
+		/// </summary>
+		[EnumMember]
+		OnlyAirportCheckIn = 1,
+
+		/// <summary>
+		/// Отсутствуют обязательные данные документов пассажира
+		/// </summary>
+		[EnumMember]
+		NeedDocument = 2,
+
+		/// <summary>
+		/// Отсутствуют данные о визе
+		/// </summary>
+		[EnumMember]
+		NeedVisaDocument = 3,
+
+		/// <summary>
+		/// Билет на пассажира ещё не оформлен
+		/// </summary>
+		[EnumMember]
+		NeedTicketing = 4
 	}
 }

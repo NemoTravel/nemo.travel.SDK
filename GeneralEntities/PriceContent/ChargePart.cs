@@ -9,16 +9,47 @@ namespace GeneralEntities.PriceContent
 		/// <summary>
 		/// Номер правила, по которому был рассчитан сбор
 		/// </summary>
-		[DataMember(Order = 2)]
-		public int RuleID { get; set; }
+		[DataMember(Order = 2, EmitDefaultValue = false)]
+		public int? RuleID { get; set; }
 
-		public ChargePart() { }
+		[DataMember(Order = 3, EmitDefaultValue = false)]
+		public ChargeType? Type { get; set; }
 
-		public ChargePart(int ruleID, Money money)
+
+		public ChargePart()
+		{
+		}
+
+		public ChargePart(Money money, int ruleID)
+			: base(money)
 		{
 			RuleID = ruleID;
-			Value = money.Value;
-			Currency = money.Currency;
+		}
+
+		public ChargePart(Money money, ChargeType type)
+			: base(money)
+		{
+			Type = type;
+		}
+
+		public ChargePart(Money money, ChargeType type, int ruleID)
+			: base(money)
+		{
+			RuleID = ruleID;
+			Type = type;
+		}
+
+		public ChargePart(ChargePart other)
+			: base(other)
+		{
+			RuleID = other.RuleID;
+			Type = other.Type;
+		}
+
+
+		public new ChargePart Copy()
+		{
+			return new ChargePart(this);
 		}
 	}
 }

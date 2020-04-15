@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace AviaEntities.SharedElements.Ancillaries.RequestElements
 {
 	/// <summary>
-	/// Содержит информацию об определённой допуслуге
+	/// Запрос на бронирование допуслуги
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
 	public class AncillaryServiceRQ : BaseAncillaryService
@@ -14,7 +14,6 @@ namespace AviaEntities.SharedElements.Ancillaries.RequestElements
 
 		[DataMember(Order = 1, IsRequired = true)]
 		public MRefList<int> SegmentRef { get; set; }
-
 
 		/// <summary>
 		/// Проверяет данный элемент на привязку к определённому пассажиру в брони

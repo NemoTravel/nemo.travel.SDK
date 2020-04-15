@@ -16,7 +16,7 @@ namespace GeneralEntities.ExtendedDateTime
 	[Serializable]
 	[JsonConverter(typeof(ExtendedDateTimeJSONConverter))]
 	[XmlSchemaProviderAttribute("GetTypeForXMLScheme")]
-	public class DateTimeEx : ISerializable, IXmlSerializable, IComparable, ICloneable
+	public class DateTimeEx : ISerializable, IXmlSerializable, IComparable
 	{
 		/// <summary>
 		/// Штамп времени, оборачиваемый данным экземпляром
@@ -119,41 +119,29 @@ namespace GeneralEntities.ExtendedDateTime
 		{
 			if (string.IsNullOrEmpty(dateTime))
 			{
-				DateTime = DateTimeOffset.MaxValue;
-				TimeZoneID = TimeZoneInfo.Local.Id;
+				throw new ArgumentNullException(nameof(dateTime));
+			}
+
+			DateTimeOffset parsedDT = string.IsNullOrEmpty(inFormat) ?
+				DateTimeOffset.Parse(dateTime) :
+				DateTimeOffset.ParseExact(dateTime, inFormat, inLocale ?? Locale.UsCulture);
+
+			DateTime = offset.HasValue ?
+				new DateTimeOffset(parsedDT.DateTime, offset.Value) :
+				parsedDT;
+
+			if (timeZoneID != null)
+			{
+				DateTime = new DateTimeOffset(parsedDT.DateTime, TimeZoneCache.GetTimeZoneByID(timeZoneID).GetUtcOffset(parsedDT));
+				TimeZoneID = timeZoneID;
 			}
 			else
 			{
-				DateTimeOffset parsedDT;
-				if (string.IsNullOrEmpty(inFormat))
-				{
-					parsedDT = DateTimeOffset.Parse(dateTime);
-				}
-				else
-				{
-					parsedDT = DateTimeOffset.ParseExact(dateTime, inFormat, inLocale ?? Locale.UsCulture);
-				}
-
-				if (offset.HasValue)
-				{
-					DateTime = new DateTimeOffset(parsedDT.DateTime, offset.Value);
-				}
-				else
-				{
-					DateTime = parsedDT;
-				}
-
-				if (timeZoneID != null)
-				{
-					DateTime = new DateTimeOffset(parsedDT.DateTime, TimeZoneCache.GetTimeZoneByID(timeZoneID).GetUtcOffset(parsedDT));
-					TimeZoneID = timeZoneID;
-				}
-				else
-				{
-					TimeZoneID = TimeZoneInfo.Local.Id;
-				}
+				TimeZoneID = TimeZoneInfo.Local.Id;
 			}
+
 			OutFormat = outFormat;
+
 			if (outLocale == null)
 			{
 				OutLocale = Locale.UsCulture;
@@ -423,16 +411,18 @@ namespace GeneralEntities.ExtendedDateTime
 		/// <returns>Дата и время в строке предпочитаемого формата</returns>
 		public string ToString(string format, CultureInfo outLocale = null)
 		{
-			return DateTime.ToString(format, outLocale != null ? outLocale : OutLocale).ToUpper();
+			return DateTime
+				.ToString(format ?? Formats.DATE_TIME_FORMAT, outLocale ?? OutLocale)
+				.ToUpper();
 		}
 
-		public object Clone()
+		public DateTimeEx Copy()
 		{
 			var result = new DateTimeEx(DateTime);
 
-			result.OutFormat = this.OutFormat;
-			result.OutLocale = this.OutLocale;
-			result.TimeZoneID = this.TimeZoneID;
+			result.OutFormat = OutFormat;
+			result.OutLocale = OutLocale;
+			result.TimeZoneID = TimeZoneID;
 
 			return result;
 		}
@@ -440,18 +430,46 @@ namespace GeneralEntities.ExtendedDateTime
 		public int CompareTo(object obj)
 		{
 			var tmp = obj as DateTimeEx;
-			if (tmp == null || this.DateTime > tmp.DateTime)
+			if (tmp == null)
 			{
 				return 1;
 			}
-			else if (this.DateTime == tmp.DateTime)
+
+			if (this.DateTime > tmp.DateTime)
+			{
+				return 1;
+			}
+
+			if (this.DateTime == tmp.DateTime)
 			{
 				return 0;
 			}
-			else
+
+			return -1;
+		}
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as DateTimeEx;
+			if (other == null)
 			{
-				return -1;
+				return false;
 			}
+
+			return CompareTo(other) == 0;
+		}
+
+		public override int GetHashCode()
+		{
+			int result = 0;
+
+			result ^= DateTime.GetHashCode();
+
+			// OutFormat - нет проверки на равенство в перегрузке Equals, поэтому не включается в хэшкод
+			// OutLocale - нет проверки на равенство в перегрузке Equals, поэтому не включается в хэшкод
+			// TimeZoneID - нет проверки на равенство в перегрузке Equals, поэтому не включается в хэшкод
+
+			return result;
 		}
 
 		#region Методы для сериализаторов

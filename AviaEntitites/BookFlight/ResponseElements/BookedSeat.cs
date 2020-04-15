@@ -8,7 +8,7 @@ namespace AviaEntities.BookFlight.ResponseElements
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
 	[Serializable]
-	public class BookedSeat : ICloneable
+	public class BookedSeat
 	{
 		/// <summary>
 		/// Номер места
@@ -33,14 +33,14 @@ namespace AviaEntities.BookFlight.ResponseElements
 		/// </summary>
 		[DataMember(IsRequired = true, Order = 3)]
 		public int SegmentNumber { get; set; }
-		
+
 		/// <summary>
 		/// Выполняет полное копирование объекта, реализация интерфейса ICloneable
 		/// </summary>
 		/// <returns>Результат копирования</returns>
-		public object Clone()
+		public BookedSeat Copy()
 		{
-			BookedSeat result = new BookedSeat();
+			var result = new BookedSeat();
 
 			result.Number = Number;
 			result.Characteristic = Characteristic;

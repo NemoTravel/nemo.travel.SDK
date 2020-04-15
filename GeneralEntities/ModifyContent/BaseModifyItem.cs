@@ -10,5 +10,11 @@ namespace GeneralEntities.ModifyContent
 		/// </summary>
 		[DataMember(Order = 0, IsRequired = true)]
 		public PNRContentModifyAction Action { get; set; }
+
+		public void CopyTo<T>(T modifyItem)
+			 where T : BaseModifyItem
+		{
+			modifyItem.Action = Action;
+		}
 	}
 }

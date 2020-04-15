@@ -10,7 +10,7 @@ namespace AviaEntities.v1_2.SearchFlights.RequestElements
 		public ClassPrefList()
 		{ }
 
-		public ClassPrefList(List<ClassType> list)
+		public ClassPrefList(IEnumerable<ClassType> list)
 			: base(list)
 		{ }
 	}

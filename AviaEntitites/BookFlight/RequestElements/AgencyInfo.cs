@@ -46,23 +46,23 @@ namespace AviaEntities.BookFlight.RequestElements
 			Address = old.Address;
 			if (latinRegistration)
 			{
-				Name = Transliteration.UARUStoENG(old.Name).ToUpper();
+				Name = Transliteration.CyrillicToLatin(old.Name).ToUpper();
 
 				if (Address != null)
 				{
 					if (!string.IsNullOrEmpty(Address.City))
 					{
-						Address.City = Transliteration.UARUStoENG(Address.City).ToUpper();
+						Address.City = Transliteration.CyrillicToLatin(Address.City).ToUpper();
 					}
 
 					if (!string.IsNullOrEmpty(Address.State))
 					{
-						Address.State = Transliteration.UARUStoENG(Address.State).ToUpper();
+						Address.State = Transliteration.CyrillicToLatin(Address.State).ToUpper();
 					}
 
 					if (!string.IsNullOrEmpty(Address.StreetAddress))
 					{
-						Address.StreetAddress = Transliteration.UARUStoENG(Address.StreetAddress).ToUpper();
+						Address.StreetAddress = Transliteration.CyrillicToLatin(Address.StreetAddress).ToUpper();
 					}
 				}
 			}

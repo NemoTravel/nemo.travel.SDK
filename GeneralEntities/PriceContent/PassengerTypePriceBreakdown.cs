@@ -44,15 +44,11 @@ namespace GeneralEntities.PriceContent
 					{
 						return BaseFare;
 					}
-					else
-					{
-						return null;
-					}
+
+					return null;
 				}
-				else
-				{
-					return equiveFare;
-				}
+
+				return equiveFare;
 			}
 			set
 			{
@@ -85,13 +81,44 @@ namespace GeneralEntities.PriceContent
 		public string FareCalc { get; set; }
 
 		/// <summary>
+		/// Сбор
+		/// </summary>
+		[DataMember(Order = 8, EmitDefaultValue = false)]
+		public Money Markup { get; set; }
+
+		/// <summary>
+		/// EquiveFare в валюте агентства
+		/// </summary>
+		[DataMember(Order = 9, EmitDefaultValue = false)]
+		public Money AgencyFare { get; set; }
+
+		[DataMember(Order = 10, EmitDefaultValue = false)]
+		public Money TotalAgencyFare { get; set; }
+
+		[DataMember(Order = 11, EmitDefaultValue = false)]
+		public ChargePartList ChargeBreakdown { get; set; }
+
+		[DataMember(Order = 12, EmitDefaultValue = false)]
+		public Money MarkupRound { get; set; }
+
+		/// <summary>
 		/// Получение тарифа для определённого сегмента услуги, в случае если подобная привязка допустима
 		/// </summary>
 		/// <param name="segmentID">ИД сегмента в услуге, для которого требуется получить тариф</param>
 		/// <returns>Тариф для указанной услуги</returns>
 		public BaseTariff GetTariffForSegment(int segmentID)
 		{
-			return Tariffs != null ? Tariffs.Find(t => t is AirTariff && ((AirTariff)t).SegmentID == segmentID) : null;
+			foreach (var tariff in Tariffs)
+			{
+				var airTariff = tariff as AirTariff;
+
+				if (airTariff != null && airTariff.SegmentID == segmentID)
+				{
+					return tariff;
+				}
+			}
+
+			return null;
 		}
 
 		/// <summary>
@@ -104,14 +131,70 @@ namespace GeneralEntities.PriceContent
 			return TravellerRef != null && TravellerRef.Contains(travellerID);
 		}
 
-		public IEnumerable<AirTariff> GetAirTariffs()
+		public IReadOnlyList<AirTariff> GetAirTariffs()
 		{
 			if (Tariffs == null)
 			{
-				return Enumerable.Empty<AirTariff>();
+				return new List<AirTariff>();
 			}
 
-			return Tariffs.OfType<AirTariff>();
+			return Tariffs.OfType<AirTariff>().ToList();
+		}
+
+		public PassengerTypePriceBreakdown Copy()
+		{
+			var result = new PassengerTypePriceBreakdown();
+
+			result.PricingType = this.PricingType;
+			result.FareCalc = this.FareCalc;
+			result.AgencyFare = this.AgencyFare?.Copy();
+			result.BaseFare = this.BaseFare?.Copy();
+			result.EquiveFare = this.EquiveFare?.Copy();
+			result.TotalFare = this.TotalFare?.Copy();
+			result.Markup = this.Markup?.Copy();
+			result.MarkupRound = this.MarkupRound?.Copy();
+			result.TotalAgencyFare = this.TotalAgencyFare?.Copy();
+
+			if (this.ChargeBreakdown != null)
+			{
+				result.ChargeBreakdown = new ChargePartList();
+
+				foreach (var chargePart in this.ChargeBreakdown)
+				{
+					result.ChargeBreakdown.Add(chargePart.Copy());
+				}
+			}
+
+			if (this.TravellerRef != null)
+			{
+				result.TravellerRef = new RefList<int>(this.TravellerRef);
+			}
+
+			if (this.Taxes != null)
+			{
+				result.Taxes = new TaxList();
+
+				foreach (var tax in this.Taxes)
+				{
+					result.Taxes.Add(tax.Copy());
+				}
+			}
+
+			if (this.Tariffs != null)
+			{
+				result.Tariffs = new TariffList();
+
+				foreach (var tariff in this.Tariffs)
+				{
+					var airTariff = tariff as AirTariff;
+					if (airTariff != null)
+					{
+						result.Tariffs.Add(airTariff.Copy());
+					}
+				}
+			}
+
+			return result;
 		}
 
 		private Money equiveFare;

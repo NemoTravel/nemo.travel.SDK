@@ -21,11 +21,31 @@ namespace GeneralEntities.Lib
 		public string Password { get; set; }
 
 		/// <summary>
+		/// Ключ авторизации через сервер настроек
+		/// </summary>
+		private string _authToken;
+
+		/// <summary>
 		/// Ключ авторизации
+		/// При установке проставляется и в NemoOneAuthToken для использования значения при авторизации через Немо 1
 		/// </summary>
 		[DataMember(Order = 2, EmitDefaultValue = false)]
-		public string AuthToken { get; set; }
+		public string AuthToken
+		{
+			get
+			{
+				return _authToken;
+			}
+			set
+			{
+				_authToken = value;
+				NemoOneAuthToken = value;
+			}
+		}
 
+		/// <summary>
+		/// Ключ авторизации через Немо 1
+		/// </summary>
 		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public string NemoOneAuthToken { get; set; }
 
@@ -35,10 +55,13 @@ namespace GeneralEntities.Lib
 		[DataMember(Order = 4, EmitDefaultValue = false)]
 		public string UserContextId { get; set; }
 
+		/// <summary>
+		/// Дополнительный параметр для ID сессии на стороне поставщика
+		/// </summary>
+		[DataMember(Order = 5, EmitDefaultValue = false)]
+		public string SupplierSessionId { get; set; }
 
-		public RequestRequisites()
-		{
-		}
+		public RequestRequisites() { }
 
 		public RequestRequisites(string token)
 		{

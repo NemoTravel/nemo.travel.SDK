@@ -1,33 +1,35 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Runtime.Serialization;
 
 namespace GeneralEntities.ExtendedDateTime
 {
 	/// <summary>
 	/// Конвертер  для DateTimeEx в JSON через Newton сериализатор
 	/// </summary>
-	public class ExtendedDateTimeJSONConverter : JsonConverter
+	public class ExtendedDateTimeJSONConverter : JsonConverter<DateTimeEx>
 	{
-		public override bool CanConvert(Type objectType)
+		public override void WriteJson(JsonWriter writer, DateTimeEx value, JsonSerializer serializer)
 		{
-			return objectType == typeof(DateTimeEx);
+			writer.WriteValue(value.ToString());
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public override DateTimeEx ReadJson(JsonReader reader, Type objectType, DateTimeEx existingValue, bool hasExistingValue, JsonSerializer serializer)
 		{
 			if (reader.Value == null)
 			{
 				return null;
 			}
-			else
-			{
-				return new DateTimeEx(reader.Value as string);
-			}
-		}
 
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			writer.WriteValue((value as DateTimeEx).ToString());
+			switch (reader.TokenType)
+			{
+				case JsonToken.Date:
+					return new DateTimeEx((DateTime)reader.Value);
+				case JsonToken.String:
+					return new DateTimeEx((string)reader.Value);
+			}
+
+			throw new SerializationException("Unknown JsonToken type");
 		}
 	}
 }

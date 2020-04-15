@@ -74,6 +74,12 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		public int? RequestedSegment { get; set; }
 
 		/// <summary>
+		/// Номер рейса а/к выполняющей рейс
+		/// </summary>
+		[DataMember(Order = 15, EmitDefaultValue = false)]
+		public string OpFlightNumber { get; set; }
+
+		/// <summary>
 		/// Индикатор конект сегмента
 		/// </summary>
 		[IgnoreDataMember]
@@ -108,6 +114,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 			result.OpAirline = OpAirline;
 			result.RequestedSegment = RequestedSegment;
 			result.StopNum = StopNum;
+			result.OpFlightNumber = OpFlightNumber;
 
 			if (ArrAirp != null)
 			{

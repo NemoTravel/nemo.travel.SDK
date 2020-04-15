@@ -1,6 +1,4 @@
-﻿using GeneralEntities;
-
-namespace GeneralEntities.BookContent.Entities.GroupElements
+﻿namespace GeneralEntities.BookContent.Entities.GroupElements
 {
 	public class RoomMealGroupElement
 	{
@@ -13,5 +11,17 @@ namespace GeneralEntities.BookContent.Entities.GroupElements
 		public string Name;
 
 		public bool IncludedInPrice = false;
+
+		public RoomMealGroupElement Copy()
+		{
+			return new RoomMealGroupElement()
+			{
+				Id = Id,
+				SupplierId = SupplierId,
+				MealCode = MealCode,
+				Name = Name,
+				IncludedInPrice = IncludedInPrice
+			};
+		}
 	}
 }

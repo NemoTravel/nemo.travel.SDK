@@ -1,5 +1,4 @@
-﻿using GeneralEntities.PriceContent;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace GeneralEntities.PriceContent
@@ -40,11 +39,12 @@ namespace GeneralEntities.PriceContent
 		[DataMember(Order = 4, IsRequired = false)]
 		public int Priority { get; set; }
 
+
 		public FareFamilyParameter(string code)
 		{
-			this.Code = code;
-			this.ShortDescription = new List<LangItem>();
-			this.FullDescription = new List<LangItem>();
+			Code = code;
+			ShortDescription = new List<LangItem>();
+			FullDescription = new List<LangItem>();
 		}
 	}
 }

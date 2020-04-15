@@ -40,6 +40,9 @@ namespace AviaEntities.v1_1.GroupSearch
 		[DataMember(Order = 6, EmitDefaultValue = false)]
 		public List<FlightLegCrossCombination> FlightLegCrossCombinations { get; set; }
 
+		[DataMember(Order = 7)]
+		public bool ResultsFiltersApplied { get; set; }
+
 		/// <summary>
 		/// Создание нового объекта класса с дефолтной инициализацией необходимых параметров
 		/// </summary>

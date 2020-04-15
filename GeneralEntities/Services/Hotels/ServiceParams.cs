@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace GeneralEntities.Services.Hotels
 {
@@ -17,14 +13,12 @@ namespace GeneralEntities.Services.Hotels
 
 		public string GetServiceParam(string key)
 		{
-			if (Params.ContainsKey(key))
+			if (Params.TryGetValue(key, out string value))
 			{
-				return Params[key];
+				return value;
 			}
-			else
-			{
-				return null;
-			}
+
+			return null;
 		}
 	}
 }

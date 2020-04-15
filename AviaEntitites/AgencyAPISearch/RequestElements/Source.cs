@@ -22,5 +22,8 @@ namespace AviaEntities.AgencyAPISearch.RequestElements
 
 		[XmlElement(Order = 5)]
 		public EndUserData EndUserData { get; set; }
+
+		[XmlElement(Order = 6)]
+		public string DebugSearchProcessKey { get; set; }
 	}
 }

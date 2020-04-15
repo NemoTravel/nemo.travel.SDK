@@ -1,4 +1,5 @@
 ﻿using GeneralEntities.Market;
+using GeneralEntities.PriceContent;
 using System.Runtime.Serialization;
 
 namespace GeneralEntities.Refund
@@ -28,9 +29,30 @@ namespace GeneralEntities.Refund
 		public bool Refundable { get; set; }
 
 		/// <summary>
-		/// Возвращаемая сумма
+		/// Общая сумма возврата
 		/// </summary>
 		[DataMember(Order = 4, EmitDefaultValue = false)]
 		public Money RefundMoney { get; set; }
+
+		/// <summary>
+		/// Сумма к возврату для тарифов и такс
+		/// </summary>
+		[DataMember(Order = 5, EmitDefaultValue = false)]
+		public RefundBreakdown RefundBreakdown { get; set; }
+
+
+		public EDRefundData()
+		{
+		}
+
+		public EDRefundData(string number, int travellerRef, bool refundable, EDType type, Money money = null, RefundBreakdown refundBreakdown = null)
+		{
+			EDType = type;
+			EDNumber = number;
+			RefundMoney = money;
+			Refundable = refundable;
+			TravellerRef = travellerRef;
+			RefundBreakdown = refundBreakdown;
+		}
 	}
 }

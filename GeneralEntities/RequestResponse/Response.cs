@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GeneralEntities.RequestResponse;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace GeneralEntities
@@ -31,6 +32,12 @@ namespace GeneralEntities
 
 		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public string CreatedPNRLocator { get; set; }
+
+		[DataMember(Order = 4, EmitDefaultValue = false)]
+		public PNRLocatorsList CreatedPNRLocators { get; set; }
+
+		[DataMember(Order = 5, EmitDefaultValue = false)]
+		public PNRLocatorsList CancelledPNRLocators { get; set; }
 	}
 
 	/// <summary>

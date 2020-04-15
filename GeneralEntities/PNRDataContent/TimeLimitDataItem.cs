@@ -15,6 +15,7 @@ namespace GeneralEntities.PNRDataContent
 		protected DateTimeEx voidTimeLimit;
 		protected DateTimeEx advancedPurchaseTimeLimit;
 		protected DateTimeEx effectiveTimeLimit;
+		protected DateTimeEx consolidatorTimeLimit;
 
 		/// <summary>
 		/// Эффективный ТЛ брони
@@ -77,6 +78,43 @@ namespace GeneralEntities.PNRDataContent
 			set { advancedPurchaseTimeLimit = SetOutFormat(value); }
 		}
 
+		/// <summary>
+		/// ТЛ консолидатора
+		/// </summary>
+		[DataMember(Order = 8, EmitDefaultValue = false)]
+		public DateTimeEx ConsolidatorTimeLimit
+		{
+			get { return consolidatorTimeLimit; }
+			set { consolidatorTimeLimit = SetOutFormat(value); }
+		}
+
+		public TimeLimitDataItem Copy()
+		{
+			var result = new TimeLimitDataItem();
+
+			result.EffectiveTimeLimit = EffectiveTimeLimit?.Copy();
+			result.PriceTimeLimit = PriceTimeLimit?.Copy();
+			result.TicketingTimeLimit = TicketingTimeLimit?.Copy();
+			result.AgencyTimeLimit = AgencyTimeLimit?.Copy();
+			result.VoidTimeLimit = VoidTimeLimit?.Copy();
+			result.AdvancedPurchaseTimeLimit = AdvancedPurchaseTimeLimit?.Copy();
+			result.ConsolidatorTimeLimit = ConsolidatorTimeLimit?.Copy();
+
+			return result;
+		}
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as TimeLimitDataItem;
+			if (other == null)
+			{
+				return false;
+			}
+
+			return PriceTimeLimit == other.PriceTimeLimit && TicketingTimeLimit == other.TicketingTimeLimit && AgencyTimeLimit == other.AgencyTimeLimit &&
+				VoidTimeLimit == other.VoidTimeLimit && AdvancedPurchaseTimeLimit == other.AdvancedPurchaseTimeLimit && EffectiveTimeLimit == other.EffectiveTimeLimit &&
+				ConsolidatorTimeLimit == other.ConsolidatorTimeLimit;
+		}
 
 		private DateTimeEx SetOutFormat(DateTimeEx value)
 		{

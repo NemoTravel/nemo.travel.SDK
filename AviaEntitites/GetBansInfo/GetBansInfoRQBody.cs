@@ -11,5 +11,11 @@ namespace AviaEntities.GetBansInfo
 		/// </summary>
 		[DataMember(Order = 0, IsRequired = false)]
 		public SubAgencyIDHashSet SubAgenciesIDs { get; set; }
+
+		/// <summary>
+		/// Возвращает или задает ID агентства из Nemo Travel.
+		/// </summary>
+		[DataMember(Order = 1, IsRequired = false)]
+		public int? NTAgencyID { get; set; }
 	}
 }

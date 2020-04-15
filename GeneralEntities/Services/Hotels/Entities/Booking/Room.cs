@@ -1,11 +1,14 @@
 ﻿using GeneralEntities.Market;
 using System.Collections.Generic;
 using GeneralEntities.BookContent.Entities.GroupElements;
+using GeneralEntities.Services.Hotels.Entities.Booking;
 
 namespace GeneralEntities.BookContent.Entities.Booking
 {
 	public class Room
 	{
+		public int RoomId;
+
 		public List<int> GuestsIds;
 
 		public int AdultsCount;
@@ -26,10 +29,13 @@ namespace GeneralEntities.BookContent.Entities.Booking
 
 		public string SupplierMealId;
 
-
 		public string meal;
 
+		public HotelsMealTypes? MealCode;
+
 		public Money Price;
+
+		public VATInfo VATInfo;
 
 		public bool IsApproximate { get; set; }
 
@@ -37,6 +43,9 @@ namespace GeneralEntities.BookContent.Entities.Booking
 
 		public List<PriceBreakdown> PriceBreakdown { get; set; }
 
+		/// <summary>
+		/// Дополнительная информация о тарифе
+		/// </summary>
 		public Dictionary<string, List<string>> AdditionalInformation { get; set; }
 
 		public bool IsSpecialOffer;
@@ -60,8 +69,15 @@ namespace GeneralEntities.BookContent.Entities.Booking
 
 		public bool MealIncludedInPrice;
 
+		/// <summary>
+		/// Комментарий заказчика
+		/// </summary>
 		public string AdditionalInfo;
 
 		public HotelProductAvailability Availability;
+
+		public CheckInCheckOutService EarlyCheckInService;
+
+		public CheckInCheckOutService LateCheckOutService;
 	}
 }

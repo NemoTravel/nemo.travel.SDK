@@ -38,5 +38,11 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 
 		[DataMember(Order = 10, EmitDefaultValue = false)]
 		public string AuthCode { get; set; }
+
+		[DataMember(Order = 11, EmitDefaultValue = false)]
+		public string AcquiringMode { get; set; }
+
+		[DataMember(Order = 12, EmitDefaultValue = false)]
+		public bool AutoticketingDisabled { get; set; }
 	}
 }

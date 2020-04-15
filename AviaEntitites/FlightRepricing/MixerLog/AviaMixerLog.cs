@@ -51,7 +51,7 @@ namespace AviaEntities.FlightRepricing.MixerLog
 				}
 			}
 
-			if (MixingRulesCount > 0)
+			if (MixingRules != null && MixingRules.Count > 0)
 			{
 				logBuilder.
 					AppendLine().
@@ -71,7 +71,7 @@ namespace AviaEntities.FlightRepricing.MixerLog
 					Append("Result currency: ").
 					AppendLine(CurrencyRates.TargetCurrency).
 					AppendLine("Currency;Rate");
-				foreach(var rate in CurrencyRates.Rates)
+				foreach (var rate in CurrencyRates.Rates)
 				{
 					logBuilder.Append(rate.Key).Append(';').Append(rate.Value).Append(';').AppendLine();
 				}

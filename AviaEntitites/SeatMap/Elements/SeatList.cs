@@ -9,5 +9,8 @@ namespace AviaEntities.SeatMap.Elements
 	[CollectionDataContract(Namespace = "http://nemo-ibe.com/Avia", Name = "Seats", ItemName = "Seat")]
 	public class SeatList : List<Seat>
 	{
+		public SeatList() : base() { }
+
+		public SeatList(IEnumerable<Seat> collection) : base(collection) { }
 	}
 }

@@ -33,8 +33,8 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		/// <summary>
 		/// Номер сегмента
 		/// </summary>
-		[DataMember(Order = 3, EmitDefaultValue = false)]
-		public int? SegNum { get; set; }
+		[DataMember(Order = 3)]
+		public int SegNum { get; set; }
 
 
 
@@ -112,7 +112,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 		/// Полное копирование объекта
 		/// </summary>
 		/// <returns>Копия данного объекта</returns>
-		public Tariff FullCopy()
+		public Tariff Copy()
 		{
 			var result = new Tariff();
 
@@ -125,7 +125,7 @@ namespace AviaEntities.FlightSearch.ResponseElements
 			result.IsSystemTransfer = IsSystemTransfer;
 			result.SegNum = SegNum;
 			result.Type = Type;
-	
+
 			return result;
 		}
 	}

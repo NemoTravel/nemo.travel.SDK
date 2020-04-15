@@ -1,6 +1,5 @@
 ﻿using AviaEntities.FlightSearch.RequestElements;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -11,7 +10,7 @@ namespace AviaEntities.FlightSearch
 	/// Тело запроса поиска перелётов
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
-	public class FlightSearchRQBody : ICloneable
+	public class FlightSearchRQBody
 	{
 		/// <summary>
 		/// Содержит техническую информацию о сегметах запрашиваемого перелёта
@@ -44,7 +43,7 @@ namespace AviaEntities.FlightSearch
 		/// Выполняет полное копирование объекта, реализация интерфейса ICloneable
 		/// </summary>
 		/// <returns>Результат копирования</returns>
-		public object Clone()
+		public FlightSearchRQBody Copy()
 		{
 			var result = new FlightSearchRQBody();
 
@@ -56,12 +55,11 @@ namespace AviaEntities.FlightSearch
 
 			result.RequestedFlightInfo.AroundDates = RequestedFlightInfo.AroundDates;
 			result.RequestedFlightInfo.Direct = RequestedFlightInfo.Direct;
-			result.RequestedFlightInfo.Type = RequestedFlightInfo.Type;
 			result.RequestedFlightInfo.SubType = RequestedFlightInfo.SubType;
 
 			foreach (var seg in RequestedFlightInfo.ODPairs)
 			{
-				result.RequestedFlightInfo.ODPairs.Add(seg.FullCopy());
+				result.RequestedFlightInfo.ODPairs.Add(seg.Copy());
 			}
 
 			foreach (var pass in Passengers)
@@ -97,15 +95,6 @@ namespace AviaEntities.FlightSearch
 			}
 
 			return result;
-		}
-
-		/// <summary>
-		/// Обёртка над интерфейсным Clone() с приведением результата к нужному типу
-		/// </summary>
-		/// <returns>Результат копирования, приведённый к типу данного класса</returns>
-		public FlightSearchRQBody FullCopy()
-		{
-			return (FlightSearchRQBody)Clone();
 		}
 	}
 }

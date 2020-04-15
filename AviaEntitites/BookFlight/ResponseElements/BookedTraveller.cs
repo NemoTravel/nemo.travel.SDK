@@ -39,7 +39,7 @@ namespace AviaEntities.BookFlight.ResponseElements
 		/// Конструктор по умолчанию
 		/// </summary>
 		public BookedTraveller()
-		{}
+		{ }
 
 		/// <summary>
 		/// Заполнение общих с пассажиром из запроса полей 
@@ -60,23 +60,23 @@ namespace AviaEntities.BookFlight.ResponseElements
 
 			if (DocumentInfo != null)
 			{
-				DocumentInfo.DocNum = Transliteration.UARUStoENG(basePass.DocumentInfo.CleanDocNum).ToUpper();
+				DocumentInfo.DocNum = Transliteration.CyrillicToLatin(basePass.DocumentInfo.CleanDocNum).ToUpper();
 			}
 
 			if (VisaInfo != null)
 			{
-				VisaInfo.BirthCity = Transliteration.UARUStoENG(basePass.VisaInfo.BirthCity).ToUpper();
-				VisaInfo.IssuePlace = Transliteration.UARUStoENG(basePass.VisaInfo.IssuePlace).ToUpper();
+				VisaInfo.BirthCity = Transliteration.CyrillicToLatin(basePass.VisaInfo.BirthCity).ToUpper();
+				VisaInfo.IssuePlace = Transliteration.CyrillicToLatin(basePass.VisaInfo.IssuePlace).ToUpper();
 			}
 
 			if (ArrAddress != null)
 			{
-				ArrAddress.City = Transliteration.UARUStoENG(basePass.ArrAddress.City).ToUpper();
-				ArrAddress.State = Transliteration.UARUStoENG(basePass.ArrAddress.State).ToUpper();
-				ArrAddress.StreetAddress = Transliteration.UARUStoENG(basePass.ArrAddress.StreetAddress).ToUpper();
+				ArrAddress.City = Transliteration.CyrillicToLatin(basePass.ArrAddress.City).ToUpper();
+				ArrAddress.State = Transliteration.CyrillicToLatin(basePass.ArrAddress.State).ToUpper();
+				ArrAddress.StreetAddress = Transliteration.CyrillicToLatin(basePass.ArrAddress.StreetAddress).ToUpper();
 			}
 		}
-		
+
 		/// <summary>
 		/// Заполнение базовой информации о пассажире, на основании данных из запроса
 		/// </summary>
@@ -97,20 +97,20 @@ namespace AviaEntities.BookFlight.ResponseElements
 			{
 				if (DocumentInfo != null)
 				{
-					DocumentInfo.DocNum = Transliteration.UARUStoENG(passengerFromRequest.DocumentInfo.CleanDocNum).ToUpper();
+					DocumentInfo.DocNum = Transliteration.CyrillicToLatin(passengerFromRequest.DocumentInfo.CleanDocNum).ToUpper();
 				}
 
 				if (VisaInfo != null)
 				{
-					VisaInfo.BirthCity = Transliteration.UARUStoENG(passengerFromRequest.VisaInfo.BirthCity).ToUpper();
-					VisaInfo.IssuePlace = Transliteration.UARUStoENG(passengerFromRequest.VisaInfo.IssuePlace).ToUpper();
+					VisaInfo.BirthCity = Transliteration.CyrillicToLatin(passengerFromRequest.VisaInfo.BirthCity).ToUpper();
+					VisaInfo.IssuePlace = Transliteration.CyrillicToLatin(passengerFromRequest.VisaInfo.IssuePlace).ToUpper();
 				}
 
 				if (ArrAddress != null)
 				{
-					ArrAddress.City = Transliteration.UARUStoENG(passengerFromRequest.ArrAddress.City).ToUpper();
-					ArrAddress.State = Transliteration.UARUStoENG(passengerFromRequest.ArrAddress.State).ToUpper();
-					ArrAddress.StreetAddress = Transliteration.UARUStoENG(passengerFromRequest.ArrAddress.StreetAddress).ToUpper();
+					ArrAddress.City = Transliteration.CyrillicToLatin(passengerFromRequest.ArrAddress.City).ToUpper();
+					ArrAddress.State = Transliteration.CyrillicToLatin(passengerFromRequest.ArrAddress.State).ToUpper();
+					ArrAddress.StreetAddress = Transliteration.CyrillicToLatin(passengerFromRequest.ArrAddress.StreetAddress).ToUpper();
 				}
 			}
 		}

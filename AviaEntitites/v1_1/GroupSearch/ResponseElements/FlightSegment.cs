@@ -77,5 +77,17 @@ namespace AviaEntities.v1_1.GroupSearch.ResponseElements
 		/// </summary>
 		[DataMember(Order = 11)]
 		public bool ETicket { get; set; }
+
+		/// <summary>
+		/// Длина пути в милях
+		/// </summary>
+		[DataMember(Order = 12)]
+		public double FlightDistance { get; set; }
+
+		/// <summary>
+		/// Индикатор наземного сегмента
+		/// </summary>
+		[DataMember(Order = 13, EmitDefaultValue = false)]
+		public bool NotAirplaneSegmentInd { get; set; }
 	}
 }

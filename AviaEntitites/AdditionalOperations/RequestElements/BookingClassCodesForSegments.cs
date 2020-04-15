@@ -9,5 +9,8 @@ namespace AviaEntities.AdditionalOperations.RequestElements
 	[CollectionDataContract(Namespace = "http://nemo-ibe.com/Avia", ItemName = "BookingClassCodesForSegment", KeyName = "SegmentNumber", ValueName = "BookingClassCode")]
 	public class BookingClassCodesForSegments : Dictionary<int, string>
 	{
+		public BookingClassCodesForSegments() : base() { }
+
+		public BookingClassCodesForSegments(IDictionary<int, string> dictionary) : base(dictionary) { }
 	}
 }

@@ -24,12 +24,6 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 		[DataMember(Order = 2)]
 		public FlightTypeInfo TypeInfo { get; set; }
 
-		/// <summary>
-		/// Признак, что на перелёте возможно есть допуслуги
-		/// </summary>
-		[DataMember(Order = 5, EmitDefaultValue = false)]
-		public bool AdditionalServicePossiblyExist { get; set; }
-
 		[DataMember(Order = 6, EmitDefaultValue = false)]
 		public bool MandatoryLatinNames { get; set; }
 
@@ -62,6 +56,9 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 
 		[DataMember(Order = 13, EmitDefaultValue = false)]
 		public bool CanHaveSubsidizedTariffs { get; set; }
+
+		[DataMember(Order = 14, EmitDefaultValue = false)]
+		public string BookingURL { get; set; }
 
 		/// <summary>
 		/// Вычисление полной цены перелёта по всем пассажирам

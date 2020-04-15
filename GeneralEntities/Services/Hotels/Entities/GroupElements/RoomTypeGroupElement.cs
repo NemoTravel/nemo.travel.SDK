@@ -1,5 +1,4 @@
-﻿
-namespace GeneralEntities.BookContent.Entities.GroupElements
+﻿namespace GeneralEntities.BookContent.Entities.GroupElements
 {
 	public class RoomTypeGroupElement
 	{
@@ -10,5 +9,16 @@ namespace GeneralEntities.BookContent.Entities.GroupElements
 		public string Name;
 
 		public string CommonName;
+
+		public RoomTypeGroupElement Copy()
+		{
+			return new RoomTypeGroupElement()
+			{
+				Id = Id,
+				SupplierId = SupplierId,
+				Name = Name,
+				CommonName = CommonName
+			};
+		}
 	}
 }

@@ -20,5 +20,15 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 1, EmitDefaultValue = false)]
 		public double VATRate { get; set; }
+
+		public VATData Copy()
+		{
+			var result = new VATData();
+
+			result.VATRate = VATRate;
+			result.VATValue = VATValue?.Copy();
+
+			return result;
+		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using GeneralEntities;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace AviaEntities.FlightRepricing.MixerLog

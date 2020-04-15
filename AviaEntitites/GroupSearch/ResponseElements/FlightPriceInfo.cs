@@ -16,7 +16,7 @@ namespace AviaEntities.GroupSearch.ResponseElements
 		/// </summary>
 		[DataMember(IsRequired = true, Order = 0)]
 		public string FlightID { get; set; }
-		
+
 		/// <summary>
 		/// ИД цены, которая определяет данный перелёт
 		/// </summary>
@@ -36,18 +36,13 @@ namespace AviaEntities.GroupSearch.ResponseElements
 		public AdditionalPriceInfo AdditionalPriceInfo { get; set; }
 
 		/// <summary>
-		/// Признак, что на перелёте возможно есть допуслуги
-		/// </summary>
-		[DataMember(Order = 6, EmitDefaultValue = false)]
-		public bool AdditionalServicePossiblyExist { get; set; }
-
-		/// <summary>
 		/// Содержит некие идентификаторы данного перелёта в системах поставщиков, необходимые для дальнейших операций с ним (бронирование или ещё что-то)
 		/// </summary>
 		[XmlIgnore]
 		[IgnoreDataMember]
 		[JsonProperty]
 		public FlightSupplierLinkageInfo SupplierLinkageInfo { get; set; }
+
 
 		/// <summary>
 		/// Создание объекта класс с инициализацией необходимых полей

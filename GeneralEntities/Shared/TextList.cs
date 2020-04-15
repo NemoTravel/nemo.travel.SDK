@@ -9,7 +9,7 @@ namespace GeneralEntities.Shared
 		public TextList()
 		{ }
 
-		public TextList(List<string> list)
+		public TextList(IEnumerable<string> list)
 			: base(list)
 		{ }
 	}

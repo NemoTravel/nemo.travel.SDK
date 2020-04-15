@@ -31,5 +31,28 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public string StatusCode { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as SSRDataItem;
+			if (other == null)
+			{
+				return false;
+			}
+
+			return Code == other.Code && Text == other.Text && Status == other.Status && StatusCode == other.StatusCode;
+		}
+
+		public SSRDataItem DeepCopy()
+		{
+			var result = new SSRDataItem();
+
+			result.Code = Code;
+			result.Text = Text;
+			result.Status = Status;
+			result.StatusCode = StatusCode;
+
+			return result;
+		}
 	}
 }

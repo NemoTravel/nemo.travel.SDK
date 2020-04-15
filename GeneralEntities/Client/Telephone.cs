@@ -30,5 +30,26 @@ namespace GeneralEntities.Client
 			Type = type;
 			PhoneNumber = number;
 		}
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as Telephone;
+			if (other == null)
+			{
+				return false;
+			}
+
+			return Type == other.Type && PhoneNumber == other.PhoneNumber;
+		}
+
+		public Telephone Copy()
+		{
+			var result = new Telephone();
+
+			result.Type = Type;
+			result.PhoneNumber = PhoneNumber;
+
+			return result;
+		}
 	}
 }

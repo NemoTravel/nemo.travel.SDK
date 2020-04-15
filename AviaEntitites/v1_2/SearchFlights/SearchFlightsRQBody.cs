@@ -1,8 +1,10 @@
 ﻿using AviaEntities.FlightSearch.RequestElements;
+using GeneralEntities;
 using GeneralEntities.PNRDataContent;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace AviaEntities.v1_2.SearchFlights
@@ -68,14 +70,18 @@ namespace AviaEntities.v1_2.SearchFlights
 		[XmlIgnore]
 		[JsonIgnore]
 		[IgnoreDataMember]
-		public bool IsCurrencySet
+		public bool IsMetaSearch
 		{
 			get
 			{
-				return Restrictions != null && Restrictions.CurrencyCode != null;
+				return Restrictions != null && Restrictions.RequestorTags != null && Restrictions.RequestorTags.Contains("meta");
 			}
 		}
 
+		[XmlIgnore]
+		[JsonIgnore]
+		[IgnoreDataMember]
+		public HashSet<ClassType> UserRequestedClass { get; set; }
 
 		/// <summary>
 		/// Выполняет полное копирование объекта, реализация интерфейса ICloneable
@@ -86,6 +92,7 @@ namespace AviaEntities.v1_2.SearchFlights
 			var result = new SearchFlightsRQBody();
 
 			result.MultiOWRequestedSegmentNumber = MultiOWRequestedSegmentNumber;
+			result.UserRequestedClass = UserRequestedClass;
 
 			result.RequestedFlightInfo = new RequestElements.FlightDirection();
 			result.RequestedFlightInfo.ODPairs = new RequestElements.FlightPairList();
@@ -93,7 +100,7 @@ namespace AviaEntities.v1_2.SearchFlights
 
 			result.RequestedFlightInfo.AroundDates = RequestedFlightInfo.AroundDates;
 			result.RequestedFlightInfo.Direct = RequestedFlightInfo.Direct;
-			result.RequestedFlightInfo.Type = RequestedFlightInfo.Type;
+			result.RequestedFlightInfo.ForcedType = RequestedFlightInfo.ForcedType;
 			result.RequestedFlightInfo.SubType = RequestedFlightInfo.SubType;
 
 			foreach (var seg in RequestedFlightInfo.ODPairs)
@@ -115,7 +122,6 @@ namespace AviaEntities.v1_2.SearchFlights
 				result.Restrictions = new RequestElements.AdditionalSearchInfo();
 				result.Restrictions.ClassPreference = new RequestElements.ClassPrefList();
 				result.Restrictions.ClassPreference.AddRange(Restrictions.ClassPreference);
-				result.Restrictions.CurrencyCode = Restrictions.CurrencyCode;
 				result.Restrictions.PrivateFaresOnly = Restrictions.PrivateFaresOnly;
 				result.Restrictions.SourcePreference = Restrictions.SourcePreference;
 				result.Restrictions.MaxConnectionTime = Restrictions.MaxConnectionTime;
@@ -125,6 +131,8 @@ namespace AviaEntities.v1_2.SearchFlights
 				result.Restrictions.AsyncSearch = Restrictions.AsyncSearch;
 				result.Restrictions.AdditionalPublicFaresOnly = Restrictions.AdditionalPublicFaresOnly;
 				result.Restrictions.MaxConnections = Restrictions.MaxConnections;
+				result.Restrictions.RequestorTags = Restrictions.RequestorTags;
+				result.Restrictions.ThreeDomainAgreementNumber = Restrictions.ThreeDomainAgreementNumber;
 
 				if (Restrictions.CompanyFilter != null)
 				{
@@ -150,6 +158,38 @@ namespace AviaEntities.v1_2.SearchFlights
 			}
 
 			return result;
+		}
+
+		/// <summary>
+		/// Получение данных для хэша запроса для использования в кэш-сервере
+		/// </summary>
+		/// <returns></returns>
+		public string GetCacheHashData()
+		{
+			var result = new StringBuilder();
+
+			result.Append(JsonConvert.SerializeObject(RequestedFlightInfo));
+			result.Append(JsonConvert.SerializeObject(Passengers));
+
+			if (Restrictions != null)
+			{
+				result.Append(Restrictions.AdditionalPublicFaresOnly);
+				result.Append(JsonConvert.SerializeObject(Restrictions.ClassPreference));
+				result.Append(JsonConvert.SerializeObject(Restrictions.CompanyFilter));
+				result.Append(Restrictions.MaxConnections);
+				result.Append(Restrictions.MaxConnectionTime);
+				result.Append(Restrictions.MaxResultCount);
+				result.Append(Restrictions.PriceRefundType);
+				result.Append(Restrictions.PrivateFaresOnly);
+
+				//непосредственно на запрос не влияют, поэтому не учитываем тут
+				//Restrictions.AsyncSearch
+				//Restrictions.RequestorTags
+				//Restrictions.ResultsGrouping
+				//Restrictions.SourcePreference
+			}
+
+			return result.ToString();
 		}
 	}
 }

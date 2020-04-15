@@ -25,5 +25,17 @@ namespace GeneralEntities.Market
 		/// </summary>
 		[DataMember(Order = 2, IsRequired = true)]
 		public double Rate { get; set; }
+
+
+		public CurrencyRate Copy()
+		{
+			var result = new CurrencyRate();
+
+			result.From = From;
+			result.To = To;
+			result.Rate = Rate;
+
+			return result;
+		}
 	}
 }

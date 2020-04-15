@@ -6,7 +6,6 @@ namespace GeneralEntities.Services.Hotels.Entities.GroupElements.Static
 	/// <summary>
 	/// особенности отелей
 	/// </summary>
-	[Flags]
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public enum HotelsFeatures
 	{

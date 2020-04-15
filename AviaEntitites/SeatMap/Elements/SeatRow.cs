@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Linq;
+using System.Runtime.Serialization;
 
 namespace AviaEntities.SeatMap.Elements
 {
@@ -46,6 +47,17 @@ namespace AviaEntities.SeatMap.Elements
 			{
 				result = Seats.Find(seat => seat.Number == seatNum);
 			}
+
+			return result;
+		}
+
+		public SeatRow DeepCopy()
+		{
+			var result = new SeatRow();
+
+			result.Number = Number;
+			result.Characteristics = Characteristics;
+			result.Seats = new SeatList(Seats.Select(s => s.DeepCopy()));
 
 			return result;
 		}

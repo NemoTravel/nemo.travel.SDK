@@ -1,4 +1,4 @@
-﻿using AviaEntities.SharedElements.Ancillaries.RequestElements;
+﻿using AviaEntities.v1_1.SharedElements.Ancillaries.RequestElements;
 using GeneralEntities.PNRDataContent;
 using System.Runtime.Serialization;
 
