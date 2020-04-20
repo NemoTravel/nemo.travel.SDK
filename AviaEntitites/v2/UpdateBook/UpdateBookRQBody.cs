@@ -29,6 +29,9 @@ namespace AviaEntities.v2.UpdateBook
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public TagList RequestorTags { get; set; }
 
+		[DataMember(Order = 3, EmitDefaultValue = false)]
+		public int? RefererID { get; set; }
+
 		[IgnoreDataMember]
 		public bool NoReprice
 		{

@@ -2,8 +2,8 @@
 using GeneralEntities.ExtendedDateTime;
 using GeneralEntities.Market;
 using GeneralEntities.PriceContent;
-using GeneralEntities.PriceContent.PricingDebug;
 using GeneralEntities.Shared;
+using NodaTime;
 using System.Linq;
 using System.Runtime.Serialization;
 
@@ -87,10 +87,26 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 		public Money RoundingChargePart { get; set; }
 
 		[DataMember(Order = 11, EmitDefaultValue = false)]
-		public bool IsFixed { get; set; }
+		public ChargePartList ChargeBreakdown { get; set; }
 
 		[DataMember(Order = 12, EmitDefaultValue = false)]
-		public ChargePartList ChargeBreakdown { get; set; }
+		public Money SubAgentMarkup { get; set; }
+
+		[DataMember(Order = 13, EmitDefaultValue = false)]
+		public ChargePartList SubAgentChargeBreakdown { get; set; }
+
+		[DataMember(Order = 14, EmitDefaultValue = false)]
+		public double? MetasearchCommissionRate { get; set; }
+
+		[DataMember(Order = 15, EmitDefaultValue = false)]
+		public Money MetasearchCommission { get; set; }
+
+		[DataMember(Order = 16, EmitDefaultValue = false)]
+		public ZonedDateTime? TimeLimit
+		{
+			get => TicketTimeLimit == null ? (ZonedDateTime?)null : Instant.FromDateTimeOffset(TicketTimeLimit.DateTime).InUtc();
+			private set { /* TODO: REFACTOR TicketTimeLimit w/ THIS PROPERTY */ }
+		}
 
 		[IgnoreDataMember]
 		public Money TotalPrice
@@ -101,10 +117,8 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 				{
 					return new Money(PassengerFares.Sum(pricePart => pricePart.TotalFare.Value * pricePart.Quantity), PassengerFares[0].TotalFare.Currency);
 				}
-				else
-				{
-					return null;
-				}
+
+				return null;
 			}
 		}
 	}

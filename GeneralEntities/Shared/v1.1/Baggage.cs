@@ -21,5 +21,16 @@ namespace GeneralEntities.Shared.v1_1
 		/// </summary>
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public string Size { get; set; }
+
+		public Baggage Copy()
+		{
+			var result = new Baggage();
+
+			result.Measure = this.Measure;
+			result.Size = this.Size;
+			result.Value = this.Value;
+
+			return result;
+		}
 	}
 }

@@ -34,12 +34,21 @@ namespace GeneralEntities.Constants
 		public const string Routes = "Routes";
 		public const string Environment = "Environment";
 		public const string AirlinesAndClasses = "AirlinesAndClasses";
+		public const string FlightDateDeparture = "FlightDateDeparture";
 
 		public static IEnumerable<string> GetConstList
 		{
 			get
 			{
 				return ConstList;
+			}
+		}
+
+		public static int ChecksCount
+		{
+			get
+			{
+				return ConstList.Count;
 			}
 		}
 
@@ -75,6 +84,7 @@ namespace GeneralEntities.Constants
 			ConstList.Add(Routes);
 			ConstList.Add(Environment);
 			ConstList.Add(AirlinesAndClasses);
+			ConstList.Add(FlightDateDeparture);
 		}
 	}
 }

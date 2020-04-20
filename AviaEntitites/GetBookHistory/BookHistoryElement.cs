@@ -26,6 +26,7 @@ namespace AviaEntities.GetBookHistory
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public BookHistoryInfo HistoryRemarks { get; set; }
 
+
 		public BookHistoryElement()
 		{
 			HistoryRemarks = new BookHistoryInfo();

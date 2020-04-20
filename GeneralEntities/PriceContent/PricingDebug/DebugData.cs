@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace GeneralEntities.PriceContent.PricingDebug
@@ -51,10 +52,27 @@ namespace GeneralEntities.PriceContent.PricingDebug
 		[DataMember(Order = 14)]
 		public ObjectData Object { get; set; }
 
+		[DataMember(Order = 15)]
+		public UsersCollection Users { get; set; }
+
+		[DataMember(Order = 16, EmitDefaultValue = false)]
+		public string SubAgentCharge { get; set; }
+
+		[DataMember(Order = 17, EmitDefaultValue = false)]
+		public bool NegativeSubAgentChargeRestricted { get; set; }
+
+		[DataMember(Order = 18, EmitDefaultValue = false)]
+		public string MetasearchCommissionRate { get; set; }
+
+		[DataMember(Order = 19, EmitDefaultValue = false)]
+		public string MetasearchCommissionValue { get; set; }
+
+
 		public string Dump()
 		{
 			var logBuilder = new StringBuilder();
 
+			logBuilder.Append("Users/groups: ").AppendLine(string.Join(", ", Users));
 			logBuilder.Append("Checked vendors: ").AppendLine(string.Join(", ", VendorsForCheck));
 			if (!string.IsNullOrEmpty(CalculatedVV))
 			{
@@ -90,24 +108,69 @@ namespace GeneralEntities.PriceContent.PricingDebug
 			}
 			if (!string.IsNullOrEmpty(MinimalProfit))
 			{
-				logBuilder.AppendFormat("Minimal profit: ").AppendLine(MinimalProfit);
+				logBuilder.Append("Minimal profit: ").AppendLine(MinimalProfit);
 			}
 			if (!string.IsNullOrEmpty(TotalCharge))
 			{
 				logBuilder.Append("Setted charge: ").AppendLine(TotalCharge);
 			}
+			if (!string.IsNullOrEmpty(SubAgentCharge))
+			{
+				logBuilder.Append("Sub agency charge: ").AppendLine(SubAgentCharge);
+				if (NegativeSubAgentChargeRestricted)
+				{
+					logBuilder.AppendLine("Negative sub agency charge restricted by settings");
+				}
+			}
+			if (!string.IsNullOrEmpty(MetasearchCommissionRate))
+			{
+				logBuilder.Append("Metasearch commission: ").Append(MetasearchCommissionRate);
+
+				if (!string.IsNullOrEmpty(MetasearchCommissionValue))
+				{
+					logBuilder.Append(" (").Append(MetasearchCommissionValue).Append(")");
+				}
+
+				logBuilder.AppendLine();
+			}
 
 			logBuilder.Append("VV;ID;AutoticketingRestriction;Sources;UTMSource;PriceActual;DepartureAndArrival;BookingClasses;SalesDates;FirstVendor;FlightType;OwnPart;").
 				Append("MarketingVendors;ServiceClasses;Aircraft;Passengers;OperatingVendors;CodeSharing;ContractType;PrivateFare;FlightDate;Zone;Tariffs;Taxes;FlightNumber;Price;DaysOfWeek;").
-				Append("RouteType;Routes;Environment;AirlinesAndClasses;Priority;ManualVV;Commission;CommissionResult;AgencyCommission;Bonus;BonusResult;Charge;AdditionalCharge;").
-				AppendLine("ChargeResult;MinProfitPriority;MinProfit;Discount;AuthCode;TourCode;RuleIsOK;BestRule;").
+				Append("RouteType;Routes;Environment;AirlinesAndClasses;FlightDateDeparture;Priority;ManualVV;Commission;CommissionResult;AgencyCommission;Bonus;BonusResult;Charge;AdditionalCharge;").
+				AppendLine("ChargeResult;MinProfitPriority;MinProfit;Discount;AuthCode;TourCode;MetasearchCommissionRate;MetasearchCommissionValue;RuleIsOK;BestRule;CorpRule;BestCorpRule;").
 				AppendLine(Object.Dump());
+
 			foreach (var ruleData in RulesDebugInfo)
 			{
 				logBuilder.AppendLine(ruleData.Dump());
 			}
 
 			return logBuilder.ToString();
+		}
+
+		public DebugData DeepCopy()
+		{
+			DebugData result = new DebugData();
+
+			result.Users = new UsersCollection(Users);
+			result.VendorsForCheck = new VendorsCollection(VendorsForCheck);
+			result.CalculatedVV = CalculatedVV;
+			result.AirlineCommission = AirlineCommission;
+			result.AgencyCommission = AgencyCommission;
+			result.Bonus = Bonus;
+			result.CurrentProfit = CurrentProfit;
+			result.ChargeProfit = ChargeProfit;
+			result.CommissionProfit = CommissionProfit;
+			result.BonusProfit = BonusProfit;
+			result.MinimalProfit = MinimalProfit;
+			result.TotalCharge = TotalCharge;
+			result.SubAgentCharge = SubAgentCharge;
+			result.NegativeSubAgentChargeRestricted = NegativeSubAgentChargeRestricted;
+			result.MetasearchCommissionRate = MetasearchCommissionRate;
+			result.MetasearchCommissionValue = MetasearchCommissionValue;
+			result.RulesDebugInfo = new RulesDebugInfoCollection(RulesDebugInfo.Select(r => r.DeepCopy()));
+
+			return result;
 		}
 	}
 }

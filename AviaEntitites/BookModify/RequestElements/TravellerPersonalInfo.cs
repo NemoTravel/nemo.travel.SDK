@@ -73,7 +73,7 @@ namespace AviaEntities.BookModify.RequestElements
 			{
 				if (newFirstName != null)
 				{
-					return Transliteration.UARUStoENG(newFirstName).ToUpper();
+					return Transliteration.CyrillicToLatin(newFirstName).ToUpper();
 				}
 				else
 				{
@@ -92,7 +92,7 @@ namespace AviaEntities.BookModify.RequestElements
 			{
 				if (newLastName != null)
 				{
-					return Transliteration.UARUStoENG(newLastName).ToUpper();
+					return Transliteration.CyrillicToLatin(newLastName).ToUpper();
 				}
 				else
 				{
@@ -111,7 +111,7 @@ namespace AviaEntities.BookModify.RequestElements
 			{
 				if (newMiddleName != null)
 				{
-					return Transliteration.UARUStoENG(newMiddleName).ToUpper();
+					return Transliteration.CyrillicToLatin(newMiddleName).ToUpper();
 				}
 				else
 				{

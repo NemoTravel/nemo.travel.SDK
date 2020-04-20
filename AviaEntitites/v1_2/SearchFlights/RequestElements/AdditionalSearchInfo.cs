@@ -1,6 +1,7 @@
 ﻿using AviaEntities.FlightSearch.RequestElements;
 using GeneralEntities;
 using GeneralEntities.Shared;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -15,6 +16,7 @@ namespace AviaEntities.v1_2.SearchFlights.RequestElements
 		/// <summary>
 		/// Код валюты, в которой должны вернуться цены результатов поиска
 		/// </summary>
+		[Obsolete("Валюта из запроса поиска больше не должна учитывается.", true)]
 		[DataMember(Order = 0, EmitDefaultValue = false)]
 		public string CurrencyCode { get; set; }
 
@@ -84,6 +86,12 @@ namespace AviaEntities.v1_2.SearchFlights.RequestElements
 		/// </summary>
 		[DataMember(Order = 16, EmitDefaultValue = false)]
 		public int? MaxConnections { get; set; }
+
+		[DataMember(Order = 17, EmitDefaultValue = false)]
+		public int? RefererID { get; set; }
+
+		[DataMember(Order = 18, EmitDefaultValue = false)]
+		public string ThreeDomainAgreementNumber { get; set; }
 
 		[IgnoreDataMember]
 		public bool AdditionalPublicFaresOnly { get; set; }

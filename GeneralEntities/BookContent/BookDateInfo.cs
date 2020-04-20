@@ -80,5 +80,105 @@ namespace GeneralEntities.BookContent
 		/// </summary>
 		[DataMember(Order = 11, EmitDefaultValue = false)]
 		public DateTimeEx SeatsReleased { get; set; }
+
+
+		/// <summary>
+		/// Простановка даты создание брони на сервере
+		/// </summary>
+		public void SetCreationDate()
+		{
+			Created = DateTimeEx.Now;
+		}
+
+		/// <summary>
+		/// Простановка даты последнего обновления брони
+		/// </summary>
+		public void SetLastUpdateDate()
+		{
+			LastUpdate = DateTimeEx.Now;
+		}
+
+		/// <summary>
+		/// Простановка даты последнего доступа к брони
+		/// </summary>
+		public void SetLastAccessDate()
+		{
+			LastAccess = DateTimeEx.Now;
+		}
+
+		/// <summary>
+		/// Простановка даты выписки брони на сервере
+		/// </summary>
+		public void SetTicketingDate()
+		{
+			Ticketed = DateTimeEx.Now;
+		}
+
+		/// <summary>
+		/// Простановка даты войдирования брони на сервере
+		/// </summary>
+		public void SetVoidingDate()
+		{
+			Voided = DateTimeEx.Now;
+		}
+
+		/// <summary>
+		/// Простановка даты возврата брони на сервере
+		/// </summary>
+		public void SetRefundDate()
+		{
+			Refunded = DateTimeEx.Now;
+		}
+
+		/// <summary>
+		/// Проставление даты разбиения брони на сервере
+		/// </summary>
+		public void SetSplitDate()
+		{
+			Splited = DateTimeEx.Now;
+		}
+
+		/// <summary>
+		/// Простановка даты отмены брони на сервере
+		/// </summary>
+		public void SetCancelingDate()
+		{
+			Canceled = DateTimeEx.Now;
+		}
+
+		/// <summary>
+		/// Простановка даты снятия мест на сервере
+		/// </summary>
+		public void SetSeatReleaseDate()
+		{
+			SeatsReleased = DateTimeEx.Now;
+		}
+
+		/// <summary>
+		/// Простановка формата строкового представления при сериализации данных
+		/// </summary>
+		/// <param name="format">Формат строкового представления</param>
+		public void SetOutFormat(string format)
+		{
+			SetOutFormat(Created, format);
+			SetOutFormat(Start, format);
+			SetOutFormat(LastUpdate, format);
+			SetOutFormat(LastAccess, format);
+			SetOutFormat(Canceled, format);
+			SetOutFormat(Ticketed, format);
+			SetOutFormat(Voided, format);
+			SetOutFormat(Refunded, format);
+			SetOutFormat(Exchanged, format);
+			SetOutFormat(Paid, format);
+		}
+
+
+		private void SetOutFormat(DateTimeEx dateTimeEx, string format)
+		{
+			if (dateTimeEx != null)
+			{
+				dateTimeEx.OutFormat = format;			
+			}
+		}
 	}
 }

@@ -17,6 +17,12 @@ namespace AviaEntities.SeatMap.Elements
 
 		/// <summary>
 		/// Тип места
+		/// <para />
+		/// Возможные значения:
+		/// W - у окна;
+		/// NPW - у прохода(Near Passenger Way);
+		/// M - месту между W и NPW;
+		/// любой тип + постфикс " NE" - места не существует.
 		/// </summary>
 		[DataMember(Order = 1, IsRequired = true)]
 		public string Type { get; set; }
@@ -42,7 +48,7 @@ namespace AviaEntities.SeatMap.Elements
 		/// <summary>
 		/// Признак того что кресла на данном месте не существует
 		/// </summary>
-		[DataMember(Order = 5, IsRequired = true)]
+		[DataMember(Order = 5, EmitDefaultValue = false)]
 		public bool NotExists { get; set; }
 
 		/// <summary>
@@ -56,21 +62,17 @@ namespace AviaEntities.SeatMap.Elements
 		/// Копирование объекта места
 		/// </summary>
 		/// <returns>Копия места</returns>
-		public Seat Clone()
+		public Seat DeepCopy()
 		{
 			var result = new Seat();
 
-			result.Number = Number;
 			result.Type = Type;
-			result.Characteristics = Characteristics;
+			result.RFISC = RFISC;
+			result.Number = Number;
 			result.IsFree = IsFree;
 			result.NotExists = NotExists;
-			result.RFISC = RFISC;
-
-			if (result.Price != null)
-			{
-				result.Price = new Money(Price);
-			}
+			result.Characteristics = Characteristics;
+			result.Price = Price?.Copy();
 
 			return result;
 		}

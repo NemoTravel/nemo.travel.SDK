@@ -1,8 +1,4 @@
-﻿using GeneralEntities.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace GeneralEntities.Services.Ancillary
 {
@@ -14,34 +10,17 @@ namespace GeneralEntities.Services.Ancillary
 	public class FlightAncillaryService : BaseService
 	{
 		/// <summary>
-		/// Отношение [ИД допуслуги в ПНР][ИД сегмента]
-		/// Может содержать повторяющиеся допуслуги на одном сегменте
-		/// </summary>
-		[IgnoreDataMember]
-		private Dictionary<string, int> linkage;
-
-
-		/// <summary>
 		/// Признак бесплатности услуг (оформление EMD не требуется)
 		/// </summary>
 		[IgnoreDataMember]
 		public bool IsFree { get; set; }
 
-		/// <summary>
-		/// ИД всех допуслуг в ПНР, которые содержатся в данной допуслуге
-		/// </summary>
-		[IgnoreDataMember]
-		public List<string> IDInPNR
-		{
-			get { return new List<string>(linkage.Keys); }
-		}
-
 
 		/// <summary>
-		/// Мульти-ссылки на сегменты перелёта, для которых приобрели услуги
+		/// Cсылка на сегмент
 		/// </summary>
 		[DataMember(Order = 0, IsRequired = true)]
-		public MRefList<int> SegmentRef { get; set; }
+		public int SegmentRef { get; set; }
 
 		/// <summary>
 		/// ИАТА код а/к, предоставляющей данную допуслугу
@@ -85,142 +64,48 @@ namespace GeneralEntities.Services.Ancillary
 		[DataMember(Order = 8, EmitDefaultValue = false)]
 		public string SSRText { get; set; }
 
-
-		public FlightAncillaryService()
-		{
-			linkage = new Dictionary<string, int>();
-		}
-
+		/// <summary>
+		/// Количество услуг
+		/// </summary>
+		[DataMember(Order = 9, IsRequired = true)]
+		public int Quantity { get; set; }
 
 		/// <summary>
-		/// Получение хэша для группировки допуслуг.
-		/// Группировка производится относительноп пассажира и данных допуслуги
+		/// Группа
 		/// </summary>
-		/// <returns>Хэш группировки</returns>
-		public int ComputeGroupingHashCode()
-		{
-			// Если в клиентском коде не была указана ссылка на пассажира, заваливаем вычесление
-			// т.к. без указания ссылки на пассажира хэш не будет валидным
-			if (TravellerRef.Count == 0)
-				throw new ArgumentException("TravellerRef");
-
-			if (Name == null)
-				throw new ArgumentException("Name");
-
-			if (RFIC == null)
-				throw new ArgumentException("RFIC");
-
-			if (RFISC == null)
-				throw new ArgumentException("RFISC");
-
-			if (CompanyCode == null)
-				throw new ArgumentException("CompanyCode");
-
-			unchecked
-			{
-				var hash =
-					TravellerRef[0] +
-					Name.GetHashCode() +
-					RFIC.GetHashCode() +
-					RFISC.GetHashCode() +
-					IsFree.GetHashCode() +
-					Status.GetHashCode() +
-					CompanyCode.GetHashCode();
-
-				if (SSRCode != null)
-				{
-					hash += SSRCode.GetHashCode();
-				}
-
-				if (SSRText != null)
-				{
-					hash += SSRText.GetHashCode();
-				}
-
-				if (TypeCode != null)
-				{
-					hash += TypeCode.GetHashCode();
-				}
-
-				return hash;
-			}
-		}
+		[DataMember(Order = 10)]
+		public string Group { get; set; }
 
 		/// <summary>
-		/// Определят содержится ли в данной услуге переданная услуга из ПНР
+		/// Суб группа
 		/// </summary>
-		/// <param name="idInPNR">ИД допуслуги из ПНР</param>
-		/// <returns></returns>
-		public bool IsContainerFor(string idInPNR)
-		{
-			return linkage.ContainsKey(idInPNR);
-		}
+		[DataMember(Order = 11)]
+		public string SubGroup { get; set; }
 
-		/// <summary>
-		/// Получение номера сегмента по ИД услуги из ПНР
-		/// </summary>
-		/// <param name="idInPNR">ИД услуги в ПНР</param>
-		/// <returns>Номер сегмента</returns>
-		public int GetSegmentFor(string idInPNR)
+		public FlightAncillaryService DeepCopy()
 		{
-			return linkage[idInPNR];
-		}
+			FlightAncillaryService result = new FlightAncillaryService();
 
-		/// <summary>
-		/// Получение всех ИД в ПНР для допуслуг на определенных мульти-сегментах
-		/// </summary>
-		/// <param name="segmentRefs">Мульти-ссылки на сегменты</param>
-		/// <returns></returns>
-		public List<string> GetIDInPNRFor(MRefList<int> segmentRefs)
-		{
-			var result = new List<string>();
-
-			foreach (var segmentRef in segmentRefs)
-			{
-				result.AddRange(GetIDInPNRFor(segmentRef));
-			}
+			result.CompanyCode = CompanyCode;
+			result.Group = Group;
+			result.ID = ID;
+			result.IsFree = IsFree;
+			result.IsOffline = IsOffline;
+			result.Name = Name;
+			result.Quantity = Quantity;
+			result.RFIC = RFIC;
+			result.RFISC = RFISC;
+			result.SegmentRef = SegmentRef;
+			result.SSRCode = SSRCode;
+			result.SSRText = SSRText;
+			result.Status = Status;
+			result.SubGroup = SubGroup;
+			result.SubStatus = SubStatus;
+			result.SupplierID = SupplierID;
+			result.TravellerRef = TravellerRef;
+			result.TypeCode = TypeCode;
 
 			return result;
-		}
-
-		/// <summary>
-		/// Получение всех ИД в ПНР для допуслуг на определенном мульти-сегменте
-		/// </summary>
-		/// <param name="segmentRef">Мульти-ссылка на сегмент</param>
-		/// <returns></returns>
-		public HashSet<string> GetIDInPNRFor(int segmentRef)
-		{
-			var result = new HashSet<string>();
-
-			foreach (var kvp in linkage)
-			{
-				if (kvp.Value == segmentRef)
-				{
-					result.Add(kvp.Key);
-				}
-			}
-
-			return result;
-		}
-
-		/// <summary>
-		/// Добавляет новую связь [ИД услуги в ПНР][ИД сегмента]
-		/// </summary>
-		/// <param name="idInPNR"></param>
-		/// <param name="segmentRef"></param>
-		public void AddLink(string idInPNR, int segmentRef)
-		{
-			linkage.Add(idInPNR, segmentRef);
-		}
-
-		/// <summary>
-		/// Добавляет новый ИД допуслуги в ПНР без привязки к сегменту
-		/// (Случай допуслуги без привязки к сегменту)
-		/// </summary>
-		/// <param name="idInPNR"></param>
-		public void AddIDInPNR(string idInPNR)
-		{
-			linkage.Add(idInPNR, -1);
 		}
 	}
 }

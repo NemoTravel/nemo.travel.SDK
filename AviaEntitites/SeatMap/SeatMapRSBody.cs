@@ -14,5 +14,11 @@ namespace AviaEntities.SeatMap
 		/// </summary>
 		[DataMember(Order = 0, EmitDefaultValue = false)]
 		public FlightSeatMap SeatMapSegments { get; set; }
+
+
+		public SeatMapRSBody()
+		{
+			SeatMapSegments = new FlightSeatMap();
+		}
 	}
 }

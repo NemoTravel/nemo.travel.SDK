@@ -10,5 +10,14 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 0, IsRequired = true)]
 		public int? SubAgencyID { get; set; }
+
+		public SellingPointDescriptionDataItem Copy()
+		{
+			var result = new SellingPointDescriptionDataItem();
+
+			result.SubAgencyID = SubAgencyID;
+
+			return result;
+		}
 	}
 }

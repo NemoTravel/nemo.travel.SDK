@@ -1,4 +1,5 @@
 ﻿using GeneralEntities.Constants;
+using SharedAssembly.Extensions;
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -65,7 +66,7 @@ namespace GeneralEntities.PriceContent.PricingDebug
 		public string AcquiringMode { get; set; }
 
 		[DataMember(Order = 19)]
-		public bool? IsAtoticketingDisabled { get; set; }
+		public bool? IsAutoticketingDisabled { get; set; }
 
 		[DataMember(Order = 20)]
 		public bool BestRule { get; set; }
@@ -76,6 +77,31 @@ namespace GeneralEntities.PriceContent.PricingDebug
 		[DataMember(Order = 22)]
 		public CheckResultsCollection CheckResults { get; set; }
 
+		[DataMember(Order = 23)]
+		public bool CorpRule { get; set; }
+
+		[DataMember(Order = 24)]
+		public bool BestCorpRule { get; set; }
+
+		/// <summary>
+		/// Ставка комиссии метапоиску
+		/// </summary>
+		[DataMember(Order = 25, EmitDefaultValue = false)]
+		public string MetasearchCommissionRate { get; set; }
+
+		/// <summary>
+		/// Рассчитанное значение комиссии метапоиску
+		/// </summary>
+		[DataMember(Order = 26, EmitDefaultValue = false)]
+		public string MetasearchCommissionValue { get; set; }
+
+		/// <summary>
+		/// Идентификатор бизнес правила
+		/// </summary>
+		[DataMember(Order = 27, EmitDefaultValue = false)]
+		public string BusinessRuleId { get; set; }
+
+
 		public string Dump()
 		{
 			var logBuilder = new StringBuilder().
@@ -84,9 +110,9 @@ namespace GeneralEntities.PriceContent.PricingDebug
 				Append(ID).
 				Append(';');
 
-			if (IsAtoticketingDisabled.HasValue)
+			if (IsAutoticketingDisabled.HasValue)
 			{
-				logBuilder.Append(IsAtoticketingDisabled.Value ? "on" : "off");
+				logBuilder.Append(IsAutoticketingDisabled.Value ? "on" : "off");
 			}
 
 			logBuilder.Append(';');
@@ -133,12 +159,56 @@ namespace GeneralEntities.PriceContent.PricingDebug
 				Append(';').
 				Append(TourCode).
 				Append(';').
+				Append(MetasearchCommissionRate).
+				Append(';').
+				Append(MetasearchCommissionValue).
+				Append(';').
 				Append(Success ? "+" : "-").
 				Append(';').
 				Append(BestRule ? "+" : "-").
+				Append(';').
+				Append(CorpRule ? "+" : "-").
+				Append(';').
+				Append(BestCorpRule ? "+" : "-").
 				Append(';');
 
 			return logBuilder.ToString();
+		}
+
+		public RuleData DeepCopy()
+		{
+			RuleData result = new RuleData();
+
+			result.ID = ID;
+			result.Priority = Priority;
+			result.ManualVV = ManualVV;
+			result.ValCompany = ValCompany;
+			result.Commission = Commission;
+			result.ComResult = ComResult;
+			result.AgencyCommission = AgencyCommission;
+			result.Bonus = Bonus;
+			result.BonusResult = BonusResult;
+			result.ChargeExt = ChargeExt;
+			result.Charge = Charge;
+			result.ChargeValue = ChargeValue;
+			result.MinProfit = MinProfit;
+			result.MinProfitPriority = MinProfitPriority;
+			result.MinProfitEnable = MinProfitEnable;
+			result.Discount = Discount;
+			result.AuthCode = AuthCode;
+			result.TourCode = TourCode;
+			result.AcquiringMode = AcquiringMode;
+			result.IsAutoticketingDisabled = IsAutoticketingDisabled;
+			result.BestRule = BestRule;
+			result.Success = Success;
+			result.CorpRule = CorpRule;
+			result.BestCorpRule = BestCorpRule;
+			result.MetasearchCommissionRate = MetasearchCommissionRate;
+			result.MetasearchCommissionValue = MetasearchCommissionValue;
+			result.CheckResults = new CheckResultsCollection(CheckResults.Count);
+			CheckResults.ForEach(c => result.CheckResults.Add(c.Key, c.Value));
+
+			return result;
 		}
 	}
 }

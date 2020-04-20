@@ -50,5 +50,28 @@ namespace GeneralEntities.ModifyContent.Avia
 		/// </summary>
 		[DataMember(Order = 7, IsRequired = true)]
 		public string BookingClassCode { get; set; }
+
+		/// <summary>
+		/// ID связанного сервиса
+		/// </summary>
+		[DataMember(Order = 8, EmitDefaultValue = false)]
+		public int? ServiceRef { get; set; }
+
+		public ModifyFlightSegment Copy()
+		{
+			var result = new ModifyFlightSegment();
+			CopyTo(result);
+
+			result.SegmentID = SegmentID;
+			result.DepatureAirport = DepatureAirport;
+			result.ArrivalAirport = ArrivalAirport;
+			result.MarketingAirline = MarketingAirline;
+			result.FlightNumber = FlightNumber;
+			result.BookingClassCode = BookingClassCode;
+			result.ServiceRef = ServiceRef;
+			result.DepatureDateTime = DepatureDateTime?.Copy();
+
+			return result;
+		}
 	}
 }

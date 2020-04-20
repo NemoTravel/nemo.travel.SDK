@@ -10,6 +10,5 @@ namespace AviaEntities.BookFlight.ResponseElements
 	[CollectionDataContract(Namespace = "http://nemo-ibe.com/Avia", Name = "BookedSeats", ItemName = "Seat")]
 	[Serializable]
 	public class BookedSeatList : List<BookedSeat>
-	{
-	}
+	{ }
 }

@@ -31,5 +31,34 @@ namespace GeneralEntities.PNRDataContent.FOP
 		/// </summary>
 		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public string ManualApprovalCode { get; set; }
+
+		public override bool Equals(object other)
+		{
+			var otherFOP = other as CreditCardFOP;
+			if (otherFOP == null)
+			{
+				return false;
+			}
+
+			return VendorCode == otherFOP.VendorCode && Number == otherFOP.Number && ExpireDate == otherFOP.ExpireDate &&
+				ManualApprovalCode == otherFOP.ManualApprovalCode && base.Equals(otherFOP);
+		}
+
+		public override BaseFOP Copy()
+		{
+			var result = new CreditCardFOP();
+			CopyTo(result);
+			return result;
+		}
+
+		protected new void CopyTo<T>(T fop) where T : CreditCardFOP
+		{
+			base.CopyTo(fop);
+
+			fop.VendorCode = VendorCode;
+			fop.Number = Number;
+			fop.ExpireDate = ExpireDate;
+			fop.ManualApprovalCode = ManualApprovalCode;
+		}
 	}
 }

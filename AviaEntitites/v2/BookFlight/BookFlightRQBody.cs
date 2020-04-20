@@ -49,5 +49,8 @@ namespace AviaEntities.v2.BookFlight
 		/// </summary>
 		[DataMember(Order = 5, EmitDefaultValue = false)]
 		public TagList RequestorTags { get; set; }
+
+		[DataMember(Order = 6, EmitDefaultValue = false)]
+		public int? RefererID { get; set; }
 	}
 }

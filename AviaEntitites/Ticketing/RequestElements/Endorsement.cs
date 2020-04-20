@@ -26,7 +26,7 @@ namespace AviaEntities.Ticketing.RequestElements
 		[DataMember(IsRequired = true, Order = 1, EmitDefaultValue = false)]
 		public string Text
 		{
-			get { return Transliteration.UARUStoENG(text); }
+			get { return Transliteration.CyrillicToLatin(text); }
 			set { text = value; }
 		}
 	}

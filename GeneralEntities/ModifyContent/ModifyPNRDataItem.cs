@@ -14,5 +14,15 @@ namespace GeneralEntities.ModifyContent
 		/// </summary>
 		[DataMember(Order = 1, IsRequired = true)]
 		public PNRDataItem DataItem { get; set; }
+
+		public ModifyPNRDataItem Copy()
+		{
+			var result = new ModifyPNRDataItem();
+			CopyTo(result);
+
+			result.DataItem = DataItem?.Copy();
+
+			return result;
+		}
 	}
 }

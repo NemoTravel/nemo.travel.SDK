@@ -56,5 +56,32 @@ namespace GeneralEntities.Services
 		/// </summary>
 		[DataMember(Order = 7, EmitDefaultValue = false)]
 		public string RFISC { get; set; }
+
+		/// <summary>
+		/// Номер билета, для которого оформляется услуга
+		/// </summary>
+		[DataMember(Order = 8, EmitDefaultValue = false)]
+		public RelatedTicketsList RelatedTickets { get; set; }
+
+		public ProcessingService Copy()
+		{
+			var result = new ProcessingService();
+
+			result.Type = this.Type;
+			result.Status = this.Status;
+			result.RFIC = this.RFIC;
+			result.RFISC = this.RFISC;
+			result.RuleID = this.RuleID;
+			result.FromSupplier = this.FromSupplier;
+			result.IncludedInMainServicePrice = this.IncludedInMainServicePrice;
+			result.AdditionalInfo = this.AdditionalInfo;
+
+			if (this.RelatedTickets != null)
+			{
+				result.RelatedTickets = new RelatedTicketsList(this.RelatedTickets);
+			}
+
+			return result;
+		}
 	}
 }

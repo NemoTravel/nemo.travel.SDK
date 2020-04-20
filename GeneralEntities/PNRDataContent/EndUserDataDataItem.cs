@@ -25,5 +25,16 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 2, IsRequired = true)]
 		public string RequestOrigin { get; set; }
+
+		public EndUserDataDataItem Copy()
+		{
+			var result = new EndUserDataDataItem();
+
+			result.EndUserIP = EndUserIP;
+			result.EndUserBrowserAgent = EndUserBrowserAgent;
+			result.RequestOrigin = RequestOrigin;
+
+			return result;
+		}
 	}
 }

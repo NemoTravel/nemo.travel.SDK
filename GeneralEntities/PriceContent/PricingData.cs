@@ -1,5 +1,6 @@
 ﻿using GeneralEntities.Market;
 using GeneralEntities.PNRDataContent;
+using System;
 using System.Runtime.Serialization;
 
 namespace GeneralEntities.PriceContent
@@ -16,6 +17,9 @@ namespace GeneralEntities.PriceContent
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public CommissionDataItem AirlineCommission { get; set; }
 
+		/// <summary>
+		/// Собственная прибыль агента - часть комиссии АК, которую получает Агент как субагент другого агента
+		/// </summary>
 		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public CommissionDataItem AgencyProfit { get; set; }
 
@@ -40,42 +44,51 @@ namespace GeneralEntities.PriceContent
 		[DataMember(Order = 10, EmitDefaultValue = false)]
 		public string AuthCode { get; set; }
 
-		public PricingData Clone()
+		[DataMember(Order = 11, EmitDefaultValue = false)]
+		public string AcquiringMode { get; set; }
+
+		[DataMember(Order = 12, EmitDefaultValue = false)]
+		public bool AutoticketingDisabled { get; set; }
+
+
+		public PricingData Copy()
 		{
 			var result = new PricingData();
 
 			result.PricingRule = PricingRule;
 			result.Code = Code;
+
+			if (AirlineCommission != null)
+			{
+				result.AirlineCommission = AirlineCommission.Copy();
+			}
+
+			if (AgencyProfit != null)
+			{
+				result.AgencyProfit = AgencyProfit.Copy();
+			}
+
 			result.TicketDesignator = TicketDesignator;
 			result.Endorsment = Endorsment;
 			result.TourCode = TourCode;
 			result.Discount = Discount;
+
+			if (AgencyCommission != null)
+			{
+				result.AgencyCommission = AgencyCommission.Copy();
+			}
+
+			if (Bonus != null)
+			{
+				result.Bonus = Bonus.Copy();
+			}
+
 			result.AuthCode = AuthCode;
-			result.AgencyCommission = AgencyCommission != null ? new Money(AgencyCommission) : null;
-			result.Bonus = Bonus != null ? new Money(Bonus) : null;
-			if (AirlineCommission != null)
-			{
-				result.AirlineCommission = new CommissionDataItem
-				{
-					Amount = AirlineCommission.Amount,
-					Currency = AirlineCommission.Currency,
-					Percent = AirlineCommission.Percent
-				};
-			}
-			if (AgencyProfit != null)
-			{
-				result.AgencyProfit = new CommissionDataItem
-				{
-					Amount = AgencyProfit.Amount,
-					Currency = AgencyProfit.Currency,
-					Percent = AgencyProfit.Percent
-				};
-			}
+			result.AcquiringMode = AcquiringMode;
+			result.AutoticketingDisabled = AutoticketingDisabled;
 
 			return result;
 		}
-
-		#region Генерация DataItem'ов
 
 		public T GetCommissionDataItem<T>(int passengersWithFareCount) where T : BasePNRDataItem, new()
 		{
@@ -98,10 +111,10 @@ namespace GeneralEntities.PriceContent
 			return commissionDI;
 		}
 
-		public PNRDataItem GetSubagentCommissionDataItem(int passengersWithFareCount)
+		public PNRDataItem GetAgencyProfitCommissionDataItem(int passengersWithFareCount)
 		{
 			PNRDataItem subagentCommissionDI = null;
-			if (AgencyProfit != null)
+			if (AgencyProfit != null && (AgencyProfit.Percent.HasValue && AgencyProfit.Percent.Value != 0 || AgencyProfit.Amount.HasValue && AgencyProfit.Amount.Value != 0))
 			{
 				subagentCommissionDI = new PNRDataItem();
 				subagentCommissionDI.Type = PNRDataItemType.SubagentCommission;
@@ -114,6 +127,21 @@ namespace GeneralEntities.PriceContent
 				{
 					subagentCommissionDI.SubagentCommission.Amount /= passengersWithFareCount;
 				}
+			}
+
+			return subagentCommissionDI;
+		}
+
+		public PNRDataItem GetSubAgentCommissionDataItem()
+		{
+			PNRDataItem subagentCommissionDI = null;
+			if (AgencyCommission != null && AgencyCommission.Value != 0)
+			{
+				subagentCommissionDI = new PNRDataItem();
+				subagentCommissionDI.Type = PNRDataItemType.SubagentCommission;
+				subagentCommissionDI.SubagentCommission = new CommissionDataItem();
+				subagentCommissionDI.SubagentCommission.Amount = Convert.ToSingle(AgencyCommission.Value);
+				subagentCommissionDI.SubagentCommission.Currency = AgencyCommission.Currency;
 			}
 
 			return subagentCommissionDI;
@@ -175,6 +203,41 @@ namespace GeneralEntities.PriceContent
 			return valCompanyDI;
 		}
 
-		#endregion
+		public T GetDiscountDataItem<T>(ICurrencyConverter currencyConverter, string currency) where T : BasePNRDataItem, new()
+		{
+			if (string.IsNullOrEmpty(Discount))
+			{
+				return null;
+			}
+
+			DiscountDataItem discountDI = null;
+
+			if (Discount.EndsWith("%"))
+			{
+				discountDI = new DiscountDataItem();
+				discountDI.Percent = Convert.ToSingle(Discount.TrimEnd('%'));
+			}
+			else
+			{
+				var discountMoney = currencyConverter.Convert(Money.Parse(Discount), currency);
+
+				discountDI = new DiscountDataItem();
+				discountDI.Amount = (float)discountMoney.Value;
+				discountDI.Currency = discountMoney.Currency;
+			}
+
+			if (discountDI != null)
+			{
+				discountDI.AuthCode = AuthCode;
+
+				var dataItem = new T();
+				dataItem.Type = PNRDataItemType.Discount;
+				dataItem.Discount = discountDI;
+
+				return dataItem;
+			}
+
+			return null;
+		}
 	}
 }

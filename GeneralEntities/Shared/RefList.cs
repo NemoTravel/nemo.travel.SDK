@@ -9,9 +9,12 @@ namespace GeneralEntities.Shared
 	{
 		public RefList() { }
 
+		public RefList(int capacity) : base(capacity) { }
+
 		public RefList(IEnumerable<T> list) : base(list) { }
 
-		public RefList<T> Clone()
+
+		public RefList<T> DeepCopy()
 		{
 			return new RefList<T>(this);
 		}
@@ -20,6 +23,24 @@ namespace GeneralEntities.Shared
 		{
 			return a == null && b == null ||
 				a != null && b != null && a.Count == b.Count && a.All(item => b.Contains(item));
+		}
+
+		public override bool Equals(object obj)
+		{
+			return base.Equals(obj);
+		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				var hashCode = 31;
+
+				// чтобы порядок не имел значения, делаем просто сложение
+				ForEach(element => hashCode += element.GetHashCode());
+
+				return hashCode;
+			}
 		}
 	}
 }

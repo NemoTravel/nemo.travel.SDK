@@ -7,5 +7,14 @@ namespace GeneralEntities.PNRDataContent
 	{
 		[DataMember(Order = 0, IsRequired = true)]
 		public string Value { get; set; }
+
+		public TicketDesignatorDataItem Copy()
+		{
+			var result = new TicketDesignatorDataItem();
+
+			result.Value = Value;
+
+			return result;
+		}
 	}
 }

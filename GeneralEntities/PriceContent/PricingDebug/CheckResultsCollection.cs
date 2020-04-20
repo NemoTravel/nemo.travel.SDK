@@ -8,6 +8,6 @@ namespace GeneralEntities.PriceContent.PricingDebug
 	{
 		public CheckResultsCollection() : base() { }
 
-		public CheckResultsCollection(IDictionary<string, CheckInfo> dictionary) : base(dictionary) { }
+		public CheckResultsCollection(int capacity) : base(capacity) { }
 	}
 }

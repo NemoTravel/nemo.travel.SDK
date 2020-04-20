@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using SharedAssembly;
 using System;
 using System.Runtime.Serialization;
 
@@ -61,10 +60,22 @@ namespace GeneralEntities.Client
 		public string Address { get; set; }
 
 		/// <summary>
-		/// телефон пассажира
+		/// Телефон пассажира
 		/// </summary>
 		[DataMember(IsRequired = false, Order = 8, EmitDefaultValue = false)]
 		public string Phone { get; set; }
+
+		/// <summary>
+		/// Электронная почта пассажира
+		/// </summary>
+		[DataMember(IsRequired = false, Order = 9, EmitDefaultValue = false)]
+		public string Email { get; set; }
+
+		/// <summary>
+		/// ID пассажира в системе поставщика
+		/// </summary>
+		[DataMember(Order = 10, EmitDefaultValue = false)]
+		public string SupplierID { get; set; }
 
 		/// <summary>
 		/// Имя пассажира с транслитерацией
@@ -75,7 +86,7 @@ namespace GeneralEntities.Client
 		{
 			get
 			{
-				return Transliteration.UARUStoENG(FirstName).ToUpper().Trim();
+				return Transliteration.CyrillicToLatin(FirstName).ToUpper().Trim();
 			}
 		}
 
@@ -86,7 +97,7 @@ namespace GeneralEntities.Client
 		[IgnoreDataMember]
 		public string LastNameTL
 		{
-			get { return Transliteration.UARUStoENG(LastName).ToUpper().Trim(); }
+			get { return Transliteration.CyrillicToLatin(LastName).ToUpper().Trim(); }
 		}
 
 		/// <summary>
@@ -100,7 +111,7 @@ namespace GeneralEntities.Client
 			{
 				if (MiddleName != null)
 				{
-					return Transliteration.UARUStoENG(MiddleName).ToUpper().Trim();
+					return Transliteration.CyrillicToLatin(MiddleName).ToUpper().Trim();
 				}
 				else
 				{

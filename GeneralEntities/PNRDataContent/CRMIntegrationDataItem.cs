@@ -50,5 +50,34 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 6, EmitDefaultValue = false)]
 		public SalesChannel SalesChannel { get; set; }
+
+		/// <summary>
+		/// Сбор субагента
+		/// </summary>
+		[DataMember(Order = 7, EmitDefaultValue = false)]
+		public Money SubagentMarkup { get; set; }
+
+		/// <summary>
+		/// Полная стоимость заказа в Немо
+		/// </summary>
+		[DataMember(Order = 7, EmitDefaultValue = false)]
+		public Money OrderTotalPrice { get; set; }
+
+		public CRMIntegrationDataItem Copy()
+		{
+			var result = new CRMIntegrationDataItem();
+
+			result.ClientID = ClientID;
+			result.NemoClientID = NemoClientID;
+			result.OrderID = OrderID;
+			result.PricingRuleID = PricingRuleID;
+			result.PaymentGateway = PaymentGateway;
+			result.PaymentGatewayMarkup = PaymentGatewayMarkup;
+			result.SalesChannel = SalesChannel;
+			result.SubagentMarkup = SubagentMarkup?.Copy();
+			result.OrderTotalPrice = OrderTotalPrice?.Copy();
+
+			return result;
+		}
 	}
 }

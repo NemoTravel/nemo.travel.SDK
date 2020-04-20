@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using GeneralEntities.Shared.BusinessRules;
+using System.Runtime.Serialization;
 
 namespace GeneralEntities.Services.Avia
 {
@@ -27,17 +28,15 @@ namespace GeneralEntities.Services.Avia
 		public FlightSegmentList Segments { get; set; }
 
 		/// <summary>
-		/// Выполняет перенумерацию сегментов в соответствии с их текущим положением
+		/// Индикатор группового заказа
 		/// </summary>
-		public void RenumSegments()
-		{
-			if (Segments != null && Segments.Count > 0)
-			{
-				for (int i = 0; i < Segments.Count; i++)
-				{
-					Segments[i].ID = i;
-				}
-			}
-		}
+		[DataMember(Order = 3, IsRequired = false)]
+		public bool GroupOrder { get; set; }
+
+		/// <summary>
+		/// Набор применимых бизнес правил
+		/// </summary>
+		[DataMember(Order = 4, EmitDefaultValue = false)]
+		public BusinessRulesCollection BusinessRules { get; set; }
 	}
 }

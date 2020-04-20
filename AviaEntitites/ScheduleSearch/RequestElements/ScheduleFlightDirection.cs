@@ -9,32 +9,6 @@ namespace AviaEntities.ScheduleSearch.RequestElements
 	[DataContract(Namespace = "http://nemo-ibe.com/Avia", Name = "ScheduleFlightDirection")]
 	public class ScheduleFlightDirection
 	{
-		protected FlightDirectionType? preSettedType;
-
-		/// <summary>
-		/// Тип перелёта (в одну сторону, туда-обратно, сложный маршрут)
-		/// </summary>
-		[IgnoreDataMember]
-		public FlightDirectionType Type
-		{
-			get
-			{
-				//если есть проставленный тип (в основном это имеется ввиду RT/2 и OW+OW+)
-				if (preSettedType.HasValue)
-				{
-					return preSettedType.Value;
-				}
-				else
-				{
-					return FlightDirectionType.OW;
-				}
-			}
-			set
-			{
-				preSettedType = value;
-			}
-		}
-
 		/// <summary>
 		/// Подтип данного поиского запроса
 		/// </summary>

@@ -38,6 +38,9 @@ namespace AviaEntities.FlightRepricing.MixerLog
 		[DataMember(Order = 9)]
 		public Money OriginalPrice { get; set; }
 
+		[DataMember(Order = 10)]
+		public string FlightID { get; set; }
+
 		internal string Dump()
 		{
 			var logBuilder = new StringBuilder();

@@ -1,4 +1,4 @@
-﻿using AviaEntities.RulesSearch;
+﻿using GeneralEntities.PNRDataContent.Ancillary;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.AdditionalOperations.ResponseElements

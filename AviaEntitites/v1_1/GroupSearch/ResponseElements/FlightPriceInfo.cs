@@ -33,13 +33,10 @@ namespace AviaEntities.v1_1.GroupSearch.ResponseElements
 		[DataMember(Order = 5, EmitDefaultValue = false)]
 		public AdditionalPriceInfo AdditionalPriceInfo { get; set; }
 
-		/// <summary>
-		/// Признак, что на перелёте возможно есть допуслуги
-		/// </summary>
-		[DataMember(Order = 6, EmitDefaultValue = false)]
-		public bool AdditionalServicePossiblyExist { get; set; }
-
 		[DataMember(Order = 7, EmitDefaultValue = false)]
 		public int? ExpectedTicketCount { get; set; }
+
+		[DataMember(Order = 8, EmitDefaultValue = false)]
+		public string BookingURL { get; set; }
 	}
 }

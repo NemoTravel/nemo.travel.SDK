@@ -13,7 +13,7 @@ namespace AviaEntities.SplitBook
 		/// <summary>
 		/// Пассажиры, которых необходимо отделить в другую бронь
 		/// </summary>
-		[DataMember(IsRequired = true)]
-		public RefList<int> Passengers { get; set; }
+		[DataMember(Name = "Passengers", IsRequired = true)]
+		public RefList<int> Travellers { get; set; }
 	}
 }

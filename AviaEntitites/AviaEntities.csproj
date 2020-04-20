@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,15 +9,15 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AviaEntities</RootNamespace>
     <AssemblyName>AviaEntities</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,97 +25,37 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'mlsd.ru|AnyCPU'">
-    <OutputPath>bin\mlsd.ru\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'prod.backend.nemo.travel|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\prod.backend.nemo.travel\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'test.backend.nemo.travel|AnyCPU' ">
-    <OutputPath>bin\test.backend.nemo.travel\</OutputPath>
-    <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ghoust_IIS|AnyCPU'">
-    <OutputPath>bin\ghoust_IIS\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'trunk|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\trunk\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'prod2.backend.nemo.travel|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\prod2.backend.nemo.travel\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'trunk2|AnyCPU'">
-    <OutputPath>bin\trunk2\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'agent.prod2.backend.nemo.travel|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\agent.prod2.backend.nemo.travel\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'airlines.pro.backend2.nemo.travel|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\airlines.pro.backend2.nemo.travel\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'loadtest.backend2.nemo.travel|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\loadtest.backend2.nemo.travel\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'preprod.mlsd.ru|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\preprod.mlsd.ru\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'trunk_2|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Lib\JsonSerializer\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NodaTime, Version=2.4.7.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NodaTime.2.4.7\lib\net45\NodaTime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -140,17 +80,46 @@
     <Compile Include="AdditionalOperations\RequestElements\PricingInfo.cs" />
     <Compile Include="AdditionalOperations\ResponseElements\AirlinesForSegments.cs" />
     <Compile Include="AdditionalOperations\ResponseElements\CheckAvailabilityResult.cs" />
+    <Compile Include="AddToQueue\AddToQueueRQBody.cs" />
+    <Compile Include="AddToQueue\RequestElements\AddToQueueConfig.cs" />
+    <Compile Include="AddToQueue\RequestElements\AddToQueueConfigList.cs" />
+    <Compile Include="AddToQueue\RequestElements\LocatorList.cs" />
+    <Compile Include="AddToQueue\RequestElements\SupplierRequisiteIdsList.cs" />
+    <Compile Include="DateRangeSearch\DateRangeSearchRQBody.cs" />
+    <Compile Include="DateRangeSearch\RequestElements\FlightDirection.cs" />
+    <Compile Include="DateRangeSearch\RequestElements\FlightPair.cs" />
+    <Compile Include="DateRangeSearch\RequestElements\FlightPairList.cs" />
+    <Compile Include="GetBook\GetBookRQBody.cs" />
+    <Compile Include="GetBook\PNRParams.cs" />
+    <Compile Include="GetSupplierFareFamilyDescription\DescriptionData.cs" />
+    <Compile Include="GetSupplierFareFamilyDescription\DescriptionDataElements.cs" />
+    <Compile Include="GetSupplierFareFamilyDescription\DescriptionItem.cs" />
+    <Compile Include="GetSupplierFareFamilyDescription\DescriptionItemList.cs" />
+    <Compile Include="GetSupplierFareFamilyDescription\GetSupplierFareFamilyDescriptionRSBody.cs" />
+    <Compile Include="ImportBook\RequestElements\SourceDescription.cs" />
+    <Compile Include="SharedElements\Ancillaries\ResponseElements\BaseAncillaryServicePrice.cs" />
+    <Compile Include="ImportPnrFromHost\ImportPnrFromHostRQBody.cs" />
+    <Compile Include="ImportPnrFromHost\ImportPnrFromHostRSBody.cs" />
+    <Compile Include="SharedElements\ExchangeTicket\CommonExchangeTicketRSBody.cs" />
+    <Compile Include="SharedElements\Interfaces\IFlightPair.cs" />
+    <Compile Include="SharedElements\RefundTicket\CommonRefundEDRSBody.cs" />
+    <Compile Include="SirenaProxy\SirenaProxyRQ.cs" />
+    <Compile Include="SirenaProxy\SirenaProxyRS.cs" />
+    <Compile Include="GetEDData\GetEDDataRQBody.cs" />
+    <Compile Include="GetEDData\GetEDDataRSBody.cs" />
     <Compile Include="GetSupplierStatic\AncillaryServiceCatalogue.cs" />
     <Compile Include="IssueEMD\IssueEMDRQBody.cs" />
     <Compile Include="ModifyContent\ModifyAncillaryService.cs" />
     <Compile Include="ModifyContent\ModifyAncillaryServicesList.cs" />
-    <Compile Include="SharedElements\Ancillaries\RequestElements\CommonAncillaryServiceRQ.cs" />
     <Compile Include="SharedElements\Ancillaries\RequestElements\AncillaryService.cs" />
+    <Compile Include="SharedElements\Ancillaries\RequestElements\CommonAncillaryServiceRQ.cs" />
     <Compile Include="SharedElements\Ancillaries\RequestElements\AncillaryServiceRQ.cs" />
     <Compile Include="SharedElements\Ancillaries\ResponseElements\AncillaryServiceRS.cs" />
     <Compile Include="SharedElements\Ancillaries\ResponseElements\AncillaryServicePrice.cs" />
     <Compile Include="SharedElements\Ancillaries\AncillaryServices.cs" />
     <Compile Include="SharedElements\Ancillaries\ResponseElements\AncillaryServicesPrices.cs" />
+    <Compile Include="SharedElements\FlightWithLanguageInfo.cs" />
+    <Compile Include="v1_1\AdditionalOperations\RequestElements\LoyaltyCards.cs" />
     <Compile Include="v1_1\AdditionalOperations\ResponseElements\AncillaryServicesSearchResult.cs" />
     <Compile Include="AdditionalOperations\ResponseElements\GetAllowedCCsResult.cs" />
     <Compile Include="AdditionalOperations\ResponseElements\GetAllowedLoyaltyCardsResult.cs" />
@@ -342,20 +311,15 @@
     <Compile Include="v1_1\FlightSearch\ResponseElements\Commission.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\CompleteSegment.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\CompleteSegmentList.cs" />
-    <Compile Include="v1_1\FlightSearch\ResponseElements\DocumentList.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\ExchangePriceInfo.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\Flight.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\FlightList.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\FlightTypeInfo.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\PassengerFare.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\PassengerFareList.cs" />
-    <Compile Include="v1_1\FlightSearch\ResponseElements\PassengerTypeDescription.cs" />
-    <Compile Include="v1_1\FlightSearch\ResponseElements\MultiLanguageDictionary.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\Price.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\PriceList.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\StopPoint.cs" />
-    <Compile Include="v1_1\FlightSearch\ResponseElements\SubsidyInformationList.cs" />
-    <Compile Include="v1_1\FlightSearch\ResponseElements\SubsidyInformation.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\SupplierSegmentInfo.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\Tariff.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\TariffList.cs" />
@@ -363,14 +327,29 @@
     <Compile Include="v1_1\FlightSearch\ResponseElements\PricingData.cs" />
     <Compile Include="v1_1\FlightSearch\ResponseElements\TaxList.cs" />
     <Compile Include="v1_1\RefundTicket\RefundEDRSBody.cs" />
+    <Compile Include="v1_1\SharedElements\Ancillaries\RequestElements\CommonAncillaryServiceRQ.cs" />
+    <Compile Include="v1_1\SeatMap\GetSeatMapRQ.cs" />
+    <Compile Include="v1_2\AdditionalOperations\RequestElements\SelectedAncillaryService.cs" />
+    <Compile Include="v1_2\AdditionalOperations\RequestElements\SelectedAncillaryServicesList.cs" />
     <Compile Include="v1_2\SearchFlights\RequestElements\AdditionalSearchInfo.cs" />
+    <Compile Include="v1_2\SearchFlights\RequestElements\RequestedTripPointList.cs" />
     <Compile Include="v1_2\SearchFlights\RequestElements\ClassPrefList.cs" />
     <Compile Include="v1_2\SearchFlights\RequestElements\FlightDirection.cs" />
     <Compile Include="v1_2\SearchFlights\RequestElements\FlightPair.cs" />
     <Compile Include="v1_2\SearchFlights\RequestElements\FlightPairList.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\RequisiteConfigList.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\RequisiteConfig.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\RouterRulesList.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\FlightsBySourcesCount.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\FlightsProcessingData.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\RouterRule.cs" />
     <Compile Include="v1_2\SearchFlights\ResponseElements\SearchDebugData.cs" />
     <Compile Include="v1_2\SearchFlights\ResponseElements\SearchThreadInfo.cs" />
     <Compile Include="v1_2\SearchFlights\ResponseElements\SourceInfo.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\SourceInfoList.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\TriggeredRequestFilter.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\TriggeredRequestFiltersList.cs" />
+    <Compile Include="v1_2\SearchFlights\ResponseElements\PackageList.cs" />
     <Compile Include="v1_2\SearchFlights\SearchFlightsRQBody.cs" />
     <Compile Include="v1_2\SearchFlights\RequestElements\RequestedTripPoint.cs" />
     <Compile Include="GetAllowedCC\CCCodeList.cs" />
@@ -443,10 +422,7 @@
     <Compile Include="Lib\SirenaUPT.cs" />
     <Compile Include="OpenSession\OpenSessionRQBody.cs" />
     <Compile Include="OpenSession\OpenSessionRSBody.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RefundTicket\RefundTicketRQBody.cs" />
-    <Compile Include="RulesSearch\FareRule.cs" />
-    <Compile Include="RulesSearch\FareRuleList.cs" />
     <Compile Include="RulesSearch\RulesSearchRSBody.cs" />
     <Compile Include="SeatMap\Elements\FlightSeatMap.cs" />
     <Compile Include="SeatMap\Elements\Seat.cs" />
@@ -478,21 +454,60 @@
     <Compile Include="v1_1\AdditionalOperations\RequestElements\AdditionalOperationsParameters.cs" />
     <Compile Include="v1_1\AdditionalOperations\RequestElements\PricingInfo.cs" />
     <Compile Include="v1_2\SearchFlights\SearchFlightsRSBody.cs" />
+    <Compile Include="v1_2\SharedElements\Ancillaries\RequestElements\AncillaryServiceList.cs" />
     <Compile Include="v2\BookFlight\AdditionalBookingActions.cs" />
     <Compile Include="v2\BookFlight\BookFlightRQBody.cs" />
     <Compile Include="v2\BookFlight\PricingOptions.cs" />
     <Compile Include="v2\BookModify\BookModifyRQBody.cs" />
+    <Compile Include="v2\DeleteFromQueue\DeleteFromQueueRQBody.cs" />
+    <Compile Include="v2\DeleteFromQueue\RequestElements\BaseBookQueueInfo.cs" />
+    <Compile Include="v2\DeleteFromQueue\RequestElements\BookQueueInfo.cs" />
+    <Compile Include="v2\DeleteFromQueue\RequestElements\BookQueueList.cs" />
+    <Compile Include="v2\DeleteFromQueue\RequestElements\ExternalBookQueueInfo.cs" />
+    <Compile Include="v2\DeleteFromQueue\RequestElements\ExternalBookQueueList.cs" />
+    <Compile Include="v2\ListQueue\ListQueueRQBody.cs" />
+    <Compile Include="v2\ListQueue\ListQueueRSBody.cs" />
+    <Compile Include="v2\ListQueue\RequestElements\ListQueueConfig.cs" />
+    <Compile Include="v2\ListQueue\RequestElements\QueueConfig.cs" />
+    <Compile Include="v2\ListQueue\RequestElements\QueueNumberList.cs" />
+    <Compile Include="v2\ListQueue\RequestElements\SourceList.cs" />
+    <Compile Include="v2\ListQueue\ResponseElements\ExternalBookInfo.cs" />
+    <Compile Include="v2\ListQueue\ResponseElements\ExternalBookInfoList.cs" />
+    <Compile Include="v2\ListQueue\ResponseElements\ExternalQueueInfo.cs" />
+    <Compile Include="v2\ListQueue\ResponseElements\UnnamedExternalQueueInfo.cs" />
     <Compile Include="v2\Ticketing\TicketingRQBody.cs" />
     <Compile Include="v2\UpdateBook\UpdateBookRQBody.cs" />
+    <Compile Include="v2_1\BookFlight\BookFlightRQBody.cs" />
+    <Compile Include="v2_1\BookModify\BookModifyRQBody.cs" />
+    <Compile Include="v2_1\ModifyContent\ModifyAncillaryService.cs" />
+    <Compile Include="v2_1\ModifyContent\ModifyAncillaryServicesList.cs" />
+    <Compile Include="v2_2\BookFlight\CustomerData.cs" />
+    <Compile Include="v2_2\ModifyContent\ModifyPricingOptions.cs" />
+    <Compile Include="v1_1\SharedElements\Ancillaries\RequestElements\AncillaryServiceRQ.cs" />
+    <Compile Include="v2_2\BookFlight\BookFlightRQBody.cs" />
+    <Compile Include="v1_2\SharedElements\Ancillaries\RequestElements\AncillaryServiceRQ.cs" />
+    <Compile Include="v2_2\BookModify\BookModifyRQBody.cs" />
+    <Compile Include="v2_2\ExchangeTicket\ExchangeTicketRSBody.cs" />
+    <Compile Include="v2_2\ModifyContent\ModifyAncillaryService.cs" />
+    <Compile Include="v2_2\ModifyContent\ModifyAncillaryServicesList.cs" />
+    <Compile Include="v2_2\RefundTicket\RefundEDRSBody.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GeneralEntities\GeneralEntities.csproj">
       <Project>{dc94fcab-3f2d-48ef-9562-8434cdee1c21}</Project>
       <Name>GeneralEntities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharedAssembly\SharedAssembly.csproj">
+      <Project>{619BBF56-B825-4C9A-8EDF-437F1625602F}</Project>
+      <Name>SharedAssembly</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

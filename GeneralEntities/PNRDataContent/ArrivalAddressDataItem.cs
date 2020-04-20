@@ -77,5 +77,30 @@ namespace GeneralEntities.PNRDataContent
 				PostalCode = tmp[i + 4];
 			}
 		}
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as ArrivalAddressDataItem;
+			if (other == null)
+			{
+				return false;
+			}
+
+			return CountryCode == other.CountryCode && City == other.City && State == other.State &&
+					StreetAddress == other.StreetAddress && PostalCode == other.PostalCode;
+		}
+
+		public ArrivalAddressDataItem Copy()
+		{
+			var result = new ArrivalAddressDataItem();
+
+			result.CountryCode = CountryCode;
+			result.City = City;
+			result.State = State;
+			result.StreetAddress = StreetAddress;
+			result.PostalCode = PostalCode;
+
+			return result;
+		}
 	}
 }

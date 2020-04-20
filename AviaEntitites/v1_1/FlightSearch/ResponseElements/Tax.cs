@@ -1,4 +1,5 @@
 ﻿using GeneralEntities.Market;
+using System.Globalization;
 using System.Runtime.Serialization;
 
 namespace AviaEntities.v1_1.FlightSearch.ResponseElements
@@ -17,5 +18,24 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 
 		[DataMember(Order = 3, EmitDefaultValue = false)]
 		public string Type { get; set; }
+
+		[IgnoreDataMember]
+		public double? AgencyAmount { get; set; }
+
+		[DataMember(Order = 3, EmitDefaultValue = false, Name = "AgencyAmount")]
+		public string AgencyAmountString
+		{
+			get
+			{
+				return AgencyAmount.HasValue ? AgencyAmount.Value.ToString(CultureInfo.InvariantCulture) : null;
+			}
+			set
+			{
+				if (value != null)
+				{
+					AgencyAmount = double.Parse(value, CultureInfo.InvariantCulture);
+				}
+			}
+		}
 	}
 }

@@ -19,5 +19,26 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 1, IsRequired = true)]
 		public string Text { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as RemarkDataItem;
+			if (other == null)
+			{
+				return false;
+			}
+
+			return Type == other.Type && Text == other.Text;
+		}
+
+		public RemarkDataItem Copy()
+		{
+			var result = new RemarkDataItem();
+
+			result.Type = Type;
+			result.Text = Text;
+
+			return result;
+		}
 	}
 }

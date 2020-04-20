@@ -11,12 +11,16 @@ namespace GeneralEntities.PNRDataContent
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public class DocumentInfoDataItem
 	{
+		private static Regex docsFormatRegex = new Regex(DOCSPattern, RegexOptions.Compiled);
+		private static Regex cleanDocNumberRegex = new Regex(@"[^\w|^а-яА-ЯЁё]", RegexOptions.Compiled);
+
 		/// <summary>
 		/// Шаблон для SSR DOCS
 		/// </summary>
 		public const string DOCSPattern = @"[A-Z]{1}/[A-Z]{2,3}/[A-Z0-9]*/[A-Z]{2,3}/[0-9]{2}[A-Z]{3}[0-9]{2,4}/[A-Z]{1,2}/[0-9]{2}[A-Z]{3}[0-9]{2,4}/([A-Z]*/{0,1}){2}[A-Z]{1}";
 
 		protected DateTimeEx elapsedTime;
+
 
 		/// <summary>
 		/// Тип документа
@@ -69,38 +73,39 @@ namespace GeneralEntities.PNRDataContent
 		{ }
 
 		/// <summary>
-		/// Создание нового объекта и заполнение его данными из SSR DOCS строки
+		/// Попытка заполнения объекта данными из SSR DOCS строки
 		/// </summary>
 		/// <param name="docsString">SSR DOCS строка</param>
 		/// <param name="supplier">Поставщик, из которого была получена SSR DOCS строка</param>
-		/// <exception cref="ArgumentException">В случае неверного формата входной строки</exception>
-		public DocumentInfoDataItem(string docsString, AviaSuppliers? supplier = null)
+		public static bool TryCreateDocumentInfoDataItem(string docsString, AviaSuppliers supplier, out DocumentInfoDataItem document)
 		{
-			if (!Regex.IsMatch(docsString, DOCSPattern))
+			document = null;
+
+			if (!docsFormatRegex.IsMatch(docsString))
 			{
-				throw new ArgumentException("Неверный формат SSR DOCS");
+				return false;
 			}
 
-			int index = 0;
 			//ибо только Сэйбр на данный момент добавляет в SSR строку статус SSRки
-			if (supplier.HasValue && supplier.Value == AviaSuppliers.Sabre)
+			var index = supplier == AviaSuppliers.Sabre ? 1 : 0;
+			var docsParts = docsString.Split('/');
+
+			document = new DocumentInfoDataItem();
+
+			document.Type = (DocTypes)Enum.Parse(typeof(DocTypes), docsParts[index]);
+			document.IssueCountryCode = docsParts[index + 1];
+			document.Number = docsParts[index + 2];
+
+			var elapsedTime = DateTime.Parse(docsParts[index + 6], Locale.UsCulture);
+			if (elapsedTime < DateTime.Now)
 			{
-				index = 1;
+				elapsedTime = elapsedTime.AddYears(100);
 			}
-			var tmp = docsString.Split('/');
+			document.ElapsedTime = new DateTimeEx(elapsedTime, Formats.DATE_FORMAT);
 
-			Type = (DocTypes)Enum.Parse(typeof(DocTypes), tmp[index]);
-			Number = tmp[index + 2];
-			IssueCountryCode = tmp[index + 1];
+			document.AddedAsDOCS = true;
 
-			var tmpElapsedDate = DateTime.Parse(tmp[index + 6], Locale.UsCulture);
-			if (tmpElapsedDate < DateTime.Now)
-			{
-				tmpElapsedDate = tmpElapsedDate.AddYears(100);
-			}
-			ElapsedTime = new DateTimeEx(tmpElapsedDate, Formats.DATE_FORMAT);
-
-			AddedAsDOCS = true;
+			return true;
 		}
 
 		/// <summary>
@@ -108,7 +113,33 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		public string GetCleanNumber()
 		{
-			return Regex.Replace(Number, @"[^\w|^а-яА-ЯЁё]", "");
+			return cleanDocNumberRegex.Replace(Number, "");
+		}
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as DocumentInfoDataItem;
+			if (other == null)
+			{
+				return false;
+			}
+
+			return Type == other.Type && Number == other.Number && IssueCountryCode == other.IssueCountryCode && Equals(ElapsedTime, other.ElapsedTime) &&
+				AddedAsDOCS == other.AddedAsDOCS && AddedAsFOID == other.AddedAsFOID;
+		}
+
+		public DocumentInfoDataItem Copy()
+		{
+			var result = new DocumentInfoDataItem();
+
+			result.Type = Type;
+			result.Number = Number;
+			result.IssueCountryCode = IssueCountryCode;
+			result.AddedAsDOCS = AddedAsDOCS;
+			result.AddedAsFOID = AddedAsFOID;
+			result.ElapsedTime = ElapsedTime?.Copy();
+
+			return result;
 		}
 	}
 }

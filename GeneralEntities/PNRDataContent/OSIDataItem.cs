@@ -13,5 +13,25 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 0, IsRequired = true)]
 		public string Text { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as OSIDataItem;
+			if (other == null)
+			{
+				return false;
+			}
+
+			return Text == other.Text;
+		}
+
+		public OSIDataItem Copy()
+		{
+			var result = new OSIDataItem();
+
+			result.Text = Text;
+
+			return result;
+		}
 	}
 }

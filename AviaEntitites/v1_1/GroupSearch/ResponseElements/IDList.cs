@@ -9,10 +9,10 @@ namespace AviaEntities.v1_1.GroupSearch.ResponseElements
 	[CollectionDataContract(Namespace = "http://nemo-ibe.com/Avia", ItemName = "ID")]
 	public class IDList : List<int>
 	{
-		public IDList(List<int> list): base(list)
-		{ }
+		public IDList(List<int> list) : base(list) { }
 
-		public IDList()
-		{ }
+		public IDList() { }
+
+		public IDList(int capacity) : base(capacity) { }
 	}
 }

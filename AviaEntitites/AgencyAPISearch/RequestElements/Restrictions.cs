@@ -22,5 +22,8 @@ namespace AviaEntities.AgencyAPISearch.RequestElements
 
 		[XmlElement(Order = 4)]
 		public PriceRefundType? PriceRefundType { get; set; }
+
+		[XmlElement(Order = 5)]
+		public int? MaxResultCount { get; set; }
 	}
 }

@@ -15,6 +15,7 @@ namespace GeneralEntities.Services
 	[KnownType(typeof(AeroexpressService))]
 	[KnownType(typeof(ServicePackageService))]
 	[KnownType(typeof(FlightAncillaryService))]
+	[KnownType(typeof(v1_1.Services.Ancillary.FlightAncillaryService))]
 	[KnownType(typeof(HotelsService))]
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public abstract class BaseService : ItemIdentification<int>

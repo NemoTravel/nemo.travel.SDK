@@ -17,7 +17,7 @@ namespace AviaEntities.ScheduleSearch.RequestElements
 		{
 			var result = new ScheduleFlightPair();
 			result.ArrivalPoint = new RequestedTripPoint();
-			result.DepaturePoint = new RequestedTripPoint();
+			result.DeparturePoint = new RequestedTripPoint();
 
 			result.DepatureDateTime = DepatureDateTime;
 			result.MaxDepatureTime = MaxDepatureTime;
@@ -27,8 +27,8 @@ namespace AviaEntities.ScheduleSearch.RequestElements
 			result.ArrivalPoint.Code = ArrivalPoint.Code;
 			result.ArrivalPoint.IsCity = ArrivalPoint.IsCity;
 
-			result.DepaturePoint.Code = DepaturePoint.Code;
-			result.DepaturePoint.IsCity = DepaturePoint.IsCity;
+			result.DeparturePoint.Code = DeparturePoint.Code;
+			result.DeparturePoint.IsCity = DeparturePoint.IsCity;
 			
 			return result;
 		}

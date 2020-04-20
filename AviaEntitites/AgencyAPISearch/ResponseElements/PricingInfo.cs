@@ -11,5 +11,17 @@ namespace AviaEntities.AgencyAPISearch.ResponseElements
 
 		[XmlElement(Order = 0, ElementName = "PassengerFare")]
 		public List<PassengerFare> PassengerFares { get; set; }
+
+		[XmlElement(Order = 1)]
+		public double? MetasearchCommissionRate { get; set; }
+
+		[XmlIgnore]
+		public bool MetasearchCommissionRateSpecified
+		{
+			get
+			{
+				return MetasearchCommissionRate.HasValue;
+			}
+		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Diagnostics;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace GeneralEntities.PNRDataContent
@@ -6,6 +7,7 @@ namespace GeneralEntities.PNRDataContent
 	/// <summary>
 	/// Содержит описание унифицированного блока данных ПНРа
 	/// </summary>
+	[DebuggerDisplay("{Type}")]
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public class PNRDataItem : BasePNRDataItem
 	{
@@ -62,6 +64,47 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 9, EmitDefaultValue = false)]
 		public SellingPointDescriptionDataItem SellingPointDescription { get; set; }
+
+
+		public PNRDataItem()
+		{ }
+
+		public PNRDataItem(BasePNRDataItem dataItem)
+		{
+			Type = dataItem.Type;
+
+			TravellerRef = dataItem.TravellerRef;
+			SegmentRef = dataItem.SegmentRef;
+			ServiceRef = dataItem.ServiceRef;
+
+			AdditionalLocators = dataItem.AdditionalLocators;
+			ArrivalAddress = dataItem.ArrivalAddress;
+			BookedSeat = dataItem.BookedSeat;
+			Commission = dataItem.Commission;
+			ContactInfo = dataItem.ContactInfo;
+			Discount = dataItem.Discount;
+			DiscountDocument = dataItem.DiscountDocument;
+			Document = dataItem.Document;
+			ElectronicDocument = dataItem.ElectronicDocument;
+			Endorsements = dataItem.Endorsements;
+			FareInfo = dataItem.FareInfo;
+			FareSourceCode = dataItem.FareSourceCode;
+			FOPInfo = dataItem.FOPInfo;
+			LoyaltyCard = dataItem.LoyaltyCard;
+			Meal = dataItem.Meal;
+			OSI = dataItem.OSI;
+			PaperDocument = dataItem.PaperDocument;
+			ReferencedBooks = dataItem.ReferencedBooks;
+			Remark = dataItem.Remark;
+			SourceInfo = dataItem.SourceInfo;
+			SSR = dataItem.SSR;
+			TimeLimits = dataItem.TimeLimits;
+			TourCode = dataItem.TourCode;
+			ValidatingCompany = dataItem.ValidatingCompany;
+			Visa = dataItem.Visa;
+			Voucher = dataItem.Voucher;
+		}
+
 
 		/// <summary>
 		/// Получение хэша данного элемента, формируемого на основании типа и контента
@@ -141,17 +184,17 @@ namespace GeneralEntities.PNRDataContent
 					{
 						if (ElectronicDocument.VATBreakdown.Tariff != null)
 						{
-							result.Append(ElectronicDocument.VATBreakdown.Tariff.ToString());
+							result.Append(ElectronicDocument.VATBreakdown.Tariff);
 							result.Append(";");
 						}
-						if (ElectronicDocument.VATBreakdown.Taxes != null)
+						if (ElectronicDocument.VATBreakdown.TaxesBreakdown != null)
 						{
-							result.Append(ElectronicDocument.VATBreakdown.Taxes.ToString());
+							result.Append(ElectronicDocument.VATBreakdown.TaxesBreakdown);
 							result.Append(";");
 						}
 						if (ElectronicDocument.VATBreakdown.Total != null)
 						{
-							result.Append(ElectronicDocument.VATBreakdown.Total.ToString());
+							result.Append(ElectronicDocument.VATBreakdown.Total);
 							result.Append(";");
 						}
 					}
@@ -281,25 +324,71 @@ namespace GeneralEntities.PNRDataContent
 					result.Append(Discount.Currency);
 					break;
 
-				//АПИ данные, используется при выписке, в брони не отображаются
-				//case PNRDataItemType.CashValueForMultiFOPProxing:
-				//	break;
-				//case PNRDataItemType.Markup:
-				//	break;
-				//case PNRDataItemType.SubagentCommission:
-				//	break;
-				//case PNRDataItemType.TicketDesignator:
-				//	break;
-				//case PNRDataItemType.TicketingProxy:
-				//	break;
+					//АПИ данные, используется при выписке, в брони не отображаются
+					//case PNRDataItemType.CashValueForMultiFOPProxing:
+					//	break;
+					//case PNRDataItemType.Markup:
+					//	break;
+					//case PNRDataItemType.SubagentCommission:
+					//	break;
+					//case PNRDataItemType.TicketDesignator:
+					//	break;
+					//case PNRDataItemType.TicketingProxy:
+					//	break;
 
 
-				//внутреннии данные брони, в АПИ не отображаются
-				//case PNRDataItemType.FareRules:
-				//	break;
+					//внутреннии данные брони, в АПИ не отображаются
+					//case PNRDataItemType.FareRules:
+					//	break;
 			}
 
 			return result.ToString();
+		}
+
+		public PNRDataItem Copy()
+		{
+			var result = new PNRDataItem();
+			CopyTo(result);
+			return result;
+		}
+
+		protected void CopyTo<T>(T dataItem) where T : PNRDataItem
+		{
+			base.CopyTo(dataItem);
+
+			#region Клонирование внутренних элементов
+			switch (Type)
+			{
+				case PNRDataItemType.CashValueForMultiFOPProxing:
+					dataItem.CashValueForMultiFOPProxing = CashValueForMultiFOPProxing?.Copy();
+					break;
+				case PNRDataItemType.FOP:
+					dataItem.PNRFOP = PNRFOP?.Copy();
+					dataItem.FOPInfo = FOPInfo?.Copy();
+					break;
+				case PNRDataItemType.SubagentCommission:
+					dataItem.SubagentCommission = SubagentCommission?.Copy();
+					break;
+				case PNRDataItemType.TicketDesignator:
+					dataItem.TicketDesignator = TicketDesignator?.Copy();
+					break;
+				case PNRDataItemType.Markup:
+					dataItem.Markup = Markup?.Copy();
+					break;
+				case PNRDataItemType.TicketingProxy:
+					dataItem.TicketingProxy = TicketingProxy?.Copy();
+					break;
+				case PNRDataItemType.CRMIntegration:
+					dataItem.CRMIntegration = CRMIntegration?.Copy();
+					break;
+				case PNRDataItemType.EndUserData:
+					dataItem.EndUserData = EndUserData?.Copy();
+					break;
+				case PNRDataItemType.SellingPointDescription:
+					dataItem.SellingPointDescription = SellingPointDescription?.Copy();
+					break;
+			}
+			#endregion
 		}
 	}
 }

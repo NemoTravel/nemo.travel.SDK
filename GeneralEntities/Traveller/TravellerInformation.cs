@@ -19,7 +19,7 @@ namespace GeneralEntities.Traveller
 		/// ИД пассажира в ПНРе поставщика
 		/// </summary>
 		[DataMember(Order = 0, EmitDefaultValue = false)]
-		public int IDInPNR { get; set; }
+		public string IDInPNR { get; set; }
 
 		/// <summary>
 		/// Тип пассажира
@@ -54,7 +54,7 @@ namespace GeneralEntities.Traveller
 		/// <summary>
 		/// Дата рождения
 		/// </summary>
-		[DataMember(Order = 6, IsRequired = true)]
+		[DataMember(Order = 6, EmitDefaultValue = false)]
 		public DateTimeEx DateOfBirth
 		{
 			get { return dob; }
@@ -71,7 +71,7 @@ namespace GeneralEntities.Traveller
 		/// <summary>
 		/// Гражданство
 		/// </summary>
-		[DataMember(Order = 7, IsRequired = true)]
+		[DataMember(Order = 7, EmitDefaultValue = false)]
 		public string Nationality { get; set; }
 
 		/// <summary>
@@ -92,6 +92,11 @@ namespace GeneralEntities.Traveller
 		[DataMember(Order = 10, EmitDefaultValue = false)]
 		public bool IsDisabled { get; set; }
 
+		/// <summary>
+		/// ИД пассажира во внешней системе
+		/// </summary>
+		[DataMember(Order = 11, EmitDefaultValue = false)]
+		public string ExternalID { get; set; }
 
 		#region ФИО с транслитерацией
 
@@ -103,7 +108,7 @@ namespace GeneralEntities.Traveller
 		{
 			get
 			{
-				return Transliteration.UARUStoENG(Name).ToUpper().Trim();
+				return Transliteration.CyrillicToLatin(Name).ToUpper().Trim();
 			}
 		}
 
@@ -113,7 +118,7 @@ namespace GeneralEntities.Traveller
 		[IgnoreDataMember]
 		public string LastNameTL
 		{
-			get { return Transliteration.UARUStoENG(LastName).ToUpper().Trim(); }
+			get { return Transliteration.CyrillicToLatin(LastName).ToUpper().Trim(); }
 		}
 
 		/// <summary>
@@ -126,7 +131,7 @@ namespace GeneralEntities.Traveller
 			{
 				if (MiddleName != null)
 				{
-					return Transliteration.UARUStoENG(MiddleName).ToUpper().Trim();
+					return Transliteration.CyrillicToLatin(MiddleName).ToUpper().Trim();
 				}
 				else
 				{
@@ -136,6 +141,15 @@ namespace GeneralEntities.Traveller
 		}
 
 		#endregion
+
+		public bool IsChild
+		{
+			get
+			{
+				return Type == PassTypes.UNN || Type == PassTypes.CNN || Type == PassTypes.INF
+					|| Type == PassTypes.INS || Type == PassTypes.JNN || Type == PassTypes.JNF;
+			}
+		}
 
 		/// <summary>
 		/// Получение полного имени для данной сущности
@@ -204,14 +218,20 @@ namespace GeneralEntities.Traveller
 		/// </summary>
 		/// <param name="date">Дата, на момент которой требуется получить возраст пассажира</param>
 		/// <returns>Возвраст пассажира, null если не удалось определить</returns>
-		public int? GetAge(DateTime date)
+		public int? GetAge(DateTimeOffset date)
 		{
 			if (DateOfBirth == null)
 			{
 				return null;
 			}
-
-			return date.Year - DateOfBirth.Date.Year - (date.DayOfYear < DateOfBirth.Date.DayOfYear ? 1 : 0);
+			if ((date.Month > DateOfBirth.Date.Month) || (date.Month == DateOfBirth.Date.Month && date.Day >= DateOfBirth.Date.Day))
+			{
+				return date.Year - DateOfBirth.Date.Year;
+			}
+			else
+			{
+				return date.Year - DateOfBirth.Date.Year - 1;
+			}
 		}
 
 		public string GetFullNameForDOCS()
@@ -245,6 +265,27 @@ namespace GeneralEntities.Traveller
 			}
 
 			return result.ToString();
+		}
+
+		public TravellerInformation Copy()
+		{
+			var result = new TravellerInformation();
+
+			result.ID = ID;
+			result.IDInPNR = IDInPNR;
+			result.Type = Type;
+			result.NamePrefix = NamePrefix;
+			result.Name = Name;
+			result.LastName = LastName;
+			result.MiddleName = MiddleName;
+			result.dob = dob;
+			result.Nationality = Nationality;
+			result.Gender = Gender;
+			result.LinkedTo = LinkedTo;
+			result.IsDisabled = IsDisabled;
+			result.ExternalID = ExternalID;
+
+			return result;
 		}
 	}
 }

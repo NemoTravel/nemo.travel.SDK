@@ -1,5 +1,8 @@
 ﻿using GeneralEntities.BookContent.Entities.Booking;
 using GeneralEntities.BookContent.Entities.GroupElements;
+using GeneralEntities.ExtendedDateTime;
+using GeneralEntities.Market;
+using GeneralEntities.Services.Hotels;
 using GeneralEntities.Services.Hotels.Entities.GroupElements.Static;
 using Newtonsoft.Json;
 using System;
@@ -9,42 +12,48 @@ namespace GeneralEntities.Services.Ancillary
 {
 	public class HotelsService : BaseService
 	{
-		public const string BOOKED_ROOM = "BOOKED_ROOM";
-
-		const string SERVICE_PARAM_SEARCH_ID = "search_id";
-
-		public const string SERVICE_PARAM_ACCOMODATION_ID = "accomodation_id";
-
 		/// <summary>
 		/// Название поставщика
 		/// </summary>
-		public HotelsSuppliers Supplier;
+		public HotelsSuppliers Supplier { get; set; }
 
-		public int PackageId;
+		public string SupplierAgencyID { get; set; }
 
-		public HotelsBookStatus BookingStatus;
+		public int PackageId { get; set; }
 
-		public string HotelId;
+		public HotelsBookStatus BookingStatus { get; set; }
 
-		public string CityId;
+		public string HotelId { get; set; }
 
-		public long SearchId;
+		public string CityId { get; set; }
 
-		public DateTime CheckInDate;
+		public long SearchId { get; set; }
 
-		public DateTime CheckOutDate;
+		public DateTimeEx CheckInDate { get; set; }
 
-		public List<Room> Rooms;
+		public string CheckInTime { get; set; }
 
-		public Person Client;
+		public DateTimeEx CheckOutDate { get; set; }
+
+		public string CheckOutTime { get; set; }
+
+		public Dictionary<int, SelectedRoomsData> SelectedRoomsData { get; set; }
+
+		public List<Room> Rooms { get; set; }
+
+		public Person Client { get; set; }
 
 		public List<CancellationRuleGroupElement> CancellationRules { get; set; }
 
 		public StaticDataContainer StaticDataContainer { get; set; }
 
-		public Hotels.PaymentInfo PaymentInfo;
+		public PaymentInfo PaymentInfo { get; set; }
 
-		public Hotels.ServiceParams ServiceParams;
+		public ServiceParams ServiceParams { get; set; }
+
+		public Money CancellationPenalty { get; set; }
+
+		public DateTime SearchDateTime { get; set; }
 
 		public void SetServiceParam<T>(string key, T value)
 		{
@@ -53,11 +62,12 @@ namespace GeneralEntities.Services.Ancillary
 
 		public T GetServiceParam<T>(string key)
 		{
-			if (ServiceParams.Params.ContainsKey(key))
+			if (ServiceParams.Params.TryGetValue(key, out string param))
 			{
-				return JsonConvert.DeserializeObject<T>(ServiceParams.Params[key]);
+				return JsonConvert.DeserializeObject<T>(param);
 			}
-			return default(T);
+
+			return default;
 		}
 	}
 }

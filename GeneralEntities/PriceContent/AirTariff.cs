@@ -7,7 +7,7 @@ namespace GeneralEntities.PriceContent
 	/// Авиа тариф в составе цены перелёта
 	/// </summary>
 	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
-	public class AirTariff : BaseTariff
+	public class AirTariff : BaseTariff, ITariff
 	{
 		/// <summary>
 		/// Тип тарифа
@@ -70,6 +70,30 @@ namespace GeneralEntities.PriceContent
 		public string FareFamilyName { get; set; }
 
 		/// <summary>
+		/// Содержит данные, необходимые для получения текста УПТ
+		/// </summary>
+		[DataMember(Order = 10, EmitDefaultValue = false)]
+		public string FBRuleKey { get; set; }
+
+		/// <summary>
+		/// ID информации о субсидии
+		/// </summary>
+		[DataMember(Order = 11, EmitDefaultValue = false)]
+		public int? SubsidyInfoID { get; set; }
+
+		/// <summary>
+		/// Ручная кладь по данному тарифу
+		/// </summary>
+		[DataMember(Order = 12, EmitDefaultValue = false)]
+		public Baggage CarryOn { get; set; }
+
+		/// <summary>
+		/// Полный код варианта багажа у поставщика. Используется для AccelAero
+		/// </summary>
+		[DataMember(Order = 13, EmitDefaultValue = false)]
+		public string SupplierBaggageCode { get; set; }
+
+		/// <summary>
 		/// Код тарифа без кода скидки
 		/// </summary>
 		public override string GetFareBasisCode(bool forceSplit = false)
@@ -78,10 +102,39 @@ namespace GeneralEntities.PriceContent
 			{
 				return FareBasisCode;
 			}
-			else
+
+			return Code;
+		}
+
+		public AirTariff Copy()
+		{
+			var result = new AirTariff();
+
+			result.SegmentID = this.SegmentID;
+			result.Code = this.Code;
+			result.BookingClassCode = this.BookingClassCode;
+			result.ClassOfService = this.ClassOfService;
+			result.FareFamilyCode = this.FareFamilyCode;
+			result.FareFamilyDescID = this.FareFamilyDescID;
+			result.FareFamilyName = this.FareFamilyName;
+			result.FBRuleKey = this.FBRuleKey;
+			result.IsSystemTransfer = this.IsSystemTransfer;
+			result.SubsidyInfoID = this.SubsidyInfoID;
+			result.Type = this.Type;
+			result.FreeBaggage = this.FreeBaggage?.Copy();
+			result.CarryOn = this.CarryOn?.Copy();
+
+			if (this.FreeMeal != null)
 			{
-				return Code;
+				result.FreeMeal = new MealTypeList(this.FreeMeal);
 			}
+
+			return result;
+		}
+
+		public int GetSegmentRef()
+		{
+			return SegmentID;
 		}
 	}
 }

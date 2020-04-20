@@ -11,7 +11,7 @@ namespace GeneralEntities.PriceContent
 	public class CCTypeFee
 	{
 		/// <summary>
-		/// Типs карты, для которs[ применяется данный сбор
+		/// Тип карты, для которой применяется данный сбор
 		/// </summary>
 		[DataMember(Order = 0, IsRequired = true)]
 		public TypeList<string> CCTypes { get; set; }
@@ -22,9 +22,28 @@ namespace GeneralEntities.PriceContent
 		[DataMember(Order = 1, IsRequired = true)]
 		public Money Fee { get; set; }
 
+
 		public CCTypeFee()
 		{
 			CCTypes = new TypeList<string>();
+		}
+
+
+		public CCTypeFee Copy()
+		{
+			var result = new CCTypeFee();
+
+			if (CCTypes != null)
+			{
+				result.CCTypes = new TypeList<string>(CCTypes);
+			}
+
+			if (Fee != null)
+			{
+				result.Fee = Fee.Copy();
+			}
+
+			return result;
 		}
 	}
 }

@@ -22,5 +22,22 @@ namespace AviaEntities.v2.Ticketing
 		/// </summary>
 		[DataMember(Order = 2, EmitDefaultValue = false)]
 		public TagList RequestorTags { get; set; }
+
+		public TicketingRQBody Clone()
+		{
+			var result = new TicketingRQBody();
+
+			result.BookID = BookID;
+			if (RequestorTags != null)
+			{
+				result.RequestorTags = new TagList(RequestorTags);
+			}
+			if (DataItems != null)
+			{
+				result.DataItems = new PNRDataItemList(DataItems);
+			}
+
+			return result;
+		}
 	}
 }

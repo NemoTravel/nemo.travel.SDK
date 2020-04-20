@@ -2,6 +2,7 @@
 using GeneralEntities.Market;
 using GeneralEntities.Shared;
 using System.Runtime.Serialization;
+using GeneralEntities.PriceContent;
 
 namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 {
@@ -79,6 +80,27 @@ namespace AviaEntities.v1_1.FlightSearch.ResponseElements
 		/// </summary>
 		[DataMember(Order = 11, EmitDefaultValue = false)]
 		public ExchangePriceInfo ExchangePriceInfo { get; set; }
+
+		/// <summary>
+		/// Сбор для цены за одного пассажира
+		/// </summary>
+		[DataMember(Order = 12, EmitDefaultValue = false)]
+		public Money Markup { get; set; }
+
+		/// <summary>
+		/// EquiveFare в валюте агентства
+		/// </summary>
+		[DataMember(Order = 13, EmitDefaultValue = false)]
+		public Money AgencyFare { get; set; }
+
+		[DataMember(Order = 14, EmitDefaultValue = false)]
+		public Money TotalAgencyFare { get; set; }
+
+		[DataMember(Order = 13, EmitDefaultValue = false)]
+		public ChargePartList ChargeBreakdown { get; set; }
+
+		[DataMember(Order = 14, EmitDefaultValue = false)]
+		public Money MarkupRound { get; set; }
 
 		/// <summary>
 		/// Проверка привязки цены к сегменту

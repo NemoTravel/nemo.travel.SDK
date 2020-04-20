@@ -71,5 +71,65 @@ namespace GeneralEntities.PNRDataContent
 		/// </summary>
 		[DataMember(Order = 9, EmitDefaultValue = false)]
 		public VATBreakdown VATBreakdown { get; set; }
+
+		/// <summary>
+		/// Номер документа, который обменяли
+		/// </summary>
+		[DataMember(Order = 10, EmitDefaultValue = false)]
+		public string ExchangedTicketNumber { get; set; }
+
+		/// <summary>
+		/// Фактические реквизиты, под которыми выписан электронный документ
+		/// </summary>
+		[DataMember(Order = 11, EmitDefaultValue = false)]
+		public string IssuedBy { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as ElectronicDocumentDataItem;
+			if (other == null)
+			{
+				return false;
+			}
+
+			if (ConjunctionNumbers == null && other.ConjunctionNumbers != null || ConjunctionNumbers != null && other.ConjunctionNumbers == null)
+			{
+				return false;
+			}
+
+			if (ConjunctionNumbers != null && (ConjunctionNumbers.Count != other.ConjunctionNumbers.Count || ConjunctionNumbers.Exists(number => !other.ConjunctionNumbers.Contains(number))))
+			{
+				return false;
+			}
+
+			return Number == other.Number && Status == other.Status && ServiceType == other.ServiceType && Equals(IssueDateTime, other.IssueDateTime) &&
+				NotStoredInPNR == other.NotStoredInPNR && Equals(ExecutionTimeLimit, other.ExecutionTimeLimit) && EMDSpecificData.Equals(EMDSpecificData, other.EMDSpecificData) &&
+				Equals(VAT, other.VAT) && VATBreakdown.CompareWithoutTaxBreakdown(VATBreakdown, other.VATBreakdown);
+		}
+
+		public ElectronicDocumentDataItem DeepCopy()
+		{
+			var result = new ElectronicDocumentDataItem();
+
+			result.Number = Number;
+			result.Status = Status;
+			result.ServiceType = ServiceType;
+			result.NotStoredInPNR = NotStoredInPNR;
+			result.ExchangedTicketNumber = ExchangedTicketNumber;
+
+			if (ConjunctionNumbers != null)
+			{
+				result.ConjunctionNumbers = new ConjunctionTicketNumberList(ConjunctionNumbers);
+			}
+
+			result.IssueDateTime = IssueDateTime?.Copy();
+			result.ExecutionTimeLimit = ExecutionTimeLimit?.Copy();
+			result.EMDSpecificData = EMDSpecificData?.Copy();
+			result.VAT = VAT?.Copy();
+			result.VATBreakdown = VATBreakdown?.Copy();
+			result.IssuedBy = IssuedBy;
+
+			return result;
+		}
 	}
 }

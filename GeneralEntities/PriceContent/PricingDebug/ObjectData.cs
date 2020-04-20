@@ -108,6 +108,9 @@ namespace GeneralEntities.PriceContent.PricingDebug
 		[DataMember(Order = 33)]
 		public string ID { get; set; }
 
+		[DataMember(Order = 34, EmitDefaultValue = false)]
+		public string FlightDateDeparture { get; set; }
+
 		public string Dump()
 		{
 			return new StringBuilder().
@@ -170,6 +173,8 @@ namespace GeneralEntities.PriceContent.PricingDebug
 				Append(Environment).
 				Append(';').
 				Append(AirlinesAndClasses).
+				Append(';').
+				Append(FlightDateDeparture).
 				Append(';', 4).
 				Append(Commission).
 				Append(";;").
