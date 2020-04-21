@@ -6,6 +6,7 @@ using GeneralEntities.PriceContent;
 using GeneralEntities.PriceContent.PricingDebug;
 using System.Linq;
 using System.Runtime.Serialization;
+using SubsidyInformationList = AviaEntities.v1_1.FlightSearch.ResponseElements.SubsidyInformationList;
 
 namespace AviaEntities.v1_2.SearchFlights
 {
