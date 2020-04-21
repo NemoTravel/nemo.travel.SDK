@@ -1,5 +1,6 @@
 ﻿using GeneralEntities.PNRDataContent.Ancillary.AdditionalLocators;
 using System.Runtime.Serialization;
+using GeneralEntities.PNRDataContent.Ancillary;
 
 namespace GeneralEntities.PNRDataContent
 {

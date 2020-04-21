@@ -1,6 +1,6 @@
 ﻿using GeneralEntities.Market;
-using GeneralEntities.PriceContent;
 using System.Runtime.Serialization;
+using GeneralEntities.PriceContent;
 
 namespace AviaEntities.RefundTicket
 {

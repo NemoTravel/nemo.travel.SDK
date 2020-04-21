@@ -1,5 +1,6 @@
 ﻿using GeneralEntities.PNRDataContent.Ancillary;
 using System.Runtime.Serialization;
+using AviaEntities.RulesSearch;
 
 namespace AviaEntities.AdditionalOperations.ResponseElements
 {
