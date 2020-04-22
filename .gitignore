@@ -3,13 +3,5 @@
 *.csproj.user
 *.suo
 .vs/
-packages/Newtonsoft.Json.*
-/.idea/.gitignore
-/.idea/.idea.SharedAPIProjects/.idea/.name
-/.idea/.idea.SharedAPIProjects/.idea/contentModel.xml
-/.idea/.idea.SharedAPIProjects/.idea/indexLayout.xml
-/.idea/.idea.SharedAPIProjects/.idea/modules.xml
-/.idea/.idea.SharedAPIProjects/.idea/projectSettingsUpdater.xml
-/.idea/.idea.SharedAPIProjects/.idea/vcs.xml
-/.idea/.idea.SharedAPIProjects/riderModule.iml
-/.idea/config/applicationhost.config
+/.idea
+/packages
