@@ -1,6 +1,7 @@
 ﻿using AviaEntities.v1_1.FlightSearch.ResponseElements;
 using GeneralEntities.PriceContent;
 using System.Runtime.Serialization;
+using SubsidyInformationList = AviaEntities.v1_1.FlightSearch.ResponseElements.SubsidyInformationList;
 
 namespace AviaEntities.FlightRepricing
 {

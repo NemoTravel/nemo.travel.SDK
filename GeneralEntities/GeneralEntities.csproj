@@ -1,66 +1,396 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Configurations>Debug;Release;trunk;preprod.mlsd.ru;trunk_2</Configurations>
-    <Platforms>AnyCPU</Platforms>
-  </PropertyGroup>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DC94FCAB-3F2D-48EF-9562-8434CDEE1C21}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GeneralEntities</RootNamespace>
     <AssemblyName>GeneralEntities</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'trunk|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'mlsd.ru|AnyCPU'">
+    <OutputPath>bin\mlsd.ru\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'prod.backend.nemo.travel|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\prod.backend.nemo.travel\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'test.backend.nemo.travel|AnyCPU' ">
+    <OutputPath>bin\test.backend.nemo.travel\</OutputPath>
     <DebugSymbols>true</DebugSymbols>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='trunk_2|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ghoust_IIS|AnyCPU'">
+    <OutputPath>bin\ghoust_IIS\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'trunk|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\trunk\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'prod2.backend.nemo.travel|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\prod2.backend.nemo.travel\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'trunk2|AnyCPU'">
+    <OutputPath>bin\trunk2\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'agent.prod2.backend.nemo.travel|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\agent.prod2.backend.nemo.travel\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'airlines.pro.backend2.nemo.travel|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\airlines.pro.backend2.nemo.travel\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'loadtest.backend2.nemo.travel|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\loadtest.backend2.nemo.travel\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'preprod.mlsd.ru|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\preprod.mlsd.ru\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BookContent\Book.cs" />
+    <Compile Include="BookContent\BookDateInfo.cs" />
+    <Compile Include="Constatnts\FlightPricingCheckName.cs" />
+    <Compile Include="Pay\CardData.cs" />
+    <Compile Include="Pay\Confirmation3DSecure.cs" />
+    <Compile Include="Pay\RequestsParams.cs" />
+    <Compile Include="PNRDataContent\Ancillary\AdditionalLocators\SirenaCharterLocator.cs" />
+    <Compile Include="PNRDataContent\Ancillary\CurrencyAmount.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FareRulesInfo\ConditionsList.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FareRulesInfo\ExchangeData.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FareRulesInfo\RefundData.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FareRulesInfo\TimeBasedFareRule.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FOP\InvoiceFOP.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FOP\NumberedFOP.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FOP\PrepaymentFOP.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FOP\TokenizedCardFOP.cs" />
+    <Compile Include="PNRDataContent\Ancillary\LinkedBookInfo\BookData.cs" />
+    <Compile Include="PNRDataContent\Ancillary\LinkedBookInfo\BooksDataCollection.cs" />
+    <Compile Include="PNRDataContent\Ancillary\LinkedBookInfo\IDLink.cs" />
+    <Compile Include="PNRDataContent\Ancillary\PercentCurrencyAmount.cs" />
+    <Compile Include="PNRDataContent\Ancillary\VatTariff.cs" />
+    <Compile Include="PNRDataContent\Ancillary\VatTariffBreakdown.cs" />
+    <Compile Include="PNRDataContent\Ancillary\VatTariffList.cs" />
+    <Compile Include="PNRDataContent\Ancillary\VatTax.cs" />
+    <Compile Include="PNRDataContent\Ancillary\VatTaxesBreakdown.cs" />
+    <Compile Include="PNRDataContent\Ancillary\VatTaxList.cs" />
+    <Compile Include="PNRDataContent\DataItemIdentification.cs" />
+    <Compile Include="PNRDataContent\DiscountDocumentDataItem.cs" />
+    <Compile Include="PNRDataContent\FareInfoDataItem.cs" />
+    <Compile Include="PNRDataContent\LinkedBooksDataItem.cs" />
+    <Compile Include="PNRDataContent\VoucherFileDataItem.cs" />
+    <Compile Include="PriceContent\DocumentList.cs" />
+    <Compile Include="PriceContent\ITariff.cs" />
+    <Compile Include="PriceContent\MultiLanguageDictionary.cs" />
+    <Compile Include="PriceContent\PassengerTypeDescription.cs" />
+    <Compile Include="PriceContent\PassengerTypePriceBreakdownListExtension.cs" />
+    <Compile Include="PriceContent\PricingDebug\PricingDebugDataCollection.cs" />
+    <Compile Include="PriceContent\PricingDebug\UsersCollection.cs" />
+    <Compile Include="PriceContent\RefundBreakdown.cs" />
+    <Compile Include="PriceContent\SubsidyInformation.cs" />
+    <Compile Include="PriceContent\SubsidyInformationList.cs" />
+    <Compile Include="RequestResponse\PNRLocatorsList.cs" />
+    <Compile Include="Services\Hotels\CheckInCheckOutOffer.cs" />
+    <Compile Include="Services\Hotels\Entities\Booking\CardInfo.cs" />
+    <Compile Include="PNRDataContent\AdditionalLocatorsDataItem.cs" />
+    <Compile Include="PNRDataContent\Ancillary\BookIDs.cs" />
+    <Compile Include="PNRDataContent\Ancillary\LocatorList.cs" />
+    <Compile Include="PNRDataContent\ReferencedBooksDataItem.cs" />
+    <Compile Include="PriceContent\ChargePartList.cs" />
+    <Compile Include="PriceContent\LangItem.cs" />
+    <Compile Include="PriceContent\PricingDebug\CheckInfo.cs" />
+    <Compile Include="PriceContent\PricingDebug\CheckResultsCollection.cs" />
+    <Compile Include="PriceContent\PricingDebug\DebugData.cs" />
+    <Compile Include="PriceContent\PricingDebug\RulesDebugInfoCollection.cs" />
+    <Compile Include="PriceContent\PricingDebug\ObjectData.cs" />
+    <Compile Include="PriceContent\PricingDebug\RuleData.cs" />
+    <Compile Include="PriceContent\PricingDebug\VendorsCollection.cs" />
+    <Compile Include="Refund\EDRefundData.cs" />
+    <Compile Include="Refund\EDRefundDataList.cs" />
+    <Compile Include="Services\Hotels\Entities\Booking\CheckInCheckOutService.cs" />
+    <Compile Include="Services\Hotels\Entities\Booking\Guest.cs" />
+    <Compile Include="Services\Hotels\Entities\Booking\Person.cs" />
+    <Compile Include="Services\Hotels\Entities\Booking\Room.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\CancellationRule.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\CancellationRuleGroupElement.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\GroupOfGroups.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\PriceBreakdown.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\RoomGroupElement.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\RoomMealGroupElement.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\RoomRateGroupElement.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\RoomTypeGroupElement.cs" />
+    <Compile Include="BookContent\PNRPossibleActionList.cs" />
+    <Compile Include="Client\ClientInfo.cs" />
+    <Compile Include="Constatnts\Formats.cs" />
+    <Compile Include="Enumerations.cs" />
+    <Compile Include="Error\AdditionalErrorInfo.cs" />
+    <Compile Include="Error\CommonErrorCodes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Error\Error.cs" />
+    <Compile Include="ExtendedDateTime\DateTimeEx.cs" />
+    <Compile Include="ExtendedDateTime\ExtendedDateTimeJSONConverter.cs" />
+    <Compile Include="Locale.cs" />
+    <Compile Include="Market\CurrencyRateInfo.cs" />
+    <Compile Include="Market\CurrencyRateList.cs" />
+    <Compile Include="Market\MoneyExtensions.cs" />
+    <Compile Include="PNRDataContent\Ancillary\EMDSpecificData.cs" />
+    <Compile Include="PNRDataContent\Ancillary\VATBreakdown.cs" />
+    <Compile Include="PNRDataContent\EndUserDataDataItem.cs" />
+    <Compile Include="PNRDataContent\OSIDataItem.cs" />
+    <Compile Include="PNRDataContent\SellingPointDescriptionDataItem.cs" />
+    <Compile Include="PriceContent\CCTypeFee.cs" />
+    <Compile Include="Market\ICurrencyConverter.cs" />
+    <Compile Include="Market\ICurrencyDepended.cs" />
+    <Compile Include="Market\Markups\Commission.cs" />
+    <Compile Include="Market\Markups\IProfit.cs" />
+    <Compile Include="Market\Markups\Margin.cs" />
+    <Compile Include="Market\Markups\Markup.cs" />
+    <Compile Include="Market\Markups\Modificants.cs" />
+    <Compile Include="Market\Markups\Profit.cs" />
+    <Compile Include="Market\Markups\RestrictedProfit.cs" />
+    <Compile Include="Market\Markups\Rounding.cs" />
+    <Compile Include="Market\Markups\SubagentCommission.cs" />
+    <Compile Include="Market\Money.cs" />
+    <Compile Include="Market\ServiceCommission.cs" />
+    <Compile Include="ModifyContent\Avia\ModifyFlightSegment.cs" />
+    <Compile Include="ModifyContent\Avia\ModifyFlightSegmentList.cs" />
+    <Compile Include="ModifyContent\BaseModifyItem.cs" />
+    <Compile Include="ModifyContent\ModifyFlightService.cs" />
+    <Compile Include="ModifyContent\ModifyPNRDataItem.cs" />
+    <Compile Include="ModifyContent\ModifyPNRDataItemList.cs" />
+    <Compile Include="ModifyContent\ModifyTravellerInformation.cs" />
+    <Compile Include="ModifyContent\ModifyTravellerInformationList.cs" />
+    <Compile Include="OrderContent\Order.cs" />
+    <Compile Include="OrderContent\OrderSourceInfo.cs" />
+    <Compile Include="OrderContent\PaymentTransaction.cs" />
+    <Compile Include="OrderContent\PaymentTransactionActionList.cs" />
+    <Compile Include="OrderContent\PaymentTransactionList.cs" />
+    <Compile Include="OrderContent\ServiceGroup.cs" />
+    <Compile Include="OrderContent\UserHierarchy.cs" />
+    <Compile Include="PNRDataContent\Ancillary\VATData.cs" />
+    <Compile Include="PNRDataContent\ArrivalAddressDataItem.cs" />
+    <Compile Include="PNRDataContent\BasePNRDataItem.cs" />
+    <Compile Include="PNRDataContent\BookedSeatDataItem.cs" />
+    <Compile Include="PNRDataContent\CashValueForMultiFOPProxingDataItem.cs" />
+    <Compile Include="PNRDataContent\CommissionDataItem.cs" />
+    <Compile Include="PNRDataContent\Ancillary\ConjunctionTicketNumberList.cs" />
+    <Compile Include="PNRDataContent\ContactInfoDataItem.cs" />
+    <Compile Include="PNRDataContent\CRMIntegrationDataItem.cs" />
+    <Compile Include="PNRDataContent\DiscountDataItem.cs" />
+    <Compile Include="PNRDataContent\DocumentInfoDataItem.cs" />
+    <Compile Include="PNRDataContent\ElectronicDocumentDataItem.cs" />
+    <Compile Include="PNRDataContent\EndorsementDataItem.cs" />
+    <Compile Include="PNRDataContent\FareSourceCodeDataItem.cs" />
+    <Compile Include="PNRDataContent\FOPDataItem.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FOP\BaseFOP.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FOP\CreditCardFOP.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FOP\FOPList.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FOP\PNRFOP.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FOP\PNRFOPList.cs" />
+    <Compile Include="PNRDataContent\MarkupDataItem.cs" />
+    <Compile Include="PNRDataContent\TicketDesignatorDataItem.cs" />
+    <Compile Include="PNRDataContent\TicketingProxyDataItem.cs" />
+    <Compile Include="PNRDataContent\TourCodeDataItem.cs" />
+    <Compile Include="PNRDataContent\ValidatingCompanyDataItem.cs" />
+    <Compile Include="PNRDataContent\LoyaltyCardDataItem.cs" />
+    <Compile Include="PNRDataContent\PaperDocumentDataItem.cs" />
+    <Compile Include="PNRDataContent\PNRFOPDataItem.cs" />
+    <Compile Include="PNRDataContent\SourceInfoDataItem.cs" />
+    <Compile Include="PNRDataContent\PNRDataItem.cs" />
+    <Compile Include="PNRDataContent\PNRDataItemList.cs" />
+    <Compile Include="PNRDataContent\RemarkDataItem.cs" />
+    <Compile Include="PNRDataContent\SSRDataItem.cs" />
+    <Compile Include="PNRDataContent\TimeLimitDataItem.cs" />
+    <Compile Include="PNRDataContent\VisaDataItem.cs" />
+    <Compile Include="PriceContent\AirTariff.cs" />
+    <Compile Include="PriceContent\BaseTariff.cs" />
+    <Compile Include="PriceContent\CCTypeFeeList.cs" />
+    <Compile Include="Market\CurrencyRate.cs" />
+    <Compile Include="PriceContent\ChargePart.cs" />
+    <Compile Include="PriceContent\FareFamilyDescription.cs" />
+    <Compile Include="PriceContent\FareFamilyDescriptionList.cs" />
+    <Compile Include="PriceContent\FareFamilyParameter.cs" />
+    <Compile Include="PriceContent\FOPPriceList.cs" />
+    <Compile Include="PriceContent\MealTypeList.cs" />
+    <Compile Include="PriceContent\PassengerTypePriceBreakdown.cs" />
+    <Compile Include="PriceContent\PassengerTypePriceBreakdownList.cs" />
+    <Compile Include="PriceContent\Price.cs" />
+    <Compile Include="PriceContent\PriceBreakdown.cs" />
+    <Compile Include="PriceContent\PriceBreakdownList.cs" />
+    <Compile Include="PriceContent\PricingData.cs" />
+    <Compile Include="PriceContent\TariffList.cs" />
+    <Compile Include="PriceContent\Tax.cs" />
+    <Compile Include="PriceContent\TaxList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestResponse\Request.cs" />
+    <Compile Include="RequestResponse\RequestRequisites.cs" />
+    <Compile Include="RequestResponse\Response.cs" />
+    <Compile Include="Client\ContactInfo.cs" />
+    <Compile Include="Services\Ancillary\AeroexpressService.cs" />
+    <Compile Include="Services\Ancillary\ArbitraryService.cs" />
+    <Compile Include="Services\Ancillary\FlightAncillaryService.cs" />
+    <Compile Include="Services\Ancillary\HotelsService.cs" />
+    <Compile Include="Services\Ancillary\InsuranceService.cs" />
+    <Compile Include="Services\Ancillary\ServicePackageService.cs" />
+    <Compile Include="Services\Avia\FlightSegment.cs" />
+    <Compile Include="Services\Avia\FlightSegmentList.cs" />
+    <Compile Include="Services\Avia\FlightService.cs" />
+    <Compile Include="Services\Avia\StopPoint.cs" />
+    <Compile Include="Services\Avia\StopPointList.cs" />
+    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\City.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\Country.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\CustomerRating.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\Distance.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\Feature.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\Hotel.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\HotelsFeatures.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\Region.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\Resort.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\Static\StaticDataContainer.cs" />
+    <Compile Include="Services\Hotels\Entities\GroupElements\VATInfo.cs" />
+    <Compile Include="Services\Hotels\PaymentInfo.cs" />
+    <Compile Include="Services\Hotels\SelectedRoomsData.cs" />
+    <Compile Include="Services\Hotels\ServiceParams.cs" />
+    <Compile Include="Services\ProcessingService.cs" />
+    <Compile Include="Services\ProcessingServiceList.cs" />
+    <Compile Include="Services\PNRAdditionalStatusList.cs" />
+    <Compile Include="Services\ServiceList.cs" />
+    <Compile Include="Services\TripPointInformation.cs" />
+    <Compile Include="Shared\Baggage.cs" />
+    <Compile Include="Shared\BaseBaggage.cs" />
+    <Compile Include="Shared\BusinessRules\AdditionalParametersCollection.cs" />
+    <Compile Include="Shared\BusinessRules\BusinessRulesCollection.cs" />
+    <Compile Include="Shared\ConjTicketsNumsList.cs" />
+    <Compile Include="Shared\IDList.cs" />
+    <Compile Include="Shared\ItemIdentification.cs" />
+    <Compile Include="Shared\MRefList.cs" />
+    <Compile Include="Shared\RefList.cs" />
+    <Compile Include="Shared\TagList.cs" />
+    <Compile Include="Shared\TextList.cs" />
+    <Compile Include="Shared\TypeList.cs" />
+    <Compile Include="Shared\v1.1\Baggage.cs" />
+    <Compile Include="Static\TimeZoneCache.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Transliteration.cs" />
+    <Compile Include="Traveller\ArrivalAddress.cs" />
+    <Compile Include="Traveller\DocumentInformation.cs" />
+    <Compile Include="Traveller\Person.cs" />
+    <Compile Include="Traveller\TravellerInfo.cs" />
+    <Compile Include="Client\PersonalInformation.cs" />
+    <Compile Include="Client\Telephone.cs" />
+    <Compile Include="Traveller\LoyaltyCard.cs" />
+    <Compile Include="Traveller\TravellerInformation.cs" />
+    <Compile Include="Traveller\TravellerList.cs" />
+    <Compile Include="Traveller\VisaInformation.cs" />
+    <Compile Include="v1_1\Services\Ancillary\AncillaryServiceList.cs" />
+    <Compile Include="v1_1\Services\Ancillary\FlightAncillaryService.cs" />
+    <Compile Include="Warning\Codes\CommonWarningCodes.cs" />
+    <Compile Include="Warning\Warning.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\SharedAssembly\SharedAssembly.csproj">
-      <Project>{619bbf56-b825-4c9a-8edf-437f1625602f}</Project>
+      <Project>{7f51958b-020b-43a1-903d-c7c532b66082}</Project>
       <Name>SharedAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

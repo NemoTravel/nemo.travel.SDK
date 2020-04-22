@@ -1,6 +1,6 @@
-﻿using AviaEntities.v1_1.SharedElements.Ancillaries.RequestElements;
-using GeneralEntities.PNRDataContent;
+﻿using GeneralEntities.PNRDataContent;
 using System.Runtime.Serialization;
+using AviaEntities.SharedElements.Ancillaries.RequestElements;
 
 namespace AviaEntities.IssueEMD
 {
