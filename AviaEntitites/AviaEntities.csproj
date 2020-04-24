@@ -469,8 +469,6 @@
     <Compile Include="OpenSession\OpenSessionRSBody.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RefundTicket\RefundTicketRQBody.cs" />
-    <Compile Include="RulesSearch\FareRule.cs" />
-    <Compile Include="RulesSearch\FareRuleList.cs" />
     <Compile Include="RulesSearch\RulesSearchRSBody.cs" />
     <Compile Include="SeatMap\Elements\FlightSeatMap.cs" />
     <Compile Include="SeatMap\Elements\Seat.cs" />

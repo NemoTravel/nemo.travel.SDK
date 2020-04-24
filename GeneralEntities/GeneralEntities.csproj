@@ -142,6 +142,8 @@
     <Compile Include="Pay\RequestsParams.cs" />
     <Compile Include="PNRDataContent\Ancillary\AdditionalLocators\SirenaCharterLocator.cs" />
     <Compile Include="PNRDataContent\Ancillary\CurrencyAmount.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FareRule.cs" />
+    <Compile Include="PNRDataContent\Ancillary\FareRuleList.cs" />
     <Compile Include="PNRDataContent\Ancillary\FareRulesInfo\ConditionsList.cs" />
     <Compile Include="PNRDataContent\Ancillary\FareRulesInfo\ExchangeData.cs" />
     <Compile Include="PNRDataContent\Ancillary\FareRulesInfo\RefundData.cs" />
