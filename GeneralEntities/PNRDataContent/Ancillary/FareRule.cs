@@ -5,7 +5,7 @@ namespace GeneralEntities.PNRDataContent.Ancillary
 	/// <summary>
 	/// Тарифное правило
 	/// </summary>
-	[DataContract(Namespace = "http://nemo-ibe.com/Avia")]
+	[DataContract(Namespace = "http://nemo-ibe.com/STL")]
 	public class FareRule
 	{
 		/// <summary>
