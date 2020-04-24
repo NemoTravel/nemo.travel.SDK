@@ -1,6 +1,6 @@
-﻿using GeneralEntities.PNRDataContent.Ancillary;
+﻿
 using System.Runtime.Serialization;
-using AviaEntities.RulesSearch;
+using FareRuleList = GeneralEntities.PNRDataContent.Ancillary.FareRuleList;
 
 namespace AviaEntities.AdditionalOperations.ResponseElements
 {

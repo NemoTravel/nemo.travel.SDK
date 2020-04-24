@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace AviaEntities.RulesSearch
+namespace GeneralEntities.PNRDataContent.Ancillary
 {
 	/// <summary>
 	/// Тарифное правило
