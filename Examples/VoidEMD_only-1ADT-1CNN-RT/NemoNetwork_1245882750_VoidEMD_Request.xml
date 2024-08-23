@@ -1,0 +1,53 @@
+http://my-webservice-domain.net/Avia.svc
+Connection: Keep-Alive
+Content-Length: 1818
+Content-Type: text/xml;charset=UTF-8
+Accept-Encoding: gzip,deflate
+Host: my-webservice-domain.net
+User-Agent: Apache-HttpClient/4.5.5 (Java/16.0.2)
+SOAPAction: "http://nemo-ibe.com/Avia/IAvia/VoidEMD"
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:avia="http://nemo-ibe.com/Avia" xmlns:stl="http://nemo-ibe.com/STL">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <avia:VoidEMD>
+         <avia:Request>
+            <stl:Requisites>
+               <stl:AuthToken>XXXXXX</stl:AuthToken>
+            </stl:Requisites>
+            <stl:UserID>12023</stl:UserID>
+            <stl:RequestType>P</stl:RequestType>
+            <stl:RequestBody>
+               <avia:BookID>1439249</avia:BookID>
+               <avia:AncillaryServices>
+                  <avia:AncillaryService>
+                     <avia:ServiceRef>1</avia:ServiceRef>
+                     <avia:SegmentRef>
+                        <stl:MRef>0</stl:MRef>
+                     </avia:SegmentRef>
+                  </avia:AncillaryService>
+                  <avia:AncillaryService>
+                     <avia:ServiceRef>2</avia:ServiceRef>
+                     <avia:SegmentRef>
+                        <stl:MRef>1</stl:MRef>
+                     </avia:SegmentRef>
+                  </avia:AncillaryService>
+                  <avia:AncillaryService>
+                     <avia:ServiceRef>3</avia:ServiceRef>
+                     <avia:SegmentRef>
+                        <stl:MRef>0</stl:MRef>
+                     </avia:SegmentRef>
+                  </avia:AncillaryService>
+                  <avia:AncillaryService>
+                     <avia:ServiceRef>4</avia:ServiceRef>
+                     <avia:SegmentRef>
+                        <stl:MRef>1</stl:MRef>
+                     </avia:SegmentRef>
+                  </avia:AncillaryService>
+               </avia:AncillaryServices>
+            </stl:RequestBody>
+         </avia:Request>
+      </avia:VoidEMD>
+   </soapenv:Body>
+</soapenv:Envelope>

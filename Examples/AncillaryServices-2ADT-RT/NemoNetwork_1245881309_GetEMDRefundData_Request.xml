@@ -1,0 +1,34 @@
+http://my-webservice-domain.net/Avia.svc
+Connection: Keep-Alive
+Content-Length: 969
+Content-Type: text/xml;charset=UTF-8
+Accept-Encoding: gzip,deflate
+Host: my-webservice-domain.net
+User-Agent: Apache-HttpClient/4.5.5 (Java/16.0.2)
+SOAPAction: "http://nemo-ibe.com/Avia/IAvia/GetEMDRefundData"
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:avia="http://nemo-ibe.com/Avia" xmlns:stl="http://nemo-ibe.com/STL">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <avia:GetEMDRefundData>
+         <avia:Request>
+            <stl:Requisites>
+               <stl:AuthToken>XXXXXX</stl:AuthToken>
+               <stl:SupplierSessionId></stl:SupplierSessionId>
+            </stl:Requisites>
+            <stl:UserID>12023</stl:UserID>
+            <stl:RequestType>P</stl:RequestType>
+            <stl:RequestBody>
+               <avia:BookID>1439240</avia:BookID>
+               <avia:ServiceRefs>
+                  <stl:Ref>1</stl:Ref>
+                  <stl:Ref>2</stl:Ref>
+                  <stl:Ref>3</stl:Ref>
+                  <stl:Ref>4</stl:Ref>
+               </avia:ServiceRefs>
+            </stl:RequestBody>
+         </avia:Request>
+      </avia:GetEMDRefundData>
+   </soapenv:Body>
+</soapenv:Envelope>

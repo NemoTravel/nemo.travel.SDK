@@ -1,0 +1,2084 @@
+<ResponseWithAdditionalOperationsRSBody_1_1 xmlns="http://nemo-ibe.com/STL" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <RequestID>1245882070</RequestID>
+  <ResponseBody xmlns:a="http://nemo-ibe.com/Avia">
+    <a:Sources>
+      <a:SourceInfo>
+        <a:ID>-14695</a:ID>
+        <a:Supplier>Nemo</a:Supplier>
+        <a:DefaultTicketingRequisiteID>-14675</a:DefaultTicketingRequisiteID>
+      </a:SourceInfo>
+    </a:Sources>
+    <a:ObjectForOperations>
+      <a:FlightID>1245882068000000</a:FlightID>
+    </a:ObjectForOperations>
+    <a:FlightsByFareFamily>
+      <a:Flight>
+        <ID>1245882070000000</ID>
+        <a:SourceID>-14695</a:SourceID>
+        <a:TypeInfo>
+          <a:Type>Regular</a:Type>
+          <a:DirectionType>RT</a:DirectionType>
+        </a:TypeInfo>
+        <a:MandatoryLatinNames>true</a:MandatoryLatinNames>
+        <a:Segments>
+          <a:Segment>
+            <ID>1</ID>
+            <a:DepAirp>
+              <a:AirportCode>CDG</a:AirportCode>
+              <a:CityCode>PAR</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>2F</a:Terminal>
+            </a:DepAirp>
+            <a:ArrAirp>
+              <a:AirportCode>BCN</a:AirportCode>
+              <a:CityCode>BCN</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>1</a:Terminal>
+            </a:ArrAirp>
+            <a:FlightNumber>603</a:FlightNumber>
+            <a:FlightTime>30</a:FlightTime>
+            <a:OpAirline>ZZ</a:OpAirline>
+            <a:MarkAirline>ZZ</a:MarkAirline>
+            <a:AircraftType>321</a:AircraftType>
+            <a:DepDateTime>2024-08-16T12:00:00</a:DepDateTime>
+            <a:ArrDateTime>2024-08-16T12:30:00</a:ArrDateTime>
+            <a:BookingClass>
+              <a:BaseClass>Economy</a:BaseClass>
+              <a:BookingClassCode>E</a:BookingClassCode>
+              <a:FreeSeatCount>9</a:FreeSeatCount>
+              <a:Cabin>Economy</a:Cabin>
+            </a:BookingClass>
+            <a:ETicket>true</a:ETicket>
+            <a:SupplierInfo>
+              <a:Status>NN</a:Status>
+              <a:GeneralizedStatus>OnRequest</a:GeneralizedStatus>
+            </a:SupplierInfo>
+            <a:RequestedSegment>0</a:RequestedSegment>
+          </a:Segment>
+          <a:Segment>
+            <ID>2</ID>
+            <a:DepAirp>
+              <a:AirportCode>BCN</a:AirportCode>
+              <a:CityCode>BCN</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>1</a:Terminal>
+            </a:DepAirp>
+            <a:ArrAirp>
+              <a:AirportCode>CDG</a:AirportCode>
+              <a:CityCode>PAR</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>2F</a:Terminal>
+            </a:ArrAirp>
+            <a:FlightNumber>604</a:FlightNumber>
+            <a:FlightTime>90</a:FlightTime>
+            <a:OpAirline>ZZ</a:OpAirline>
+            <a:MarkAirline>ZZ</a:MarkAirline>
+            <a:AircraftType>321</a:AircraftType>
+            <a:DepDateTime>2024-08-18T12:30:00</a:DepDateTime>
+            <a:ArrDateTime>2024-08-18T14:00:00</a:ArrDateTime>
+            <a:BookingClass>
+              <a:BaseClass>Economy</a:BaseClass>
+              <a:BookingClassCode>W</a:BookingClassCode>
+              <a:FreeSeatCount>9</a:FreeSeatCount>
+              <a:Cabin>Economy</a:Cabin>
+            </a:BookingClass>
+            <a:ETicket>true</a:ETicket>
+            <a:SupplierInfo>
+              <a:Status>NN</a:Status>
+              <a:GeneralizedStatus>OnRequest</a:GeneralizedStatus>
+            </a:SupplierInfo>
+            <a:RequestedSegment>1</a:RequestedSegment>
+          </a:Segment>
+        </a:Segments>
+        <a:PriceInfo>
+          <a:Price>
+            <ID>1</ID>
+            <a:ValidatingCompany>ZZ</a:ValidatingCompany>
+            <a:Refundable>Refundable</a:Refundable>
+            <a:PrivateFareInd>false</a:PrivateFareInd>
+            <a:TicketTimeLimit>2024-08-13 23:59:00 +03:00</a:TicketTimeLimit>
+            <a:PassengerFares>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>1</Ref>
+                </a:SegmentRef>
+                <a:Type>ADT</a:Type>
+                <a:Quantity>2</a:Quantity>
+                <a:PricedAs>AAT</a:PricedAs>
+                <a:BaseFare>
+                  <Amount>5</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>5</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>40.1</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>ELTOW</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>1</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>1</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>440</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.Y.1.LIGHT</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>1</Ref>
+                </a:SegmentRef>
+                <a:Type>CNN</a:Type>
+                <a:Quantity>1</a:Quantity>
+                <a:BaseFare>
+                  <Amount>4</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>4</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>39.1</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>ELTOW/CN20</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>1</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>1</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>440</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.Y.1.LIGHT</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+            </a:PassengerFares>
+            <a:TimeLimit zone="UTC">2024-08-13T20:59:00Z</a:TimeLimit>
+          </a:Price>
+          <a:Price>
+            <ID>2</ID>
+            <a:ValidatingCompany>ZZ</a:ValidatingCompany>
+            <a:Refundable>Refundable</a:Refundable>
+            <a:PrivateFareInd>false</a:PrivateFareInd>
+            <a:TicketTimeLimit>2024-08-13 23:59:00 +03:00</a:TicketTimeLimit>
+            <a:PassengerFares>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>2</Ref>
+                </a:SegmentRef>
+                <a:Type>ADT</a:Type>
+                <a:Quantity>2</a:Quantity>
+                <a:PricedAs>AAT</a:PricedAs>
+                <a:BaseFare>
+                  <Amount>9</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>9</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>67.1</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>4</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>QV</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>18</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>JD</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>OG</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>WLTOW</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>2</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>1</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>440</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.Y.1.LIGHT</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>2</Ref>
+                </a:SegmentRef>
+                <a:Type>CNN</a:Type>
+                <a:Quantity>1</a:Quantity>
+                <a:BaseFare>
+                  <Amount>8</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>8</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>66.1</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>4</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>QV</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>18</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>JD</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>OG</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>WLTOW/CN20</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>2</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>1</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>440</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.Y.1.LIGHT</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+            </a:PassengerFares>
+            <a:TimeLimit zone="UTC">2024-08-13T20:59:00Z</a:TimeLimit>
+          </a:Price>
+        </a:PriceInfo>
+        <a:FareFamiliesDescription>
+          <Description>
+            <ID>440</ID>
+            <Name>LIGHT</Name>
+            <UniversalParameters>
+              <FareFamilyParameter>
+                <Code>baggage</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Luggage - not included in the fare</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Luggage is not included. You can buy extra baggage as an additional service. </Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>NotAvailable</NeedToPay>
+                <Priority>2</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>carry_on</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Hand luggage - 8 kg</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Hand luggage - 1 piece up to 8 kg </Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>1</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>exchangeable</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Non-exchangeble</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Exchange before/after departure is unavailable</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>NotAvailable</NeedToPay>
+                <Priority>7</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>refundable</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Non-refundable</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Refund before/after departure is unavailable</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>NotAvailable</NeedToPay>
+                <Priority>6</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>seats_registration</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Seat selection - available with a fee</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Seat selection - available with a fee</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Charge</NeedToPay>
+                <Priority>3</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>miles</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>FFP miles - 25%</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>25% miles for Service Airline FFP members</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>5</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>vip_service</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>No VIP services</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value> VIP services are not available</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>NotAvailable</NeedToPay>
+                <Priority>4</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>description</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>RU</Code>
+                    <Value>Лайт</Value>
+                  </LangItem>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Light</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription />
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+            </UniversalParameters>
+          </Description>
+        </a:FareFamiliesDescription>
+      </a:Flight>
+      <a:Flight>
+        <ID>1245882070000001</ID>
+        <a:SourceID>-14695</a:SourceID>
+        <a:TypeInfo>
+          <a:Type>Regular</a:Type>
+          <a:DirectionType>RT</a:DirectionType>
+        </a:TypeInfo>
+        <a:MandatoryLatinNames>true</a:MandatoryLatinNames>
+        <a:Segments>
+          <a:Segment>
+            <ID>1</ID>
+            <a:DepAirp>
+              <a:AirportCode>CDG</a:AirportCode>
+              <a:CityCode>PAR</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>2F</a:Terminal>
+            </a:DepAirp>
+            <a:ArrAirp>
+              <a:AirportCode>BCN</a:AirportCode>
+              <a:CityCode>BCN</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>1</a:Terminal>
+            </a:ArrAirp>
+            <a:FlightNumber>603</a:FlightNumber>
+            <a:FlightTime>30</a:FlightTime>
+            <a:OpAirline>ZZ</a:OpAirline>
+            <a:MarkAirline>ZZ</a:MarkAirline>
+            <a:AircraftType>321</a:AircraftType>
+            <a:DepDateTime>2024-08-16T12:00:00</a:DepDateTime>
+            <a:ArrDateTime>2024-08-16T12:30:00</a:ArrDateTime>
+            <a:BookingClass>
+              <a:BaseClass>Economy</a:BaseClass>
+              <a:BookingClassCode>E</a:BookingClassCode>
+              <a:FreeSeatCount>9</a:FreeSeatCount>
+              <a:Cabin>Economy</a:Cabin>
+            </a:BookingClass>
+            <a:ETicket>true</a:ETicket>
+            <a:RequestedSegment>0</a:RequestedSegment>
+          </a:Segment>
+          <a:Segment>
+            <ID>2</ID>
+            <a:DepAirp>
+              <a:AirportCode>BCN</a:AirportCode>
+              <a:CityCode>BCN</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>1</a:Terminal>
+            </a:DepAirp>
+            <a:ArrAirp>
+              <a:AirportCode>CDG</a:AirportCode>
+              <a:CityCode>PAR</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>2F</a:Terminal>
+            </a:ArrAirp>
+            <a:FlightNumber>604</a:FlightNumber>
+            <a:FlightTime>90</a:FlightTime>
+            <a:OpAirline>ZZ</a:OpAirline>
+            <a:MarkAirline>ZZ</a:MarkAirline>
+            <a:AircraftType>321</a:AircraftType>
+            <a:DepDateTime>2024-08-18T12:30:00</a:DepDateTime>
+            <a:ArrDateTime>2024-08-18T14:00:00</a:ArrDateTime>
+            <a:BookingClass>
+              <a:BaseClass>Economy</a:BaseClass>
+              <a:BookingClassCode>L</a:BookingClassCode>
+              <a:FreeSeatCount>9</a:FreeSeatCount>
+              <a:Cabin>Economy</a:Cabin>
+            </a:BookingClass>
+            <a:ETicket>true</a:ETicket>
+            <a:RequestedSegment>1</a:RequestedSegment>
+          </a:Segment>
+        </a:Segments>
+        <a:PriceInfo>
+          <a:Price>
+            <ID>1</ID>
+            <a:ValidatingCompany>ZZ</a:ValidatingCompany>
+            <a:Refundable>Refundable</a:Refundable>
+            <a:PrivateFareInd>false</a:PrivateFareInd>
+            <a:TicketTimeLimit>2024-08-16 12:30:00 +03:00</a:TicketTimeLimit>
+            <a:PassengerFares>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>1</Ref>
+                </a:SegmentRef>
+                <a:Type>ADT</a:Type>
+                <a:Quantity>2</a:Quantity>
+                <a:PricedAs>AAT</a:PricedAs>
+                <a:BaseFare>
+                  <Amount>31</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>31</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>66.1</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>EBD3</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>1</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>1</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyCode>ZZ.ZZ.Y.2.STANDART</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>1</Ref>
+                </a:SegmentRef>
+                <a:Type>CNN</a:Type>
+                <a:Quantity>1</a:Quantity>
+                <a:BaseFare>
+                  <Amount>16</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>16</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>51.1</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>EBD3/CN50</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>1</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>1</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyCode>ZZ.ZZ.Y.2.STANDART</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+            </a:PassengerFares>
+            <a:TimeLimit zone="UTC">2024-08-16T09:30:00Z</a:TimeLimit>
+          </a:Price>
+          <a:Price>
+            <ID>2</ID>
+            <a:ValidatingCompany>ZZ</a:ValidatingCompany>
+            <a:Refundable>Refundable</a:Refundable>
+            <a:PrivateFareInd>false</a:PrivateFareInd>
+            <a:TicketTimeLimit>2024-08-13 23:59:00 +03:00</a:TicketTimeLimit>
+            <a:PassengerFares>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>2</Ref>
+                </a:SegmentRef>
+                <a:Type>ADT</a:Type>
+                <a:Quantity>2</a:Quantity>
+                <a:PricedAs>AAT</a:PricedAs>
+                <a:BaseFare>
+                  <Amount>150</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>150</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>208.1</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>4</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>QV</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>18</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>JD</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>OG</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>LSTDOW</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>2</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>1</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>441</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.Y.2.STANDART</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>2</Ref>
+                </a:SegmentRef>
+                <a:Type>CNN</a:Type>
+                <a:Quantity>1</a:Quantity>
+                <a:BaseFare>
+                  <Amount>120</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>120</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>178.1</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>4</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>QV</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>18</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>JD</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>OG</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>LSTDOW/CN20</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>2</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>1</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>441</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.Y.2.STANDART</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+            </a:PassengerFares>
+            <a:TimeLimit zone="UTC">2024-08-13T20:59:00Z</a:TimeLimit>
+          </a:Price>
+        </a:PriceInfo>
+        <a:FareFamiliesDescription>
+          <Description>
+            <ID>441</ID>
+            <Name>STANDART</Name>
+            <UniversalParameters>
+              <FareFamilyParameter>
+                <Code>description</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>RU</Code>
+                    <Value>Стандарт</Value>
+                  </LangItem>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Standard</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription />
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>baggage</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Luggage - 1 bag up to 23kg</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Luggage - 1 bag up to 23 kg</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>2</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>carry_on</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Hand luggage - 8 kg</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Hand luggage -1 bag up to 8 kg</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>1</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>miles</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>FFP miles - 100% </Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>100% miles for Service Airline FFP members</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>5</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>seats_registration</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Seat selection - available with a fee</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Seat selection - available with a fee</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Charge</NeedToPay>
+                <Priority>3</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>exchangeable</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Exchange before departure</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Exchange before departure is available</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>7</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>refundable</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Non-refundable</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Refund before/after departure is unavailable</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>NotAvailable</NeedToPay>
+                <Priority>6</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>vip_service</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Business lounge - paid access</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Business lounge access is available with additional fee</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Charge</NeedToPay>
+                <Priority>4</Priority>
+              </FareFamilyParameter>
+            </UniversalParameters>
+          </Description>
+        </a:FareFamiliesDescription>
+      </a:Flight>
+      <a:Flight>
+        <ID>1245882070000002</ID>
+        <a:SourceID>-14695</a:SourceID>
+        <a:TypeInfo>
+          <a:Type>Regular</a:Type>
+          <a:DirectionType>RT</a:DirectionType>
+        </a:TypeInfo>
+        <a:MandatoryLatinNames>true</a:MandatoryLatinNames>
+        <a:Segments>
+          <a:Segment>
+            <ID>1</ID>
+            <a:DepAirp>
+              <a:AirportCode>CDG</a:AirportCode>
+              <a:CityCode>PAR</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>2F</a:Terminal>
+            </a:DepAirp>
+            <a:ArrAirp>
+              <a:AirportCode>BCN</a:AirportCode>
+              <a:CityCode>BCN</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>1</a:Terminal>
+            </a:ArrAirp>
+            <a:FlightNumber>603</a:FlightNumber>
+            <a:FlightTime>30</a:FlightTime>
+            <a:OpAirline>ZZ</a:OpAirline>
+            <a:MarkAirline>ZZ</a:MarkAirline>
+            <a:AircraftType>321</a:AircraftType>
+            <a:DepDateTime>2024-08-16T12:00:00</a:DepDateTime>
+            <a:ArrDateTime>2024-08-16T12:30:00</a:ArrDateTime>
+            <a:BookingClass>
+              <a:BaseClass>Economy</a:BaseClass>
+              <a:BookingClassCode>L</a:BookingClassCode>
+              <a:FreeSeatCount>9</a:FreeSeatCount>
+              <a:Cabin>Economy</a:Cabin>
+            </a:BookingClass>
+            <a:ETicket>true</a:ETicket>
+            <a:RequestedSegment>0</a:RequestedSegment>
+          </a:Segment>
+          <a:Segment>
+            <ID>2</ID>
+            <a:DepAirp>
+              <a:AirportCode>BCN</a:AirportCode>
+              <a:CityCode>BCN</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>1</a:Terminal>
+            </a:DepAirp>
+            <a:ArrAirp>
+              <a:AirportCode>CDG</a:AirportCode>
+              <a:CityCode>PAR</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>2F</a:Terminal>
+            </a:ArrAirp>
+            <a:FlightNumber>604</a:FlightNumber>
+            <a:FlightTime>90</a:FlightTime>
+            <a:OpAirline>ZZ</a:OpAirline>
+            <a:MarkAirline>ZZ</a:MarkAirline>
+            <a:AircraftType>321</a:AircraftType>
+            <a:DepDateTime>2024-08-18T12:30:00</a:DepDateTime>
+            <a:ArrDateTime>2024-08-18T14:00:00</a:ArrDateTime>
+            <a:BookingClass>
+              <a:BaseClass>Economy</a:BaseClass>
+              <a:BookingClassCode>L</a:BookingClassCode>
+              <a:FreeSeatCount>9</a:FreeSeatCount>
+              <a:Cabin>Economy</a:Cabin>
+            </a:BookingClass>
+            <a:ETicket>true</a:ETicket>
+            <a:RequestedSegment>1</a:RequestedSegment>
+          </a:Segment>
+        </a:Segments>
+        <a:PriceInfo>
+          <a:Price>
+            <ID>1</ID>
+            <a:ValidatingCompany>ZZ</a:ValidatingCompany>
+            <a:Refundable>Refundable</a:Refundable>
+            <a:PrivateFareInd>false</a:PrivateFareInd>
+            <a:TicketTimeLimit>2024-08-13 23:59:00 +03:00</a:TicketTimeLimit>
+            <a:PassengerFares>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>1</Ref>
+                </a:SegmentRef>
+                <a:Type>ADT</a:Type>
+                <a:Quantity>2</a:Quantity>
+                <a:PricedAs>AAT</a:PricedAs>
+                <a:BaseFare>
+                  <Amount>120.5</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>120.5</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>155.6</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>LFLEXRT</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>1</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>1</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>442</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.Y.3.FLEX</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>1</Ref>
+                </a:SegmentRef>
+                <a:Type>CNN</a:Type>
+                <a:Quantity>1</a:Quantity>
+                <a:BaseFare>
+                  <Amount>96</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>96</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>131.1</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>LFLEXRT/CN20</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>1</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>1</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>442</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.Y.3.FLEX</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>2</Ref>
+                </a:SegmentRef>
+                <a:Type>ADT</a:Type>
+                <a:Quantity>2</a:Quantity>
+                <a:PricedAs>AAT</a:PricedAs>
+                <a:BaseFare>
+                  <Amount>120.5</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>120.5</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>178.6</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>4</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>QV</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>18</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>JD</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>OG</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>LFLEXRT</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>2</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>1</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>442</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.Y.3.FLEX</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>2</Ref>
+                </a:SegmentRef>
+                <a:Type>CNN</a:Type>
+                <a:Quantity>1</a:Quantity>
+                <a:BaseFare>
+                  <Amount>96</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>96</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>154.1</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>4</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>QV</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>18</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>JD</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>OG</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>LFLEXRT/CN20</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>2</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>1</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>442</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.Y.3.FLEX</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>1</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+            </a:PassengerFares>
+            <a:TimeLimit zone="UTC">2024-08-13T20:59:00Z</a:TimeLimit>
+          </a:Price>
+        </a:PriceInfo>
+        <a:FareFamiliesDescription>
+          <Description>
+            <ID>442</ID>
+            <Name>FLEX</Name>
+            <UniversalParameters>
+              <FareFamilyParameter>
+                <Code>description</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>RU</Code>
+                    <Value>Гибкий</Value>
+                  </LangItem>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Flex</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription />
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>carry_on</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Hand luggage - 8 kg</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Hand luggage - 1 piece up to 8 kg </Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>baggage</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Luggage - 1 bag up to 23kg</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Luggage - 1 bag up to 23kg</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>seats_registration</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Seat selection - available with a fee</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Seat selection - available with a fee</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Charge</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>vip_service</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Business lounge - paid access</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Business lounge access is available with additional fee</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Charge</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>miles</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>FFP miles - 150%</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>100% miles for Service Airline FFP members</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>refundable</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Refund before departure</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Refund before departure is available</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>exchangeable</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Exchange before departure</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Exchange before departure is available</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+            </UniversalParameters>
+          </Description>
+        </a:FareFamiliesDescription>
+      </a:Flight>
+      <a:Flight>
+        <ID>1245882070000003</ID>
+        <a:SourceID>-14695</a:SourceID>
+        <a:TypeInfo>
+          <a:Type>Regular</a:Type>
+          <a:DirectionType>RT</a:DirectionType>
+        </a:TypeInfo>
+        <a:MandatoryLatinNames>true</a:MandatoryLatinNames>
+        <a:Segments>
+          <a:Segment>
+            <ID>1</ID>
+            <a:DepAirp>
+              <a:AirportCode>CDG</a:AirportCode>
+              <a:CityCode>PAR</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>2F</a:Terminal>
+            </a:DepAirp>
+            <a:ArrAirp>
+              <a:AirportCode>BCN</a:AirportCode>
+              <a:CityCode>BCN</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>1</a:Terminal>
+            </a:ArrAirp>
+            <a:FlightNumber>603</a:FlightNumber>
+            <a:FlightTime>30</a:FlightTime>
+            <a:OpAirline>ZZ</a:OpAirline>
+            <a:MarkAirline>ZZ</a:MarkAirline>
+            <a:AircraftType>321</a:AircraftType>
+            <a:DepDateTime>2024-08-16T12:00:00</a:DepDateTime>
+            <a:ArrDateTime>2024-08-16T12:30:00</a:ArrDateTime>
+            <a:BookingClass>
+              <a:BaseClass>Business</a:BaseClass>
+              <a:BookingClassCode>C</a:BookingClassCode>
+              <a:FreeSeatCount>9</a:FreeSeatCount>
+              <a:Cabin>Business</a:Cabin>
+            </a:BookingClass>
+            <a:ETicket>true</a:ETicket>
+            <a:RequestedSegment>0</a:RequestedSegment>
+          </a:Segment>
+          <a:Segment>
+            <ID>2</ID>
+            <a:DepAirp>
+              <a:AirportCode>BCN</a:AirportCode>
+              <a:CityCode>BCN</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>1</a:Terminal>
+            </a:DepAirp>
+            <a:ArrAirp>
+              <a:AirportCode>CDG</a:AirportCode>
+              <a:CityCode>PAR</a:CityCode>
+              <a:UTC>2</a:UTC>
+              <a:Terminal>2F</a:Terminal>
+            </a:ArrAirp>
+            <a:FlightNumber>604</a:FlightNumber>
+            <a:FlightTime>90</a:FlightTime>
+            <a:OpAirline>ZZ</a:OpAirline>
+            <a:MarkAirline>ZZ</a:MarkAirline>
+            <a:AircraftType>321</a:AircraftType>
+            <a:DepDateTime>2024-08-18T12:30:00</a:DepDateTime>
+            <a:ArrDateTime>2024-08-18T14:00:00</a:ArrDateTime>
+            <a:BookingClass>
+              <a:BaseClass>Business</a:BaseClass>
+              <a:BookingClassCode>C</a:BookingClassCode>
+              <a:FreeSeatCount>9</a:FreeSeatCount>
+              <a:Cabin>Business</a:Cabin>
+            </a:BookingClass>
+            <a:ETicket>true</a:ETicket>
+            <a:RequestedSegment>1</a:RequestedSegment>
+          </a:Segment>
+        </a:Segments>
+        <a:PriceInfo>
+          <a:Price>
+            <ID>1</ID>
+            <a:ValidatingCompany>ZZ</a:ValidatingCompany>
+            <a:Refundable>Refundable</a:Refundable>
+            <a:PrivateFareInd>false</a:PrivateFareInd>
+            <a:TicketTimeLimit>2024-08-13 23:59:00 +03:00</a:TicketTimeLimit>
+            <a:PassengerFares>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>1</Ref>
+                </a:SegmentRef>
+                <a:Type>ADT</a:Type>
+                <a:Quantity>2</a:Quantity>
+                <a:PricedAs>AAT</a:PricedAs>
+                <a:BaseFare>
+                  <Amount>200.5</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>200.5</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>235.6</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>C</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>1</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>2</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>443</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.C.4.BUSINESS</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>2</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>2</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>2</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>1</Ref>
+                </a:SegmentRef>
+                <a:Type>CNN</a:Type>
+                <a:Quantity>1</a:Quantity>
+                <a:BaseFare>
+                  <Amount>160.5</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>160.5</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>195.6</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>C/CN20</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>1</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>2</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>443</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.C.4.BUSINESS</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>2</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>2</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>2</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>2</Ref>
+                </a:SegmentRef>
+                <a:Type>ADT</a:Type>
+                <a:Quantity>2</a:Quantity>
+                <a:PricedAs>AAT</a:PricedAs>
+                <a:BaseFare>
+                  <Amount>200.5</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>200.5</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>258.6</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>4</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>QV</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>18</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>JD</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>OG</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>C</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>2</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>2</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>443</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.C.4.BUSINESS</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>2</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>2</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>2</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+              <a:PassengerFare>
+                <a:SegmentRef>
+                  <Ref>2</Ref>
+                </a:SegmentRef>
+                <a:Type>CNN</a:Type>
+                <a:Quantity>1</a:Quantity>
+                <a:BaseFare>
+                  <Amount>160.5</Amount>
+                  <Currency>USD</Currency>
+                </a:BaseFare>
+                <a:EquiveFare>
+                  <Amount>160.5</Amount>
+                  <Currency>USD</Currency>
+                </a:EquiveFare>
+                <a:TotalFare>
+                  <Amount>218.6</Amount>
+                  <Currency>USD</Currency>
+                </a:TotalFare>
+                <a:Taxes>
+                  <a:Tax>
+                    <Amount>35.1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>YQ</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>4</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>QV</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>18</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>JD</a:TaxCode>
+                  </a:Tax>
+                  <a:Tax>
+                    <Amount>1</Amount>
+                    <Currency>USD</Currency>
+                    <a:TaxCode>OG</a:TaxCode>
+                  </a:Tax>
+                </a:Taxes>
+                <a:Tariffs>
+                  <a:Tariff>
+                    <a:Code>C/CN20</a:Code>
+                    <a:Type>Public</a:Type>
+                    <a:IsSystemTransfer>false</a:IsSystemTransfer>
+                    <a:SegNum>2</a:SegNum>
+                    <a:FreeBaggage>
+                      <Value>2</Value>
+                      <Measure>Pieces</Measure>
+                    </a:FreeBaggage>
+                    <a:FareFamilyDescID>443</a:FareFamilyDescID>
+                    <a:FareFamilyCode>ZZ.ZZ.C.4.BUSINESS</a:FareFamilyCode>
+                    <a:BaggageDetailsList>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>2</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>2</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                      <a:Baggage>
+                        <Type>CheckedBaggage</Type>
+                        <Count>2</Count>
+                        <Weight i:nil="true" />
+                        <WeightUnit i:nil="true" />
+                        <Size i:nil="true" />
+                      </a:Baggage>
+                    </a:BaggageDetailsList>
+                  </a:Tariff>
+                </a:Tariffs>
+              </a:PassengerFare>
+            </a:PassengerFares>
+            <a:TimeLimit zone="UTC">2024-08-13T20:59:00Z</a:TimeLimit>
+          </a:Price>
+        </a:PriceInfo>
+        <a:FareFamiliesDescription>
+          <Description>
+            <ID>443</ID>
+            <Name>BUSINESS</Name>
+            <UniversalParameters>
+              <FareFamilyParameter>
+                <Code>description</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>RU</Code>
+                    <Value>Бизнес</Value>
+                  </LangItem>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Business</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription />
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>carry_on</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Hand luggage - 10 kg</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Hand luggage - 1 bag up to 10 kg</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>baggage</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Luggage - 2 bags up to 23 kg</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Luggage - 2 bags up to 23 kg</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>seats_registration</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Seat selection</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Free seat selection is provided</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>vip_service</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Business lounge</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Free business lounge access</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>miles</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>FFP miles- 200%</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>200% miles for Service Airline FFP members</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>refundable</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Refund before departure</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Refund before departure is available</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+              <FareFamilyParameter>
+                <Code>exchangeable</Code>
+                <ShortDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Exchange before departure</Value>
+                  </LangItem>
+                </ShortDescription>
+                <FullDescription>
+                  <LangItem>
+                    <Code>EN</Code>
+                    <Value>Exchange before departure is available</Value>
+                  </LangItem>
+                </FullDescription>
+                <NeedToPay>Free</NeedToPay>
+                <Priority>0</Priority>
+              </FareFamilyParameter>
+            </UniversalParameters>
+          </Description>
+        </a:FareFamiliesDescription>
+      </a:Flight>
+    </a:FlightsByFareFamily>
+    <a:ResultsFiltersApplied>false</a:ResultsFiltersApplied>
+  </ResponseBody>
+</ResponseWithAdditionalOperationsRSBody_1_1>

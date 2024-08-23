@@ -1,0 +1,27 @@
+http://my-webservice-domain.net/Avia.svc
+Connection: Keep-Alive
+Content-Length: 741
+Content-Type: text/xml;charset=UTF-8
+Accept-Encoding: gzip,deflate
+Host: my-webservice-domain.net
+User-Agent: Apache-HttpClient/4.5.5 (Java/16.0.2)
+SOAPAction: "http://nemo-ibe.com/Avia/IAvia/Ticket_2_0"
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:avia="http://nemo-ibe.com/Avia" xmlns:stl="http://nemo-ibe.com/STL" xmlns:stl1="http://nemo.travel/STL" xmlns:avia1="http://nemo.travel/Avia">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <avia:Ticket_2_0>
+         <avia:Request>
+            <stl:Requisites>
+               <stl:AuthToken>XXXXXX</stl:AuthToken>
+            </stl:Requisites>
+            <stl:UserID>12023</stl:UserID>
+            <stl:RequestType>P</stl:RequestType>
+            <stl:RequestBody>
+               <avia:BookID>1439245</avia:BookID>
+            </stl:RequestBody>
+         </avia:Request>
+      </avia:Ticket_2_0>
+   </soapenv:Body>
+</soapenv:Envelope>

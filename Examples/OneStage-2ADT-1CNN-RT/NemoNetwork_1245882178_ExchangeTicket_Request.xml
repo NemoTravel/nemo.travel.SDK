@@ -1,0 +1,36 @@
+http://my-webservice-domain.net/Avia.svc
+Connection: Keep-Alive
+Content-Length: 1216
+Content-Type: text/xml;charset=UTF-8
+Accept-Encoding: gzip,deflate
+Host: my-webservice-domain.net
+User-Agent: Apache-HttpClient/4.5.5 (Java/16.0.2)
+SOAPAction: "http://nemo-ibe.com/Avia/IAvia/ExchangeTicket"
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:avia="http://nemo-ibe.com/Avia" xmlns:stl="http://nemo-ibe.com/STL" xmlns:stl1="http://nemo.travel/STL" xmlns:avia1="http://nemo.travel/Avia" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <avia:ExchangeTicket>
+         <avia:Request>
+            <stl:Requisites>
+               <stl:AuthToken>XXXXXX</stl:AuthToken>
+            </stl:Requisites>
+            <stl:UserID>12023</stl:UserID>
+            <stl:RequestType>P</stl:RequestType>
+            <stl:RequestBody>
+               <avia:BookID>1439245</avia:BookID>
+               <avia:FlightID>1245882108000000</avia:FlightID>
+               <avia:Passengers>
+                  <stl:Ref>1</stl:Ref>
+                  <stl:Ref>2</stl:Ref>
+                  <stl:Ref>3</stl:Ref>
+               </avia:Passengers>
+               <avia:AutoRefundForEmdA>false</avia:AutoRefundForEmdA>
+               <avia:DataItems xsi:nil="true"/>
+               <avia:Traveller xsi:nil="true"/>
+            </stl:RequestBody>
+         </avia:Request>
+      </avia:ExchangeTicket>
+   </soapenv:Body>
+</soapenv:Envelope>

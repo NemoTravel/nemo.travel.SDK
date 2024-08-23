@@ -1,0 +1,61 @@
+http://my-webservice-domain.net/Avia.svc
+Connection: Keep-Alive
+Content-Length: 2462
+Content-Type: text/xml;charset=UTF-8
+Accept-Encoding: gzip,deflate
+Host: my-webservice-domain.net
+User-Agent: Apache-HttpClient/4.5.5 (Java/16.0.2)
+SOAPAction: "http://nemo-ibe.com/Avia/IAvia/ModifyBook_2_0"
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:avia="http://nemo-ibe.com/Avia" xmlns:stl="http://nemo-ibe.com/STL" xmlns:stl1="http://nemo.travel/STL" xmlns:avia1="http://nemo.travel/Avia">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <avia:ModifyBook_2_0>
+         <avia:Request>
+            <stl:Requisites>
+               <stl:AuthToken>XXXXXX</stl:AuthToken>
+            </stl:Requisites>
+            <stl:UserID>12023</stl:UserID>
+            <stl:RequestType>P</stl:RequestType>
+            <stl:RequestBody>
+               <avia:BookID>1439240</avia:BookID>
+               <avia:AncillaryServices>
+                  <avia:ModifyAncillaryService>
+                     <stl:Action>Add</stl:Action>
+                     <avia:AncillaryService>
+                        <avia:ID>-1</avia:ID>
+                        <avia:Name>OVERSIZE PC UPTO23KGOVER203LCM</avia:Name>
+                        <avia:Group>BG</avia:Group>
+                        <avia:RFIC>C</avia:RFIC>
+                        <avia:RFISC>0FB</avia:RFISC>
+                        <avia:Type>C</avia:Type>
+                        <avia:TravellerRef>1</avia:TravellerRef>
+                        <avia:SegmentRef>
+                           <stl:MRef>0</stl:MRef>
+                           <stl:MRef>1</stl:MRef>
+                        </avia:SegmentRef>
+                     </avia:AncillaryService>
+                  </avia:ModifyAncillaryService>
+                  <avia:ModifyAncillaryService>
+                     <stl:Action>Add</stl:Action>
+                     <avia:AncillaryService>
+                        <avia:ID>-1</avia:ID>
+                        <avia:Name>OVERSIZE PC UPTO23KGOVER203LCM</avia:Name>
+                        <avia:Group>BG</avia:Group>
+                        <avia:RFIC>C</avia:RFIC>
+                        <avia:RFISC>0FB</avia:RFISC>
+                        <avia:Type>C</avia:Type>
+                        <avia:TravellerRef>2</avia:TravellerRef>
+                        <avia:SegmentRef>
+                           <stl:MRef>0</stl:MRef>
+                           <stl:MRef>1</stl:MRef>
+                        </avia:SegmentRef>
+                     </avia:AncillaryService>
+                  </avia:ModifyAncillaryService>
+               </avia:AncillaryServices>
+            </stl:RequestBody>
+         </avia:Request>
+      </avia:ModifyBook_2_0>
+   </soapenv:Body>
+</soapenv:Envelope>

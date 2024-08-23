@@ -1,0 +1,76 @@
+<ResponseWithRefundEDRSBody xmlns="http://nemo-ibe.com/STL" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <RequestID>1245882506</RequestID>
+  <ResponseBody xmlns:a="http://nemo-ibe.com/Avia">
+    <TicketsRefundData xmlns="http://nemo.travel/Avia" xmlns:b="http://nemo-ibe.com/STL">
+      <b:RefundData>
+        <b:EDNumber>00Z2400056740</b:EDNumber>
+        <b:EDType>Ticket</b:EDType>
+        <b:TravellerRef>1</b:TravellerRef>
+        <b:Refundable>true</b:Refundable>
+        <b:RefundMoney>
+          <b:Amount>40.1</b:Amount>
+          <b:Currency>USD</b:Currency>
+        </b:RefundMoney>
+        <b:RefundBreakdown xmlns:c="http://nemo.travel/STL">
+          <c:RefundFares>
+            <b:Amount>5</b:Amount>
+            <b:Currency>USD</b:Currency>
+          </c:RefundFares>
+          <c:RefundTaxes>
+            <b:Tax>
+              <b:Amount>35.1</b:Amount>
+              <b:Currency>USD</b:Currency>
+              <b:TaxCode>YQ</b:TaxCode>
+            </b:Tax>
+          </c:RefundTaxes>
+        </b:RefundBreakdown>
+      </b:RefundData>
+      <b:RefundData>
+        <b:EDNumber>00Z2400056741</b:EDNumber>
+        <b:EDType>Ticket</b:EDType>
+        <b:TravellerRef>2</b:TravellerRef>
+        <b:Refundable>true</b:Refundable>
+        <b:RefundMoney>
+          <b:Amount>39.1</b:Amount>
+          <b:Currency>USD</b:Currency>
+        </b:RefundMoney>
+        <b:RefundBreakdown xmlns:c="http://nemo.travel/STL">
+          <c:RefundFares>
+            <b:Amount>4</b:Amount>
+            <b:Currency>USD</b:Currency>
+          </c:RefundFares>
+          <c:RefundTaxes>
+            <b:Tax>
+              <b:Amount>35.1</b:Amount>
+              <b:Currency>USD</b:Currency>
+              <b:TaxCode>YQ</b:TaxCode>
+            </b:Tax>
+          </c:RefundTaxes>
+        </b:RefundBreakdown>
+      </b:RefundData>
+      <b:RefundData>
+        <b:EDNumber>00Z2400056742</b:EDNumber>
+        <b:EDType>Ticket</b:EDType>
+        <b:TravellerRef>3</b:TravellerRef>
+        <b:Refundable>true</b:Refundable>
+        <b:RefundMoney>
+          <b:Amount>39.1</b:Amount>
+          <b:Currency>USD</b:Currency>
+        </b:RefundMoney>
+        <b:RefundBreakdown xmlns:c="http://nemo.travel/STL">
+          <c:RefundFares>
+            <b:Amount>4</b:Amount>
+            <b:Currency>USD</b:Currency>
+          </c:RefundFares>
+          <c:RefundTaxes>
+            <b:Tax>
+              <b:Amount>35.1</b:Amount>
+              <b:Currency>USD</b:Currency>
+              <b:TaxCode>YQ</b:TaxCode>
+            </b:Tax>
+          </c:RefundTaxes>
+        </b:RefundBreakdown>
+      </b:RefundData>
+    </TicketsRefundData>
+  </ResponseBody>
+</ResponseWithRefundEDRSBody>

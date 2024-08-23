@@ -1,0 +1,69 @@
+http://my-webservice-domain.net/Avia.svc
+Connection: Keep-Alive
+Content-Length: 3064
+Content-Type: text/xml;charset=UTF-8
+Accept-Encoding: gzip,deflate
+Host: my-webservice-domain.net
+User-Agent: Apache-HttpClient/4.5.5 (Java/16.0.2)
+SOAPAction: "http://nemo-ibe.com/Avia/IAvia/GetExchangeVariants"
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:avia="http://nemo-ibe.com/Avia" xmlns:stl="http://nemo-ibe.com/STL">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <avia:GetExchangeVariants>
+         <avia:Request>
+            <stl:Requisites>
+               <stl:AuthToken>XXXXXX</stl:AuthToken>
+               <stl:SupplierSessionId></stl:SupplierSessionId>
+            </stl:Requisites>
+            <stl:UserID>12023</stl:UserID>
+            <stl:RequestType>P</stl:RequestType>
+            <stl:RequestBody>
+               <avia:BookID>1439245</avia:BookID>
+               <avia:Passengers>
+                  <stl:Ref>1</stl:Ref>
+                  <stl:Ref>2</stl:Ref>
+                  <stl:Ref>3</stl:Ref>
+               </avia:Passengers>
+               <avia:RequestedFlightInfo>
+                  <avia:ODPairs>
+                     <avia:ODPair>
+                        <avia:DepatureDateTime>2024-08-15</avia:DepatureDateTime>
+                        <avia:DepaturePoint>
+                           <avia:Code>PAR</avia:Code>
+                           <avia:IsCity>false</avia:IsCity>
+                        </avia:DepaturePoint>
+                        <avia:ArrivalPoint>
+                           <avia:Code>BCN</avia:Code>
+                           <avia:IsCity>false</avia:IsCity>
+                        </avia:ArrivalPoint>
+                     </avia:ODPair>
+                     <avia:ODPair>
+                        <avia:DepatureDateTime>2024-08-17</avia:DepatureDateTime>
+                        <avia:DepaturePoint>
+                           <avia:Code>BCN</avia:Code>
+                           <avia:IsCity>false</avia:IsCity>
+                        </avia:DepaturePoint>
+                        <avia:ArrivalPoint>
+                           <avia:Code>PAR</avia:Code>
+                           <avia:IsCity>false</avia:IsCity>
+                        </avia:ArrivalPoint>
+                     </avia:ODPair>
+                  </avia:ODPairs>
+               </avia:RequestedFlightInfo>
+               <avia:Restrictions>
+                  <avia:ClassPreference>
+                     <avia:ClassOfService>Economy</avia:ClassOfService>
+                  </avia:ClassPreference>
+                  <avia:ResultsGrouping>None</avia:ResultsGrouping>
+                  <avia:SourcePreference>
+                     <avia:Source>-14695</avia:Source>
+                  </avia:SourcePreference>
+               </avia:Restrictions>
+               <avia:Involuntary>false</avia:Involuntary>
+            </stl:RequestBody>
+         </avia:Request>
+      </avia:GetExchangeVariants>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,46 @@
+http://my-webservice-domain.net/Avia.svc
+Connection: Keep-Alive
+Content-Length: 1585
+Content-Type: text/xml;charset=UTF-8
+Accept-Encoding: gzip,deflate
+Host: my-webservice-domain.net
+User-Agent: Apache-HttpClient/4.5.5 (Java/16.0.2)
+SOAPAction: "http://nemo-ibe.com/Avia/IAvia/ModifyBook_2_0"
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:avia="http://nemo-ibe.com/Avia" xmlns:stl="http://nemo-ibe.com/STL" xmlns:stl1="http://nemo.travel/STL" xmlns:avia1="http://nemo.travel/Avia">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <avia:ModifyBook_2_0>
+         <avia:Request>
+            <stl:Requisites>
+               <stl:AuthToken>XXXXXX</stl:AuthToken>
+            </stl:Requisites>
+            <stl:UserID>12023</stl:UserID>
+            <stl:RequestType>P</stl:RequestType>
+            <stl:RequestBody>
+               <avia:BookID>1439243</avia:BookID>
+               <avia:DataItems>
+                  <stl:ModifyDataItem>
+                     <stl:Action>Remove</stl:Action>
+                     <stl:DataItem>
+                        <stl:ID>1968522532</stl:ID>
+                        <stl:TravellerRef>
+                           <stl:Ref>1</stl:Ref>
+                        </stl:TravellerRef>
+                        <stl:SegmentRef>
+                           <stl:Ref>0</stl:Ref>
+                        </stl:SegmentRef>
+                        <stl:Type>BookedSeat</stl:Type>
+                        <stl:BookedSeat>
+                           <stl:Number>6A</stl:Number>
+                           <stl:RFISC>0B5</stl:RFISC>
+                        </stl:BookedSeat>
+                     </stl:DataItem>
+                  </stl:ModifyDataItem>
+               </avia:DataItems>
+            </stl:RequestBody>
+         </avia:Request>
+      </avia:ModifyBook_2_0>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,13 @@
+<ResponseWithExchangeTicketRSBody xmlns="http://nemo-ibe.com/STL" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <RequestID>1245882178</RequestID>
+  <Errors>
+    <Error>
+      <Level>Supplier</Level>
+      <Code>0</Code>
+      <Message>Error from supplier</Message>
+      <ServiceMessage>This operation is not available</ServiceMessage>
+    </Error>
+  </Errors>
+  <CreatedPNRLocators />
+  <CancelledPNRLocators />
+</ResponseWithExchangeTicketRSBody>
